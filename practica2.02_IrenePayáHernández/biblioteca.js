@@ -12,9 +12,9 @@ export const mesSegunNumero = (numero) => {
     let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     //He visto que existe un método para comprobar si un número es entero, por lo que a parte de comprobar si es NaN, compruebo si es entero.
     if (isNaN(numero) || !Number.isInteger(numero)){
-        return "Introduce un número entero entre 1 y 12.";
+        return "ERROR. Introduce un número entero entre 1 y 12.";
     } else if(numero < 1 || numero > 12){
-        return "Veo que no sabes contar, introduce un número entre 1 y 12.";
+        return "ERROR. Veo que no sabes contar, introduce un número entre 1 y 12.";
     }
     //Resto 1 al número para que coincida con el índice del array.
     return meses[numero - 1];
@@ -32,7 +32,7 @@ export const analisisNumerico = (numero) => {
     let respuesta;
     
     if(isNaN(numero)){
-        return "Introduce un número.";
+        return "ERROR. Introduce un número.";
     }
     
     //Utilizo el operador ternario porque me parece más limpio.
@@ -49,7 +49,7 @@ export const analisisNumerico = (numero) => {
  * @returns {boolean}
  */
 const esPar = (numero) => {
-    //Un número es par si el resto de dividirlo entre 2 es 0.
+    //Un número es par si el resto de dividirlo entre 2 es 0 y es entero.
     return numero % 2 === 0;
 }
 
@@ -91,7 +91,7 @@ const esPrimo = (numero) => {
  */
 export const multiplosDeTres = (numero) => {
     if(isNaN(numero) || !Number.isInteger(numero) || numero < 1){
-        return "Introduce un número válido, debe ser entero y positivo.";
+        return "ERROR. Introduce un número válido, debe ser entero y positivo.";
     }
     let multiplos = [];
     //Empiezo en 1 porque el 0 no es múltiplo de 3.
@@ -114,7 +114,7 @@ export const multiplosDeTres = (numero) => {
  */
 export const potencia = (base, exponente) => {
     if(isNaN(base) || isNaN(exponente) || !Number.isInteger(base) ||!Number.isInteger(exponente)){
-        return "Debes introducir un número entero.";
+        return "ERROR. Debes introducir un número entero.";
     }
     //Convierto el exponente a positivo para poder hacer el bucle.
     let exponentePositivo = Math.abs(exponente);
@@ -142,7 +142,7 @@ export function mediaDeNumeros(){
 
     //Insultamos, quiero decir, avisamos al usuario de que la media de números se calcula con números.
     if(arguments.length === 0){
-        return "Estaría bien que introdujeras algún número, la verdad.";
+        return "ERROR. Estaría bien que introdujeras algún número, la verdad.";
     }
 
     //En esta variable vamos sumando el total de los números.
@@ -150,7 +150,7 @@ export function mediaDeNumeros(){
     for(let i=0; i<arguments.length; i++){
         //Nos aseguramos de que todos los números son enteros y positivos.
         if(isNaN(arguments[i]) || !Number.isInteger(arguments[i]) || arguments[i] < 0){
-            return "Introduce sólo números enteros positivos.";
+            return "ERROR. Introduce sólo números enteros positivos.";
         }
         sumaNumeros += arguments[i];
     }
@@ -160,30 +160,90 @@ export function mediaDeNumeros(){
 
 //Ejercicio 6 - Calculadora.
 
-
+/**
+ * 
+ * @param {number} numero1 
+ * @param {number} numero2 
+ * @param {string} operador 
+ * @returns {string|number}
+ */
 export const calculadora = (numero1, numero2, operador) => {
+    //Compruebo que los números son enteros.
     if(isNaN(numero1) || isNaN(numero2) || !Number.isInteger(numero1) || !Number.isInteger(numero2)){
-        return "Introduce sólo números enteros.";
+        return "ERROR. Introduce sólo números enteros.";
     }
+    //Devuelvo solo el resultado ya que devolverlo ya formateado en string hace menos reutilizable la función.
     switch(operador){
         case "+":
-            return numero1 + numero2;
+            return suma(numero1, numero2);
         case "-":
-            return numero1 - numero2;
+            return resta(numero1, numero2);
         case "*":
-            return numero1 * numero2;
-        case "/":
-            if(numero2 === 0){
-                return "No se puede dividir entre 0.";
-            }
-            return numero1 / numero2;
-        case "%":
-            if(numero2 === 0){
-                return "No se puede dividir entre 0.";
-            }
-            return numero1 % numero2;
+            return multiplicacion(numero1, numero2);
+        case "/": 
+            return division(numero1, numero2);
+        case "%":   
+            return modulo(numero1, numero2);
         default:
-            return "Operador no válido, por favor introduce uno de los siguientes (solo uno): +, -, *, /, %";
+            //Si el usuario no ha introducido un operador válido le avisamos.
+            return "ERROR. Operador no válido, por favor, introduce uno de los siguientes (solo uno): +, -, *, /, %";
     }
     
+}
+
+/**
+ * 
+ * @param {number} numero1 
+ * @param {number} numero2 
+ * @returns {number}
+ */
+const suma = (numero1, numero2) =>{
+    return numero1 + numero2;
+}
+
+/**
+ * 
+ * @param {number} numero1 
+ * @param {number} numero2 
+ * @returns {number}
+ */
+const resta = (numero1, numero2) =>{
+    return numero1 - numero2;
+}
+
+/**
+ * 
+ * @param {number} numero1 
+ * @param {number} numero2 
+ * @returns {number}
+ */
+const multiplicacion = (numero1, numero2) =>{
+    return numero1 * numero2;
+}
+
+/**
+ * 
+ * @param {number} numero1 
+ * @param {number} numero2 
+ * @returns {number|string}
+ */
+const division = (numero1, numero2) =>{
+    if(numero2 === 0){
+        return "ERROR.No se puede dividir entre 0.";
+    }
+    return numero1 / numero2;
+}
+
+/**
+ * 
+ * @param {number} numero1 
+ * @param {number} numero2 
+ * @returns {number|string}
+ */
+const modulo = (numero1, numero2) =>{
+    //El módulo de un número entre 0 tampoco se puede calcular.
+    if(numero2 === 0){
+        return "ERROR. No se puede dividir entre 0.";
+    }
+    return numero1 % numero2;
 }
