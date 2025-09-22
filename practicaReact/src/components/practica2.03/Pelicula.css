@@ -1,0 +1,31 @@
+.Pelicula_contenedor {
+    border: 2px solid #000;
+    padding: 20px;
+    background-color: lightblue;
+    width: 100%;
+    margin-bottom: 40px;;
+}
+
+.Pelicula_titulo{
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom:20px;
+    
+}
+
+.Pelicula_contenido{
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.Pelicula_cartelera{
+    width: 700px;
+    border-radius:10px;
+    
+}
+.Pelicula_sinopsis{
+    font-size: 20px;
+    flex: 1;
+}
