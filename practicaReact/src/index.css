@@ -1,7 +1,8 @@
-body{
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content: center;
-    align-items: center;
+body {
+	margin: 0;
+	background-color: #c3d4e7;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

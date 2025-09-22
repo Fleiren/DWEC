@@ -1,31 +1,19 @@
-.Pelicula_contenedor {
-    border: 2px solid #000;
-    padding: 20px;
-    background-color: lightblue;
-    width: 100%;
-    margin-bottom: 40px;;
+.pelicula_contenedor {
+	display: grid;
+	grid-template-columns: 30% auto;
+	gap: 10px;
+}
+img {
+	grid-row: 1 / span 2;
+	justify-self: center;
+	align-self: center;
+	width: 95%;
+	height: 95%;
 }
 
-.Pelicula_titulo{
-    font-size: 50px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom:20px;
-    
-}
-
-.Pelicula_contenido{
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-}
-
-.Pelicula_cartelera{
-    width: 700px;
-    border-radius:10px;
-    
-}
-.Pelicula_sinopsis{
-    font-size: 20px;
-    flex: 1;
+.pelicula_interpretes {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 10px;
+	padding: 10px;
 }
