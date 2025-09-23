@@ -1,5 +1,5 @@
 import React from "react";
-import "./Interprete.css";
+import "./interprete.css";
 
 const Interprete = (props) => {
 	return (

@@ -2,7 +2,5 @@ body {
 	margin: 0;
 	background-color: #c3d4e7;
 	height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	
 }

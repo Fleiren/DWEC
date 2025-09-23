@@ -1,5 +1,5 @@
 import React from "react";
-import "./Pelicula.css";
+import "./pelicula.css";
 
 const Pelicula = (props) => {
 	return (
@@ -11,9 +11,10 @@ const Pelicula = (props) => {
 			></img>
 			<div className="pelicula_contenido">
 				<div>
-					<h1>{props.titulo}</h1>
-					<h3>Director: {props.direccion}</h3>
-					<p>{props.sinopsis}</p>
+					<h1 id="titulo">{props.titulo}</h1>
+					<h3>Director: {props.direccion}.</h3>
+					<p id="sinopsis">{props.sinopsis}</p>
+					<h3>Elenco:</h3>
 				</div>
 				<div className="pelicula_interpretes">{props.children}</div>
 			</div>

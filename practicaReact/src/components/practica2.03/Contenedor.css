@@ -1,5 +1,7 @@
 .contenedor_contenedor {
 	background-color: antiquewhite;
 	border-radius: 5px;
-	margin: 200px;
+	border: 1px solid black;
+	margin: 5px;
+	
 }

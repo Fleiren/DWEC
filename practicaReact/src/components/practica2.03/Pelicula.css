@@ -7,13 +7,34 @@ img {
 	grid-row: 1 / span 2;
 	justify-self: center;
 	align-self: center;
-	width: 95%;
-	height: 95%;
+	width: 80%;
+	height: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
+h3{
+	font-size: 20px;
+}
+
+#titulo{
+	font-size: 40px;
+}
+
+#sinopsis{
+	margin-right: 20px;
+}
+
+p{
+	font-size: 15px;
+	text-align: justify;
+}
 .pelicula_interpretes {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	gap: 10px;
 	padding: 10px;
+	margin-right : 40px;
+	margin-top: 50px;
+	margin-bottom: 5px;
 }
