@@ -13,19 +13,19 @@ img {
 	margin-bottom: 10px;
 }
 
-h3{
+h3 {
 	font-size: 20px;
 }
 
-#titulo{
+#titulo {
 	font-size: 40px;
 }
 
-#sinopsis{
+#sinopsis {
 	margin-right: 20px;
 }
 
-p{
+p {
 	font-size: 15px;
 	text-align: justify;
 }
@@ -34,7 +34,7 @@ p{
 	grid-template-columns: 1fr 1fr 1fr;
 	gap: 10px;
 	padding: 10px;
-	margin-right : 40px;
+	margin-right: 40px;
 	margin-top: 50px;
 	margin-bottom: 5px;
 }
