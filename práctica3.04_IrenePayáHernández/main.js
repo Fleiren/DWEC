@@ -17,18 +17,18 @@ let nombres = ["Irene", "Luis", "Aarón", "Carolina", "Francisco"];
 //Utilizo map para que el array se muestre por pantalla más bonito.
 //Nombres en mayúscula.
 console.log("Nombres en mayúscula:");
-console.log(minusculaMayuscula(nombres).map((nombre) => `- ${nombre}`));
+console.log(minusculaMayuscula(nombres).map((nombre) => `- ${nombre}`).join("\n"));
 
 //Nombres ordenados alfabéticamente en orden inverso.
 console.log("Nombres ordenados alfabéticamente al revés:");
-console.log(nombresOrdenadosAlReves(nombres).map((nombre) => `- ${nombre}`));
+console.log(nombresOrdenadosAlReves(nombres).map((nombre) => `- ${nombre}`).join("\n"));
 
 //convertir los nombres en objetos con id y nombre.
 console.log("Nombres convertidos a objetos:");
 console.log(
 	convertirStringsAObjetos(nombres).map(
-		(objeto) => console.log`- id: ${objeto.id}, nombre: ${objeto.nombre}`
-	)
+		(objeto) => `- id: ${objeto.id}, nombre: ${objeto.nombre}`
+	).join("\n")
 );
 
 //Ejercicio 2.
