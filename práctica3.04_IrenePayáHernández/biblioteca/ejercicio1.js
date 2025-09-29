@@ -5,7 +5,7 @@
 /**
  * 
  * @param {string[]} nombres 
- * @returns {string[]} con los nombres en mayúscula
+ * @returns {string[]} con los nombres en mayúscula.
  */
 export const minusculaMayuscula = (nombres)=>{
 	return nombres.map(nombre => nombre.toUpperCase());

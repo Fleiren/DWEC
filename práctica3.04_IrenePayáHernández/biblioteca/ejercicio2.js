@@ -3,7 +3,7 @@
 /**
  *
  * @param {number[]} numeros
- * @returns {number[]} con los números mayores que 5
+ * @returns {number[]} con los números mayores que 5.
  */
 export const mayorQueCinco = (numeros) => {
 	return [...numeros].filter((numero) => numero > 5);
@@ -11,7 +11,7 @@ export const mayorQueCinco = (numeros) => {
 
 /**
  *
- * @returns {number[]} con 10 números aleatorios entre 1 y 10
+ * @returns {number[]} con 10 números aleatorios entre 1 y 10.
  */
 export const generarArrayDiezNumerosAleatorios = () => {
 	return [...Array(10)].map(() => Math.floor(Math.random() * 10) + 1);
