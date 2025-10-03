@@ -5,14 +5,16 @@ import "./app.css";
 import Interprete from "./components/practica2.03/Interprete.jsx";
 import Pelicula from "./components/practica2.03/Pelicula.jsx";
 import Contenedor from "./components/practica2.03/Contenedor.jsx";
+import Listado from "./components/practica3.08/Listado.jsx";
 
 function App() {
-	const [count, setCount] = useState(0);
 	//He visto que se puede hacer un array con todos los datos estilo JSON y luego mapearlos (No lo he hecho porque en el ejercicio no se pide).
 	return (
 		<>
-			
-				<h1>Películas</h1>
+			<Listado />
+
+			{/* EJERCICIO PELÍCULAS PRÁCTICA 2.03
+				 <h1>Películas</h1>
 				<Contenedor>
 					<Pelicula
 						titulo="Cry-Baby"
@@ -82,8 +84,7 @@ function App() {
 								<div>Actor británico (1946–2016). Reconocido por sus papeles intensos y poco convencionales, fue nominado al Óscar como mejor actor de reparto por Fat City (1972). Participó en filmes de culto como Cry-Baby (1990) y Flesh+Blood. Su estilo excéntrico y magnético lo convirtió en un actor de culto en Hollywood.</div>
 							</Interprete>	
 					</Pelicula>
-				</Contenedor>
-			
+				</Contenedor> */}
 		</>
 	);
 }
