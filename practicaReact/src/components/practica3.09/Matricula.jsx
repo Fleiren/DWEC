@@ -1,6 +1,7 @@
 import React ,{useState} from 'react';
 import datos from './datos/matriculados.json';
 import Discente from './Discente.jsx';
+import Botones from './Botones.jsx';
 import './matricula.css';
 
 /**No sé si te parecerá bien lo que voy a hacer, pero preguntando a ChatGPT e investigando he visto que se podría crear un custom hook para gestionar la lista fuera del componente.
@@ -11,6 +12,7 @@ const Matricula = () => {
     const [lista, setLista] = useState(matriculados);
     //Entiendo que lo interesante sería que si desmatriculamos el alumno ya no aparezca a no ser que reiniciemos la lista, por eso voy a usar una lista auxiliar.
     const [matriculadosActuales, setMatriculadosActuales] = useState(matriculados)
+
     const desmatricularAlumno = (id) => {
         const listaActualizada = matriculadosActuales.filter(alumno => alumno.id !== id);
         setLista(listaActualizada);
@@ -24,41 +26,12 @@ const Matricula = () => {
          * El uso de dos listas distintas me permite ir aplicando los filtros sobre una lista que se va actualizando si se desmatriculan alumnos.
         */}
            <div className="matricula_botones">
-                <button onClick={()=>
-                setLista(matriculadosActuales.filter(alumno => alumno.curso === "2DAW"))
-                }>
-                    2DAW
-                </button>
-                <button onClick={()=>
-                    setLista(matriculadosActuales.filter(alumno => alumno.curso.startsWith("1")))
-                }>
-                    Primero
-                </button>
-                <button onClick={()=>
-                    setLista(matriculadosActuales.filter(alumno => alumno.curso.endsWith("DAM")))
-                }>
-                    DAM
-                </button>
-                <button onClick={()=>
-                    setLista(matriculadosActuales.filter(alumno => alumno.aficiones.includes("lectura")))
-                }>
-                    Lectores
-                </button>
-                <button  onClick={()=>{
-                    
-                    ordenAsc ? 
-                    setLista([...matriculadosActuales].sort((a,b) => a.apellidos.localeCompare(b.apellidos))) :
-                    setLista([...matriculadosActuales].sort((a,b) => b.apellidos.localeCompare(a.apellidos)));
-                    ordenAsc = !ordenAsc;
-                }}>
-                    Ordenar
-                </button>
-                <button onClick={()=>{
-                    setLista([...matriculados]);
-                    setMatriculadosActuales([...matriculados]);
-                }}>
-                    Reiniciar
-                </button>
+                <Botones
+                matriculados={datos.discentes}
+                matriculadosActuales={matriculadosActuales}
+                setLista={setLista}
+                setMatriculadosActuales={setMatriculadosActuales}
+                ></Botones>
            </div>
             
             <div className="matricula_discentes">
