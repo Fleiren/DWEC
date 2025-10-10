@@ -1,0 +1,10 @@
+
+.botones{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.likes h2{
+    text-align: center;
+}

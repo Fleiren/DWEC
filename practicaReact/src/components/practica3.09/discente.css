@@ -1,0 +1,17 @@
+.discente_contenedor{
+    background-color: #f4eff5;
+    border-style: solid;
+    border-color: #799fc7;;
+    border-radius: 20px;
+    margin: 5px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+
+}
+
+p{
+    margin: 2px;
+}

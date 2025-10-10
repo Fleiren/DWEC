@@ -1,0 +1,37 @@
+.listado{
+    overflow-y: auto;
+    align-items: center;
+    grid-row: 1 / span 2;
+    
+}
+
+.botones{
+    margin: 2px;
+    align-items: center;
+    
+    
+}
+
+.listado ul{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem 1rem;
+    margin-right: 40px;
+}
+
+.listado li{
+    list-style: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    text-align: center;
+    background-color: #f0f0f0;
+}
+
+.listado p{
+    text-align: center;
+    font-size: 20px;
+}
+
+.listado h2{
+     text-align: center;
+}

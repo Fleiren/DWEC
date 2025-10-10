@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { generarNumeroAleatorio } from "./funciones/funciones.js";
+import './listado.css';
 
 const Listado = () => {
 	const [numeros, setNumeros] = useState([]);
@@ -32,39 +33,47 @@ const Listado = () => {
 	// };
 	return (
 		<>
-			<h1>Lista de números</h1>
-			{mensajeNumerosCompletos}
-			{numeros.length ? (
-				<ul>
-					{numeros.map((numero) => {
-						return <li key={crypto.randomUUID()}>{numero}</li>;
-					})}
-				</ul>
-			) : (
-				<p>No hay números en la lista.</p>
-			)}
-			<button
-				onClick={() => {
-					generar();
-				}}
-			>
-				Generar
-			</button>
-			<button
-				onClick={() => {
-					eliminarNumero();
-				}}
-			>
-				Eliminar
-			</button>
-			{/* Lo uso para ver que no genera más de 100 números y sale el mensaje de aviso. 
-            <button
-				onClick={() => {
-					cienNumerosDeUna();
-				}}
-			>
-				cien
-			</button> */}
+			<div className='contador listado'>
+				<h1>Lista de números</h1>
+				<h2>Ejercicio 1</h2>
+				<div className="botones">
+					<button 
+						onClick={() => {
+							generar();
+						}}
+					>
+						Generar
+					</button>
+					<button
+						onClick={() => {
+							eliminarNumero();
+						}}
+					>
+						Eliminar
+					</button>
+					</div>
+					{mensajeNumerosCompletos}
+					{numeros.length ? (
+						<ul>
+							{numeros.map((numero) => {
+								return <li key={crypto.randomUUID()}>{numero}</li>;
+							})}
+						</ul>
+					) : (
+						<p>No hay números en la lista.</p>
+					)}
+					{/* Lo uso para ver que no genera más de 100 números y sale el mensaje de aviso. 
+					<button
+						onClick={() => {
+							cienNumerosDeUna();
+						}}
+					>
+						cien
+					</button> */}
+				
+				
+			</div>
+				
 		</>
 	);
 };
