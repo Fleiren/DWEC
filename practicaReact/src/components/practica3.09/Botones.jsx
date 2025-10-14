@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
-const Botones = ({ matriculados, matriculadosActuales, setLista, setMatriculadosActuales }) => {
-    let ordenAsc = true;
+const Botones = ({ matriculados, matriculadosActuales, setLista, setMatriculadosActuales, ordenarLista }) => {
 
+    //No se si habría sido buena práctica pero se podría añadir todas las funciones de filtrado, es decir , todos los setters en el custom hook para que aquí solo se llame a la función
+    //ya que parece que quedaría más limpio y claro si se llama a funciones como en el caso de ordenarLista pero son funciones tan simples que no se si merece la pena.
     return(
         <div className="botones_botones">
                 <button onClick={()=>
@@ -26,10 +27,7 @@ const Botones = ({ matriculados, matriculadosActuales, setLista, setMatriculados
                     Lectores
                 </button>
                 <button  onClick={()=>{            
-                    ordenAsc ? 
-                    setLista([...matriculadosActuales].sort((a,b) => a.apellidos.localeCompare(b.apellidos))) :
-                    setLista([...matriculadosActuales].sort((a,b) => b.apellidos.localeCompare(a.apellidos)));
-                    ordenAsc = !ordenAsc;
+                    ordenarLista();
                 }}>
                     Ordenar
                 </button>

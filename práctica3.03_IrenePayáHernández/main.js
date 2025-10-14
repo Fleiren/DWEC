@@ -17,6 +17,7 @@ console.log(JSON.stringify(curso2Daw));
 console.log("\n\n- Ejercicio 2 -");
 mostrarCurso(curso2Daw);
 
+
 //Ejercicio 3.
 console.log("\n\n- Ejercicio 3 -");
 let discente = {

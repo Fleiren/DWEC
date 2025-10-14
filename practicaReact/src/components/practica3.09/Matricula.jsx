@@ -1,5 +1,6 @@
 import React ,{useState} from 'react';
 import datos from './datos/matriculados.json';
+import { useMatriculados } from './hooks/useMatriculados.js';
 import Discente from './Discente.jsx';
 import Botones from './Botones.jsx';
 import './matricula.css';
@@ -8,17 +9,9 @@ import './matricula.css';
 *Lo he hecho así para aprender, ya que uso la IA como una herramienta de apoyo para entender mejor cómo funcionan estas cosas. Espero que lo veas bien.
 */
 const Matricula = () => {
-    const matriculados = datos.discentes;
-    const [lista, setLista] = useState(matriculados);
-    //Entiendo que lo interesante sería que si desmatriculamos el alumno ya no aparezca a no ser que reiniciemos la lista, por eso voy a usar una lista auxiliar.
-    const [matriculadosActuales, setMatriculadosActuales] = useState(matriculados)
-
-    const desmatricularAlumno = (id) => {
-        const listaActualizada = matriculadosActuales.filter(alumno => alumno.id !== id);
-        setLista(listaActualizada);
-        setMatriculadosActuales(listaActualizada);
-    }
-    
+    //Gracias al custom hook podemos dejar el componente más limpio y separar la lógica de la vista.
+    //Al custom hook le pasamos los datos que vamos a usar y devuelve lo que necesitamos.
+    const {matriculados, lista, setLista, matriculadosActuales, setMatriculadosActuales, desmatricularAlumno, ordenarLista} = useMatriculados(datos.discentes);
 
     return(
         <>
@@ -27,10 +20,11 @@ const Matricula = () => {
         */}
            <div className="matricula_botones">
                 <Botones
-                matriculados={datos.discentes}
+                matriculados={matriculados}
                 matriculadosActuales={matriculadosActuales}
                 setLista={setLista}
                 setMatriculadosActuales={setMatriculadosActuales}
+                ordenarLista={ordenarLista}
                 ></Botones>
            </div>
             
