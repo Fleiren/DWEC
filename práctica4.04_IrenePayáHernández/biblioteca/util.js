@@ -11,3 +11,5 @@ const esPrimo = (numero) => {
 	}
 	return true;
 };
+
+export {esPrimo};

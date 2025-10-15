@@ -7,4 +7,8 @@ setTimeout(() => {
 }, 1000);
 
 tablaNumeros();
-pintarPrimos();
+
+setTimeout(() => {
+	pintarPrimos();
+}, 1000);
+

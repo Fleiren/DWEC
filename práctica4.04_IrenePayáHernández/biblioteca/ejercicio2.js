@@ -1,4 +1,5 @@
 "use strict";
+import { esPrimo } from "./util.js";
 
 const tablaNumeros = () => {
 	let cuerpo = document.body;
@@ -13,11 +14,21 @@ const tablaNumeros = () => {
 	}
 	tabla += "</table>";
 	cuerpo.innerHTML += tabla;
-};
+}
 
 const pintarPrimos = () => {
-	let tabla = document.getElementsByTagName("table");
+	let tabla = document.getElementsByTagName("table")[0];
 	console.log(tabla);
-};
+	let celdas = tabla.getElementsByTagName("td");
+	for (let celda of celdas){
+		//el contenido de cada celda es texto por lo que debemos convertirlo a enteros antes de calcular si es primo.
+		let num = parseInt(celda.textContent);
+		//Compruebo que sea un número y que sea primo.
+		if(!isNaN(num) && esPrimo(num)){
+			//Gracias a classList añadimos la clase esPrimo a esa celda
+			celda.classList.add("esPrimo");
+		}
+	}
+}
 
 export { tablaNumeros, pintarPrimos };

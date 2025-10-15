@@ -27,6 +27,6 @@ const bloquearContenido = () => {
 		);
 	}
 	cuerpo.innerHTML = nuevo;
-};
+}
 
 export { bloquearContenido };
