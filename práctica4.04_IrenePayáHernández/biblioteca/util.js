@@ -10,6 +10,10 @@ const esPrimo = (numero) => {
 		}
 	}
 	return true;
-};
+}
 
-export {esPrimo};
+const numAleatorio = (rango, base) => {
+	return Math.floor(Math.random()*rango) + base;
+}
+
+export {esPrimo, numAleatorio};

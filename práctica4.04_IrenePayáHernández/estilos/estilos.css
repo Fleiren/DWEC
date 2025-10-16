@@ -20,3 +20,15 @@ td {
 	background-color: red;
 	font-weight: bold;
 }
+
+.parrafo {
+	
+	height: auto;
+	width: auto;
+	border: 2px solid black;
+	border-radius: 6px;
+	background-color: rgb(251, 201, 208);
+	padding: 10px;
+}
+
+
