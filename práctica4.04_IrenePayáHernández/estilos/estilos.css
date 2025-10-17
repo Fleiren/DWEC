@@ -31,4 +31,8 @@ td {
 	padding: 10px;
 }
 
+.imagen img {
+    transition: opacity 0.2s;
+    opacity: 1;
+}
 
