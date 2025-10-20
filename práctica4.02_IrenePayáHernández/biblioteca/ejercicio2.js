@@ -2,8 +2,10 @@
 import { esPrimo } from "./util.js";
 
 const tablaNumeros = () => {
-	let cuerpo = document.body;
-	let tabla = '<table class="tabla">';
+	//Coloco la tabla dentro de un contenedor para poder modificar con css todo más comodo.
+	let contenedor = document.createElement('div');
+	contenedor.classList.add("contenedorTabla")
+	let tabla = '<h1>Tabla</h1><table class="tabla">';
 	let contador = 1;
 	for (let i = 0; i < 10; i++) {
 		tabla += "<tr>";
@@ -13,7 +15,8 @@ const tablaNumeros = () => {
 		tabla += "</tr>";
 	}
 	tabla += "</table>";
-	cuerpo.innerHTML += tabla;
+	contenedor.innerHTML = tabla;
+	document.body.appendChild(contenedor);
 }
 
 const pintarPrimos = () => {

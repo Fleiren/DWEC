@@ -1,0 +1,79 @@
+.contenidoBloqueado {
+	color: red;
+	font-style: italic;
+}
+
+.contenedorTabla{
+	margin: 50px;
+	padding: 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: rgb(251, 201, 208);
+	border-radius: 5px;
+}
+.tabla, th, td {
+	border: 2px solid black;
+	border-collapse: collapse;
+	padding: 5px;
+	text-align: center;
+	
+}
+
+td {
+	width: 30px;
+	height: 30px;
+}
+
+.esPrimo{
+	background-color: red;
+	font-weight: bold;
+}
+
+.parrafo {
+	
+	height: auto;
+	width: auto;
+	border: 2px solid black;
+	border-radius: 6px;
+	background-color: rgb(251, 201, 208);
+	padding: 10px;
+}
+
+.contenedorFotos{
+	margin: 50px;
+	padding: 30px;
+	display: flex;
+	background-color: rgb(251, 201, 208);
+	border-radius: 5px;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	
+}
+
+.contenedorFotos img {
+	width: 500px;
+	height: 450px;
+	border: 2px solid black;
+	border-radius: 6px;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+.transicion {
+	 opacity: 1;
+    transform: translateX(0);
+   /* opacity: 1;
+  	transform: scale(1.03);
+	transition: all 0.3s ease-in-out;*/
+}
+
+.salida {
+	transform: translateX(-100%);
+	opacity: 0;
+}
+
+.entrada {
+	transform: translateX(100%);
+	opacity: 0;
+}
