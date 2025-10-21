@@ -1,0 +1,19 @@
+.interprete_foto {
+	width: 40%;
+	height: auto;
+	border-radius: 5px;
+}
+
+.interprete_contenedor {
+	padding: 10px;
+	border: 2px solid rgb(49, 49, 49);
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	background-color: whitesmoke;
+}
+
+h2 {
+	text-align: center;
+	font-size: 15px;
+}

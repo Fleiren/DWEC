@@ -1,0 +1,75 @@
+{"peliculas":[
+        {
+            "titulo":"Cry-Baby",
+            "cartelera":"https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p12228_p_v10_an.jpg",
+            "dirección":"John Waters",
+            "sinopsis":"En los años 50, Wade 'Cry-Baby' Walker es el líder de una banda de jóvenes rebeldes conocidos como 'drapes'. Cuando Cry-Baby se enamora de Allison, una chica de buena familia, su relación provoca un choque entre los 'drapes' y los 'squares', los jóvenes conservadores de la ciudad.",
+            "taquilla": "10.800.000€",
+            "elenco":[
+                {
+                    "nombre":"Johnny Depp",
+                    "foto":"https://www.lavanguardia.com/peliculas-series/images/profile/1963/6/w1280/z4wuEcnTW4hlICMYPGn5W8bK2zh.jpg",
+                    "biografia":"Actor, productor y músico estadounidense (1963). Alcanzó la fama en los 80 con 21 Jump Street y se consolidó con Cry-Baby (1990) y Eduardo Manostijeras. Conocido por su versatilidad y su colaboración con Tim Burton, ha interpretado papeles icónicos como Jack Sparrow en Piratas del Caribe. Ha recibido múltiples nominaciones al Óscar y Globos de Oro."
+                },
+                {
+                    "nombre":"Amy Locane",
+                    "foto":"https://m.media-amazon.com/images/M/MV5BMjg4NTQyMzEtNzM3Ny00N2U4LTgwODUtMDg4ZDNmMzEwM2E1XkEyXkFqcGc@._V1_.jpg",
+                    "biografia":"Actriz estadounidense (1971). Debutó en cine a finales de los 80 y logró notoriedad como protagonista femenina en Cry-Baby (1990) junto a Johnny Depp. También apareció en series como Melrose Place y en películas como Carried Away (1996). Su carrera se interrumpió por problemas legales en la década de 2010."
+                },
+                {
+                    "nombre":"Susan Tyrrell",
+                    "foto":"https://m.media-amazon.com/images/M/MV5BMTM5NTI2NzQ4NV5BMl5BanBnXkFtZTcwOTA2MTUzOA@@._V1_.jpg",
+                    "biografia":"Actriz estadounidense (1945–2012). Reconocida por sus papeles intensos y poco convencionales, fue nominada al Óscar como mejor actriz de reparto por Fat City (1972). Participó en filmes de culto como Cry-Baby (1990) y Flesh+Blood. Su estilo excéntrico y magnético la convirtió en una actriz de culto en Hollywood."
+                }
+            ]
+        },
+        {
+            "titulo":"Sombras Tenebrosas",
+            "cartelera":"https://images.justwatch.com/poster/240462902/s718/sombras-tenebrosas.jpg",
+            "dirección":"Tim Burton",
+            "sinopsis":"En 1752, la familia Collins se traslada de Liverpool a Maine, donde construyen una mansión y fundan la ciudad de Collinsport. En 1796, Barnabas Collins, un joven heredero, es convertido en vampiro por una bruja llamada Angelique Bouchard, quien está enamorada de él. Después de ser enterrado vivo, Barnabas es liberado en 1972 y regresa a su antigua mansión, solo para descubrir que su familia ha caído en la ruina y que Angelique sigue viva y poderosa.",
+            "taquilla": "6.102.157€",
+            "elenco":[
+                {
+                    "nombre":"Johnny Depp",
+                    "foto":"https://images.justwatch.com/poster/240462902/s718/sombras-tenebrosas.jpg",
+                    "biografia":"Actor, productor y músico estadounidense (1963). Alcanzó la fama en los 80 con 21 Jump Street y se consolidó con Cry-Baby (1990) y Eduardo Manostijeras. Conocido por su versatilidad y su colaboración con Tim Burton, ha interpretado papeles icónicos como Jack Sparrow en Piratas del Caribe. Ha recibido múltiples nominaciones al Óscar y Globos de Oro."
+                },
+                {
+                    "nombre":"Helena Bonham Carter",
+                    "foto":"https://i.pinimg.com/736x/78/82/3c/78823c39563bedfafbd2cddc1d040de6.jpg",
+                    "biografia":"Actriz británica (1966). Reconocida por su versatilidad y colaboraciones con Tim Burton en películas como El joven manos de tijera (1990), Sweeney Todd (2007) y Alicia en el país de las maravillas (2010). Ha sido nominada a varios premios, incluyendo los Óscar y Globos de Oro, destacándose por sus papeles en cine independiente y de gran presupuesto."
+                },
+                {
+                    "nombre":"Eva Green",
+                    "foto":"https://m.media-amazon.com/images/M/MV5BMTQ0MDA2ODE2Ml5BMl5BanBnXkFtZTcwMjI0Nzc3Nw@@._V1_FMjpg_UX1000_.jpg",
+                    "biografia":"Actriz francesa (1980). Debutó en cine con La maldición de las brujas (2003) y ganó reconocimiento internacional con Casino Royale (2006) como Vesper Lynd. Conocida por su presencia magnética y versatilidad, ha trabajado en películas como Sombras Tenebrosas (2012) y Penny Dreadful (2014-2016). Ha recibido varios premios por su trabajo en cine y televisión."
+                }
+            ]
+        },
+        {
+            "titulo":"Sweeney Todd: El barbero diabólico de la calle Fleet",
+            "cartelera":"https://m.media-amazon.com/images/M/MV5BMTg3NjUxMzM5NV5BMl5BanBnXkFtZTcwMzQ1NjQzMw@@._V1_FMjpg_UX1000_.jpg",
+            "dirección":"Tim Burton",
+            "sinopsis":"En el Londres victoriano, Benjamin Barker, un barbero talentoso, es injustamente encarcelado por el juez Turpin, quien codicia a su esposa. Tras escapar de prisión y adoptar el nombre de Sweeney Todd, regresa a Londres para vengarse del juez. Con la ayuda de Mrs. Lovett, una astuta pastelera, Sweeney abre una barbería donde asesina a sus clientes y utiliza sus cuerpos para hacer pasteles de carne.",
+            "taquilla": "3.300.000€",
+            "elenco":[
+                {
+                    "nombre":"Johnny Depp",
+                    "foto":"https://images.justwatch.com/poster/240462902/s718/sombras-tenebrosas.jpg",
+                    "biografia":"Actor, productor y músico estadounidense (1963). Alcanzó la fama en los 80 con 21 Jump Street y se consolidó con Cry-Baby (1990) y Eduardo Manostijeras. Conocido por su versatilidad y su colaboración con Tim Burton, ha interpretado papeles icónicos como Jack Sparrow en Piratas del Caribe. Ha recibido múltiples nominaciones al Óscar y Globos de Oro."
+                },
+                {
+                    "nombre":"Helena Bonham Carter",
+                    "foto":"https://i.pinimg.com/736x/78/82/3c/78823c39563bedfafbd2cddc1d040de6.jpg",
+                    "biografia":"Actriz británica (1966). Reconocida por su versatilidad y colaboraciones con Tim Burton en películas como El joven manos de tijera (1990), Sweeney Todd (2007) y Alicia en el país de las maravillas (2010). Ha sido nominada a varios premios, incluyendo los Óscar y Globos de Oro, destacándose por sus papeles en cine independiente y de gran presupuesto."
+                },
+                {
+                    "nombre":"Alan Rickman",
+                    "foto":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1hNoH1nErMiuUHq3iVHGq7tttCEMEcHp5HQ&s",
+                    "biografia":"Actor británico (1946-2016). Reconocido por su voz profunda y su presencia magnética en pantalla. Saltó a la fama con su papel de Hans Gruber en Duro de matar (1988) y continuó interpretando personajes memorables en películas como Robin Hood: Príncipe de los ladrones (1991), Sense and Sensibility (1995) y la saga de Harry Potter como Severus Snape. Su carrera abarcó teatro, cine y televisión, dejando un legado duradero."
+                }
+            ]
+        }
+    ]
+}
