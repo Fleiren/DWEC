@@ -3,16 +3,16 @@
   border-radius: 5px;
   border: 2px solid black;
   margin: 20px;
-  display: grid;
-  grid-template-rows: auto 1fr;
+  display: flex;
+  flex-direction: column;
 }
 
 .actores{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 10px;
 }
 
 h1{
-    font-size: 25px;
+    font-size: 20px;
 }

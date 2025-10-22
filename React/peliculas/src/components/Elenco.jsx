@@ -4,7 +4,7 @@ import Interprete from "./Interprete.jsx";
 
 const Elenco = (props) => {
     const { elenco } = props;
-
+    //En este componente se recorren los actores y se pintan llamando al componente Interprete.
     return(
         <>
         
@@ -15,7 +15,6 @@ const Elenco = (props) => {
                 return <Interprete key={indice} nombre={actor.nombre} foto={actor.foto} biografia={actor.biografia}></Interprete>
             })} 
             </div>
-            
         </div>
         
         </>
