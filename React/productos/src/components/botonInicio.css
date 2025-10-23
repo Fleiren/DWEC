@@ -1,0 +1,9 @@
+button{
+    background-color: beige;
+    transition: transform 0.2s; 
+}
+
+button:hover{
+    border-color: black;
+    transform: scale(1.1);
+}

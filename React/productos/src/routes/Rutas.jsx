@@ -4,6 +4,7 @@ import Inicio from '../pages/Inicio.jsx';
 import Contacto from '../pages/Contacto.jsx';
 import AcercaDe from '../pages/AcercaDe.jsx';
 import Productos from '../pages/Productos.jsx';
+import Error from '../pages/Error.jsx';
 
 const Rutas = () => {
     return(
@@ -15,6 +16,8 @@ const Rutas = () => {
                 <Route path="/contacto" element={<Contacto />}></Route>
                 <Route path="/acercaDe" element={<AcercaDe />}></Route>
                 <Route path="/productos" element={<Productos />}></Route>
+                {/*Añadimos la ruta por defecto para que si la ruta que se intenta buscar no coincide con ninguna lleve a una página de error*/}
+                <Route path="/*" element={<Error/>}></Route>
             </Routes>
         </>
     )

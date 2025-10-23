@@ -1,0 +1,19 @@
+.menu_contenedor{
+    background-color: beige;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.menu_elemento{
+    color: black;
+    margin: 10px;
+    margin-left: 8%;
+    margin-right: 8%;
+    transition: transform 0.2s;
+}
+
+.menu_elemento:hover{
+    color: brown;
+    transform: scale(1.1);
+}

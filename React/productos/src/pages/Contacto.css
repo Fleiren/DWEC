@@ -1,0 +1,11 @@
+.contacto_contenido{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.contacto_contenido img{
+    width: 20%;
+    height: 20% ;
+}

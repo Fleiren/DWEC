@@ -6,9 +6,7 @@ const Menu = () => {
 	return (
 		<>
 			<nav className="menu_contenedor">
-				<Link className="menu_elemento" to="/">
-					Inicio
-				</Link>
+				{/*He quitado inicio para que tengan más sentido los botones de inicio por página*/}
 				<Link className="menu_elemento" to="/acercaDe">
 					Acerca De
 				</Link>
