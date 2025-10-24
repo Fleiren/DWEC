@@ -16,7 +16,7 @@ const Rutas = () => {
                 <Route path="/contacto" element={<Contacto />}></Route>
                 <Route path="/acercaDe" element={<AcercaDe />}></Route>
                 <Route path="/productos" element={<Productos />}></Route>
-                {/*Añadimos la ruta por defecto para que si la ruta que se intenta buscar no coincide con ninguna lleve a una página de error*/}
+                {/*Añadimos la ruta por defecto para que si la ruta que se intenta buscar no coincide con ninguna lleve a una página de error.*/}
                 <Route path="/*" element={<Error/>}></Route>
             </Routes>
         </>

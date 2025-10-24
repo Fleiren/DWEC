@@ -1,4 +1,9 @@
 button{
+    position: fixed;
+    font-size: 30px;
+    top: 80vh;
+    height: 10vh;
+    width: 20vh;
     background-color: beige;
     transition: transform 0.2s; 
 }

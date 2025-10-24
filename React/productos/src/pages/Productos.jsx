@@ -7,9 +7,8 @@ const Productos = () => {
         <>
         <div className='productos_contenido'>
             <h1>Productos</h1>
-            <img src="/src/assets/img/gumballProductos.jpg" alt="Gumball feliz" />
-        </div>
-            
+            <img src="/src/assets/img/gumballProductos.jpg" alt="Gumball feliz." />
+        </div> 
             <BotonInicio />
         </>
     );

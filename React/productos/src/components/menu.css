@@ -11,6 +11,7 @@
     margin-left: 8%;
     margin-right: 8%;
     transition: transform 0.2s;
+    font-size: 25px;
 }
 
 .menu_elemento:hover{

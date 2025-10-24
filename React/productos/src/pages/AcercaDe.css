@@ -1,11 +1,11 @@
 .acercaDe_contenido{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
-    align-items: baseline;
+    align-items: center;
 }
 
 .acercaDe_contenido img{
-    width: 30%;
-    height: 30% ;
+    width: 30vh;
+    height: 15vh ;
 }

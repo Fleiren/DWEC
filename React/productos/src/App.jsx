@@ -9,6 +9,7 @@ import Menu from "./components/Menu.jsx";
 function App() {
 	return (
 		<>
+		 
 			<Menu></Menu>
 			<Contenedor>			
 				<h1>Tienda de productos</h1>

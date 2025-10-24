@@ -1,11 +1,11 @@
 .productos_contenido{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
-    align-items: baseline;
+    align-items: center;
 }
 
 .productos_contenido img{
-    width: 30%;
-    height: 30% ;
+    width: 40vh;
+    height: 25vh ;
 }
