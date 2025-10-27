@@ -1,11 +1,14 @@
 {
 	"peliculas": [
 		{
+			"id": 1,
 			"titulo": "Sombras Tenebrosas",
+			"anio": 2012,
 			"cartelera": "https://images.justwatch.com/poster/240462902/s718/sombras-tenebrosas.jpg",
 			"direccion": "Tim Burton",
 			"sinopsis": "En 1752, la familia Collins se traslada de Liverpool a Maine, donde construyen una mansión y fundan la ciudad de Collinsport. En 1796, Barnabas Collins, un joven heredero, es convertido en vampiro por una bruja llamada Angelique Bouchard, quien está enamorada de él. Después de ser enterrado vivo, Barnabas es liberado en 1972 y regresa a su antigua mansión, solo para descubrir que su familia ha caído en la ruina y que Angelique sigue viva y poderosa.",
 			"taquilla": "6102157",
+			"moneda": "EUR",
 			"elenco": [
 				{
 					"nombre": "Johnny Depp",
@@ -25,11 +28,14 @@
 			]
 		},
 		{
+			"id": 2,
 			"titulo": "Sweeney Todd: El barbero diabólico de la calle Fleet",
+			"anio": 2007,
 			"cartelera": "https://m.media-amazon.com/images/M/MV5BMTg3NjUxMzM5NV5BMl5BanBnXkFtZTcwMzQ1NjQzMw@@._V1_FMjpg_UX1000_.jpg",
 			"direccion": "Tim Burton",
 			"sinopsis": "En el Londres victoriano, Benjamin Barker, un barbero talentoso, es injustamente encarcelado por el juez Turpin, quien codicia a su esposa. Tras escapar de prisión y adoptar el nombre de Sweeney Todd, regresa a Londres para vengarse del juez. Con la ayuda de Mrs. Lovett, una astuta pastelera, Sweeney abre una barbería donde asesina a sus clientes y utiliza sus cuerpos para hacer pasteles de carne.",
 			"taquilla": "3300000",
+			"moneda": "EUR",
 			"elenco": [
 				{
 					"nombre": "Johnny Depp",
@@ -45,6 +51,267 @@
 					"nombre": "Alan Rickman",
 					"foto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1hNoH1nErMiuUHq3iVHGq7tttCEMEcHp5HQ&s",
 					"biografia": "Actor británico (1946-2016). Reconocido por su voz profunda y su presencia magnética en pantalla. Saltó a la fama con su papel de Hans Gruber en Duro de matar (1988) y continuó interpretando personajes memorables en películas como Robin Hood: Príncipe de los ladrones (1991), Sense and Sensibility (1995) y la saga de Harry Potter como Severus Snape. Su carrera abarcó teatro, cine y televisión, dejando un legado duradero."
+				}
+			]
+		},
+		{
+			"id": 3,
+			"titulo": "Eduardo manos tijeras",
+			"anio": 1990,
+			"cartelera": "",
+			"director": "Tim burton",
+			"sinopsis": "Un hombre artificial con tijeras en lugar de manos es descubierto por una vendedora de Avon y llevado a vivir a un barrio suburbano. Su bondad e inusual aspecto le traen tanto amor como crueldad de la sociedad.",
+			"taquilla": "5975144",
+			"moneda": "EUR",
+			"elenco": [
+				{
+					"nombre": "Johnny Depp",
+					"foto": "https://images.justwatch.com/poster/240462902/s718/sombras-tenebrosas.jpg",
+					"biografia": "Actor, productor y músico estadounidense (1963). Alcanzó la fama en los 80 con 21 Jump Street y se consolidó con Cry-Baby (1990) y Eduardo Manostijeras. Conocido por su versatilidad y su colaboración con Tim Burton, ha interpretado papeles icónicos como Jack Sparrow en Piratas del Caribe. Ha recibido múltiples nominaciones al Óscar y Globos de Oro."
+				},
+				{
+					"nombre": "Winona Ryder",
+					"foto": "",
+					"biografia": "Actriz estadounidense (1971). Se convirtió en un icono de la cultura pop y gótica de los 90. Frecuente colaboradora de Burton, interpretó el papel de Kim Boggs."
+				},
+				{
+					"nombre": "Dianne Wiest",
+					"foto": "",
+					"biografia": "Actriz estadounidense (1948), ganadora de dos Premios Óscar. Interpretó a Peg Boggs, la cariñosa mujer que acoge a Eduardo en su hogar."
+				}
+			]
+		},
+		{
+			"id": 4,
+			"titulo": "Beetlejuice",
+			"anio": 1988,
+			"director": "Tim Burton",
+			"sinopsis": "Una pareja recién fallecida contrata a Beetlejuice, un 'bio-exorcista', para asustar a los nuevos yuppies que han comprado su casa, descubriendo que invocarlo puede tener consecuencias terribles.",
+			"taquilla": "127000000",
+			"moneda": "EUR",
+			"elenco": [
+				{
+					"nombre": "Michael Keaton",
+					"foto": "",
+					"biografia": "Actor estadounidense (1951). Famoso por su comedia oscura y por interpretar roles duales como este y Batman para Burton. Ganador de un Globo de Oro."
+				},
+				{
+					"nombre": "Winona Ryder",
+					"foto": "",
+					"biografia": "Actriz estadounidense (1971). Se convirtió en un icono gótico por su papel de Lydia Deetz, la adolescente melancólica que puede ver a los fantasmas."
+				},
+				{
+					"nombre": "Alec Baldwin",
+					"foto": "",
+					"biografia": "Actor estadounidense (1958). Tuvo su primer éxito cinematográfico como el fantasma Adam Maitland. También conocido por su trabajo en la televisión y la comedia."
+				}
+			]
+		},
+		{
+			"id": 5,
+			"titulo": "Coraline",
+			"anio": 2009,
+			"director": "Henry Selick",
+			"sinopsis": "Una niña llamada Coraline se muda a una nueva casa y descubre una puerta secreta que conduce a una versión 'mejorada' de su vida. Pronto se da cuenta de que este 'Otro Mundo' esconde un terrible y oscuro secreto.",
+			"taquilla": "100000000",
+			"moneda": "EUR",
+			"elenco": [
+				{
+					"nombre": "Dakota Fanning",
+					"foto": "",
+					"biografia": "Actriz estadounidense (1994). Proporcionó la voz para Coraline Jones, el personaje principal curioso y valiente de esta película de stop-motion."
+				},
+				{
+					"nombre": "Teri Hatcher",
+					"foto": "",
+					"biografia": "Actriz estadounidense (1964). Conocida por Desperate Housewives y James Bond. Dio voz tanto a la Madre de Coraline como a la siniestra Otra Madre."
+				},
+				{
+					"nombre": "Keith David",
+					"foto": "",
+					"biografia": "Actor estadounidense (1956). Veterano del cine y la voz en off. Interpretó la voz del Gato, el guía misterioso de Coraline."
+				}
+			]
+		},
+		{
+			"id": 6,
+			"titulo": "Sleepy Hollow",
+			"anio": 1999,
+			"director": "Tim Burton",
+			"sinopsis": "El investigador Ichabod Crane, un hombre con métodos científicos, es enviado a Sleepy Hollow para investigar una serie de asesinatos supuestamente cometidos por un jinete sin cabeza.",
+			"taquilla": "165000000",
+			"moneda": "EUR",
+			"elenco": [
+				{
+					"nombre": "Johnny Depp",
+					"foto": "https://images.justwatch.com/poster/240462902/s718/sombras-tenebrosas.jpg",
+					"biografia": "Actor, productor y músico estadounidense (1963). Alcanzó la fama en los 80 con 21 Jump Street y se consolidó con Cry-Baby (1990) y Eduardo Manostijeras. Conocido por su versatilidad y su colaboración con Tim Burton, ha interpretado papeles icónicos como Jack Sparrow en Piratas del Caribe. Ha recibido múltiples nominaciones al Óscar y Globos de Oro."
+				},
+				{
+					"nombre": "Christina Ricci",
+					"foto": "",
+					"biografia": "Actriz estadounidense (1980). Ícono del cine de estética oscura por su papel de Miércoles Addams. Interpretó a Katrina Van Tassel."
+				},
+				{
+					"nombre": "Miranda Richardson",
+					"foto": "",
+					"biografia": "Actriz británica (1958). Conocida por su trabajo en teatro y cine, donde ha interpretado a menudo personajes complejos y misteriosos."
+				}
+			]
+		},
+		{
+			"id": 7,
+			"titulo": "El Laberinto del Fauno",
+			"anio": 2006,
+			"director": "Guillermo del Toro",
+			"sinopsis": "España, 1944. Ofelia, una niña con una imaginación desbordante, se muda con su madre a un campamento militar. Allí descubre un laberinto donde un fauno le revela que ella es la princesa de un reino subterráneo y debe completar tres peligrosas tareas.",
+			"taquilla": "8896195",
+			"moneda": "EUR",
+			"elenco": [
+				{
+					"nombre": "Ivana Baquero",
+					"foto": "",
+					"biografia": "Actriz española (1994). Alcanzó fama internacional por su papel protagonista como Ofelia, ganando el Premio Goya a la Mejor Actriz Revelación."
+				},
+				{
+					"nombre": "Sergi López",
+					"foto": "",
+					"biografia": "Actor español (1965). Conocido por su trabajo en el cine europeo. Interpretó al brutal y sádico Capitán Vidal."
+				},
+				{
+					"nombre": "Doug Jones",
+					"foto": "",
+					"biografia": "Actor estadounidense (1960). Famoso por sus interpretaciones de criaturas con mucho maquillaje y prótesis (como el Fauno y el Hombre Pálido). Colaborador frecuente de Del Toro."
+				}
+			]
+		},
+		{
+			"id": 8,
+			"titulo": "Big Fish",
+			"anio": 2003,
+			"director": "Tim Burton",
+			"sinopsis": "Un hijo regresa a casa para estar con su padre moribundo, cuyas historias fantásticas y exageradas sobre su vida siempre han frustrado al hijo. Busca la verdad detrás de las leyendas antes de que sea demasiado tarde.",
+			"taquilla": "130000000",
+			"moneda": "EUR",
+			"elenco": [
+				{
+					"nombre": "Ewan McGregor",
+					"foto": "",
+					"biografia": "Actor escocés (1971). Conocido por Trainspotting y la saga Star Wars. Interpretó la versión joven y aventurera de Edward Bloom."
+				},
+				{
+					"nombre": "Albert Finney",
+					"foto": "",
+					"biografia": "Actor británico (1936-2019). Veterano del teatro y cine, interpretó al anciano y cuentacuentos Edward Bloom."
+				},
+				{
+					"nombre": "Billy Crudup",
+					"foto": "",
+					"biografia": "Actor estadounidense (1968). Interpretó a Will Bloom, el hijo que busca la verdad detrás de los cuentos de su padre."
+				}
+			]
+		},
+		{
+			"id": 9,
+			"titulo": "Dark City",
+			"anio": 1998,
+			"director": "Alex Proyas",
+			"sinopsis": "Un hombre se despierta en un hotel sin memoria, acusado de asesinatos brutales. Mientras intenta resolver el misterio, descubre que toda su ciudad es un experimento controlado por misteriosos seres de otro mundo.",
+			"taquilla": "22500000",
+			"moneda": "EUR",
+			"elenco": [
+				{
+					"nombre": "Rufus Sewell",
+					"foto": "",
+					"biografia": "Actor británico (1967). Interpretó a John Murdoch, el amnésico protagonista. Conocido por sus papeles en cine y televisión."
+				},
+				{
+					"nombre": "Kiefer Sutherland",
+					"foto": "",
+					"biografia": "Actor canadiense (1966). Famoso por su papel como Jack Bauer en 24. Interpretó al Dr. Daniel Schreber."
+				},
+				{
+					"nombre": "Jennifer Connelly",
+					"foto": "",
+					"biografia": "Actriz estadounidense (1970), ganadora de un Premio Óscar. Interpretó a Emma Murdoch, la esposa del protagonista."
+				}
+			]
+		},
+		{
+			"id": 10,
+			"titulo": "La Ciudad de los Niños Perdidos",
+			"anio": 1995,
+			"director": "Jean-Pierre Jeunet, Marc Caro",
+			"sinopsis": "En un mundo de fantasía distópica, un científico loco en una plataforma marina roba los sueños de los niños de la ciudad para evitar envejecer. Un forzudo y una niña de nueve años se unen para rescatarlos.",
+			"taquilla": "12000000",
+			"moneda": "EUR",
+			"elenco": [
+				{
+					"nombre": "Ron Perlman",
+					"foto": "",
+					"biografia": "Actor estadounidense (1950). Colaborador frecuente de Guillermo del Toro. Interpretó a One, el forzudo de circo que busca a su hermano."
+				},
+				{
+					"nombre": "Daniel Emilfork",
+					"foto": "",
+					"biografia": "Actor chileno-francés (1924-2006). Famoso por sus papeles excéntricos. Interpretó al Científico Krank."
+				},
+				{
+					"nombre": "Judith Vittet",
+					"foto": "",
+					"biografia": "Actriz francesa (1984). Interpretó a Miette, la joven líder de un grupo de huérfanos ladrones."
+				}
+			]
+		},
+		{
+			"id": 11,
+			"titulo": "Frankenweenie",
+			"anio": 2012,
+			"director": "Tim Burton",
+			"sinopsis": "Victor Frankenstein, un joven científico, utiliza la electricidad para devolverle la vida a su perro Sparky tras un accidente. Cuando sus compañeros descubren su secreto, los intentos de resucitar a otras mascotas resultan monstruosos.",
+			"taquilla": "60000000",
+			"moneda": "EUR",
+			"elenco": [
+				{
+					"nombre": "Charlie Tahan",
+					"foto": "",
+					"biografia": "Actor estadounidense (1998). Puso voz a Victor Frankenstein en esta película de animación stop-motion en blanco y negro."
+				},
+				{
+					"nombre": "Winona Ryder",
+					"foto": "",
+					"biografia": "Actriz estadounidense. Dio voz a Elsa Van Helsing, la vecina y compañera de clase de Victor."
+				},
+				{
+					"nombre": "Catherine O'Hara",
+					"foto": "",
+					"biografia": "Actriz canadiense (1954). Famosa por Beetlejuice. Puso voz a varios personajes, incluyendo la Madre de Victor y la Sra. Remenski."
+				}
+			]
+		},
+		{
+			"id": 12,
+			"titulo": "Donnie Darko",
+			"anio": 2001,
+			"director": "Richard Kelly",
+			"sinopsis": "Un adolescente problemático y sonámbulo comienza a experimentar visiones de un conejo gigante llamado Frank, que le manipula para cometer actos criminales, advirtiéndole del inminente fin del mundo.",
+			"taquilla": "4500000",
+			"moneda": "EUR",
+			"elenco": [
+				{
+					"nombre": "Jake Gyllenhaal",
+					"foto": "",
+					"biografia": "Actor estadounidense (1980). Interpretó a Donnie Darko, un papel que lanzó su carrera y lo convirtió en un icono del cine de culto."
+				},
+				{
+					"nombre": "Jena Malone",
+					"foto": "",
+					"biografia": "Actriz estadounidense (1984). Interpretó a Gretchen Ross, la misteriosa novia de Donnie."
+				},
+				{
+					"nombre": "Drew Barrymore",
+					"foto": "",
+					"biografia": "Actriz y productora estadounidense (1975). Proporcionó la voz de la Sra. Darko, la madre de Donnie."
 				}
 			]
 		}

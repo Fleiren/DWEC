@@ -1,0 +1,14 @@
+.pelicula_pelicula{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    padding: 2px;
+}
+
+.pelicula_pelicula img{
+    height: 15vh;
+    width: auto;
+    
+}
