@@ -1,17 +1,31 @@
 import React from "react";
 import "./galeria.css";
 import MenuGaleria from "./../components/menu/submenu/MenuGaleria.jsx";
+import Cartelera from "./../components/Cartelera.jsx";
 import { Outlet } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-//Habia pensado usar Outlet para que cada filtro fuera una subpágina pero hay que usar cosas que no hemos dado y no se si sería mejor práctica
-//ya que teniendo useState es más legible el código.
-const Galeria = () => {
+const Galeria = (props) => {
+	//Utilizo el hook useLocation para saber si estoy en la ruta principal y así mostrar el contenido por defecto
+	const location = useLocation();
+	const paginaPrincipal = location.pathname === "/galeria";
+	const { peliculas } = props;
 	return (
 		<>
 			<div className="galeria_galeria">
 				<div className="galeria_contenido">
 					<h1>Esta es la página de galería</h1>
-					<div className="galeria_carteleras">{}</div>
+					<div className="galeria_carteleras">
+						{paginaPrincipal ? (
+							peliculas.map((pelicula) => {
+								return (
+									<Cartelera key={pelicula.id} pelicula={pelicula}></Cartelera>
+								);
+							})
+						) : (
+							<Outlet></Outlet>
+						)}
+					</div>
 				</div>
 				<MenuGaleria></MenuGaleria>
 			</div>

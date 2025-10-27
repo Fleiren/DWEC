@@ -5,8 +5,9 @@ import "./pelicula.css";
 const Pelicula = (props) => {
 	const { pelicula } = props;
 	const navigate = useNavigate();
+
 	const verDetalles = () => {
-		navigate("/peliculas/detalles", pelicula);
+		navigate(`/peliculas/${pelicula.id}`);
 	};
 
 	return (
