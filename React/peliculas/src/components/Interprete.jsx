@@ -7,8 +7,12 @@ const Interprete = (props) => {
 	return (
 		<>
 			<div className="interprete_interprete">
-				<h2>{interprete.nombre}</h2>
-				<img src={interprete.foto} alt={`Foto de ${interprete.nombre}`} />
+				<h2 id="interprete_nombre">{interprete.nombre}</h2>
+				<img
+					id="foto_interprete"
+					src={interprete.foto}
+					alt={`Foto de ${interprete.nombre}`}
+				/>
 				<p>{interprete.biografia}</p>
 				<h3>Películas</h3>
 				<div className="interprete_peliculas">

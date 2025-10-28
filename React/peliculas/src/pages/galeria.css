@@ -1,15 +1,24 @@
-.galeria_galeria{
-    display:flex;
-    min-height: 100vh;
-    
+.galeria_galeria {
+	display: flex;
+	min-height: 800px;
+	max-height: 2000px;
+
+	background-image: repeating-linear-gradient(
+		-45deg,
+		#1a1a1a,
+		#1a1a1a 5px,
+		#202020 5px,
+		#202020 10px
+	);
+	border-top: 5px dashed #4a4a4a; /* Borde discontinuo/cosido */
 }
 
-.galeria_contenido{
-    flex-grow: 1;
-    padding: 20px;
+.galeria_contenido {
+	flex-grow: 1;
+	padding: 20px;
 }
 
-.galeria_carteleras{
-    display:grid;
-    grid-template-columns: 1fr 1fr 1fr;
+.galeria_carteleras {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
 }

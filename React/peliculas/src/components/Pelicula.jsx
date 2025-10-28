@@ -20,7 +20,7 @@ const Pelicula = (props) => {
 						verDetalles();
 					}}
 				/>
-				<h2>{pelicula.titulo}</h2>
+				<h2 id="pelicula_titulo">{pelicula.titulo}</h2>
 				<p>{pelicula.anio}</p>
 			</div>
 		</>

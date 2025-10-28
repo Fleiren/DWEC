@@ -14,9 +14,10 @@ header {
 
 .frase {
 	font-style: italic;
-	font-size: large;
+	font-size: normal;
 	align-content: center;
 	grid-area: frase;
+	margin-right: 10px;
 }
 
 .titulo {

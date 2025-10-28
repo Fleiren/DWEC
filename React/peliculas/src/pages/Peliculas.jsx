@@ -7,11 +7,13 @@ const Peliculas = (props) => {
 	const { peliculas } = props;
 	return (
 		<>
-			<h1>Esta es la página de películas</h1>
-			<div className="peliculas_peliculas">
-				{peliculas.map((pelicula) => {
-					return <Pelicula key={pelicula.id} pelicula={pelicula}></Pelicula>;
-				})}
+			<div className="peliculas_contenedor">
+				<h1>Esta es la página de películas</h1>
+				<div className="peliculas_peliculas">
+					{peliculas.map((pelicula) => {
+						return <Pelicula key={pelicula.id} pelicula={pelicula}></Pelicula>;
+					})}
+				</div>
 			</div>
 		</>
 	);

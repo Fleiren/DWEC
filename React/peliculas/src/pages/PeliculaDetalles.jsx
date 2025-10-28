@@ -20,8 +20,9 @@ const PeliculaDetalles = (props) => {
 				<div className="peliculaDetalles_pelicula">
 					<h1>{pelicula.titulo}</h1>
 					<h2>{pelicula.direccion}</h2>
-					<p>{pelicula.sinposis}</p>
+					<p>{pelicula.sinopsis}</p>
 					<img
+						id="peliculaDetalles_cartelera"
 						src={pelicula.cartelera}
 						alt={`Cartelera de ${pelicula.titulo}`}
 					/>

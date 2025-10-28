@@ -1,1 +1,6 @@
-
+.contenedor_contenedor {
+	/* 1. Altura Mínima Garantizada */
+	/* min-height: 100vh asegura que el contenedor principal ocupará *al menos* el 100% de la altura visible del navegador. Si el contenido es más largo, crecerá. */
+	min-height: 100vh;
+	max-height: auto;
+}

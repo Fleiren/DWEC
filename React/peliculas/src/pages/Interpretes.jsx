@@ -9,11 +9,15 @@ const Interpretes = (props) => {
 
 	return (
 		<>
-			<h1>Esta es la página de intérpretes</h1>
-			<div className="interpretes_interpretes">
-				{interpretes.map((interprete, indice) => {
-					return <Interprete key={indice} interprete={interprete}></Interprete>;
-				})}
+			<div className="interpretes_contenedor">
+				<h1>Esta es la página de intérpretes</h1>
+				<div className="interpretes_interpretes">
+					{interpretes.map((interprete, indice) => {
+						return (
+							<Interprete key={indice} interprete={interprete}></Interprete>
+						);
+					})}
+				</div>
 			</div>
 		</>
 	);

@@ -5,6 +5,7 @@
 	border-radius: 15px;
 	padding: 15px;
 	margin: 15px;
+	width: 200px;
 	text-align: center;
 	box-shadow: 10px 10px 0 #111111; /* Sombra desplazada, como dibujada */
 	transition: transform 0.3s, box-shadow 0.3s;
@@ -32,7 +33,7 @@
 	filter: grayscale(0%) contrast(1); /* Color un poco más vivo al pasar el ratón */
 }
 
-.pelicula_pelicula h2 {
+#pelicula_titulo {
 	font-size: 1.5em;
 	margin-top: 10px;
 }
