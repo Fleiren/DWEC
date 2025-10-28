@@ -1,24 +1,39 @@
-.galeria_galeria {
-	display: flex;
-	min-height: 800px;
-	max-height: 2000px;
+/* --- galeria.css MODIFICADO --- */
 
-	background-image: repeating-linear-gradient(
-		-45deg,
-		#1a1a1a,
-		#1a1a1a 5px,
-		#202020 5px,
-		#202020 10px
-	);
-	border-top: 5px dashed #4a4a4a; /* Borde discontinuo/cosido */
+.galeria_galeria {
+	/* Usamos Flexbox para la disposición lateral */
+	display: flex;
+	/* Alineamos los elementos al inicio del contenedor (arriba) */
+	align-items: flex-start;
+
+	/* El contenedor Galeria ocupará todo el ancho disponible */
+	width: 100%;
+	/* Pequeño margen interno para separar del borde del contenido principal */
+	padding-top: 20px;
 }
 
 .galeria_contenido {
+	/* Ocupa el espacio restante después de que el menú haya tomado su parte */
 	flex-grow: 1;
-	padding: 20px;
+	padding-left: 30px; /* Separación visual del menú */
+
+	/* Estética de Burton para el contenido */
+	background-color: #2b2b2b; /* Fondo sutil para el área de contenido */
+	padding-bottom: 30px;
+}
+
+.galeria_contenido h1 {
+	/* Estilo de título más dramático */
+	margin-top: 0;
+	margin-bottom: 25px;
+	border-bottom: 2px dashed #3d0347; /* Separador temático */
+	padding-bottom: 10px;
 }
 
 .galeria_carteleras {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	/* Flexbox para la galería de carteleras */
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px; /* Espacio entre las carteleras */
+	justify-content: center; /* Centramos las carteleras */
 }

@@ -1,16 +1,47 @@
-.menuGaleria_contenedor {
-	width: 250px;
-	max-height: auto;
-	min-height: auto;
-	flex-shrink: 0;
-	padding: 20px 15px;
+/* --- menuGaleria.css MODIFICADO --- */
 
-	background-color: rgba(0, 0, 0, 0.85);
-	border-right: 5px solid #5a1e5a;
+.menuGaleria_contenedor {
+	/* 1. Ancho Compacto */
+	width: 150px; /* Ancho pequeño para el menú lateral */
+	min-width: 150px; /* Aseguramos que no se encoja */
+	padding: 15px 10px;
+
+	/* 2. Estilo Fijo/Pegajoso */
+	/* Sticky funciona mejor dentro de un contenedor con scroll. */
+	position: sticky;
+	top: 20px; /* Se pegará 20px debajo del borde superior del área de scroll */
+
+	/* 3. Estética de Burton: Diseño de columna */
 	display: flex;
 	flex-direction: column;
+	gap: 10px; /* Espacio entre los elementos del menú */
+
+	background-color: #111111; /* Fondo muy oscuro */
+	border: 3px ridge #4a4a4a; /* Borde antiguo */
+	box-shadow: 5px 5px 0 #3d0347; /* Sombra dramática y desplazada */
 }
 
 .menuGaleria_elemento {
-	color: #eee;
+	/* 4. Elementos del Menú */
+	text-decoration: none;
+	color: #e0e0e0; /* Texto blanco hueso */
+	background-color: #3d0347; /* Morado oscuro, como un parche */
+	padding: 8px 12px;
+	text-align: center;
+	border: 1px solid #6e6e6e; /* Borde de costura */
+	border-radius: 5px;
+	transition: background-color 0.3s, transform 0.1s;
+	font-size: 0.9em; /* Letra ligeramente más pequeña */
 }
+
+.menuGaleria_elemento:hover {
+	background-color: #5a046c; /* Morado más vivo al pasar el ratón */
+	transform: scale(1.05); /* Pequeño movimiento excéntrico */
+	color: #ffffff;
+}
+
+/* Opcional: Estilo para el enlace activo (usando una clase que React Router te dé) */
+/* .menuGaleria_elemento.activo {
+    border: 3px solid #c9c9c9; 
+    background-color: #5a046c;
+} */

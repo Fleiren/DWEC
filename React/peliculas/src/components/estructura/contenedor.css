@@ -1,6 +1,13 @@
+/* --- contenedor.css --- */
 .contenedor_contenedor {
-	/* 1. Altura Mínima Garantizada */
-	/* min-height: 100vh asegura que el contenedor principal ocupará *al menos* el 100% de la altura visible del navegador. Si el contenido es más largo, crecerá. */
-	min-height: 100vh;
-	max-height: auto;
+	/* 1. Usamos Flexbox para organizar verticalmente */
+	display: flex;
+	flex-direction: column;
+
+	/* 2. Ocupamos toda la altura */
+	height: 100vh; /* 100% del alto visible del navegador */
+
+	/* 3. Estética de Burton */
+	border: 5px solid #4a4a4a; /* Marco dramático */
+	box-shadow: inset 0 0 20px #3d0347; /* Sombra interior morada para dramatismo */
 }

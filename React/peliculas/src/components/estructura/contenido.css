@@ -1,0 +1,14 @@
+/* --- contenido.css --- */
+.contenido_Contenido {
+	/* 1. La clave: Ocupar todo el espacio restante */
+	flex-grow: 1; /* Esto le dice a Flexbox que tome todo el espacio que no usen la Cabecera y el Pie */
+
+	/* 2. Manejo de Scroll */
+	overflow-y: auto; /* Permite el scroll vertical SÓLO dentro de esta área si el contenido excede su altura */
+
+	/* 3. Estética y Padding */
+	padding: 20px;
+	background-color: #2b2b2b; /* Ligeramente más claro que el fondo para diferenciar */
+	border-top: 2px dashed #6e6e6e;
+	border-bottom: 2px dashed #6e6e6e;
+}
