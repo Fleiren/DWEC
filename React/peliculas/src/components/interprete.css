@@ -1,0 +1,47 @@
+.interprete_interprete {
+	background-color: #222222;
+	border: 3px dashed #6e6e6e; /* Borde cosido o rasgado */
+	border-radius: 5px;
+	padding: 20px;
+	margin: 20px;
+	width: 300px; /* Tamaño fijo para tarjeta */
+	text-align: center;
+	box-shadow: -5px -5px 0 #3d0347; /* Sombra en la esquina opuesta */
+}
+
+.interprete_interprete img {
+	width: 150px;
+	height: 150px;
+	object-fit: cover;
+	border-radius: 50%; /* Foto circular */
+	border: 4px solid #c9c9c9; /* Borde pálido para los "ojos" */
+	filter: sepia(30%) grayscale(20%); /* Tono antiguo/misterioso */
+	margin: 15px 0;
+}
+
+.interprete_interprete h2 {
+	color: #e0e0e0;
+	margin-bottom: 10px;
+}
+
+.interprete_interprete p {
+	text-align: left;
+	font-size: 0.9em;
+	line-height: 1.4;
+	border-left: 3px solid #6e6e6e; /* Barra lateral para simular un recorte de periódico */
+	padding-left: 10px;
+	margin-bottom: 20px;
+}
+
+.interprete_peliculas {
+	display: flex;
+	overflow-x: auto; /* Scroll horizontal si hay muchas películas */
+	padding: 10px 0;
+	/* Esconde la barra de scroll, pero permite el scroll */
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+.interprete_peliculas::-webkit-scrollbar {
+	display: none; /* Chrome, Safari, Opera*/
+}

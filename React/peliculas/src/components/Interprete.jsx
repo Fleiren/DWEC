@@ -7,11 +7,11 @@ const Interprete = (props) => {
 	return (
 		<>
 			<div className="interprete_interprete">
-				<h1>{interprete.nombre}</h1>
+				<h2>{interprete.nombre}</h2>
 				<img src={interprete.foto} alt={`Foto de ${interprete.nombre}`} />
 				<p>{interprete.biografia}</p>
+				<h3>Películas</h3>
 				<div className="interprete_peliculas">
-					<h2>Películas</h2>
 					{interprete.peliculas.map((pelicula, indice) => {
 						return <Pelicula key={indice} pelicula={pelicula}></Pelicula>;
 					})}
