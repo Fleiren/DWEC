@@ -1,0 +1,15 @@
+.menuGaleria_contenedor{
+    width: 250px;
+    flex-shrink: 0;
+    padding: 20px 15px;
+
+    background-color: rgba(0,0,0,0.85);
+    border-right: 5px solid #5a1e5a;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.menuGaleria_elemento{
+    color: #EEE;
+}

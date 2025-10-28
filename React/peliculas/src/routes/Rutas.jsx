@@ -18,12 +18,14 @@ const Rutas = (props) => {
 			<Routes>
 				<Route path="/" element={<Inicio />}></Route>
 				<Route path="/*" element={<Error />}></Route>
-				<Route path="/peliculas" element={<Peliculas peliculas={peliculas} />}>
-					<Route
-						path="/peliculas/:id"
-						element={<PeliculaDetalles peliculas={peliculas} />}
-					></Route>
-				</Route>
+				<Route
+					path="/peliculas"
+					element={<Peliculas peliculas={peliculas} />}
+				></Route>
+				<Route
+					path="/peliculas/:id"
+					element={<PeliculaDetalles peliculas={peliculas} />}
+				></Route>
 				<Route
 					path="/interpretes"
 					element={<Interpretes peliculas={peliculas} />}

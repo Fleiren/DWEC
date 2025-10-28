@@ -13,6 +13,7 @@ const Galeria = (props) => {
 	return (
 		<>
 			<div className="galeria_galeria">
+				<MenuGaleria></MenuGaleria>
 				<div className="galeria_contenido">
 					<h1>Esta es la página de galería</h1>
 					<div className="galeria_carteleras">
@@ -27,7 +28,6 @@ const Galeria = (props) => {
 						)}
 					</div>
 				</div>
-				<MenuGaleria></MenuGaleria>
 			</div>
 		</>
 	);

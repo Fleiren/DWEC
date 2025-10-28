@@ -12,13 +12,14 @@ const Pelicula = (props) => {
 
 	return (
 		<>
-			<div
-				className="pelicula_pelicula"
-				onClick={() => {
-					verDetalles();
-				}}
-			>
-				<img src={pelicula.cartelera} alt={`Cartelera de ${pelicula.titulo}`} />
+			<div className="pelicula_pelicula">
+				<img
+					src={pelicula.cartelera}
+					alt={`Cartelera de ${pelicula.titulo}`}
+					onClick={() => {
+						verDetalles();
+					}}
+				/>
 				<h2>{pelicula.titulo}</h2>
 				<p>{pelicula.anio}</p>
 			</div>

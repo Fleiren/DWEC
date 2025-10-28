@@ -1,0 +1,15 @@
+.galeria_galeria{
+    display:flex;
+    min-height: 100vh;
+    
+}
+
+.galeria_contenido{
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.galeria_carteleras{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
