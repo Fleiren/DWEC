@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import "./cartelera.css";
 const Cartelera = (props) => {
 	const { pelicula } = props;
 	const navigate = useNavigate();
@@ -7,7 +8,7 @@ const Cartelera = (props) => {
 		<>
 			<div className="cartelera_cartelera">
 				<img
-					src={pelicula.foto}
+					src={pelicula.cartelera}
 					alt={`Cartelera de ${pelicula.titulo}`}
 					onClick={() => {
 						navigate(`/peliculas/${pelicula.id}`);

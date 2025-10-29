@@ -1,10 +1,56 @@
+/* --- error.css --- */
+
 .error_contenedor {
-	background-image: repeating-linear-gradient(
-		-45deg,
-		#1a1a1a,
-		#1a1a1a 5px,
-		#202020 5px,
-		#202020 10px
-	);
-	border-top: 5px dashed #4a4a4a; /* Borde discontinuo/cosido */
+    /* Centrado y altura garantizada dentro del área de contenido */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh; /* Ocupa gran parte del espacio visible */
+    padding: 30px;
+    text-align: center;
+    
+    /* Fondo que simula una pared de ladrillos o papel tapiz rasgado */
+    background-color: #151515; 
+    border: 5px solid #6e0000; /* Borde de advertencia rojo oscuro/sangriento */
+    box-shadow: inset 0 0 20px #6e0000; /* Sombra interior para dramatismo */
+}
+
+/* --- Código de Error (El Número Fantasmal) --- */
+.error_codigo {
+    font-size: 8em;
+    /* Usar un color rojo/naranja desaturado para la advertencia */
+    color: #cc4444; 
+    
+    /* El toque Burton: Sombra pesada y retorcida */
+    text-shadow: 
+        10px 10px 0 #3d0347, /* Sombra principal morada y desplazada */
+        0 0 30px rgba(204, 68, 68, 0.8); /* Resplandor interior */
+    
+    margin-bottom: 0;
+    line-height: 1; /* Para que quede muy junto al texto siguiente */
+    /* Pequeña inclinación para un toque de caos */
+    transform: rotate(-3deg); 
+}
+
+/* --- Mensaje de Error (El Susurro Macabro) --- */
+.error_mensaje {
+    font-size: 2em;
+    font-style: italic;
+    color: #e0e0e0;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    /* Borde que simula un texto en un cartel viejo */
+    border-bottom: 1px dashed #6e6e6e; 
+    padding-bottom: 10px;
+}
+
+/* --- Instrucción (El Camino de Vuelta) --- */
+.error_instruccion {
+    font-size: 1.2em;
+    color: #aaaaaa;
+    padding: 15px 30px;
+    /* Fondo para que la instrucción destaque ligeramente */
+    background-color: rgba(34, 34, 34, 0.8); 
+    border-radius: 5px;
 }

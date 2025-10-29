@@ -1,40 +1,99 @@
+/* --- peliculaDetalles.css --- */
+
 .peliculaDetalles_pelicula {
-	padding: 30px;
-	background-color: #2b2b2b;
-	border: 10px double #4a4a4a; /* Borde doble más formal y dramático */
-	text-align: center;
+    /* Contenedor Principal: Como una página de libro antiguo o un marco de escena */
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px 40px;
+    
+    /* Fondo oscuro con textura (simulando papel tapiz despegado o pizarra) */
+    background-color: #2b2b2b;
+    
+    /* Borde Dramático: Como un marco de cuadro o una costura */
+    border: 8px ridge #4a4a4a; /* Borde con relieve/antiguo */
+    border-radius: 10px;
+    
+    /* Sombra que da profundidad teatral */
+    box-shadow: 0 0 25px rgba(61, 3, 71, 0.8), 0 0 10px rgba(0, 0, 0, 0.7); 
+    
+    text-align: center; /* Centramos elementos como el título y la cartelera */
 }
 
+/* --- Títulos (Drama Gótico) --- */
 .peliculaDetalles_pelicula h1 {
-	font-size: 3em;
-	color: #e0e0e0;
-	margin-bottom: 10px;
+    font-size: 3.5em;
+    color: #e0e0e0;
+    margin-bottom: 5px;
+    /* Usamos la sombra para un efecto de relieve sombrío */
+    text-shadow: 4px 4px 0 #3d0347; 
+    border-bottom: 2px dashed #6e6e6e; /* Separador sutil */
+    padding-bottom: 10px;
 }
 
 .peliculaDetalles_pelicula h2 {
-	font-style: italic;
-	color: #c9c9c9;
-	margin-bottom: 20px;
+    font-size: 1.5em;
+    font-style: italic;
+    color: #c9c9c9;
+    margin-bottom: 30px;
 }
 
-.peliculaDetalles_pelicula p {
-	margin-bottom: 15px;
-	font-size: 1.1em;
+/* --- Texto (Sinopsis y Taquilla) --- */
+#sinopsis, #taquilla{
+    font-size: 1.1em;
+	color:#c9c9c9;
+    line-height: 1.6;
+    margin: 20px auto;
+    text-align: justify; /* Justificamos la sinopsis para un aire formal/editorial */
+    max-width: 80%; /* Aseguramos que la sinopsis no se extienda demasiado */
 }
 
+/* --- Cartelera (La Joya de la Corona) --- */
 #peliculaDetalles_cartelera {
-	height: 800px;
-	width: auto;
-	margin: 20px 0;
-	border: 7px ridge #6e6e6e; /* Borde con textura/antiguo */
-	box-shadow: 0 0 15px rgba(61, 3, 71, 0.7); /* Brillo morado sutil */
+    max-width: 350px; /* Tamaño grande y prominente */
+    height: auto;
+    margin: 30px 0;
+    
+    /* Marco Temático: Borde ancho y decorativo */
+    border: 10px double #6e6e6e; 
+    
+    /* Filtros: Más dramáticos que la galería */
+    filter: grayscale(40%) sepia(20%) contrast(1.1);
+    
+    /* Sombra exterior que imita un marco flotante */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.9); 
+}
+
+/* --- Botón (El Parche de Costura) --- */
+.peliculaDetalles_pelicula button {
+    /* Reutilizamos el estilo base de botón, pero lo hacemos más grande y centrado */
+    margin-top: 30px;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    
+    background-color: #3d0347;
+    color: #e0e0e0;
+    border: 3px solid #6e6e6e; 
+    border-radius: 15px; /* Más redondo para simular un parche */
+    
+    /* El toque final: pequeña rotación para que sea "raro" */
+    transform: rotate(-2deg); 
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.peliculaDetalles_pelicula button:hover {
+    background-color: #5a046c; 
+    transform: rotate(2deg) scale(1.05); /* Rotación opuesta en hover */
+}
+
+/* --- Estilo de Error --- */
+.peliculaDetalles_error {
+    text-align: center;
+    padding: 50px;
 }
 
 .peliculaDetalles_error p {
-	color: red;
-	font-size: 2em;
-	text-align: center;
-	margin-top: 50px;
-	/* Estilo de error más dramático */
-	text-shadow: 0 0 10px red;
+    color: #cc0000;
+    font-size: 2.5em;
+    /* Efecto de sangre o alarma */
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff3333;
 }

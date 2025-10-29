@@ -1,10 +1,55 @@
+/* --- acercaDe.css --- */
+
 .acercaDe_contenedor {
-	background-image: repeating-linear-gradient(
-		-45deg,
-		#1a1a1a,
-		#1a1a1a 5px,
-		#202020 5px,
-		#202020 10px
-	);
-	border-top: 5px dashed #4a4a4a; /* Borde discontinuo/cosido */
+    /* 1. Contenedor: Como un pergamino antiguo o una lápida */
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 40px;
+    text-align: center;
+    
+    background-color: #222222; /* Fondo de piedra oscura o papel viejo */
+    color: #e0e0e0; /* Texto pálido */
+    
+    /* Borde formal y sombrío */
+    border: 5px solid #3d0347; /* Marco morado oscuro */
+    border-radius: 5px;
+    
+    /* Sombra pesada */
+    box-shadow: 15px 15px 0 #111111;
+    
+    /* Inclinación sutil, como una tarjeta dejada en una mesa */
+    transform: rotate(-1deg);
+    transition: transform 0.3s;
+}
+
+.acercaDe_contenedor:hover {
+    transform: rotate(0deg); /* Se endereza al pasar el ratón */
+}
+
+/* 2. Títulos: Formal y Dramático */
+.acercaDe_contenedor h1 {
+    font-size: 2.5em;
+    color: #c9c9c9;
+    text-shadow: 2px 2px #3d0347;
+    margin-bottom: 20px;
+    border-bottom: 2px dashed #4a4a4a; /* Línea de separación */
+    padding-bottom: 10px;
+}
+
+/* 3. Nombre: Destacado */
+.acercaDe_contenedor h2 {
+    font-size: 1.8em;
+    font-style: italic;
+    color: #e0e0e0;
+    margin: 15px 0;
+}
+
+/* 4. Párrafo: Información sencilla */
+.acercaDe_contenedor p {
+    font-size: 1.1em;
+    margin-top: 30px;
+    padding: 10px;
+    /* Un borde que simula una etiqueta */
+    border: 1px dotted #6e6e6e; 
+    display: inline-block;
 }

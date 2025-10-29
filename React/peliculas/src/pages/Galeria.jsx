@@ -12,6 +12,9 @@ const Galeria = (props) => {
 	const { peliculas } = props;
 	return (
 		<>
+			{/**
+			 * Con una ternaria y el hook puedo controlar que voy a mostrar por pantalla, si la subruta por el outlet o la información por defecto.
+			 */}
 			<div className="galeria_galeria">
 				<MenuGaleria></MenuGaleria>
 				<div className="galeria_contenido">

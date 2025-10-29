@@ -1,4 +1,5 @@
 import React from "react";
+//No me ha hecho falta contenido css.
 import "./elenco.css";
 import Interprete from "./Interprete";
 import {
@@ -13,6 +14,9 @@ const Elenco = (props) => {
 		<>
 			<div className="elenco_elenco">
 				{interpretes.map((interprete, indice) => {
+					{
+						/**Aprovecho que tengo una función que extrae actores con las peliculas en las que aparece para que sea todo más detallado. */
+					}
 					const interpreteDetallado = extraerInterpreteDetallado(
 						listaInterpretesCompleta,
 						interprete.nombre

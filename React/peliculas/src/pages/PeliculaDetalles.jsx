@@ -20,14 +20,16 @@ const PeliculaDetalles = (props) => {
 				<div className="peliculaDetalles_pelicula">
 					<h1>{pelicula.titulo}</h1>
 					<h2>{pelicula.direccion}</h2>
-					<p>{pelicula.sinopsis}</p>
+					<p id="sinopsis">{pelicula.sinopsis}</p>
 					<img
 						id="peliculaDetalles_cartelera"
 						src={pelicula.cartelera}
 						alt={`Cartelera de ${pelicula.titulo}`}
 					/>
 
-					<p>{formatearTaquilla(pelicula.taquilla, pelicula.moneda)}</p>
+					<p id="taquilla">
+						{formatearTaquilla(pelicula.taquilla, pelicula.moneda)}
+					</p>
 					{/**Le paso películas porque quiero que por interprete se muestre también todas las peliculas en las que sale. */}
 					<Elenco interpretes={pelicula.elenco} peliculas={peliculas}></Elenco>
 					<button

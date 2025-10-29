@@ -7,6 +7,7 @@ const Pelicula = (props) => {
 	const navigate = useNavigate();
 
 	const verDetalles = () => {
+		//Navegamos a la ruta que nos mostrará el componente PeliculaDetalles.
 		navigate(`/peliculas/${pelicula.id}`);
 	};
 

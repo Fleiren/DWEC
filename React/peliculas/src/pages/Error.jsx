@@ -1,12 +1,18 @@
-import React from 'react';
-import './error.css';
+import React from "react";
+import "./error.css";
 
 const Error = () => {
-    return(
-        <>
-        <h1>Esta es la página de error</h1>
-        </>
-    );
+	return (
+		<>
+			<div className="error_contenedor">
+				<h1 className="error_codigo">404</h1>
+				<p className="error_mensaje">
+					Parece que esta página se ha desvanecido en la niebla.
+				</p>
+				<p className="error_instruccion">Intenta volver a un lugar seguro.</p>
+			</div>
+		</>
+	);
 };
 
 export default Error;

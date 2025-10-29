@@ -1,0 +1,44 @@
+/* --- cartelera.css --- */
+
+.cartelera_cartelera {
+    /* 1. Contenedor Base con Poca Gracia (La imagen es la estrella) */
+    display: inline-block; /* Para que se ajusten bien en el flex-wrap de la galería */
+    margin: 10px; /* Espacio entre cada cartelera */
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    position: relative; /* Para posibles efectos de superposición o texto */
+    
+    /* 2. Sombra inicial que da un aire de recorte o capa */
+    box-shadow: 8px 8px 0 #111111; /* Sombra sólida y oscura */
+}
+
+.cartelera_cartelera:hover {
+    /* 3. Efecto en hover: ligeramente "despegado" o animado */
+    transform: translateY(-5px) rotate(1deg); /* Sutil movimiento hacia arriba y rotación */
+    box-shadow: 12px 12px 0 #3d0347; /* Sombra morada para destacar, como un golpe de luz dramático */
+}
+
+.cartelera_cartelera img {
+    /* 4. La Imagen del Cartel: El centro del estilo Burton */
+    max-width: 250px; /* Tamaño máximo, ajustable según tu diseño */
+    height: auto;
+    display: block; /* Elimina espacio extra debajo de la imagen */
+    
+    /* 5. Filtros para un look envejecido/misterioso */
+    filter: grayscale(60%) contrast(1.1) brightness(0.9) sepia(10%);
+    
+    /* 6. Borde o Marco: como una foto antigua o un recorte de periódico */
+    border: 4px solid #4a4a4a; /* Borde oscuro y grueso */
+    border-radius: 3px; /* Esquinas ligeramente suavizadas */
+    
+    /* 7. Toque irregular: podríamos usar clip-path si quisiéramos formas más complejas */
+    /* Por ahora, un borde ligeramente ondulado sería con SVG o pseudo-elementos,
+       así que nos centramos en los filtros y la sombra. */
+    
+    transition: filter 0.3s ease-in-out;
+}
+
+.cartelera_cartelera img:hover {
+    /* 8. Efecto en hover para la imagen: revivir un poco el color */
+    filter: grayscale(10%) contrast(1.2) brightness(1) sepia(5%); /* Menos gris, más contraste */
+}

@@ -17,12 +17,12 @@ const extraerInterpretes = (peliculas) => {
                 "foto": interprete.foto,
                 "biografia": interprete.biografia,
                 "peliculas":[
-                    {"titulo":pelicula.titulo, "cartelera":pelicula.cartelera}
+                    {"titulo":pelicula.titulo, "cartelera":pelicula.cartelera, "id":pelicula.id}
                 ]
                 });
             }else{
                 const datosInterprete = interpretes.get(interprete.nombre);
-                datosInterprete.peliculas = [...datosInterprete.peliculas, {"titulo":pelicula.titulo, "cartelera":pelicula.cartelera}]
+                datosInterprete.peliculas = [...datosInterprete.peliculas, {"titulo":pelicula.titulo, "cartelera":pelicula.cartelera, "id":pelicula.id}]
             }
             
         }
