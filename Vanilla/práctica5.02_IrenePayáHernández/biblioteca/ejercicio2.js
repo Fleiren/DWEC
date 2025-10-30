@@ -3,13 +3,13 @@
 import { contarPosicion } from "./ejercicio1.js";
 
 const contenidoPestana = (pestana) => {
-	const paginas = Array.from(
-		document.getElementsByClassName("contenido")[0].children
-	);
-	console.log(paginas);
-
+	const paginas = document.getElementsByClassName("contenido")[0].children;
 	let posicionPestana = contarPosicion(pestana);
-	paginas[posicionPestana - 1].classList.toggle("ocultar");
+	for (let i = 0; i < paginas.length; i++) {
+		paginas[i] === paginas[posicionPestana - 1]
+			? paginas[i].classList.remove("ocultar")
+			: paginas[i].classList.add("ocultar");
+	}
 };
 
 export { contenidoPestana };
