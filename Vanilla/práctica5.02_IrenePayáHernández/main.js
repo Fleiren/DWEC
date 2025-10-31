@@ -7,8 +7,9 @@ import {
 
 import { contenidoPestana } from "./biblioteca/ejercicio2.js";
 window.onload = () => {
-	const acordeon = document.getElementsByClassName("acordeon")[0];
-	const pestanas = document.getElementsByClassName("pestanas")[0];
+	const div = document.getElementsByName("div");
+	const acordeon = div[0];
+	const tabs = div[1];
 	crearAcordeon(acordeon);
 	acordeon.addEventListener(
 		"click",
@@ -20,7 +21,7 @@ window.onload = () => {
 		false
 	);
 
-	pestanas.addEventListener("click", (evento) => {
+	tabs.addEventListener("click", (evento) => {
 		contenidoPestana(evento.target);
 	});
 }; //fin onload
