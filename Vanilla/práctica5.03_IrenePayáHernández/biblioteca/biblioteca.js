@@ -16,4 +16,31 @@ const crearLienzo = (celdas) => {
 	lienzo.appendChild(tabla);
 };
 
-export { crearLienzo };
+const agregarBoton = (nombre, elemento) => {
+	const boton = document.createElement("button");
+	boton.innerText = nombre;
+	elemento.appendChild(boton);
+};
+
+const insertarColores = () => {
+	const colores = document.getElementsByClassName("colores")[0];
+	const clasesColores = [
+		"blanco",
+		"rojo",
+		"azul",
+		"verde",
+		"negro",
+		"amarillo",
+	];
+	for (let i = 0; i < clasesColores.length; i++) {
+		const div = document.createElement("div");
+		div.classList.add(clasesColores[i]);
+		colores.appendChild(div);
+	}
+	const aleatorio = document.createElement("input");
+	aleatorio.type = "color";
+	aleatorio.value = "000000";
+	colores.appendChild(aleatorio);
+};
+
+export { crearLienzo, insertarColores, agregarBoton };

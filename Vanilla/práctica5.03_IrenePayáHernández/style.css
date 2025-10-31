@@ -1,3 +1,35 @@
 table {
 	border: 1px solid black;
+	overflow: hidden;
+}
+
+table td {
+	width: 10px;
+	height: 10px;
+}
+
+.colores div {
+	width: 20px;
+	height: 20px;
+	border: 2px solid black;
+	border-radius: 50%;
+}
+
+.rojo {
+	background-color: red;
+}
+.azul {
+	background-color: blue;
+}
+.verde {
+	background-color: green;
+}
+.negro {
+	background-color: black;
+}
+.amarillo {
+	background-color: yellow;
+}
+.blanco {
+	background-color: white;
 }
