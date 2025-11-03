@@ -71,4 +71,4 @@ window.onload = () => {
 		},
 		false
 	);
-}; //fin de windows.onload
+}; //fin de windows.onload.
