@@ -17,16 +17,15 @@ window.onload = () => {
 	lienzo.addEventListener(
 		"mousedown",
 		(evento) => {
-			console.log(evento.target.tagName);
-
 			if (evento.target.tagName === "TD" && !libre) {
 				pintar = true;
-				
 				evento.target.classList = color;
 			}
-			if(evento.target.tagName === "TD" && libre){
+			if (evento.target.tagName === "TD" && libre) {
+				pintar = true;
+				//En el caso de un color aleatorio debo coger el color aquí porque es cuando ya se ha cambiado el valor del input, si lo hago al hacer click se guarda el valor anterior.
+				color = document.getElementsByClassName("aleatorio")[0].value;
 				evento.target.style.backgroundColor = color;
-				
 			}
 			if (evento.target.tagName === "BUTTON") {
 				celdas.forEach((celda) => {
@@ -62,26 +61,14 @@ window.onload = () => {
 	paleta.addEventListener(
 		"click",
 		(evento) => {
-			if(evento.target.tagName === "DIV"){
-				libre=false;
+			if (evento.target.tagName === "DIV") {
+				libre = false;
 				color = evento.target.classList[0];
-				console.log(color);
 			}
-			
-			
+			if (evento.target.tagName === "INPUT") {
+				libre = true;
+			}
 		},
 		false
 	);
-
-	paleta.addEventListener(
-		"mouseup",
-		(evento) => {
-			if(evento.target.tagName === "INPUT"){
-				libre = true;
-				color = evento.target.value;
-				console.log(color);
-			}
-		},
-		false
-	)
 }; //fin de windows.onload

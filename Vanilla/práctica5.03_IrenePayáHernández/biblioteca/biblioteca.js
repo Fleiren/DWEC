@@ -2,7 +2,6 @@
 
 const crearLienzo = (celdas) => {
 	const lienzo = document.getElementsByClassName("lienzo")[0];
-	console.log(lienzo);
 	const tabla = document.createElement("table");
 	for (let i = 0; i < celdas; i++) {
 		const tr = document.createElement("tr");
@@ -37,11 +36,12 @@ const insertarColores = () => {
 		div.classList.add(clasesColores[i]);
 		colores.appendChild(div);
 	}
-	
+
 	const libre = document.createElement("div");
 	const aleatorio = document.createElement("input");
 	aleatorio.type = "color";
 	aleatorio.value = "000000";
+	aleatorio.classList.add("aleatorio");
 	colores.appendChild(aleatorio);
 };
 

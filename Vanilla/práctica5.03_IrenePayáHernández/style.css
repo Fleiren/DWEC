@@ -1,5 +1,4 @@
-body{
-	
+body {
 	display: grid;
 	flex-direction: row;
 }
@@ -11,6 +10,7 @@ table {
 table td {
 	width: 10px;
 	height: 10px;
+	user-select: none;
 }
 
 .colores div {
@@ -19,13 +19,13 @@ table td {
 	border: 2px solid black;
 	border-radius: 50%;
 }
-.colores{
+.colores {
 	display: flex;
 	padding: 2%;
 	border-radius: 20%;
-	border:2px grey solid;
+	border: 2px grey solid;
 	gap: 2%;
-	justify-content: space-between; 
+	justify-content: space-between;
 }
 
 .rojo {
@@ -47,3 +47,5 @@ table td {
 	background-color: white;
 }
 
+.aleatorio {
+}
