@@ -1,3 +1,105 @@
-.ocultar{
-    display: none;
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f9;
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap:50px;
+}
+
+
+.ocultar {
+    display: none; 
+   
+}
+
+
+.acordeon {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    width: 80%; /* Opcional: limitar ancho */
+    max-width: 600px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.acordeon .titulo {
+    background-color: #e39ce9;
+    color: black;
+    padding: 10px 15px;
+    cursor: pointer; /*Para que salga el icono de la mano en vez de el de escribir al pasar el cursor por encima.*/
+    border: 1px solid #c82aec;
+    
+}
+
+
+
+.acordeon .titulo:hover {
+    background-color: #d588df;
+}
+
+/* Genial poder descartar de esta manera para aplicr estilos, este se aplicara a aquellos div que no tengan la clase título. */
+.acordeon div:not(.titulo) {
+    padding: 15px;
+    background-color: #ffffff;
+    border-top: 1px solid #eee;
+    
+}
+
+
+
+
+.contenedor_tabs {
+    border: 1px solid #c82aec;
+    border-radius: 5px;
+    width: 50vh;
+    max-width: auto;
+    background-color:#e39ce9 ;
+}
+
+.tabs {
+    display: flex; 
+    border-bottom: 1px solid #060404;
+}
+
+.tabs button {
+    background-color: #e39ce9;
+    border: none;
+    border-bottom: 3px solid transparent; /* Para el indicador de pestaña activa */
+    padding: 10px 15px;
+    cursor: pointer;
+    outline: none; /* Quitar el borde de foco por defecto */
+    transition: background-color 0.3s;
+}
+
+.tabs button:hover {
+    background-color: #d588df;
+}
+
+
+.contenido {
+    padding: 20px;
+    background-color: #fff;
+}
+
+.contenido p {
+    margin: 0;
+}
+
+.error{
+    background-color: coral;
+    padding:30px;
+    border-radius: 5px;
+    border: 4px rgb(179, 53, 8) double;
+    
+    
+    color: #060404;
+    text-align: center;
+    font-weight: bolder;
+    width: 120px;
+    height: 30%;
 }

@@ -1,3 +1,8 @@
+body{
+	
+	display: grid;
+	flex-direction: row;
+}
 table {
 	border: 1px solid black;
 	overflow: hidden;
@@ -13,6 +18,14 @@ table td {
 	height: 20px;
 	border: 2px solid black;
 	border-radius: 50%;
+}
+.colores{
+	display: flex;
+	padding: 2%;
+	border-radius: 20%;
+	border:2px grey solid;
+	gap: 2%;
+	justify-content: space-between; 
 }
 
 .rojo {
@@ -33,3 +46,4 @@ table td {
 .blanco {
 	background-color: white;
 }
+

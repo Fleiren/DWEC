@@ -37,6 +37,8 @@ const insertarColores = () => {
 		div.classList.add(clasesColores[i]);
 		colores.appendChild(div);
 	}
+	
+	const libre = document.createElement("div");
 	const aleatorio = document.createElement("input");
 	aleatorio.type = "color";
 	aleatorio.value = "000000";
