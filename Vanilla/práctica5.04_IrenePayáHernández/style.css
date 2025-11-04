@@ -1,0 +1,40 @@
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 50px;
+}
+.piezas {
+	width: 80vh;
+	height: 50vh;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	gap: 10px;
+}
+
+.piezas img {
+	width: 100%;
+	height: auto;
+}
+
+.tablero {
+	width: 80vh;
+	height: 50vh;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	border: 2px solid black;
+	background-color: beige;
+}
+
+.tablero div {
+	border: 1px solid black;
+	width: 100%;
+	height: 100%;
+}
+.tablero img {
+	width: 100%;
+	height: 100%;
+}
