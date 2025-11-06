@@ -3,7 +3,7 @@ import {
 	crearLienzo,
 	insertarColores,
 	agregarBoton,
-	rangoColor
+	rangoColor,
 } from "./biblioteca/biblioteca.js";
 window.onload = () => {
 	//Creo el lienzo indicando que sea de 60x60.
@@ -12,7 +12,7 @@ window.onload = () => {
 	insertarColores();
 	//Recojo los contenedores para añadir los eventos, las celdas y el input para añadir el evento a la elección de un color preciso.
 	const lienzo = document.getElementsByClassName("lienzo")[0];
-	agregarBoton("limpiar", lienzo);	
+	agregarBoton("limpiar", lienzo);
 	const paleta = document.getElementsByClassName("colores")[0];
 	const celdas = Array.from(lienzo.getElementsByTagName("td"));
 	const inputPreciso = document.getElementsByClassName("preciso")[0];
@@ -20,7 +20,7 @@ window.onload = () => {
 	let pintar = false;
 	let color = "blanco";
 	let libre = false;
-
+	//Para los colores precisos es mucho mejor en google chrome, en firefox solo salen unos cuantos colores para elegir.
 	//Cuando el usuario presiona el lienzo comienza a pintar, la variable pintar será true.
 	lienzo.addEventListener(
 		"mousedown",
@@ -47,7 +47,7 @@ window.onload = () => {
 	);
 
 	//Cuando el usuario deje de presionar el botón izquierdo del ratón la variable pintar será false ya que termina el proceso de pintar.
-	lienzo.addEventListener(
+	document.addEventListener(
 		"mouseup",
 		() => {
 			pintar = false;
@@ -80,7 +80,7 @@ window.onload = () => {
 				libre = false;
 				color = evento.target.classList[0];
 				//Mostramos el color seleccionado.
-				document.getElementById("colorUsado").innerHTML=`${color}`;
+				document.getElementById("colorUsado").innerHTML = `${color}`;
 			}
 
 			//Si el usuario ha pulsado en el input de elegir un color preciso, entonces la variable libre será true, pero aún no mostramos el color porque se motrará el anterior seleccionado.
@@ -101,5 +101,5 @@ window.onload = () => {
 			document.getElementById("colorUsado").innerHTML = rangoColor(color);
 		},
 		false
-	)
+	);
 }; //fin de windows.onload.

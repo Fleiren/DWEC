@@ -2,29 +2,31 @@
 
 /**
  *
- * Para poder reutilizar las imagenes deben guardarse con el nombre del número de pieza y sean .png en la carpeta img.
+ * Para poder reutilizar este método las imagenes deben guardarse con el nombre del número de pieza y sean .png en la carpeta img.
  * @param {number} cantidadImagenes
  */
 const cargarImagenes = (cantidadImagenes) => {
-	const imagenes = [];
+	let imagenes = [];
 	let imagen;
 	for (let i = 1; i <= cantidadImagenes; i++) {
 		imagen = `./img/${i}.png`;
 		imagenes = [...imagenes, imagen];
 	}
-	console.log(imagenes);
 	return imagenes;
 };
+
 /**
  *
  */
 const cargarPiezas = (piezas) => {
 	const contenedorPiezas = document.getElementsByClassName("piezas")[0];
-	for (let i = 1; i <= ca; i++) {
+	contenedorPiezas.classList.add("soltable");
+	const imagenes = desordenarArray(piezas);
+	for (let i = 0; i < imagenes.length; i++) {
 		const imagen = document.createElement("img");
-		imagen.src = `./img/${i}.png`;
-		imagen.alt = `Pieza ${i}`;
-		imagen.id = i;
+		imagen.src = imagenes[i];
+		imagen.alt = `Pieza ${imagenes[i].substring(6, 7)}.`;
+		imagen.id = `${imagenes[i].substring(6, 7)}pieza.`;
 		imagen.classList.add("arrastrable", "soltable");
 		imagen.setAttribute("draggable", true);
 		contenedorPiezas.appendChild(imagen);
@@ -51,9 +53,31 @@ const comprobarCeldasLlenas = (tablero) => {
 };
 
 const comprobarOrden = (tablero) => {
-	return true;
+	let correctas = 0;
+	const piezas = tablero.children;
+	for (const pieza of piezas) {
+		//El alt de la pieza tiene el número de pieza, debe coincidir con la casilla, también se puede usar el nombre de la imagen.
+		let idPieza = pieza.firstChild.id;
+		if (pieza.id === idPieza.substring(0, 1)) correctas++;
+	}
+
+	return correctas === tablero.children.length;
 };
 
+const desordenarArray = (array) => {
+	let desordenado = [];
+	let posicionesSeleccionadas = [];
+	let posiciones = array.length;
+	while (posicionesSeleccionadas.length < posiciones) {
+		let indiceAleatorio = Math.floor(Math.random() * posiciones);
+		if (!posicionesSeleccionadas.includes(indiceAleatorio)) {
+			posicionesSeleccionadas = [...posicionesSeleccionadas, indiceAleatorio];
+			desordenado = [...desordenado, array[indiceAleatorio]];
+		}
+	}
+
+	return desordenado;
+};
 export {
 	crearTablero,
 	cargarPiezas,

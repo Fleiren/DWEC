@@ -51,4 +51,26 @@ window.onload = () => {
 		},
 		false
 	);
+
+	tablero.addEventListener("dragstart", (evento) => {
+		if (evento.target.classList.contains("arrastrable")) {
+			evento.dataTransfer.setData("id", evento.target.id);
+		}
+	});
+
+	piezas.addEventListener(
+		"dragover",
+		(evento) => {
+			evento.preventDefault();
+		},
+		false
+	);
+
+	piezas.addEventListener("drop", (evento) => {
+		if (evento.target.classList.contains("soltable")) {
+			evento.preventDefault();
+			const pieza = document.getElementById(evento.dataTransfer.getData("id"));
+			piezas.appendChild(pieza);
+		}
+	});
 }; //fin de window.onload.
