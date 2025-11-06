@@ -1,31 +1,134 @@
 body {
-	display: grid;
-	flex-direction: row;
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "colores lienzo";
+    grid-template-columns: 180px 1fr; 
+    gap: 15px;
+    padding: 15px; 
+    background-color: #f7f7f0;
+    font-family: 'patrick hand', cursive;
 }
+
+h1 {
+    grid-area: header;
+    font-family: 'pangolin', cursive;
+    text-align: left;
+    color: #333;
+    border-bottom: 1px dashed #aaa; 
+    padding-bottom: 10px;
+    margin-bottom: 0;
+}
+
+.colores {
+    grid-area: colores;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+    padding: 15px;
+    border: none; 
+    background-color: white; 
+    border-radius: 4px; 
+    outline: 1px solid #ccc; 
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.colores{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+
+.color {
+    width: 30px; 
+    height: 30px;
+    border: 2px solid #555;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.1s;
+    margin: 0;
+}
+
+.color:hover {
+    transform: scale(1.1);
+    border-color: #000;
+}
+
+
+#colorUsado {
+    font-weight: bold;
+    color: #444;
+	min-height: fit-content;
+	height: 4vh;
+    padding: 8px;
+    border: 1px solid #888;
+    border-radius: 4px;
+    text-align: center;
+	align-content: center;
+    background-color: #eee;
+}
+
+#colorUsado::first-letter {
+    text-transform: uppercase;
+}
+
+
+.preciso {
+    width: 100%;
+    height: 35px;
+    background-color: #a8a8a8; 
+    color: white;
+    border: 1px solid #777;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.1s;
+}
+
+.preciso:hover {
+    background-color: #909090;
+}
+
+.lienzo {
+    grid-area: lienzo;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent; 
+}
+
+
 table {
-	border: 1px solid black;
-	overflow: hidden;
+    border-collapse: collapse;  
+    border: none;
+    background-color: white;
+    margin-bottom: 15px;
+    outline: 1px solid #ccc;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 table td {
-	width: 10px;
-	height: 10px;
-	user-select: none;
+    width: 10px;
+    height: 10px;
+    user-select: none;
+    border: none;
+    transition: background-color 0.05s;
+}
+.lienzo button {
+    padding: 8px 15px;
+    background-color: #c93737; 
+    color: white;
+    border: 1px solid #a72c2c;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: none; 
+    transition: background-color 0.1s;
 }
 
-.colores div {
-	width: 20px;
-	height: 20px;
-	border: 2px solid black;
-	border-radius: 50%;
-}
-.colores {
-	display: flex;
-	padding: 2%;
-	border-radius: 20%;
-	border: 2px grey solid;
-	gap: 2%;
-	justify-content: space-between;
+.lienzo button:hover {
+    background-color: #a72c2c;
 }
 
 .rojo {
@@ -47,5 +150,3 @@ table td {
 	background-color: white;
 }
 
-.aleatorio {
-}
