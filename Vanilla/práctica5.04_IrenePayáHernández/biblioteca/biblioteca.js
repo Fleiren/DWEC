@@ -5,11 +5,11 @@
  * Para poder reutilizar este método las imagenes deben guardarse con el nombre del número de pieza y sean .png en la carpeta img.
  * @param {number} cantidadImagenes
  */
-const cargarImagenes = (cantidadImagenes) => {
+const cargarImagenes = (cantidadImagenes, ruta) => {
 	let imagenes = [];
 	let imagen;
 	for (let i = 1; i <= cantidadImagenes; i++) {
-		imagen = `./img/${i}.png`;
+		imagen = `${ruta}${i}.png`;
 		imagenes = [...imagenes, imagen];
 	}
 	return imagenes;
@@ -23,10 +23,13 @@ const cargarPiezas = (piezas) => {
 	contenedorPiezas.classList.add("soltable");
 	const imagenes = desordenarArray(piezas);
 	for (let i = 0; i < imagenes.length; i++) {
+		//Con esto puedo sacar el número de la imagen para que se registre en el id de forma correcta (no me fio de usar la variable i y menos mal porque lo he comprobado y no se recorre en orden).
+		//todas terminan con X.png siendo X el número correcto de la imagen por lo que con substring puedo sacar ese dato.  
+		let posicionCorrecta = imagenes[i].length - 5;
 		const imagen = document.createElement("img");
 		imagen.src = imagenes[i];
-		imagen.alt = `Pieza ${imagenes[i].substring(6, 7)}.`;
-		imagen.id = `${imagenes[i].substring(6, 7)}pieza.`;
+		imagen.alt = `Pieza ${imagenes[i].substring(posicionCorrecta, posicionCorrecta + 1)}.`;
+		imagen.id = `${imagenes[i].substring(posicionCorrecta, posicionCorrecta + 1)}pieza.`;
 		imagen.classList.add("arrastrable", "soltable");
 		imagen.setAttribute("draggable", true);
 		contenedorPiezas.appendChild(imagen);
@@ -43,6 +46,15 @@ const crearTablero = (cantidadPiezas) => {
 	}
 };
 
+const vaciarTablero = () => {
+	const tablero = document.getElementsByClassName("tablero")[0].children;
+	const contenedorPiezas = document.getElementsByClassName("piezas")[0];
+	for(let casilla of tablero){
+		if(casilla.children.length === 1) contenedorPiezas.appendChild(casilla.firstChild);
+		
+	}
+}
+
 const comprobarCeldasLlenas = (tablero) => {
 	let celdasLlenas = 0;
 	for (const div of tablero.children) {
@@ -56,7 +68,6 @@ const comprobarOrden = (tablero) => {
 	let correctas = 0;
 	const piezas = tablero.children;
 	for (const pieza of piezas) {
-		//El alt de la pieza tiene el número de pieza, debe coincidir con la casilla, también se puede usar el nombre de la imagen.
 		let idPieza = pieza.firstChild.id;
 		if (pieza.id === idPieza.substring(0, 1)) correctas++;
 	}
@@ -78,10 +89,17 @@ const desordenarArray = (array) => {
 
 	return desordenado;
 };
+
+const vaciarTableroYPiezas = (tablero, piezas) =>{
+	tablero.innerHTML="";
+	piezas.innerHTML="";
+}
 export {
 	crearTablero,
 	cargarPiezas,
 	comprobarCeldasLlenas,
 	comprobarOrden,
 	cargarImagenes,
+	vaciarTablero,
+	vaciarTableroYPiezas
 };
