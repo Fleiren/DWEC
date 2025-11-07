@@ -23,13 +23,12 @@ const cargarPiezas = (piezas) => {
 	contenedorPiezas.classList.add("soltable");
 	const imagenes = desordenarArray(piezas);
 	for (let i = 0; i < imagenes.length; i++) {
-		//Con esto puedo sacar el número de la imagen para que se registre en el id de forma correcta (no me fio de usar la variable i y menos mal porque lo he comprobado y no se recorre en orden).
-		//todas terminan con X.png siendo X el número correcto de la imagen por lo que con substring puedo sacar ese dato.  
-		let posicionCorrecta = imagenes[i].length - 5;
+		//Con esto puedo sacar el número de la imagen para que se registre en el id de forma correcta usando esa expresión regular puedo extraer los números de un string.
+		//He usado la IA para que me dijera si exixtía una expresión regular que hiciera esto ya que con substring se me complicaba saber si hay un número o dos.
 		const imagen = document.createElement("img");
 		imagen.src = imagenes[i];
-		imagen.alt = `Pieza ${imagenes[i].substring(posicionCorrecta, posicionCorrecta + 1)}.`;
-		imagen.id = `${imagenes[i].substring(posicionCorrecta, posicionCorrecta + 1)}pieza.`;
+		imagen.alt = `Pieza ${imagenes[i].match(/\d+/g)}.`;
+		imagen.id = `${imagenes[i].match(/\d+/g)}pieza.`;
 		imagen.classList.add("arrastrable", "soltable");
 		imagen.setAttribute("draggable", true);
 		contenedorPiezas.appendChild(imagen);
@@ -49,11 +48,11 @@ const crearTablero = (cantidadPiezas) => {
 const vaciarTablero = () => {
 	const tablero = document.getElementsByClassName("tablero")[0].children;
 	const contenedorPiezas = document.getElementsByClassName("piezas")[0];
-	for(let casilla of tablero){
-		if(casilla.children.length === 1) contenedorPiezas.appendChild(casilla.firstChild);
-		
+	for (let casilla of tablero) {
+		if (casilla.children.length === 1)
+			contenedorPiezas.appendChild(casilla.firstChild);
 	}
-}
+};
 
 const comprobarCeldasLlenas = (tablero) => {
 	let celdasLlenas = 0;
@@ -90,10 +89,10 @@ const desordenarArray = (array) => {
 	return desordenado;
 };
 
-const vaciarTableroYPiezas = (tablero, piezas) =>{
-	tablero.innerHTML="";
-	piezas.innerHTML="";
-}
+const vaciarTableroYPiezas = (tablero, piezas) => {
+	tablero.innerHTML = "";
+	piezas.innerHTML = "";
+};
 export {
 	crearTablero,
 	cargarPiezas,
@@ -101,5 +100,5 @@ export {
 	comprobarOrden,
 	cargarImagenes,
 	vaciarTablero,
-	vaciarTableroYPiezas
+	vaciarTableroYPiezas,
 };

@@ -6,27 +6,39 @@ import {
 	comprobarOrden,
 	cargarImagenes,
 	vaciarTablero,
-	vaciarTableroYPiezas
+	vaciarTableroYPiezas,
 } from "./biblioteca/biblioteca.js";
 window.onload = () => {
-	const imagenesNivel = [cargarImagenes(9, "./img/facil/"), cargarImagenes(9, "./img/medio"), cargarImagenes(9, "./img/dificil"), cargarImagenes(9, "./img/maestro")];
-	
-	//cargarPiezas(cargarImagenes(9, "./img/facil/"));
-	//crearTablero(9);
+	const imagenesNivel = [
+		cargarImagenes(9, "./img/facil/"),
+		cargarImagenes(9, "./img/medio/"),
+		cargarImagenes(9, "./img/dificil/"),
+		cargarImagenes(25, "./img/maestro/"),
+	];
+
+	//Se inicia con el nivel base que es lo que nos pides en la práctica.
+	cargarPiezas(cargarImagenes(9, "./img/facil/"));
+	crearTablero(9);
 	const niveles = document.getElementsByClassName("niveles")[0];
 	const piezas = document.getElementsByClassName("piezas")[0];
 	const tablero = document.getElementsByClassName("tablero")[0];
 	const boton = document.getElementsByClassName("boton")[0];
-
-	niveles.addEventListener("click", (evento) => {
-		//Esto lo he hecho así para no tener una condición por nivel y que se puedan añadir niveles de forma fácil.
-		let nivel = parseInt(evento.target.id.substring(0,1));		
-		if(nivel >= 0 && nivel < imagenesNivel.length){
-			vaciarTableroYPiezas(tablero, piezas);
-			cargarPiezas(imagenesNivel[nivel]);
-			crearTablero(imagenesNivel[nivel].length);
-		}
-	}, false);
+	niveles.addEventListener(
+		"click",
+		(evento) => {
+			//Esto lo he hecho así para no tener una condición por nivel y que se puedan añadir niveles de forma fácil.
+			let idBoton = evento.target.id;
+			let nivel = idBoton.match(/\d+/g);
+			if (nivel >= 0 && nivel < imagenesNivel.length) {
+				vaciarTableroYPiezas(tablero, piezas);
+				piezas.classList = `piezas ${idBoton.substring(1, idBoton.length)}`;
+				tablero.classList = `tablero ${idBoton.substring(1, idBoton.length)}`;
+				cargarPiezas(imagenesNivel[nivel]);
+				crearTablero(imagenesNivel[nivel].length);
+			}
+		},
+		false
+	);
 
 	piezas.addEventListener(
 		"dragstart",
@@ -78,7 +90,9 @@ window.onload = () => {
 			}
 			if (comprobarCeldasLlenas(tablero) === tablero.children.length) {
 				const mensaje = document.getElementById("resultado");
-				comprobarOrden(tablero) ? mensaje.innerHTML="Enhorabuena." : mensaje.innerHTML="Has perdido.";
+				comprobarOrden(tablero)
+					? (mensaje.innerHTML = "Enhorabuena.")
+					: (mensaje.innerHTML = "Has perdido.");
 			}
 		},
 		false
@@ -90,11 +104,14 @@ window.onload = () => {
 		}
 	});
 
-	boton.addEventListener("click", (evento) => {
-		if(evento.target.tagName === "BUTTON") {
-			vaciarTablero();
-			document.getElementById("resultado").innerHTML = "";
-		}
-	}, false);
-	
+	boton.addEventListener(
+		"click",
+		(evento) => {
+			if (evento.target.tagName === "BUTTON") {
+				vaciarTablero();
+				document.getElementById("resultado").innerHTML = "";
+			}
+		},
+		false
+	);
 }; //fin de window.onload.
