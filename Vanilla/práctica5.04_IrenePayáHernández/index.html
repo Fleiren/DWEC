@@ -4,18 +4,26 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
-		<link rel="stylesheet" href="./style.css" />
+		<link rel="stylesheet" type="text/css" href="./style.css" />
 	</head>
 	<body>
-		<div class="niveles">
+		<div class="titulo_juego">
+			<h1 id="titulo">Puzzles</h1>
+			<h2 id="resultado"></h2>
+		</div>
+		
+		<div class="niveles">	
 			<button id="0facil">Fácil</button>
 			<button id="1medio">Medio</button>
 			<button id="2dificil">Difícil</button>
 			<button id="3maestro">Maestro</button>
 		</div>
-		<h2 id="resultado"></h2>
-		<div class="piezas facil"></div>
-		<div class="tablero facil"></div>
+		
+		<!-- Lo rodeo todo en un div por el diseño css -->
+		<div class="contenedor_juego">
+			<div class="piezas facil"></div>
+			<div class="tablero facil"></div>
+		</div>
 		<div class="boton">
 			<button>Reiniciar</button>
 		</div>
