@@ -1,9 +1,20 @@
 body{
     display:flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     padding: 20px;
+}
+#error{
+    border:2px solid red;
+    border-radius: 8px;
+    background-color: rgb(214, 168, 168);
+    font-weight: bold;
+    color: rgb(77, 7, 7);
+}
+.ocultar{
+    display: none;
 }
 #formularioDisco{
     padding:25px;

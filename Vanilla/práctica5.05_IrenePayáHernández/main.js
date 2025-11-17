@@ -26,7 +26,12 @@ window.onload = () => {
             let campos = formularioDisco.elements;
             let errores = validarFormulario(campos);
             //Si no hay erroes vacío el mensaje de error por si ya había alguno mostrándose.
-            errores.length === 0 ? elementoError.innerHTML = "" : mostrarErrores(errores, elementoError);
+            if(errores.length === 0){
+                elementoError.classList.add("ocultar");
+            } else{
+                elementoError.classList.remove("ocultar");
+                mostrarErrores(errores, elementoError);
+            }  
              
         }
     }, false);

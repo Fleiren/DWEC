@@ -41,19 +41,23 @@ const validarFormulario = (campos) => {
 const mensajeError = (campo) => {
 	//Si me da tiempo añadiré todos los tipos de input, de momento solo colocaré los que necesito en este ejercicio.
 	let mensaje = "";
+	//Los elementos input cuentan con la propiedad label que devuelve los labels asociados, lo uso para que apraezca bien formateado el error.
+	let label = campo.labels[0].innerText;
+	label = label.substring(0, label.length - 1); //Le quito los dos puntos del final.
+
 	if(campo.type === "number"){
-		mensaje = `El campo ${campo.name} debe ser un número.`;
+		mensaje = `El campo ${label} debe ser un número.`;
 	}
 	else if(campo.type === "url"){
-		mensaje = `El campo ${campo.name} debe ser una URL válida.`;
+		mensaje = `El campo ${label} debe ser una URL válida.`;
 	}
 	else if(campo.required && campo.value === ""){
-		mensaje=`El campo ${campo.name} es obligatorio.`;
+		mensaje=`El campo ${label} es obligatorio.`;
 	}
 	else if(campo.pattern){
-		mensaje = `El campo ${campo.name} no cumple los requisitos de formato.`;
+		mensaje = `El campo ${label} no cumple los requisitos de formato.`;
 	} else {
-		mensaje = `El campo ${campo.name} no es válido.`;
+		mensaje = `El campo ${label} no es válido.`;
 	}
 
 	return mensaje;
