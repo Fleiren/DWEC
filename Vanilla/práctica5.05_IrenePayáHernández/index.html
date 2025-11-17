@@ -6,7 +6,6 @@
 		<link rel="stylesheet" type="text/css" href="./style.css" />
 	</head>
 	<body>
-		<div id="error" class="ocultar"></div>
 		<fieldset id="formularioDisco">
 			<legend>Agregar disco</legend>
 			<form name="agregarDisco" id="agregarDisco">
@@ -16,7 +15,7 @@
 					id="inputNombre"
 					name="nombre"
 					placeholder="Introduce el nombre del disco"
-					pattern = ".{5,}"
+					pattern=".{5,}"
 					required
 				/>
 				<label for="inputCaratula">Carátula:</label>
@@ -32,11 +31,19 @@
 					id="inputGrupo"
 					name="grupo"
 					placeholder="Introduce el grupo / intérprete"
-					pattern = ".{5,}"
+					pattern=".{5,}"
 					required
 				/>
 				<label for="inputAnyo">Año de publicación:</label>
-				<input type="number" min="1900" max="" id="inputAnyo" name="anyo" pattern="\d{4}" placeholder="Introduce el año de publicación"/>
+				<input
+					type="number"
+					min="1900"
+					max=""
+					id="inputAnyo"
+					name="anyo"
+					pattern="\d{4}"
+					placeholder="Introduce el año de publicación"
+				/>
 				<label for="selectGenero">Género:</label>
 				<select id="selectGenero" required>
 					<option value="">Selecciona un género</option>
@@ -61,9 +68,15 @@
 					<option value="worship">Worship</option>
 				</select>
 				<label for="inputLocalizacion">Localización:</label>
-				<input type="text" id="inputLocalizacion" name="locaclizacion" pattern="^[A-Z]{2}-\d{3}[A-Z]{2}$"> <!--He comprobado con la IA si era correcto y me ha dicho que si, pero que es más seguro si añado ^ al principio y $ al final para que la cadena entera coincida con el patrón por si acaso (me ha venido bien haber estudiado esto para el examen de DIW)-->
+				<input
+					type="text"
+					id="inputLocalizacion"
+					name="localizacion"
+					pattern="^[A-Z]{2}-\d{3}[A-Z]{2}$"
+				/>
+				<!--He comprobado con la IA si era correcto y me ha dicho que si, pero que es más seguro si añado ^ al principio y $ al final para que la cadena entera coincida con el patrón por si acaso (me ha venido bien haber estudiado esto para el examen de DIW)-->
 				<label for="inputPrestado">Prestado: </label>
-				<input type="checkbox" id="inputPrestado" name="prestado">
+				<input type="checkbox" id="inputPrestado" name="prestado" />
 				<button id="guardar">Guardar</button>
 				<button id="mostrar">Mostrar</button>
 			</form>
