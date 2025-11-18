@@ -1,19 +1,16 @@
 "use strict";
 import {
+	validarCampo,
+	validarFormulario,
+	añadirErrores,
 	fechaActual,
-	validarFormulario, 
-	eliminarElementos,
-	obtenerInputs
-} from "./biblioteca/utilFormularios.js";
-import { validarCampo, 
-	obtenerErrores, 
-	añadirErrores
- } from "./biblioteca/biblioteca.js";
+	obtenerInputs,
+} from "./biblioteca/biblioteca.js";
 window.onload = () => {
 	const anyo = document.getElementById("inputAnyo");
 	const formularioDisco = document.forms.agregarDisco;
+	//Obtenemos todos los elementos interactuables del formulario para aplicar de forma más comoda los elementos div de error (Podría haberlos puesto directamente en el html la verdad).
 	const inputs = obtenerInputs(formularioDisco);
-	const errores = obtenerErrores();
 	//Coloco el año actual como máximo.
 	fechaActual(anyo);
 	añadirErrores(inputs);
@@ -44,19 +41,9 @@ window.onload = () => {
 	formularioDisco.addEventListener(
 		"click",
 		(evento) => {
-			if (evento.target.tagName === "BUTTON") {
-				//Actua no se porque como un submit aunque no lo sea.
-				evento.preventDefault();
-				//Reviso que todos los campos obligatorios tengan valor y sean válidos.
-				let elementosFormulario = formularioDisco.elements;
-				//He diseñado este método con la posibilidad de que se quiera mostrar los errores o no, no se me ocurría otra forma de validar y mostrar los errores en dos métodos distintos sin validar dos veces.
-				//Había pensado devolver un array con los errores pero me parecía más lioso.
-				//Creo que tiene demasiados parámetros de entrada.
-				let valido = validarFormulario(elementosFormulario,errores, "mensajeError");
-				if(valido){
-					let mensajes = document.getElementsByClassName("mensajeError");
-					eliminarElementos(mensajes);
-					
+			if (evento.target.id === "guardar") {
+				if (validarFormulario(formularioDisco)) {
+					guardarDatos(formulario);
 				}
 			}
 		},
