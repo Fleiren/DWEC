@@ -1,16 +1,22 @@
 "use strict";
 import {
 	fechaActual,
-	validarFormulario,
-	mostrarErrores,
+	validarFormulario, 
+	eliminarElementos,
+	obtenerInputs
 } from "./biblioteca/utilFormularios.js";
-import { validarCampo } from "./biblioteca/biblioteca.js";
+import { validarCampo, 
+	obtenerErrores, 
+	añadirErrores
+ } from "./biblioteca/biblioteca.js";
 window.onload = () => {
 	const anyo = document.getElementById("inputAnyo");
 	const formularioDisco = document.forms.agregarDisco;
-	const elementoError = document.getElementById("error");
+	const inputs = obtenerInputs(formularioDisco);
+	const errores = obtenerErrores();
 	//Coloco el año actual como máximo.
 	fechaActual(anyo);
+	añadirErrores(inputs);
 	//Lo he separado en dos eventos porque los select no funcionan bien con input y si pongo los input en el evento change se ponene en rojo cuando pierden el foco y no es lo que quiero.
 	formularioDisco.addEventListener(
 		"input",
@@ -42,14 +48,15 @@ window.onload = () => {
 				//Actua no se porque como un submit aunque no lo sea.
 				evento.preventDefault();
 				//Reviso que todos los campos obligatorios tengan valor y sean válidos.
-				let campos = formularioDisco.elements;
-				let errores = validarFormulario(campos);
-				//Si no hay erroes vacío el mensaje de error por si ya había alguno mostrándose.
-				if (errores.length === 0) {
-					elementoError.classList.add("ocultar");
-				} else {
-					elementoError.classList.remove("ocultar");
-					mostrarErrores(errores, elementoError);
+				let elementosFormulario = formularioDisco.elements;
+				//He diseñado este método con la posibilidad de que se quiera mostrar los errores o no, no se me ocurría otra forma de validar y mostrar los errores en dos métodos distintos sin validar dos veces.
+				//Había pensado devolver un array con los errores pero me parecía más lioso.
+				//Creo que tiene demasiados parámetros de entrada.
+				let valido = validarFormulario(elementosFormulario,errores, "mensajeError");
+				if(valido){
+					let mensajes = document.getElementsByClassName("mensajeError");
+					eliminarElementos(mensajes);
+					
 				}
 			}
 		},
