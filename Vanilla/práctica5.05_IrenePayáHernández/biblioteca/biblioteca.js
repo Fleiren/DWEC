@@ -14,25 +14,16 @@ const errores = {
 	anyo: "El año debe ser de 4 cifras.",
 	genero: "Debes seleccionar un género.",
 	localizacion:
-		"La localización debe tener el formato AA-123AA. (Dos letras mayúsculas, guión medio, tres números y dos letras mayúsculas).",
+		"La localización debe tener el formato ES-123AA. (ES, guión medio, tres números y dos letras mayúsculas).",
 };
 
-const disco = {
-	nombre: "",
-	caratula: "",
-	grupo: "",
-	anyo: "",
-	genero: "",
-	localizacion: "",
-	prestado: "",
-};
-const discos = [];
 
-const fechaActual = (elementoAnyo) => {
-	if (elementoAnyo.tagName === "INPUT" || elementoAnyo.type === "number") {
-		const hoy = new Date();
-		elementoAnyo.max = hoy.getFullYear();
-	}
+let discos = [];
+
+const fechaActual = () => {
+	const hoy = new Date();
+	return hoy.getFullYear();
+	
 };
 const añadirErrores = (inputs) => {
 	for (let i = 0; i < inputs.length; i++) {
@@ -110,7 +101,9 @@ const validarFormulario = (formulario) => {
 		valido = false;
 	}
 	if (!validarGenero(formulario.genero)) {
-		mostrarError(formulario.anyo);
+		//Te pido disculpas ya de antemano porque llevo una hora peleandome con el input number que siempre me daba error y con la validación del año y todo daba error por culpa de que aquí tenía mostrarError(formulario.anyo),
+		//por lo que si el género daba error se mostraba el mensaje del año por lo que yo pensaba que el error era en la validación del año y no, era aquí.
+		mostrarError(formulario.genero);
 		valido = false;
 	}
 	if (!validarLocalizacion(formulario.localizacion)) {
@@ -122,90 +115,67 @@ const validarFormulario = (formulario) => {
 
 //No me convence esto de tanto método con prácticamente lo mismo... ¿luego los métodos se generalizan un poco de alguna manera en la vida real no?
 const validarNombre = (campo) => {
-	let valido = true;
 	let patron = patrones.nombre;
-
-	//Me aseguro de que exista por si acaso.
-	if (campo) {
-		//Con dos métodos extraigo código que se iba a repetir en todos los métodos siguientes.
-		valido = validarBasico(campo) && validarPatron(campo.value, patron);
-	} else {
-		valido = false;
-	}
-	return valido;
+	//Con dos métodos extraigo código que se iba a repetir en todos los métodos siguientes.
+	return validarBasico(campo) && validarPatron(campo.value, patron);
 };
 const validarCaratula = (campo) => {
-	let valido = true;
 	let patron = patrones.caratula;
-	if (campo) {
-		valido = validarBasico(campo) && validarPatron(campo.value, patron);
-	} else {
-		valido = false;
-	}
-	return valido;
+	return validarBasico(campo) && validarPatron(campo.value, patron);
 };
 const validarGrupo = (campo) => {
-	let valido = true;
 	let patron = patrones.grupo;
-	if (campo) {
-		valido = validarBasico(campo) && validarPatron(campo.value, patron);
-	} else {
-		valido = false;
-	}
-	return valido;
+	return validarBasico(campo) && validarPatron(campo.value, patron);
 };
 const validarAnyo = (campo) => {
 	let valido = true;
 	let patron = patrones.anyo;
-	if (campo) {
-		valido = validarBasico(campo) && validarPatron(campo.value, patron);
-	} else {
-		valido = false;
-	}
+	//Curioso, para los input type number al usar validity si está vacío da error siempre sea required o no, llevo una hora sin exagerar intentando arreglarlo pero la única solución es convertir el input number en uno de tipo texto,
+	//me da rabia porque si tenemos un input de tipo number es para usarlo en estos casos, si este problema tiene solución me gustaría saberlo.
+	//Creo que esto ha quedado muy feo, si me da tiempo le daré otra vuelta, llevo mucho tiempo con esto y con que funcione ahora mismo me sobra.
+	if(campo.value === "" && campo.required) valido = false;
+	
+	if(campo.value !== ""){
+		const valor = parseInt(campo.value);
+		if(isNaN(valor)) valido = false;
+		if(!validarPatron(campo.value, patron)) valido = false;
+		if(valor > fechaActual() || valor < 1850) valido = false;
+	} 
+
 	return valido;
+	
 };
 const validarGenero = (campo) => {
-	let valido = true;
 	//Este no tiene patrón ya que no se valida mediante patrón, con la validación básica nos sobra.
-	if (campo) {
-		valido = validarBasico(campo);
-	} else {
-		valido = false;
-	}
-	return valido;
+	return validarBasico(campo);
 };
 const validarLocalizacion = (campo) => {
-	let valido = true;
 	let patron = patrones.localizacion;
-	if (campo) {
-		valido = validarBasico(campo) && validarPatron(campo.value, patron);
-	} else {
-		valido = false;
-	}
-	return valido;
+	return validarBasico(campo) && validarPatron(campo.value, patron);	
 };
 
 const validarBasico = (campo) => {
 	let valido = true;
-	if (campo) {
-		//De forma genérica validamos lo básico, que cumpla las normas del propio elemento con validity y que si es required que contenga valor.
-		if (campo.required && !campo.value) valido = false;
-		//Añado validación del propio input para reforzar la validación.
-		//Suponía que de alguna forma se podía acceder a las validaciones propias del input de alguna manera y como no encontraba nada (y soy cabezona) le he preguntado a la IA si se podía y me ha enseñado el método validity de los inputs.
-		//Es difícil de encontrar porque cuando haces console.log hay muchas propiedades, es una locura.
-		//Supongo que cuantas más cosas se puedan validar mejor.
-		if (campo.value !== "" && !campo.validity.valid) valido = false;
-	}
-
+	//De forma genérica validamos lo básico, que cumpla las normas del propio elemento con validity y que si es required que contenga valor.
+	if (campo.required && !campo.value) valido = false;
+	//Añado validación del propio input para reforzar la validación.
+	//Suponía que de alguna forma se podía acceder a las validaciones propias del input de alguna manera y como no encontraba nada (y soy cabezona) le he preguntado a la IA si se podía y me ha enseñado el método validity de los inputs.
+	//Es difícil de encontrar porque cuando haces console.log hay muchas propiedades, es una locura.
+	//Supongo que cuantas más cosas se puedan validar mejor.
+	if (campo.value !== "" && !campo.validity.valid) valido = false;
 	return valido;
 };
 
 const validarPatron = (valor, patron) => {
-	return patron.test(valor);
+	//Si el valor está vacío se da como válido porque los campos opcionales no deben dar error si se comprueba el patrón estando vacíos, por ello se hace antes una validación básica comprobando si pueden o no estar vacíos.
+	//Solo se comprueba el patrón si el campo tiene contenido ya que si llega hasta aquí vacío se entiende que es por ser opcional.
+	let valido = true;
+	if(valor !== "") valido = patron.test(valor);
+	return valido;
 };
 
 const mostrarError = (campo) => {
-	if (campo && campo.nextSibling.classList.contains("mensajeError")) {
+	if (campo.nextSibling.classList.contains("mensajeError")) {
 		let error = campo.nextSibling;
 		error.classList.remove("ocultar");
 		error.innerHTML = errores[campo.name];
@@ -223,7 +193,66 @@ const limpiarErrores = (formulario) => {
 	}
 };
 
-const guardarDatos = (formulario) => {};
+const crearDiscoJSON = (formulario) => {
+	return {
+		nombre: formulario.nombre.value,
+		caratula: formulario.caratula.value,
+		grupo: formulario.grupo.value,
+		anyo: formulario.anyo.value,
+		genero: formulario.genero.value,
+		localizacion: formulario.localizacion.value,
+		prestado: formulario.prestado.value
+	}
+}
+const guardarDisco = (discoJSON) => {
+	//Llamar a un método para comprobar que la balda no esté ocupada o que coincidan todos los campos antes de guardarlo (si me da tiempo).
+	discos = [...discos, discoJSON];
+	console.log(discos);
+};
+
+const mostrarDiscos = (contenedorMostrar) => {
+	//Uso forEach porque solo voy a mostrar los datos, no necesito que me devuelva algo.
+	discos.forEach((disco) => {
+		imprimirDisco(contenedorMostrar, disco);
+	})
+}
+const imprimirDisco = (contenedorMostrar, disco) => {
+	const discoHtml = generarHTMLDisco(disco);
+	contenedorMostrar.appendChild(discoHtml);
+}
+
+const generarHTMLDisco = (disco) => {
+	//Voy a prerarar el html por partes con varias variables para que se entienda el código.
+	const contenedorDisco = document.createElement("div");
+	const datosPrincipales = document.createElement("div");
+	const informacionAdicional = document.createElement("div");
+	contenedorDisco.classList.add("disco");
+	datosPrincipales.classList.add("contenidoPrincipal");
+	informacionAdicional.classList.add("infoAdicional");
+	if(disco.caratula){
+		const caratula = document.createElement("img");
+		caratula.src = disco.caratula;
+		caratula.alt = "Carátula del disco";
+		datosPrincipales.appendChild(caratula);
+	}
+	const nombre = document.createElement("h2");
+	nombre.innerText = disco.nombre;
+	datosPrincipales.appendChild(nombre);
+	const grupo = document.createElement("h3");
+	grupo.innerText = disco.grupo;
+	datosPrincipales.appendChild(grupo);
+	if(disco.anyo){
+		const anyo = document.createElement("p");
+		anyo.innerText = `Año: ${disco.anyo}`;
+		informacionAdicional.appendChild(anyo);
+	}
+	const genero = document.createElement("p");
+	genero.innerText = `Género musical: ${disco.genero}`;
+	informacionAdicional.appendChild(genero);
+
+	
+	
+}
 
 export {
 	validarCampo,
@@ -231,4 +260,7 @@ export {
 	añadirErrores,
 	fechaActual,
 	obtenerInputs,
+	crearDiscoJSON,
+	guardarDisco,
+	mostrarDiscos
 };

@@ -8,6 +8,7 @@
 	<body>
 		<fieldset id="formularioDisco">
 			<legend>Agregar disco</legend>
+			
 			<form name="agregarDisco" id="agregarDisco">
 				<label for="inputNombre">Nombre:</label>
 				<input
@@ -36,9 +37,7 @@
 				/>
 				<label for="inputAnyo">Año de publicación:</label>
 				<input
-					type="number"
-					min="1900"
-					max=""
+					type="text"
 					id="inputAnyo"
 					name="anyo"
 					pattern="\d{4}"
@@ -81,6 +80,7 @@
 				<input type="button" id="mostrar" value="Mostrar" />
 			</form>
 		</fieldset>
+		<div id="mostrarDiscos"></div>
 
 		<script src="./main.js" type="module"></script>
 	</body>
