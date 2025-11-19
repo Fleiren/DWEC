@@ -17,13 +17,11 @@ const errores = {
 		"La localización debe tener el formato ES-123AA. (ES, guión medio, tres números y dos letras mayúsculas).",
 };
 
-
 let discos = [];
 
 const fechaActual = () => {
 	const hoy = new Date();
 	return hoy.getFullYear();
-	
 };
 const añadirErrores = (inputs) => {
 	for (let i = 0; i < inputs.length; i++) {
@@ -133,17 +131,16 @@ const validarAnyo = (campo) => {
 	//Curioso, para los input type number al usar validity si está vacío da error siempre sea required o no, llevo una hora sin exagerar intentando arreglarlo pero la única solución es convertir el input number en uno de tipo texto,
 	//me da rabia porque si tenemos un input de tipo number es para usarlo en estos casos, si este problema tiene solución me gustaría saberlo.
 	//Creo que esto ha quedado muy feo, si me da tiempo le daré otra vuelta, llevo mucho tiempo con esto y con que funcione ahora mismo me sobra.
-	if(campo.value === "" && campo.required) valido = false;
-	
-	if(campo.value !== ""){
+	if (campo.value === "" && campo.required) valido = false;
+
+	if (campo.value !== "") {
 		const valor = parseInt(campo.value);
-		if(isNaN(valor)) valido = false;
-		if(!validarPatron(campo.value, patron)) valido = false;
-		if(valor > fechaActual() || valor < 1850) valido = false;
-	} 
+		if (isNaN(valor)) valido = false;
+		if (!validarPatron(campo.value, patron)) valido = false;
+		if (valor > fechaActual() || valor < 1850) valido = false;
+	}
 
 	return valido;
-	
 };
 const validarGenero = (campo) => {
 	//Este no tiene patrón ya que no se valida mediante patrón, con la validación básica nos sobra.
@@ -151,7 +148,7 @@ const validarGenero = (campo) => {
 };
 const validarLocalizacion = (campo) => {
 	let patron = patrones.localizacion;
-	return validarBasico(campo) && validarPatron(campo.value, patron);	
+	return validarBasico(campo) && validarPatron(campo.value, patron);
 };
 
 const validarBasico = (campo) => {
@@ -170,12 +167,13 @@ const validarPatron = (valor, patron) => {
 	//Si el valor está vacío se da como válido porque los campos opcionales no deben dar error si se comprueba el patrón estando vacíos, por ello se hace antes una validación básica comprobando si pueden o no estar vacíos.
 	//Solo se comprueba el patrón si el campo tiene contenido ya que si llega hasta aquí vacío se entiende que es por ser opcional.
 	let valido = true;
-	if(valor !== "") valido = patron.test(valor);
+	if (valor !== "") valido = patron.test(valor);
 	return valido;
 };
 
 const mostrarError = (campo) => {
 	if (campo.nextSibling.classList.contains("mensajeError")) {
+		campo.classList.add("error");
 		let error = campo.nextSibling;
 		error.classList.remove("ocultar");
 		error.innerHTML = errores[campo.name];
@@ -194,7 +192,6 @@ const limpiarErrores = (formulario) => {
 };
 
 const crearDiscoJSON = (formulario) => {
-	
 	return {
 		nombre: formulario.nombre.value,
 		caratula: formulario.caratula.value,
@@ -202,9 +199,9 @@ const crearDiscoJSON = (formulario) => {
 		anyo: formulario.anyo.value,
 		genero: formulario.genero.value,
 		localizacion: formulario.localizacion.value,
-		prestado: formulario.prestado.checked
-	}
-}
+		prestado: formulario.prestado.checked,
+	};
+};
 const guardarDisco = (discoJSON) => {
 	//Llamar a un método para comprobar que la balda no esté ocupada o que coincidan todos los campos antes de guardarlo (si me da tiempo).
 	discos = [...discos, discoJSON];
@@ -212,15 +209,17 @@ const guardarDisco = (discoJSON) => {
 };
 
 const mostrarDiscos = (contenedorMostrar) => {
+	//Limpiamos el contenido del contenedor para que no se repitan.
+	contenedorMostrar.innerHTML = "";
 	//Uso forEach porque solo voy a mostrar los datos, no necesito que me devuelva algo.
 	discos.forEach((disco) => {
 		imprimirDisco(contenedorMostrar, disco);
-	})
-}
+	});
+};
 const imprimirDisco = (contenedorMostrar, disco) => {
 	const discoHtml = generarHTMLDisco(disco);
 	contenedorMostrar.appendChild(discoHtml);
-}
+};
 
 const generarHTMLDisco = (disco) => {
 	//Voy a prerarar el html por partes con varias variables para que se entienda el código.
@@ -230,7 +229,7 @@ const generarHTMLDisco = (disco) => {
 	contenedorDisco.classList.add("disco");
 	datosPrincipales.classList.add("contenidoPrincipal");
 	informacionAdicional.classList.add("infoAdicional");
-	if(disco.caratula){
+	if (disco.caratula) {
 		const caratula = document.createElement("img");
 		caratula.src = disco.caratula;
 		caratula.alt = "Carátula del disco";
@@ -242,7 +241,7 @@ const generarHTMLDisco = (disco) => {
 	const grupo = document.createElement("h3");
 	grupo.innerText = disco.grupo;
 	datosPrincipales.appendChild(grupo);
-	if(disco.anyo){
+	if (disco.anyo) {
 		const anyo = document.createElement("p");
 		anyo.innerText = `Año: ${disco.anyo}`;
 		informacionAdicional.appendChild(anyo);
@@ -250,21 +249,23 @@ const generarHTMLDisco = (disco) => {
 	const genero = document.createElement("p");
 	genero.innerText = `Género musical: ${disco.genero}`;
 	informacionAdicional.appendChild(genero);
-	if(disco.localizacion){
+	if (disco.localizacion) {
 		const localizacion = document.createElement("d");
 		localizacion.innerText = `Localización en la estantería: ${disco.localizacion}`;
 		informacionAdicional.appendChild(localizacion);
 	}
 	const prestado = document.createElement("p");
 	let mensajePrestado = "";
-	disco.prestado  ? mensajePrestado = "El disco es prestado" : mensajePrestado = "El disco es nuevo";
+	disco.prestado
+		? (mensajePrestado = "El disco es prestado")
+		: (mensajePrestado = "El disco es nuevo");
 	prestado.innerText = mensajePrestado;
 	informacionAdicional.appendChild(prestado);
 
 	contenedorDisco.appendChild(datosPrincipales);
 	contenedorDisco.appendChild(informacionAdicional);
 	return contenedorDisco;
-}
+};
 
 export {
 	validarCampo,
@@ -274,5 +275,5 @@ export {
 	obtenerInputs,
 	crearDiscoJSON,
 	guardarDisco,
-	mostrarDiscos
+	mostrarDiscos,
 };

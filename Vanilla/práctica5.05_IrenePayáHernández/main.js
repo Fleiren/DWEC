@@ -7,7 +7,7 @@ import {
 	obtenerInputs,
 	crearDiscoJSON,
 	guardarDisco,
-	mostrarDiscos
+	mostrarDiscos,
 } from "./biblioteca/biblioteca.js";
 window.onload = () => {
 	const formularioDisco = document.forms.agregarDisco;
@@ -19,7 +19,11 @@ window.onload = () => {
 	formularioDisco.addEventListener(
 		"input",
 		(evento) => {
-			if (evento.target.tagName === "INPUT") {
+			//Para que no se aplique al checkbox
+			if (
+				evento.target.tagName === "INPUT" &&
+				evento.target.id !== "inputPrestado"
+			) {
 				validarCampo(evento.target)
 					? evento.target.classList.remove("error")
 					: evento.target.classList.add("error");
@@ -48,7 +52,7 @@ window.onload = () => {
 					formularioDisco.reset();
 				}
 			}
-			if(evento.target.id === "mostrar"){
+			if (evento.target.id === "mostrar") {
 				mostrarDiscos(contenedorDiscos);
 			}
 		},
