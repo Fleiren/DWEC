@@ -11,6 +11,7 @@ import {
 } from "./biblioteca/biblioteca.js";
 window.onload = () => {
 	const formularioDisco = document.forms.agregarDisco;
+	const contenedorDiscos = document.getElementById("discos");
 	//Obtenemos todos los elementos interactuables del formulario para aplicar de forma más comoda los elementos div de error (Podría haberlos puesto directamente en el html la verdad).
 	const inputs = obtenerInputs(formularioDisco);
 	añadirErrores(inputs);
@@ -46,6 +47,9 @@ window.onload = () => {
 					guardarDisco(crearDiscoJSON(formularioDisco));
 					formularioDisco.reset();
 				}
+			}
+			if(evento.target.id === "mostrar"){
+				mostrarDiscos(contenedorDiscos);
 			}
 		},
 		false

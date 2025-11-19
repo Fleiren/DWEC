@@ -194,6 +194,7 @@ const limpiarErrores = (formulario) => {
 };
 
 const crearDiscoJSON = (formulario) => {
+	
 	return {
 		nombre: formulario.nombre.value,
 		caratula: formulario.caratula.value,
@@ -201,7 +202,7 @@ const crearDiscoJSON = (formulario) => {
 		anyo: formulario.anyo.value,
 		genero: formulario.genero.value,
 		localizacion: formulario.localizacion.value,
-		prestado: formulario.prestado.value
+		prestado: formulario.prestado.checked
 	}
 }
 const guardarDisco = (discoJSON) => {
@@ -249,9 +250,20 @@ const generarHTMLDisco = (disco) => {
 	const genero = document.createElement("p");
 	genero.innerText = `Género musical: ${disco.genero}`;
 	informacionAdicional.appendChild(genero);
+	if(disco.localizacion){
+		const localizacion = document.createElement("d");
+		localizacion.innerText = `Localización en la estantería: ${disco.localizacion}`;
+		informacionAdicional.appendChild(localizacion);
+	}
+	const prestado = document.createElement("p");
+	let mensajePrestado = "";
+	disco.prestado  ? mensajePrestado = "El disco es prestado" : mensajePrestado = "El disco es nuevo";
+	prestado.innerText = mensajePrestado;
+	informacionAdicional.appendChild(prestado);
 
-	
-	
+	contenedorDisco.appendChild(datosPrincipales);
+	contenedorDisco.appendChild(informacionAdicional);
+	return contenedorDisco;
 }
 
 export {
