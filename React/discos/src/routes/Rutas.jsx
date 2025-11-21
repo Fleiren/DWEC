@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { Inicio, Error, InsertarDisco, ListarDisco } from "./pages";
 
 const Rutas = () => {
 	return (

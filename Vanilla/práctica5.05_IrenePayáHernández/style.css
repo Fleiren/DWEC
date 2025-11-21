@@ -1,42 +1,46 @@
+/*El css es de la IA, lo siento, me dejo los comentarios que me ha puesto para que me sirva de repaso para DIW*/
+
 /* 1. Estilos Base y Generales */
 body {
-	font-family: "Arial", sans-serif;
-	background-color: #f4f7f9;
-	margin: 0;
-	padding: 20px;
-	color: #333;
-	line-height: 1.6;
+    /* Ajustado a una fuente más clásica rústica */
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background-color: #F8F8F8; /* Blanco roto */
+    margin: 0;
+    padding: 20px;
+    color: #333;
+    line-height: 1.6;
 }
 
 /* --- Estilos del Formulario (#formularioDisco) --- */
 
 #formularioDisco {
-	max-width: 600px;
-	margin: 0 auto 40px auto;
-	padding: 30px;
-	border: 1px solid #c9d6df;
-	border-radius: 10px;
-	background-color: #ffffff;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    padding: 30px;
+    /* Aplicando estilo rústico */
+    border: 3px solid #556B2F; /* Verde principal, borde grueso */
+    border-radius: 8px; /* Bordes ligeramente rústicos */
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra marcada */
 }
 
 #formularioDisco legend {
-	font-size: 1.5em;
-	font-weight: bold;
-	color: #007bff;
-	padding: 0 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #556B2F; /* Verde principal */
+    padding: 0 10px;
 }
 
 #agregarDisco {
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 #agregarDisco label {
-	font-weight: bold;
-	margin-top: 10px;
-	color: #555;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #556B2F; /* Verde principal */
 }
 
 /* Estilo para Inputs y Selects */
@@ -44,169 +48,230 @@ body {
 #agregarDisco input[type="url"],
 #agregarDisco select,
 #agregarDisco input[type="number"] {
-	/* Aseguramos que se aplique a todos los inputs relevantes */
-	padding: 10px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	font-size: 1em;
-	width: 100%;
-	box-sizing: border-box;
-	transition: border-color 0.3s ease; /* Transición para el efecto de error */
+    padding: 10px;
+    border: 1px solid #B0C4DE; /* Tono suave, como arcilla */
+    border-radius: 5px;
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+#agregarDisco input:focus,
+#agregarDisco select:focus {
+    border-color: #8FBC8F; /* Verde claro al enfocar */
+    outline: none;
+    box-shadow: 0 0 5px rgba(143, 188, 143, 0.5);
 }
 
 /* Checkbox */
 #agregarDisco label[for="inputPrestado"] {
-	font-weight: normal;
-	display: flex;
-	align-items: center;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    color: #333; /* Reseteamos el color */
 }
 #inputPrestado {
-	width: auto;
-	margin-left: 0;
-	margin-right: 10px;
+    width: auto;
+    margin-left: 0;
+    margin-right: 10px;
 }
 
-/* Estilo para los botones */
+/* Estilo para los botones (Guardar, Mostrar) */
 #guardar,
 #mostrar {
-	padding: 12px 20px;
-	margin-top: 20px;
-	border: none;
-	border-radius: 5px;
-	font-size: 1em;
-	font-weight: bold;
-	cursor: pointer;
-	transition: background-color 0.3s ease;
-	width: 100%;
-	box-sizing: border-box;
+    padding: 12px 20px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #8FBC8F; /* Verde Musgo Claro */
+    color: white;
 }
 
-#guardar {
-	background-color: #007bff;
-	color: white;
-}
-
-#guardar:hover {
-	background-color: #0056b3;
-}
-
-#mostrar {
-	background-color: #007bff;
-	color: white;
-	margin-top: 10px;
-}
-
+#guardar:hover,
 #mostrar:hover {
-	background-color: #0056b3;
+    background-color: #4B6E4B; /* Verde más oscuro al pasar el ratón */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilo aplicado por tu JS cuando la validación falla */
+/* --- Estilos de Errores --- */
+
+/* Corrección de sintaxis y aplicación de tono rústico al error */
 .error {
-	/* Resalta el borde del input/select en rojo */
-	border: 2px, solid, #dc3545;
-	background-color: rgb(250, 184, 184);
-	box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
+    border: 2px solid #A52A2A !important; /* Marrón rojizo fuerte */
+    background-color: #FFF0F0; /* Fondo muy claro para no desentonar tanto */
+    box-shadow: 0 0 5px rgba(165, 42, 42, 0.5);
 }
 
-/* Estilo para el div de mensaje de error (asumiendo que se inserta después del input) */
 .mensajeError {
-	/* El div de error debe ser visible cuando se aplica la clase (se asume que existe una clase "ocultar" que lo esconde) */
-	color: #dc3545;
-	font-size: 0.85em;
-	margin-top: -5px; /* Lo acerca un poco al input */
-	margin-bottom: 5px;
-	font-weight: bold;
+    color: #A52A2A; /* Marrón rojizo fuerte */
+    font-size: 0.85em;
+    margin-top: -5px;
+    margin-bottom: 5px;
+    font-style: italic; /* Añadido para un toque diferente */
 }
 
-/* Clase para ocultar el mensaje de error si existe en tu biblioteca.js */
 .ocultar {
-	display: none;
+    display: none;
 }
+
+/* --- Estilos de la Barra de Opciones/Búsqueda (#opciones) --- */
+
+#opciones {
+    /* Estilos añadidos */
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    padding: 20px 0;
+    border-bottom: 2px dashed #B0C4DE; /* Separador sutil */
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#inputBuscar {
+    /* Estilo de input dentro de opciones */
+    padding: 10px;
+    border: 1px solid #B0C4DE;
+    border-radius: 5px;
+    font-size: 1em;
+    flex-grow: 1; /* Para que ocupe el espacio restante */
+}
+
+/* Estilo para los botones de búsqueda (Buscar, Limpiar) */
+#opciones button {
+    background-color: #556B2F; /* Verde Principal */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#opciones button:hover {
+    background-color: #4B6E4B;
+}
+
+
+/* --- Estilos del Contenedor de Discos (.contenedorDiscos) --- */
 
 .contenedorDiscos {
-	/* Configuración principal de CSS Grid */
-	display: grid;
-	/* Crea hasta 3 columnas, responsivas */
-	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-	gap: 30px;
-	padding: 20px;
-	max-width: 1200px;
-	margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* Tarjeta de Disco Individual (.disco) */
 .disco {
-	background-color: #ffffff;
-	border: 1px solid #e0e0e0;
-	border-radius: 8px;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-	overflow: hidden;
-	display: flex;
-	flex-direction: column;
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #F8FFF8; /* Blanco muy claro con tinte verde */
+    border: 1px solid #8FBC8F; /* Borde suave */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .disco:hover {
-	transform: translateY(-5px);
-	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 /* Contenido Principal (Carátula, Nombre, Grupo) */
 .contenidoPrincipal {
-	text-align: center;
-	padding: 15px;
-	background-color: #f9f9f9;
-	flex-shrink: 0;
-	/* Añadimos estas líneas para centrar y dar espacio a la imagen */
-	min-height: 240px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+    text-align: center;
+    padding: 15px;
+    background-color: #E8F4E8; /* Fondo sutilmente verde claro */
+    flex-shrink: 0;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid #556B2F;
 }
 
 .contenidoPrincipal img {
-	width: 100%;
-	max-height: 200px;
-	height: auto;
-	/* CLAVE: Mantiene la proporción y muestra la imagen entera */
-	object-fit: contain;
-	border-radius: 4px;
-	margin-bottom: 10px;
+    width: 100%;
+    max-height: 200px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    border: 1px solid #556B2F; /* Marco rústico a la carátula */
 }
 
 .contenidoPrincipal h2 {
-	font-size: 1.4em;
-	margin: 0 0 5px 0;
-	color: #007bff;
+    font-size: 1.4em;
+    margin: 0 0 5px 0;
+    color: #556B2F; /* Verde principal */
 }
 
 .contenidoPrincipal h3 {
-	font-size: 1em;
-	margin: 0;
-	font-weight: normal;
-	color: #6c757d;
+    font-size: 1em;
+    margin: 0;
+    font-weight: normal;
+    color: #778899;
 }
 
 /* Información Adicional */
 .infoAdicional {
-	padding: 15px;
-	flex-grow: 1;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
-.infoAdicional p {
-	margin: 0;
-	padding: 4px 0;
-	font-size: 0.95em;
-	border-bottom: 1px dotted #eee;
+.infoAdicional p, .infoAdicional d {
+    /* Añadida la etiqueta 'd' que usaste en tu JS */
+    margin: 0;
+    padding: 6px 0;
+    font-size: 0.95em;
+    border-bottom: 1px dotted #DCDCDC; /* Línea punteada rústica */
+    color: #333;
 }
 
-.infoAdicional p:last-child {
-	border-bottom: none;
-	margin-top: 10px;
-	font-weight: bold;
-	color: #dc3545; /* Color para el estado de préstamo */
+.infoAdicional p:last-of-type {
+    border-bottom: none;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #556B2F; /* Usamos el verde principal para el estado de préstamo */
+}
+
+/* Estilo para el botón de eliminar */
+#botonEliminar {
+    /* Ajustamos el tamaño y lo alineamos */
+    width: 32px; /* Tamaño fijo, mejor que 5% */
+    height: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    align-self: flex-end; 
+    transition: opacity 0.2s;
+    filter: drop-shadow(0 0 2px rgba(0,0,0,0.3)); /* Sombra para que destaque un poco */
+}
+
+#botonEliminar:hover {
+    opacity: 0.8;
+}
+
+/* Estilo para el mensaje de error de búsqueda */
+.contenedorDiscos h1 {
+    color: #A52A2A; 
+    grid-column: 1 / -1; 
+    text-align: center;
+    font-size: 1.5em;
+    padding: 30px;
 }
