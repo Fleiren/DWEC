@@ -1,0 +1,73 @@
+.error {
+	border: 2px solid #a52a2a !important; /* Marrón rojizo fuerte */
+	background-color: #fff0f0; /* Fondo muy claro para no desentonar tanto */
+	box-shadow: 0 0 5px rgba(165, 42, 42, 0.5);
+}
+
+.ocultar {
+	display: none;
+}
+
+#formularioDisco {
+	max-width: 600px;
+	margin: 0 auto 40px auto;
+	padding: 30px;
+	/* Aplicando estilo rústico */
+	border: 3px solid #556b2f; /* Verde principal, borde grueso */
+	border-radius: 8px; /* Bordes ligeramente rústicos */
+	background-color: #ffffff;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra marcada */
+}
+
+#formularioDisco legend {
+	font-size: 1.5em;
+	font-weight: bold;
+	color: #556b2f; /* Verde principal */
+	padding: 0 10px;
+}
+
+#agregarDisco {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+#agregarDisco label {
+	font-weight: bold;
+	margin-top: 10px;
+	color: #556b2f; /* Verde principal */
+}
+
+/* Estilo para Inputs y Selects */
+#agregarDisco input[type="text"],
+#agregarDisco input[type="url"],
+#agregarDisco select,
+#agregarDisco input[type="number"] {
+	padding: 10px;
+	border: 1px solid #b0c4de; /* Tono suave, como arcilla */
+	border-radius: 5px;
+	font-size: 1em;
+	width: 100%;
+	box-sizing: border-box;
+	transition: border-color 0.3s ease;
+}
+
+#agregarDisco input:focus,
+#agregarDisco select:focus {
+	border-color: #8fbc8f; /* Verde claro al enfocar */
+	outline: none;
+	box-shadow: 0 0 5px rgba(143, 188, 143, 0.5);
+}
+
+/* Checkbox */
+#agregarDisco label[for="inputPrestado"] {
+	font-weight: normal;
+	display: flex;
+	align-items: center;
+	color: #333; /* Reseteamos el color */
+}
+#inputPrestado {
+	width: auto;
+	margin-left: 0;
+	margin-right: 10px;
+}

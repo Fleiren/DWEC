@@ -1,0 +1,7 @@
+.mensajeError {
+	color: #a52a2a; /* Marrón rojizo fuerte */
+	font-size: 0.85em;
+	margin-top: -5px;
+	margin-bottom: 5px;
+	font-style: italic; /* Añadido para un toque diferente */
+}

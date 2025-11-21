@@ -4,7 +4,7 @@ const Cabecera = () => {
 	return (
 		<>
 			<header className="cabecera_contenedor">
-				<img src="" alt="Logo" />
+				<img src="null" alt="Logo" />
 				<h1>Discos</h1>
 				<p>Frase bonita sobre música</p>
 			</header>

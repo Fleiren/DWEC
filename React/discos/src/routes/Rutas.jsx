@@ -1,6 +1,9 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { Inicio, Error, InsertarDisco, ListarDisco } from "./pages";
+import Inicio from "./../pages/Inicio.jsx";
+import Error from "./../pages/Error.jsx";
+import InsertarDisco from "./../pages/InsertarDisco.jsx";
+import ListarDiscos from "./../pages/ListarDiscos.jsx";
 
 const Rutas = () => {
 	return (
@@ -9,7 +12,7 @@ const Rutas = () => {
 				<Route path="/" element={<Inicio />}></Route>
 				<Route path="/*" element={<Error />}></Route>
 				<Route path="/insertarDisco" element={<InsertarDisco />}></Route>
-				<Route path="/listarDisco" element={<ListarDisco />}></Route>
+				<Route path="/listarDiscos" element={<ListarDiscos />}></Route>
 			</Routes>
 		</>
 	);
