@@ -29,22 +29,22 @@ const validarCampo = (campo) => {
 		//He usado un switch porque pienso que no lo usamos nunca y que para varias opciones como en este caso es para lo que está diseñado ¿Es así? es que no lo uso nunca.
 		switch (nombreCampo) {
 			case "nombre":
-				valido = validarNombre(campo);
+				valido = validarNombre(campo.value);
 				break;
 			case "caratula":
-				valido = validarCaratula(campo);
+				valido = validarCaratula(campo.value);
 				break;
 			case "grupo":
-				valido = validarGrupo(campo);
+				valido = validarGrupo(campo.value);
 				break;
 			case "anyo":
-				valido = validarAnyo(campo);
+				valido = validarAnyo(campo.value);
 				break;
 			case "genero":
-				valido = validarGenero(campo);
+				valido = validarGenero(campo.value);
 				break;
 			case "localizacion":
-				valido = validarLocalizacion(campo);
+				valido = validarLocalizacion(campo.value);
 				break;
 			default:
 				valido = false;
@@ -54,6 +54,7 @@ const validarCampo = (campo) => {
 	return valido;
 };
 
+
 /**
  * Valida el campo nombre.
  * @param {HTMLElement} campo
@@ -62,7 +63,7 @@ const validarCampo = (campo) => {
 const validarNombre = (campo) => {
 	let patron = patrones.nombre;
 	//Con dos métodos extraigo código que se iba a repetir en todos los métodos siguientes.
-	return validarBasico(campo) && validarPatron(campo.value, patron);
+	return campo!=="" && validarPatron(campo, patron);
 };
 
 /**
@@ -72,7 +73,7 @@ const validarNombre = (campo) => {
  */
 const validarCaratula = (campo) => {
 	let patron = patrones.caratula;
-	return validarBasico(campo) && validarPatron(campo.value, patron);
+	return validarPatron(campo, patron);
 };
 
 /**
@@ -82,7 +83,7 @@ const validarCaratula = (campo) => {
  */
 const validarGrupo = (campo) => {
 	let patron = patrones.grupo;
-	return validarBasico(campo) && validarPatron(campo.value, patron);
+	return campo!=="" && validarPatron(campo, patron);
 };
 
 /**
@@ -95,16 +96,10 @@ const validarAnyo = (campo) => {
 	let valido = true;
 	let patron = patrones.anyo;
 
-	//Dejo mi comentario de desesperación:
-	//Curioso, para los input type number al usar validity si está vacío da error siempre sea required o no, llevo una hora sin exagerar intentando arreglarlo pero la única solución es convertir el input number en uno de tipo texto,
-	//me da rabia porque si tenemos un input de tipo number es para usarlo en estos casos, si este problema tiene solución me gustaría saberlo.
-	//Creo que esto ha quedado muy feo, si me da tiempo le daré otra vuelta, llevo mucho tiempo con esto y con que funcione ahora mismo me sobra.
-	if (campo.value === "" && campo.required) valido = false;
-
-	if (campo.value !== "") {
-		const valor = parseInt(campo.value);
+	if (campo !== "") {
+		const valor = parseInt(campo);
 		if (isNaN(valor)) valido = false;
-		if (!validarPatron(campo.value, patron)) valido = false;
+		if (!validarPatron(campo, patron)) valido = false;
 		if (valor > fechaActual() || valor < 1850) valido = false;
 	}
 
@@ -118,7 +113,7 @@ const validarAnyo = (campo) => {
  */
 const validarGenero = (campo) => {
 	//Este no tiene patrón ya que no se valida mediante patrón, con la validación básica nos sobra.
-	return validarBasico(campo);
+	return campo !=="";
 };
 
 /**
@@ -128,24 +123,7 @@ const validarGenero = (campo) => {
  */
 const validarLocalizacion = (campo) => {
 	let patron = patrones.localizacion;
-	return validarBasico(campo) && validarPatron(campo.value, patron);
-};
-
-/**
- * Hace una validación básica del campo que recibe por parámetro de entrada.
- * @param {HTMLElement} campo
- * @returns {boolean}
- */
-const validarBasico = (campo) => {
-	let valido = true;
-	//De forma genérica validamos lo básico, que cumpla las normas del propio elemento con validity y que si es required que contenga valor.
-	if (campo.required && !campo.value) valido = false;
-	//Añado validación del propio input para reforzar la validación.
-	//Suponía que de alguna forma se podía acceder a las validaciones propias del input de alguna manera y como no encontraba nada (y soy cabezona) le he preguntado a la IA si se podía y me ha enseñado el método validity de los inputs.
-	//Es difícil de encontrar porque cuando haces console.log hay muchas propiedades, es una locura.
-	//Supongo que cuantas más cosas se puedan validar mejor.
-	if (campo.value !== "" && !campo.validity.valid) valido = false;
-	return valido;
+	return validarPatron(campo, patron);
 };
 
 /**
@@ -162,4 +140,24 @@ const validarPatron = (valor, patron) => {
 	return valido;
 };
 
-export { validarCampo };
+const crearDiscoJSON = (formulario) => {
+	//Generamos la id.
+	let idDisco = crypto.randomUUID();
+	return {
+		id: idDisco,
+		nombre: formulario.nombre,
+		caratula: formulario.caratula,
+		grupo: formulario.grupo,
+		anyo: formulario.anyo,
+		genero: formulario.genero,
+		localizacion: formulario.localizacion,
+		prestado: formulario.prestado,
+	};
+};
+
+export { validarCampo, crearDiscoJSON, validarNombre,
+	validarAnyo,
+	validarCaratula,
+	validarGenero,
+	validarGrupo,
+	validarLocalizacion };

@@ -1,12 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { validarCampo } from "./../libraries/ultilFormularios.js";
+import React, { useEffect, useState, useRef } from "react";
+import {
+	validarCampo,
+	crearDiscoJSON,
+	validarNombre,
+	validarAnyo,
+	validarCaratula,
+	validarGenero,
+	validarGrupo,
+	validarLocalizacion,
+} from "./../libraries/ultilFormularios.js";
+import MensajeError from "./../components/MensajeError.jsx";
 import "./insertarDisco.css";
 const InsertarDisco = () => {
 	const errores = {
 		nombre: "El nombre debe tener al menos 5 caracteres.",
 		caratula: "La URL de la carátula debe ser válida.",
 		grupo: "El nombre del grupo / intérprete debe tener al menos 5 caracteres.",
-		anyo: "El año debe ser de 4 cifras.",
+		anyo: "El año debe ser de 4 cifras y debe tener sentido.",
 		genero: "Debes seleccionar un género.",
 		localizacion:
 			"La localización debe tener el formato ES-123AA. (ES, guión medio, tres números y dos letras mayúsculas).",
@@ -18,6 +28,7 @@ const InsertarDisco = () => {
 		anyo: "",
 		genero: "",
 		localizacion: "",
+		prestado: false,
 	};
 	const erroresActivosInicial = {
 		nombre: "",
@@ -28,60 +39,89 @@ const InsertarDisco = () => {
 		localizacion: "",
 	};
 
+	//Arreglar esta validación.
+
+	const discosIniciales = localStorage.getItem("discos")
+		? JSON.parse(localStorage.getItem("discos"))
+		: [];
+
+	const [discos, setDiscos] = useState(discosIniciales);
 	const [formulario, setFormulario] = useState(formularioInicial);
 	const [erroresActivos, setErroresActivos] = useState(erroresActivosInicial);
-	const formRef = useRef();
+	const [exito, setExito] = useState(false);
 	const revisarDatos = (evento) => {
-		validarCampo(evento.target)
-			? evento.target.classList.remove("error")
-			: evento.target.classList.add("error");
-	};
-	const revisarFormulario = () => {
-		let valido = true;
-		limpiarErrores(formulario);
-		if (!validarNombre(formulario.nombre)) {
-			setErroresActivos({ ...erroresActivos, [nombre]: errores.nombre });
-			valido = false;
-		}
-		if (!validarCaratula(formulario.caratula)) {
-			setErroresActivos({ ...erroresActivos, [caratula]: errores.caratula });
-			valido = false;
-		}
-		if (!validarGrupo(formulario.grupo)) {
-			setErroresActivos({ ...erroresActivos, [grupo]: errores.grupo });
-			valido = false;
-		}
-		if (!validarAnyo(formulario.anyo)) {
-			setErroresActivos({ ...erroresActivos, [anyo]: errores.anyo });
-			valido = false;
-		}
-		if (!validarGenero(formulario.genero)) {
-			setErroresActivos({ ...erroresActivos, [genero]: errores.genero });
-			valido = false;
-		}
-		if (!validarLocalizacion(formulario.localizacion)) {
-			setErroresActivos({
-				...erroresActivos,
-				[localizacion]: errores.localizacion,
+		if (evento.target.name === "prestado") {
+			setFormulario({ ...formulario, prestado: evento.target.checked });
+		} else {
+			validarCampo(evento.target)
+				? evento.target.classList.remove("error")
+				: evento.target.classList.add("error");
+			setFormulario({
+				...formulario,
+				[evento.target.name]: evento.target.value,
 			});
-			valido = false;
 		}
 	};
 
-	useEffect(() => {}, [formulario]);
+	const validarFormulario = () => {
+		let erroresActivos = { ...erroresActivosInicial };
+		let valido = true;
+		setErroresActivos(erroresActivosInicial);
+		if (!validarNombre(formulario.nombre)) {
+			erroresActivos.nombre = errores.nombre;
+			valido = false;
+		}
+		if (!validarCaratula(formulario.caratula)) {
+			erroresActivos.caratula = errores.caratula;
+			valido = false;
+		}
+		if (!validarGrupo(formulario.grupo)) {
+			erroresActivos.grupo = errores.grupo;
+			valido = false;
+		}
+		if (!validarAnyo(formulario.anyo)) {
+			erroresActivos.anyo = errores.anyo;
+			valido = false;
+		}
+		if (!validarGenero(formulario.genero)) {
+			erroresActivos.genero = errores.genero;
+			valido = false;
+		}
+		if (!validarLocalizacion(formulario.localizacion)) {
+			erroresActivos.localizacion = errores.localizacion;
+			valido = false;
+		}
+		setErroresActivos(erroresActivos);
+		if (valido) {
+			const disco = crearDiscoJSON(formulario);
+			setExito(true);
+			//Lo del timeout ha sido idea de la IA, no me aclaraba para quitar el mensaje, no me gustaban las soluciones que se me ocurrían, sinceramente no me acordaba de que existía timeout.
+			setTimeout(() => {
+				setExito(false);
+			}, 3000);
+			setDiscos([...discos, disco]);
+			setFormulario(formularioInicial);
+		}
+	};
+	useEffect(() => {
+		localStorage.setItem("discos", JSON.stringify(discos));
+		console.log(discos);
+	}, [discos]);
 
 	return (
 		<>
 			<div className="contenedor_insertarDisco">
+				{exito && <div className="exito">Disco registrado con éxito.</div>}
 				<fieldset id="formularioDisco">
 					<legend>Agregar disco</legend>
 
-					<form name="agregarDisco" id="agregarDisco" ref={formRef}>
+					<form name="agregarDisco" id="agregarDisco">
 						<label htmlFor="inputNombre">Nombre:</label>
 						<input
 							type="text"
 							id="inputNombre"
 							name="nombre"
+							value={formulario.nombre}
 							placeholder="Introduce el nombre del disco"
 							pattern=".{5,}"
 							onInput={revisarDatos}
@@ -96,6 +136,7 @@ const InsertarDisco = () => {
 							type="url"
 							id="inputCaratula"
 							name="caratula"
+							value={formulario.caratula}
 							placeholder="Coloca la URL de la carátula del disco"
 							onInput={revisarDatos}
 						/>
@@ -109,6 +150,7 @@ const InsertarDisco = () => {
 							type="text"
 							id="inputGrupo"
 							name="grupo"
+							value={formulario.grupo}
 							placeholder="Introduce el grupo / intérprete"
 							pattern=".{5,}"
 							onInput={revisarDatos}
@@ -122,6 +164,7 @@ const InsertarDisco = () => {
 							type="text"
 							id="inputAnyo"
 							name="anyo"
+							value={formulario.anyo}
 							pattern="\d{4}"
 							placeholder="Introduce el año de publicación"
 							onInput={revisarDatos}
@@ -133,6 +176,7 @@ const InsertarDisco = () => {
 						<select
 							id="selectGenero"
 							name="genero"
+							value={formulario.genero}
 							onChange={revisarDatos}
 							required
 						>
@@ -165,6 +209,7 @@ const InsertarDisco = () => {
 							type="text"
 							id="inputLocalizacion"
 							name="localizacion"
+							value={formulario.localizacion}
 							pattern="^[A-Z]{2}-\d{3}[A-Z]{2}$"
 							onInput={revisarDatos}
 						/>
@@ -174,12 +219,18 @@ const InsertarDisco = () => {
 							></MensajeError>
 						)}
 						<label htmlFor="inputPrestado">Prestado: </label>
-						<input type="checkbox" id="inputPrestado" name="prestado" />
+						<input
+							type="checkbox"
+							id="inputPrestado"
+							name="prestado"
+							onChange={revisarDatos}
+							value={formulario.prestado}
+						/>
 						<input
 							type="button"
 							id="guardar"
 							value="Guardar"
-							onClick={revisarFormulario}
+							onClick={validarFormulario}
 						/>
 					</form>
 				</fieldset>

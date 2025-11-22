@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./mensajeError.css";
 const MensajeError = (props) => {
 	const { mensajeError } = props;
@@ -13,3 +13,4 @@ const MensajeError = (props) => {
 };
 
 export default MensajeError;
+ad;
