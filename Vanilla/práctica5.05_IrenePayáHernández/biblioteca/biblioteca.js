@@ -421,7 +421,7 @@ const generarHTMLDisco = (disco) => {
  * @param {*} dato 
  * @returns 
  */
-const buscarDisco = (dato) => {
+const buscarDisco = (dato, discos) => {
 	let resultado = [];
 	resultado = discos.filter((disco) => disco.nombre === dato || disco.genero === dato || disco.localizacion === dato || disco.anyo === dato || disco.grupo === dato);
 	return resultado;

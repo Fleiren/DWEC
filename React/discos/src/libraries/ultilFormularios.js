@@ -155,9 +155,34 @@ const crearDiscoJSON = (formulario) => {
 	};
 };
 
+/**
+ * 
+ * @param {*} dato 
+ * @returns 
+ */
+const buscarDisco = (dato, discos) => {
+	let resultado = [];
+	resultado = discos.filter((disco) => disco.nombre === dato || disco.genero === dato || disco.localizacion === dato || disco.anyo === dato || disco.grupo === dato);
+	return resultado;
+}
+
+/**
+ * 
+ * @param {*} id 
+ */
+const eliminarDiscoPorId = (id, discos) => {
+	//Si tengo tiempo el confirm lo haré yo con un div.
+	confirm("¿Estás seguro de que quieres eliminar el disco?") && (discos = discos.filter((disco) => disco.id !== id));
+	return discos;
+	
+}
+
 export { validarCampo, crearDiscoJSON, validarNombre,
 	validarAnyo,
 	validarCaratula,
 	validarGenero,
 	validarGrupo,
-	validarLocalizacion };
+	validarLocalizacion,
+	buscarDisco,
+	eliminarDiscoPorId
+ };

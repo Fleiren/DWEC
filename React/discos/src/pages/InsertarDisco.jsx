@@ -11,7 +11,8 @@ import {
 } from "./../libraries/ultilFormularios.js";
 import MensajeError from "./../components/MensajeError.jsx";
 import "./insertarDisco.css";
-const InsertarDisco = () => {
+const InsertarDisco = (props) => {
+	const { discos, setDiscos } = props;
 	const errores = {
 		nombre: "El nombre debe tener al menos 5 caracteres.",
 		caratula: "La URL de la carátula debe ser válida.",
@@ -41,11 +42,6 @@ const InsertarDisco = () => {
 
 	//Arreglar esta validación.
 
-	const discosIniciales = localStorage.getItem("discos")
-		? JSON.parse(localStorage.getItem("discos"))
-		: [];
-
-	const [discos, setDiscos] = useState(discosIniciales);
 	const [formulario, setFormulario] = useState(formularioInicial);
 	const [erroresActivos, setErroresActivos] = useState(erroresActivosInicial);
 	const [exito, setExito] = useState(false);
@@ -103,10 +99,6 @@ const InsertarDisco = () => {
 			setFormulario(formularioInicial);
 		}
 	};
-	useEffect(() => {
-		localStorage.setItem("discos", JSON.stringify(discos));
-		console.log(discos);
-	}, [discos]);
 
 	return (
 		<>
