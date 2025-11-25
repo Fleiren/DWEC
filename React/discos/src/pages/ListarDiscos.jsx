@@ -1,6 +1,10 @@
 import React, { useState, useRef } from "react";
 import Disco from "../components/Disco.jsx";
-import { buscarDisco } from "../libraries/ultilFormularios.js";
+import "./listarDiscos.css";
+import {
+	buscarDisco,
+	eliminarDiscoPorId,
+} from "../libraries/ultilFormularios.js";
 
 const ListarDiscos = (props) => {
 	const { discos, setDiscos } = props;
@@ -28,22 +32,34 @@ const ListarDiscos = (props) => {
 		setBusquedaVacia(false);
 		setDiscosFiltrados(discos);
 	};
+
+	const eliminarDisco = (evento) => {
+		if (evento.target.name === "eliminar") {
+			const nuevaLista = eliminarDiscoPorId(evento.target.value, [...discos]);
+			setDiscos(nuevaLista);
+			setDiscosFiltrados(nuevaLista);
+		}
+	};
+
 	return (
 		<>
 			<div className="contenedor_listarDiscos">
-				<input
-					ref={filtroRef}
-					type="text"
-					name="filtrar"
-					id="inputFiltrar"
-					placeholder="Filtrar por..."
-				/>
-				<button id="buscar" onClick={filtrar}>
-					Buscar
-				</button>
-				<button id="limpiar" onClick={limpiar}>
-					Limpiar
-				</button>
+				<div className="contenedor_controles">
+					<input
+						ref={filtroRef}
+						type="text"
+						name="filtrar"
+						id="inputFiltrar"
+						placeholder="Filtrar por..."
+					/>
+					<button id="buscar" onClick={filtrar}>
+						Buscar
+					</button>
+					<button id="limpiar" onClick={limpiar}>
+						Limpiar
+					</button>
+				</div>
+
 				<div className="contenedor_mostrarDiscos">
 					{discosFiltrados && !busquedaVacia ? (
 						discosFiltrados.map((disco) => {
@@ -52,6 +68,7 @@ const ListarDiscos = (props) => {
 									key={disco.id}
 									disco={disco}
 									setDiscos={setDiscos}
+									eliminarDisco={eliminarDisco}
 								></Disco>
 							);
 						})

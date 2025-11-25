@@ -1,12 +1,16 @@
 import React from "react";
+import "./cabecera.css";
 
 const Cabecera = () => {
 	return (
 		<>
 			<header className="cabecera_contenedor">
-				<img src="null" alt="Logo" />
+				<img src="./src/img/eyeInTheSky.jpg" id="logo" alt="Logo" />
 				<h1>Discos</h1>
-				<p>Frase bonita sobre música</p>
+				<em>
+					"Remember that you were a friend of mine, as the final curtain falls
+					before my eyes." ~ The Alan Parsons Project - Old And Wise
+				</em>
 			</header>
 		</>
 	);

@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./contenedor.css";
 const Contenedor = (props) => {
 	return (
 		<>

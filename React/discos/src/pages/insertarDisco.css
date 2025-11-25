@@ -1,73 +1,106 @@
-.error {
-	border: 2px solid #a52a2a !important; /* Marrón rojizo fuerte */
-	background-color: #fff0f0; /* Fondo muy claro para no desentonar tanto */
-	box-shadow: 0 0 5px rgba(165, 42, 42, 0.5);
-}
 
-.ocultar {
-	display: none;
+
+.contenedor_insertarDisco {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
 }
 
 #formularioDisco {
-	max-width: 600px;
-	margin: 0 auto 40px auto;
-	padding: 30px;
-	/* Aplicando estilo rústico */
-	border: 3px solid #556b2f; /* Verde principal, borde grueso */
-	border-radius: 8px; /* Bordes ligeramente rústicos */
-	background-color: #ffffff;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra marcada */
+    background-color: #37201e;
+    border: 1px solid #431410;
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 #formularioDisco legend {
-	font-size: 1.5em;
-	font-weight: bold;
-	color: #556b2f; /* Verde principal */
-	padding: 0 10px;
+    font-size: 1.8em;
+    font-weight: 700;
+    color: rgb(214, 169, 34); 
+    text-transform: uppercase;
+    text-shadow: 0 0 5px rgba(75, 63, 27, 0.802);
+    margin-bottom: 20px;
 }
 
 #agregarDisco {
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
+    display: block; 
 }
 
 #agregarDisco label {
-	font-weight: bold;
-	margin-top: 10px;
-	color: #556b2f; /* Verde principal */
+    font-weight: 600;
+    color: rgb(214, 169, 34);
+    display: block; 
+    margin-top: 25px; 
+    margin-bottom: 5px; 
 }
 
-/* Estilo para Inputs y Selects */
-#agregarDisco input[type="text"],
-#agregarDisco input[type="url"],
-#agregarDisco select,
-#agregarDisco input[type="number"] {
-	padding: 10px;
-	border: 1px solid #b0c4de; /* Tono suave, como arcilla */
-	border-radius: 5px;
-	font-size: 1em;
-	width: 100%;
-	box-sizing: border-box;
-	transition: border-color 0.3s ease;
+/*No puedo cambiar el fondo azul*/
+#agregarDisco select option{
+	background-color: rgb(49, 15, 15) !important;
 }
 
-#agregarDisco input:focus,
-#agregarDisco select:focus {
-	border-color: #8fbc8f; /* Verde claro al enfocar */
-	outline: none;
-	box-shadow: 0 0 5px rgba(143, 188, 143, 0.5);
+
+
+#agregarDisco label:first-of-type {
+    margin-top: 0;
 }
 
-/* Checkbox */
-#agregarDisco label[for="inputPrestado"] {
-	font-weight: normal;
-	display: flex;
-	align-items: center;
-	color: #333; /* Reseteamos el color */
+#agregarDisco input:not([type="button"]):not([type="checkbox"]),
+#agregarDisco select {
+    background-color: rgb(13, 8, 3);
+    color: rgb(214, 169, 34);
+    border: 1px dotted rgb(89, 72, 21);
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    margin-bottom: 0; 
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
 }
-#inputPrestado {
-	width: auto;
-	margin-left: 0;
-	margin-right: 10px;
+
+#agregarDisco input[type="checkbox"]{
+	height: 20px;
+	width:20px;
+	cursor:pointer;
+}
+
+#guardar {
+    display: block;
+    width: auto;
+    margin: 30px auto 0 auto; 
+    background-color: rgb(13, 8, 3);
+    color: rgb(214, 169, 34);
+    border-radius: 10px;
+	padding: 10px 15px;
+    font-size: 1em;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+#guardar:hover {
+    background-color: #3c3211;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.5); 
+}
+
+#guardar:active {
+    background-color:  #D4AF37;
+    color: #0D101C;
+    transform: translateY(1px);
+}
+
+.mensajeError {
+    color: red;
+    font-size: 1em;
+    text-align: left;
+    margin-top: 5px; 
+    margin-bottom: 10px; 
+   
+}
+.error{
+	color:red !important;
+	background-color: rgb(73, 13, 13) !important;
+	box-shadow: 0 0 10px red !important;
 }

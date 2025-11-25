@@ -171,8 +171,8 @@ const buscarDisco = (dato, discos) => {
  * @param {*} id 
  */
 const eliminarDiscoPorId = (id, discos) => {
-	//Si tengo tiempo el confirm lo haré yo con un div.
-	confirm("¿Estás seguro de que quieres eliminar el disco?") && (discos = discos.filter((disco) => disco.id !== id));
+	//He tenido que añadir window porque no me funcionaba, en Vanilla si funciona.
+	window.confirm("¿Estás seguro de que quieres eliminar el disco?") && (discos = discos.filter((disco) => disco.id !== id));
 	return discos;
 	
 }

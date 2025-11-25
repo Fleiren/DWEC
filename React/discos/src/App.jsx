@@ -42,7 +42,7 @@ function App() {
 				<Contenido>
 					<Rutas discos={discos} setDiscos={setDiscos}></Rutas>
 				</Contenido>
-				<Pie></Pie>
+				<Pie className="contenedor_pie"></Pie>
 			</Contenedor>
 		</>
 	);

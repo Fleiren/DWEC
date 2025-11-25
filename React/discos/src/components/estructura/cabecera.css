@@ -1,0 +1,94 @@
+.cabecera_contenedor {
+    /* Fondo oscuro y sólido */
+    background-color: var(--color-fondo-principal);
+    
+    /* Configuración de visualización */
+    display: flex;
+    align-items: center; /* Alineación vertical de los elementos */
+    justify-content: space-between; /* Distribución del espacio */
+    padding: 20px 40px;
+    
+    /* Borde inferior para simular la separación del panel */
+    border-bottom: 3px solid var(--color-gris-linea);
+    
+    /* Sombra sutil para efecto de panel saliente */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+    
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* ========================================= */
+/* 2. LOGO (Imagen) */
+/* ========================================= */
+
+#logo {
+    width: 60px; /* Tamaño adecuado para un logo/símbolo */
+    height: 60px;
+    object-fit: cover;
+    margin-right: 20px;
+    
+    /* Efecto de marco de diagrama */
+    border: 2px solid var(--color-detalle-cian);
+    border-radius: 50%; /* Si la imagen es cuadrada, la hace circular (como un ojo) */
+    
+    /* Sutil resplandor cian */
+    box-shadow: 0 0 10px rgba(72, 240, 208, 0.4);
+}
+
+/* ========================================= */
+/* 3. TÍTULO PRINCIPAL (h1) */
+/* ========================================= */
+
+.cabecera_contenedor h1 {
+    font-size: 2.5em;
+    color: var(--color-acento-principal); /* Blanco puro para máxima visibilidad */
+    font-weight: 800;
+    margin: 0;
+    
+    /* Estilo de título de proyecto/esquema */
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3); /* Resplandor blanco sutil */
+}
+
+/* ========================================= */
+/* 4. CITA (em) */
+/* ========================================= */
+
+.cabecera_contenedor em {
+    max-width: 400px;
+    font-size: 0.85em;
+    font-style: italic;
+    text-align: right;
+    line-height: 1.4;
+    margin-left: 20px;
+    
+    /* Color dorado/metálico para la cita */
+    color: var(--color-detalle-dorado); 
+    
+    /* Borde a la izquierda para separarla visualmente (como una nota en un diagrama) */
+    border-left: 2px solid var(--color-detalle-dorado);
+    padding-left: 15px;
+}
+
+/* ========================================= */
+/* AJUSTES RESPONSIVOS (Para móviles) */
+/* ========================================= */
+
+@media (max-width: 768px) {
+    .cabecera_contenedor {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px 20px;
+        gap: 10px;
+    }
+    
+    .cabecera_contenedor h1 {
+        font-size: 1.8em;
+    }
+
+    /* Ocultar la cita en pantallas pequeñas para ahorrar espacio */
+    .cabecera_contenedor em {
+        display: none; 
+    }
+}

@@ -1,0 +1,79 @@
+nav {
+    /* Fondo que lo separa visualmente del fondo principal */
+    background-color: #1A202C; 
+    
+    display: flex;
+    justify-content: center; /* Centra los enlaces horizontalmente */
+    padding: 10px 0;
+    
+    /* Borde superior e inferior para enmarcar el panel de navegación */
+    border-top: 1px solid var(--color-gris-linea);
+    border-bottom: 1px solid var(--color-gris-linea);
+    
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra de profundidad */
+}
+
+/* ========================================= */
+/* 2. ENLACES INDIVIDUALES (Link con className="menu_elemento") */
+/* ========================================= */
+
+.menu_elemento {
+    /* Color de texto base (gris/blanco sutil) */
+    color: var(--color-acento-secundario);
+    text-decoration: none; /* Elimina el subrayado por defecto */
+    
+    padding: 10px 20px;
+    margin: 0 15px;
+    font-size: 1em;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    
+    /* Efecto de transición para suavizar el hover */
+    transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
+    
+    /* Borde inferior sutil para simular una línea de menú */
+    border-bottom: 2px solid transparent; 
+}
+
+/* Estado al pasar el ratón (Hover) */
+.menu_elemento:hover {
+    color: var(--color-detalle-cian); /* Color de acento cian al interactuar */
+    background-color: rgba(72, 240, 208, 0.05); /* Fondo sutilmente brillante */
+    
+    /* Brillo inferior para indicar selección o activación (estilo de diagrama) */
+    border-bottom: 2px solid var(--color-detalle-cian);
+    box-shadow: 0 5px 10px -5px rgba(72, 240, 208, 0.4);
+}
+
+/* Estilo para el enlace activo (si usas NavLink o lo gestionas manualmente) */
+.menu_elemento.active {
+    color: var(--color-detalle-dorado); /* Dorado para el elemento activo */
+    border-bottom: 2px solid var(--color-detalle-dorado);
+    font-weight: 700;
+}
+
+/* ========================================= */
+/* AJUSTES RESPONSIVOS */
+/* ========================================= */
+
+@media (max-width: 600px) {
+    nav {
+        flex-direction: column; /* Apila los enlaces en pantallas pequeñas */
+        padding: 10px 0;
+    }
+    
+    .menu_elemento {
+        margin: 5px 10px;
+        text-align: center;
+        width: 100%;
+        padding: 10px 0;
+        /* Asegura que la línea de abajo se vea bien en ancho completo */
+        border-bottom: 1px solid transparent; 
+    }
+
+    .menu_elemento:hover {
+        border-bottom: 1px solid var(--color-detalle-cian);
+        box-shadow: none;
+    }
+}
