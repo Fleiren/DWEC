@@ -13,12 +13,16 @@ const ListarDiscos = (props) => {
 	const filtroRef = useRef();
 	let resultadoFiltro = [];
 
+	/**
+	 * Actualiza el estado de discosFiltrados con el nuevo filtro.
+	 */
 	const filtrar = () => {
 		let textoBusqueda = filtroRef.current.value;
 		//Si el usuario no pone nada se muestran todos los discos, está el botón limpiar pero por si acaso el usuario no lo entiende... le damos más opciones para ver la lista completa.
 		if (textoBusqueda !== "") {
 			resultadoFiltro = buscarDisco(textoBusqueda, [...discos]);
 			setDiscosFiltrados(resultadoFiltro);
+			//Si no hay discos que coincidan con la busqueda el estado busquedaVacia se pone en true para que se muestre el mensaje.
 			resultadoFiltro.length === 0
 				? setBusquedaVacia(true)
 				: setBusquedaVacia(false);
@@ -28,13 +32,21 @@ const ListarDiscos = (props) => {
 		}
 	};
 
+	/**
+	 * Reestablece los valores de los estados busquedaVacia y discosFiltrados.
+	 */
 	const limpiar = () => {
 		setBusquedaVacia(false);
 		setDiscosFiltrados(discos);
 	};
 
+	/**
+	 * Si el elemento pulsado contiene el nombre eliminar, eliminará el disco con la id que se obtiene al pulsar en el icono de eliminar.
+	 * @param {HTMLElement} evento
+	 */
 	const eliminarDisco = (evento) => {
 		if (evento.target.name === "eliminar") {
+			//La id del disco se obtiene porque en el input para eliminar tiene como valor la id del disco.
 			const nuevaLista = eliminarDiscoPorId(evento.target.value, [...discos]);
 			setDiscos(nuevaLista);
 			setDiscosFiltrados(nuevaLista);

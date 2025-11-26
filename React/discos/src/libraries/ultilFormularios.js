@@ -1,7 +1,7 @@
 "use strict";
 const patrones = {
 	nombre: /.{5,}/,
-	caratula: /^https?:\/\//, //No me iba por lo de escapar las barras (En la práctica dice que no es necesario validarlo pero por probar las expresiones lo he hecho).
+	caratula: /^https?:\/\//, 
 	grupo: /.{5,}/,
 	anyo: /\d{4}/,
 	localizacion: /^ES-\d{3}[A-Z]{2}$/,
@@ -22,11 +22,9 @@ const fechaActual = () => {
  * @returns {boolean}
  */
 const validarCampo = (campo) => {
-	//Este método lo utilizo para hacer las validaciones instantaneas, es el método que se activa en los eventos input y change.
 	let valido = true;
 	if (campo) {
 		let nombreCampo = campo.name;
-		//He usado un switch porque pienso que no lo usamos nunca y que para varias opciones como en este caso es para lo que está diseñado ¿Es así? es que no lo uso nunca.
 		switch (nombreCampo) {
 			case "nombre":
 				valido = validarNombre(campo.value);
@@ -62,7 +60,6 @@ const validarCampo = (campo) => {
  */
 const validarNombre = (campo) => {
 	let patron = patrones.nombre;
-	//Con dos métodos extraigo código que se iba a repetir en todos los métodos siguientes.
 	return campo!=="" && validarPatron(campo, patron);
 };
 
@@ -92,7 +89,6 @@ const validarGrupo = (campo) => {
  * @returns {boolean}
  */
 const validarAnyo = (campo) => {
-	//Esta validación no ha quedado bien al final por el problema que he mencionado antes.
 	let valido = true;
 	let patron = patrones.anyo;
 
@@ -112,7 +108,6 @@ const validarAnyo = (campo) => {
  * @returns {boolean}
  */
 const validarGenero = (campo) => {
-	//Este no tiene patrón ya que no se valida mediante patrón, con la validación básica nos sobra.
 	return campo !=="";
 };
 
@@ -133,13 +128,16 @@ const validarLocalizacion = (campo) => {
  * @returns
  */
 const validarPatron = (valor, patron) => {
-	//Si el valor está vacío se da como válido porque los campos opcionales no deben dar error si se comprueba el patrón estando vacíos, por ello se hace antes una validación básica comprobando si pueden o no estar vacíos.
-	//Solo se comprueba el patrón si el campo tiene contenido ya que si llega hasta aquí vacío se entiende que es por ser opcional.
 	let valido = true;
 	if (valor !== "") valido = patron.test(valor);
 	return valido;
 };
 
+/**
+ * Devuelve el objeto bien formateado, añadiendo la id.
+ * @param {Object} formulario 
+ * @returns {Object}
+ */
 const crearDiscoJSON = (formulario) => {
 	//Generamos la id.
 	let idDisco = crypto.randomUUID();
@@ -156,9 +154,10 @@ const crearDiscoJSON = (formulario) => {
 };
 
 /**
- * 
- * @param {*} dato 
- * @returns 
+ * Devuelve la lista de discos filtrada buscando coincidencias con el string que se ha pasado por parámetro.
+ * @param {string} dato  
+ * @param {Array} discos  
+ * @returns {Array}
  */
 const buscarDisco = (dato, discos) => {
 	let resultado = [];
@@ -167,8 +166,10 @@ const buscarDisco = (dato, discos) => {
 }
 
 /**
- * 
- * @param {*} id 
+ * Eliminar de la lista el disco con la id que se pasa por parámetro.
+ * @param {string} id 
+ * @param {Array} discos 
+ * @returns {Array}
  */
 const eliminarDiscoPorId = (id, discos) => {
 	//He tenido que añadir window porque no me funcionaba, en Vanilla si funciona.
@@ -177,6 +178,15 @@ const eliminarDiscoPorId = (id, discos) => {
 	
 }
 
+/**
+ * Busca el disco con la id pasada por parámetro.
+ * @param {string} id 
+ * @param {Array} discos 
+ * @returns {Object}
+ */
+const buscarDiscoId = (id, discos) => {
+	return discos.find((disco) => {return disco.id===id});
+}
 export { validarCampo, crearDiscoJSON, validarNombre,
 	validarAnyo,
 	validarCaratula,
@@ -184,5 +194,6 @@ export { validarCampo, crearDiscoJSON, validarNombre,
 	validarGrupo,
 	validarLocalizacion,
 	buscarDisco,
-	eliminarDiscoPorId
+	eliminarDiscoPorId,
+	buscarDiscoId
  };

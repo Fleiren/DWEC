@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState } from "react";
 import {
 	validarCampo,
 	crearDiscoJSON,
@@ -12,7 +12,9 @@ import {
 import MensajeError from "./../components/MensajeError.jsx";
 import "./insertarDisco.css";
 const InsertarDisco = (props) => {
+	//Obtenemos las variables necesarias para modificar y obtener los datos de los discos.
 	const { discos, setDiscos } = props;
+	//Declaramos los mensajes de error según el campo del formulario.
 	const errores = {
 		nombre: "El nombre debe tener al menos 5 caracteres.",
 		caratula: "La URL de la carátula debe ser válida.",
@@ -22,6 +24,7 @@ const InsertarDisco = (props) => {
 		localizacion:
 			"La localización debe tener el formato ES-123AA. (ES, guión medio, tres números y dos letras mayúsculas).",
 	};
+	//Declaramos el estado inicial del objeto disco.
 	const formularioInicial = {
 		nombre: "",
 		caratula: "",
@@ -31,6 +34,8 @@ const InsertarDisco = (props) => {
 		localizacion: "",
 		prestado: false,
 	};
+
+	//Declaramos el estado inicial de los errores que están activos.
 	const erroresActivosInicial = {
 		nombre: "",
 		caratula: "",
@@ -39,12 +44,16 @@ const InsertarDisco = (props) => {
 		genero: "",
 		localizacion: "",
 	};
-
-	//Arreglar esta validación.
-
+	//Declaramos los estados.
 	const [formulario, setFormulario] = useState(formularioInicial);
 	const [erroresActivos, setErroresActivos] = useState(erroresActivosInicial);
 	const [exito, setExito] = useState(false);
+
+	//En este método actualizamos el estado formulario y revisamos si es correcto (¿Hace muchas cosas? a veces modularizar se hace difícil).
+	/**
+	 * Actualiza el objeto formulario.
+	 * @param {HTMLElement} evento
+	 */
 	const revisarDatos = (evento) => {
 		if (evento.target.name === "prestado") {
 			setFormulario({ ...formulario, prestado: evento.target.checked });
@@ -59,6 +68,10 @@ const InsertarDisco = (props) => {
 		}
 	};
 
+	//Validamos el formulario para saber si se puede enviar o no.
+	/**
+	 * Valida el objeto formulario para ver si es correcto y actualiza el estado de errores activos si los hay.
+	 */
 	const validarFormulario = () => {
 		let erroresActivos = { ...erroresActivosInicial };
 		let valido = true;
@@ -88,16 +101,31 @@ const InsertarDisco = (props) => {
 			valido = false;
 		}
 		setErroresActivos(erroresActivos);
+		//Si sigue siendo válido podemos enviar el formulario.
 		if (valido) {
-			const disco = crearDiscoJSON(formulario);
-			setExito(true);
-			//Lo del timeout ha sido idea de la IA, no me aclaraba para quitar el mensaje, no me gustaban las soluciones que se me ocurrían, sinceramente no me acordaba de que existía timeout.
-			setTimeout(() => {
-				setExito(false);
-			}, 3000);
-			setDiscos([...discos, disco]);
-			setFormulario(formularioInicial);
+			enviarFormulario();
 		}
+	};
+
+	/**
+	 * Actualiza los discos y resetea el formulario.
+	 */
+	const enviarFormulario = () => {
+		const disco = crearDiscoJSON(formulario);
+		mensajeExito();
+		setDiscos([...discos, disco]);
+		setFormulario(formularioInicial);
+	};
+
+	/**
+	 * Maneja el estado Exito para mostrar el mensaje.
+	 */
+	const mensajeExito = () => {
+		setExito(true);
+		//Lo del timeout ha sido idea de la IA, no me aclaraba para quitar el mensaje, no me gustaban las soluciones que se me ocurrían, sinceramente no me acordaba de que existía timeout.
+		setTimeout(() => {
+			setExito(false);
+		}, 3000);
 	};
 
 	return (

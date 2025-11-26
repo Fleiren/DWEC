@@ -1,7 +1,15 @@
 .contenedor_mensajeError {
-	color: #a52a2a; /* Marrón rojizo fuerte */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #a52a2a;
+	height: 40px;
+	margin-top: 10px;
+	padding-left: 5px;
+	padding-right:5px;
 	font-size: 0.85em;
-	margin-top: -5px;
 	margin-bottom: 5px;
-	font-style: italic; /* Añadido para un toque diferente */
+	background-color: rgb(53, 14, 14);
+	box-shadow: 0 0 10px red;
+	font-style: italic; 
 }

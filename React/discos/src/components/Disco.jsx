@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./disco.css";
 
 const Disco = (props) => {
@@ -6,18 +7,22 @@ const Disco = (props) => {
 	//pero no, no puedo colocar eventos como tal a los componentes, tengo que indicar en el input que al hacer onClick ejecute la función que he pasado por props al componente, no se si es la mejor solución,
 	//pero no quería que la lógica se hiciera en este componente y al final probando cosas la IA me ha dicho que pusiera el onClick también en el input.
 	const { disco, eliminarDisco } = props;
+	const navigate = useNavigate();
+	const navegar = (evento) => {
+		//Si le damos a otro sitio que no sea eliminar entonces veremos los detalles del disco.
+		if (evento.target.name !== "eliminar") {
+			navigate(`/disco/${disco.id}`);
+		}
+	};
 	return (
 		<>
-			<div className="contenedor_disco">
+			<div className="contenedor_disco" onClick={navegar}>
 				{disco.caratula && (
 					<img src={disco.caratula} alt="Carátula del disco" />
 				)}
 				<h1>{disco.nombre}</h1>
 				<h2>{disco.grupo}</h2>
-				{disco.anyo && <p>Año de publicación: {disco.anyo}</p>}
 				<p>Género: {disco.genero}</p>
-				{disco.Localizacion && <p>Localización: {disco.género}</p>}
-				<p>{disco.prestado ? "El disco es prestado" : "El disco es nuevo"}</p>
 				<input
 					type="image"
 					id="botonEliminar"
