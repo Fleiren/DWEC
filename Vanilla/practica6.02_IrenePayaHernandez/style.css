@@ -1,4 +1,35 @@
-#peliculas{
-    display:flex;
-    flex-direction: column;
+#contenedor {
+	display: flex;
+	flex-direction: row;
+	margin: 0;
+	height: 98vh;
+	padding: 2px;
+	position: fixed;
+}
+
+#peliculas {
+	display: flex;
+	flex-direction: column;
+	border: 2px solid black;
+	cursor: pointer;
+}
+
+#informacion {
+	margin: 30px;
+}
+
+.tituloPelicula {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px dashed black;
+	width: 10em;
+	height: 4em;
+	margin: 5px;
+	padding: 2px;
+	text-align: center;
+}
+
+.tituloPelicula:hover {
+	background-color: bisque;
 }

@@ -1,6 +1,5 @@
 "use strict";
 
-console.log("doiasoijdaosijdaosijdasd");
 const promesa = new Promise((resolver, rechazar) => {
 	console.log("Comprobando datos...");
 	setTimeout(() => {
