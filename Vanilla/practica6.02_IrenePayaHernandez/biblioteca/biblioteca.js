@@ -7,9 +7,35 @@ const obtenerDatos = (url, tipoDeDato) => {
         if(tipoDeDato.toLowerCase() === "blop") return respuesta.blop();
     }).then((datos) => {
         return datos;
-    }).catch((error)=>{
+    }).catch((error) => {
         return `Se ha producido un error: ${error.message}`;
     });
 }
 
-export {obtenerDatos}
+const pintarTitulosPelicula = (peliculas) => {
+    let plantilla = "";
+    if(peliculas && peliculas.length!==0){    
+        for (const pelicula of peliculas) {
+            plantilla += `<div class="tituloPelicula" id=${pelicula.episode_id}>${pelicula.title}</div>`;
+        }
+    }
+    return plantilla;
+}
+
+const obtenerPeliculaPorId = (peliculas, id) => {
+    
+    return peliculas.filter((pelicula) => pelicula.episode_id === id);
+}
+
+const pintarDatosPelicula = (pelicula) => {
+   
+    const fecha = formatearFechaEuropea(pelicula.release_date);
+    return `<h1>${pelicula.title}</h1><h3>Sinopsis</h3><p>${pelicula.opening_crawl}</p><h3>Director</h3><p>${pelicula.director}</p><h3>Productor</h3><p>${pelicula.productor}</p><h3>Fecha de lanzamiento</h3><p>${fecha}</p>`
+}
+
+const formatearFechaEuropea = (fecha) => {
+    const formatoFechaEuropea = new Intl.DateTimeFormat('es-ES');
+    return formatoFechaEuropea.format(fecha);
+} 
+
+export {obtenerDatos, pintarTitulosPelicula, obtenerPeliculaPorId, pintarDatosPelicula}

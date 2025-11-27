@@ -1,0 +1,4 @@
+#peliculas{
+    display:flex;
+    flex-direction: column;
+}
