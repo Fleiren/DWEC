@@ -1,35 +1,70 @@
-#contenedor {
-	display: flex;
-	flex-direction: row;
-	margin: 0;
-	height: 98vh;
-	padding: 2px;
-	position: fixed;
+
+body {
+    font-family: sans-serif;
+	background-size: 100%;
+	background-image: url("https://images.steamusercontent.com/ugc/882006763974320412/35411188A0460EA0345231717315AFF0CCED8D3B/?imw=116&imh=65&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true");
+    color: rgb(70, 46, 30);
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh; 
 }
+
+
+#contenedor {
+    display: flex;
+    max-width: 200vh;
+    margin: 0 auto;
+    gap: 20px;
+}
+
 
 #peliculas {
-	display: flex;
-	flex-direction: column;
-	border: 2px solid black;
-	cursor: pointer;
-}
-
-#informacion {
-	margin: 30px;
+    padding: 15px;
+    border-right: 5px dotted rgb(70, 46, 30); 
+    min-width: 250px;
 }
 
 .tituloPelicula {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border: 1px dashed black;
-	width: 10em;
-	height: 4em;
-	margin: 5px;
-	padding: 2px;
-	text-align: center;
+    font-size: 1.5em;
+    padding: 10px ;
+    margin-bottom: 5px;
+    cursor: pointer;
+    border-bottom: 1px dashed var(--color-borde); /* Línea de separación galáctica */
+    transition: color 0.3s ease, transform 0.3s ease;
+    text-transform: uppercase;
 }
 
 .tituloPelicula:hover {
-	background-color: bisque;
+    background-color: rgba(75, 40, 7, 0.17);
+    transform: translateX(5px); 
 }
+
+#informacion {
+    width: 100vh;
+    padding: 15px;
+	padding-top: 0;
+}
+
+#informacion h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+	margin-top: 0;
+    text-shadow: 0 0 5px rgba(84, 57, 7, 0.624); 
+}
+
+#informacion h3 {
+	text-shadow: 0 0 5px rgba(84, 57, 7, 0.624);
+    font-size: 1.5em;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
+#informacion p {
+	background-color: rgba(75, 40, 7, 0.17);
+	border-radius: 10px;
+	padding: 10px;
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
