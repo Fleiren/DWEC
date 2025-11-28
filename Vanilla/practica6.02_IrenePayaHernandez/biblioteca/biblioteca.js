@@ -7,30 +7,35 @@
  * @returns
  */
 const obtenerDatos = (url, tipoDeDato) => {
-	//La idea es que sea una función genérica que sirva para cualquier URL y cualquier tipo de dato pero el return del segundo then está adaptado para esta petición en concreto.
+	//La idea es que sea una función genérica que sirva para cualquier URL y cualquier tipo de dato.
 
-	// Realiza la petición a la URL.
+	//Realiza la petición a la URL.
 	return fetch(url)
 		.then((respuesta) => {
+			//Si la respuesta no es correcta hay un error en la url
+			if (!respuesta.ok) throw new Error("Error en la url.");
 			// Comprueba el tipo de dato para que sea devuelto en el formato correcto.
 			if (tipoDeDato.toLowerCase() === "json") return respuesta.json();
 			if (tipoDeDato.toLowerCase() === "text") return respuesta.text();
 			if (tipoDeDato.toLowerCase() === "blop") return respuesta.blop();
 		})
 		.then((datos) => {
-			if (datos) throw new Error("NO HAY DATOS");
+			//Si no obtenemos datos de la api se muestra un error indicándolo.
+			if (!datos) throw new Error("No hay datos");
 			// Devuelve los datos obtenidos.
-			return datos.results;
+			//No hago aquí lo de datos.results porque quiero que la función sea genérica.
+			return datos;
 		})
 		.catch((error) => {
-			throw error;
+			//Devolvemos el error que se produzca ya sea personalizado o no.
+			return error;
 		});
 };
 
 /**
  * Genera una plantilla HTML con los títulos de las películas.
  * @param {Array} peliculas
- * @returns {string} plantilla con los títulos de las películas.
+ * @returns {string} Plantilla con los títulos de las películas.
  */
 const pintarTitulosPelicula = (peliculas) => {
 	let plantilla = "";
@@ -46,7 +51,7 @@ const pintarTitulosPelicula = (peliculas) => {
  *
  * @param {Array} peliculas
  * @param {string} id
- * @returns {Object} película con el id que se ha pasado por parámetro.
+ * @returns {Object} Película con el id que se ha pasado por parámetro.
  */
 const obtenerPeliculaPorId = (peliculas, id) => {
 	return peliculas.find((pelicula) => {
@@ -57,7 +62,7 @@ const obtenerPeliculaPorId = (peliculas, id) => {
 /**
  * Genera una plantilla HTML con los datos de la película.
  * @param {Object} pelicula
- * @returns {string} plantilla HTML con los datos de la película.
+ * @returns {string} Plantilla HTML con los datos de la película.
  */
 const pintarDatosPelicula = (pelicula) => {
 	const fecha = formatearFechaEuropea(pelicula.release_date);
@@ -67,7 +72,7 @@ const pintarDatosPelicula = (pelicula) => {
 /**
  * Formatea una fecha en formato europeo (dd/mm/yyyy).
  * @param {string} fecha
- * @returns {string} fecha formateada en formato europeo.
+ * @returns {string} Fecha formateada en formato europeo.
  */
 const formatearFechaEuropea = (fecha) => {
 	const formatoFechaEuropea = new Date(fecha);

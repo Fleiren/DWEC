@@ -19,7 +19,8 @@ window.onload = () => {
 		peliculas.innerHTML = "<p>Se están cargando los datos...</p>";
 		try {
 			datos = await obtenerDatos(url, tipoDeDato);
-			console.log(datos);
+			//Obtengo los datos de las películas de esta manera porque así debo tratarlos por como me los envía la api.
+			datos = datos.results;
 			peliculas.innerHTML = pintarTitulosPelicula(datos);
 		} catch (error) {
 			contenedorInformacion.innerHTML = `<h1>${error.message}</h1>`;
@@ -29,7 +30,7 @@ window.onload = () => {
 
 	//Cuando se haga clic al título de alguna película se obtendrán los datos de la película correspondiente.
 	//El evento está declarado fuera del try ya que así aligeramos el el método cargar página y con la condición que hay en el evento nos aseguramos que los datos ya estarán guardados ya que
-	//si no si han cargado los datos, los div con los titulos de las películas no aparecerán.
+	//si no se han cargado los datos, los div con los titulos de las películas no aparecerán.
 	peliculas.addEventListener(
 		"click",
 		(evento) => {
