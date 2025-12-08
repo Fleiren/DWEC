@@ -1,0 +1,7 @@
+.contenedor_actor{
+    display: flex;
+    justify-content: flex-start;
+    align-self: flex-start;
+    padding: 10px;
+    cursor: pointer;
+}

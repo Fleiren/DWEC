@@ -1,0 +1,14 @@
+.contenedor_actores{ 
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 70px;
+}
+
+.cargando{
+    width: 10%;
+    height: 10%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}

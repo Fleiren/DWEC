@@ -1,0 +1,10 @@
+/* Estilo para el contenedor principal que divide el espacio */
+.contenedor_peliculas{
+    display: flex;
+    gap:10vh;
+    margin: 10px;
+    padding-bottom: 70px;
+}
+
+
+

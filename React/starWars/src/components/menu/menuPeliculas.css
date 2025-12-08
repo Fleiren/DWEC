@@ -1,0 +1,35 @@
+.contenedor_menuPeliculas{
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+    padding: 10px 0;
+}
+
+.contenedor_menuPeliculas a{
+text-decoration: none;
+    
+    
+    background-color: #000000; 
+    color: #ecf0f1; 
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.9em;
+    
+   
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    
+   
+    width: 100%; 
+    
+    
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+
+/* Estilo al pasar el ratón (hover) */
+.contenedor_menuPeliculas a:hover {
+    background-color: rgb(75, 58, 8); /* Azul brillante al pasar el ratón */
+    transform: translateX(5px); /* Pequeño desplazamiento para indicar interactividad */
+}

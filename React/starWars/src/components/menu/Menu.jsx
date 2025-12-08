@@ -5,7 +5,12 @@ const Menu = () => {
 	return (
 		<>
 			<nav>
-				<Link to="/">Inicio</Link>
+				<Link className="menu_elemento" to="/">
+					Inicio
+				</Link>
+				<Link className="menu_elemento" to="/peliculas">
+					Peliculas
+				</Link>
 			</nav>
 		</>
 	);

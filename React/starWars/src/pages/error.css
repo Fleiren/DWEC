@@ -1,0 +1,54 @@
+/* Error.css */
+
+.error-contenedor {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    /* Asegura que el contenedor ocupe la altura disponible en el área de contenido */
+    height: 100%; 
+    text-align: center;
+    padding: 40px 20px;
+    margin-bottom: 70px;
+}
+
+.error-codigo {
+    /* Estilo del número 404 grande */
+    font-size: 8em;
+    font-weight: 900;
+    color: #e74c3c; /* Rojo para un impacto visual de error */
+    margin-bottom: 5px;
+    text-shadow: 0 0 10px rgba(231, 76, 60, 0.5); /* Sombra suave */
+}
+
+.error-mensaje {
+    /* Mensaje principal */
+    font-size: 2em;
+    color: #f1c40f; /* Amarillo/Dorado para contrastar */
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.error-descripcion {
+    /* Texto secundario */
+    font-size: 1em;
+    color: #bdc3c7;
+    margin-bottom: 30px;
+}
+
+.error-link-inicio {
+    /* Botón/Link de navegación */
+    text-decoration: none;
+    background-color: black; /* Azul */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.error-link-inicio:hover {
+    background-color: #f1c40f59;
+}

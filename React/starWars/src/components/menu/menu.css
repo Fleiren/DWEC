@@ -1,0 +1,32 @@
+nav {  
+    background-color: #000000; 
+    display: flex;
+    min-height: 40px;
+    justify-content: center; 
+    padding: 10px 0;
+    
+}
+
+.menu_elemento {
+    color: rgb(221, 204, 167);
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 15px;
+    font-size: 1em;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
+    
+}
+.menu_elemento:hover {
+    color: rgb(214, 169, 34); 
+    background-color: rgba(19, 17, 17, 0.552); 
+}
+.menu_elemento:active {
+    color: rgb(214, 169, 34); 
+    border-bottom: 2px solid rgb(214, 169, 34);
+    box-shadow: 0 5px 10px -5px  rgb(214, 169, 34);
+    font-weight: 700;
+}
+

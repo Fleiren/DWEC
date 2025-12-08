@@ -1,0 +1,45 @@
+
+
+.contenedor_inicio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+    align-items: center; /* Centra el contenido horizontalmente */
+    
+    /* Propiedades críticas de altura y ancho para Grid/Flex */
+    height: 100%;
+    width: 100%;
+
+    /* --- Estilos de Fondo --- */
+    background-image: black;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-bottom: 70px;
+}
+
+.inicio-contenido {
+    /* Contenedor del texto de bienvenida */
+    text-align: center;
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.75); /* Fondo semitransparente oscuro para la legibilidad */
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
+}
+
+.inicio-contenido h1 {
+    /* Título principal de bienvenida */
+    color: rgb(214, 169, 34); /* Dorado de Star Wars */
+    font-size: 3em;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(214, 169, 34, 0.8);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.inicio-contenido p {
+    /* Subtítulo */
+    color: rgb(229, 216, 202); 
+    font-size: 1.2em;
+}
+

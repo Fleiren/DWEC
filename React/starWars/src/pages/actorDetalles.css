@@ -1,0 +1,63 @@
+/* ActorDetalles.css */
+
+.contenedor_actorDetalles {
+    /* Contenedor de la Tarjeta de Detalles */
+    max-width: 800px;
+    margin: 30px auto; 
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.9); /* Fondo oscuro semitransparente (similar al header/footer) */
+    border: 1px solid #000000;
+    border-radius: 8px;
+    box-shadow: 0 0 25px rgba(214, 169, 34, 0.15); /* Sombra dorada suave */
+    color: #ecf0f1; /* Texto claro */
+    margin-bottom: 70px;
+}
+
+.contenedor_actorDetalles h1 {
+    /* Título (Nombre del Actor) */
+    color: #f1c40f; /* Color Dorado/Amarillo */
+    border-bottom: 2px solid #000000; /* Línea divisoria Roja */
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+    font-size: 2.5em;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.contenedor_actorDetalles p {
+    /* Estilo de los párrafos de datos */
+    line-height: 1.6;
+    margin-bottom: 10px;
+    padding: 5px 0;
+    border-bottom: 1px dashed #4b6584; /* Línea divisoria sutil */
+    font-size: 1.1em;
+}
+
+.contenedor_actorDetalles p:last-of-type {
+    border-bottom: none;
+}
+
+/* 💡 Asegúrate de añadir <strong> al JSX de ActorDetalles para usar este estilo */
+.contenedor_actorDetalles strong {
+    color: #bdc3c7; /* Gris claro para las etiquetas */
+    display: inline-block;
+    width: 200px; /* Alinea los valores a la derecha */
+    font-weight: 500;
+}
+
+.contenedor_actorDetalles button {
+    /* Botón Atrás */
+    margin-top: 30px;
+    padding: 10px 30px;
+    background-color: #000000; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.contenedor_actorDetalles button:hover {
+    background-color: #b6b9297c;
+    transform: translateY(-2px);
+}
