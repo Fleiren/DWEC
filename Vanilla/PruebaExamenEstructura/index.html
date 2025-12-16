@@ -20,19 +20,29 @@
 					pattern=".{5,}"
 					required
 				/>
-				
+
 				<label>Clima:</label>
 				<select required>
-                    <option value="">Selecciona un clima...</option>
-                    <option value="arid">Arid (Árido)</option>
-                    <option value="temperate">Temperate (Templado)</option>
-                    <option value="tropical">Tropical</option>
-                    <option value="frozen">Frozen (Congelado)</option>
-                    <option value="murky">Murky (Turbio/Pantanoso)</option>
-                    <option value="windy">Windy (Ventoso)</option>
-                    <option value="artificial">Artificial</option>
-                </select>
-
+					<option value="">Selecciona un clima...</option>
+					<option value="arid">Arid (Árido)</option>
+					<option value="temperate">Temperate (Templado)</option>
+					<option value="tropical">Tropical</option>
+					<option value="frozen">Frozen (Congelado)</option>
+					<option value="murky">Murky (Turbio/Pantanoso)</option>
+					<option value="windy">Windy (Ventoso)</option>
+					<option value="artificial">Artificial</option>
+				</select>
+				<input list="feo" />
+				<datalist id="feo">
+					<option value="">Selecciona un clima...</option>
+					<option value="arid">Arid (Árido)</option>
+					<option value="temperate">Temperate (Templado)</option>
+					<option value="tropical">Tropical</option>
+					<option value="frozen">Frozen (Congelado)</option>
+					<option value="murky">Murky (Turbio/Pantanoso)</option>
+					<option value="windy">Windy (Ventoso)</option>
+					<option value="artificial">Artificial</option>
+				</datalist>
 				<label for="inputDiametro">Diámetro (km):</label>
 				<input
 					type="number"
@@ -44,18 +54,15 @@
 				/>
 
 				<label for="inputLinkImagen">Link a Imagen:</label>
-				<input
-					type="url"
-					placeholder="URL de la imagen del planeta"
-				/>
-				
-				<div class="mensajeError" id="errorGeneral" style="color: red;"></div>
+				<input type="url" placeholder="URL de la imagen del planeta" />
+
+				<div class="mensajeError" id="errorGeneral" style="color: red"></div>
 
 				<input type="button" value="Guardar Planeta" />
 				<input type="button" value="Mostrar Planetas" />
 			</form>
 		</fieldset>
-		
+
 		<div class="ocultar listaPlanetas">
 			<h3>Lista de planetas</h3>
 		</div>
