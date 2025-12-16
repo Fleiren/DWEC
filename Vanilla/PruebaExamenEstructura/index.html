@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="./css/style.css" />
+		<title>Catálogo Galáctico (SWAPI)</title>
+	</head>
+	<body>
+		<fieldset id="formularioPlaneta">
+			<legend>Crear Planeta Propio</legend>
+
+			<form name="agregarPlaneta" id="agregarPlaneta">
+				<label for="inputNombre">Nombre del Planeta:</label>
+				<input
+					type="text"
+					id="inputNombre"
+					name="nombre"
+					placeholder="Ej: Geonosis del Usuario"
+					pattern=".{5,}"
+					required
+				/>
+				
+				<label>Clima:</label>
+				<select required>
+                    <option value="">Selecciona un clima...</option>
+                    <option value="arid">Arid (Árido)</option>
+                    <option value="temperate">Temperate (Templado)</option>
+                    <option value="tropical">Tropical</option>
+                    <option value="frozen">Frozen (Congelado)</option>
+                    <option value="murky">Murky (Turbio/Pantanoso)</option>
+                    <option value="windy">Windy (Ventoso)</option>
+                    <option value="artificial">Artificial</option>
+                </select>
+
+				<label for="inputDiametro">Diámetro (km):</label>
+				<input
+					type="number"
+					id="inputDiametro"
+					name="diametro"
+					min="1000"
+					placeholder="Ej: 10465"
+					required
+				/>
+
+				<label for="inputLinkImagen">Link a Imagen:</label>
+				<input
+					type="url"
+					placeholder="URL de la imagen del planeta"
+				/>
+				
+				<div class="mensajeError" id="errorGeneral" style="color: red;"></div>
+
+				<input type="button" value="Guardar Planeta" />
+				<input type="button" value="Mostrar Planetas" />
+			</form>
+		</fieldset>
+		
+		<div class="ocultar listaPlanetas">
+			<h3>Lista de planetas</h3>
+		</div>
+		<script src="./main.js" type="module"></script>
+	</body>
+</html>
