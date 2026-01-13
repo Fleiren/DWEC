@@ -6,9 +6,8 @@ import Contenido from "./components/estructura/Contenido.jsx";
 import Pie from "./components/estructura/Pie.jsx";
 import Rutas from "./routes/Rutas.jsx";
 import Menu from "./components/menu/Menu.jsx";
-//Creo que tendría que haber creado más componentes, que falta modularizarlo más y hacer más validaciones.
+
 function App() {
-	//No puedo meter useEffect y estados en una condición (eso me ha dicho la IA al ver que no me funcinaba el código así que coloco un return extra por si no soporta localStorage, no sabía que se podía hacer).
 	if (typeof Storage === "undefined") {
 		return (
 			<>
@@ -19,10 +18,6 @@ function App() {
 		);
 	}
 
-	//Este código lo tenía en el componente InsertarDisco pero al empezar a organizar listarDisco me he dado cuenta de que necesitaba obviamente los todos los discos y actualizados,
-	//No me parecía buena práctica hacerlo en cada componente por el tema de "consultar a la base de datos" tantas veces, por lo que he pensado en hacer la lógica aquí.
-	//Luego he tenido el problema de que si pasaba los discos en una variable y la pasaba por props solo iba a tener los discos iniciales. Estaba a punto de volver a mover la lógica y hacer solo una carga de los datos
-	//al montar los componentes para tener la lista actualizada hasta que se me ha ocurrido pasarle un estado por props y por lo visto si se puede hacer pero no se si es buena práctica.
 	const discosIniciales = localStorage.getItem("discos")
 		? JSON.parse(localStorage.getItem("discos"))
 		: [];
@@ -36,8 +31,8 @@ function App() {
 	return (
 		<>
 			<Contenedor>
-				<Cabecera></Cabecera>
-				<Menu></Menu>
+				<Cabecera />
+				<Menu />
 				<Contenido>
 					<Rutas discos={[...discos]} setDiscos={setDiscos}></Rutas>
 				</Contenido>

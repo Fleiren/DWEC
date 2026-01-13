@@ -72,7 +72,7 @@ const ListarDiscos = (props) => {
 					</button>
 				</div>
 
-				<div className="contenedor_mostrarDiscos">
+				<div className="contenedor_mostrarDiscos" onClick={eliminarDisco}>
 					{discosFiltrados && !busquedaVacia ? (
 						discosFiltrados.map((disco) => {
 							return (
@@ -80,7 +80,6 @@ const ListarDiscos = (props) => {
 									key={disco.id}
 									disco={disco}
 									setDiscos={setDiscos}
-									eliminarDisco={eliminarDisco}
 								></Disco>
 							);
 						})

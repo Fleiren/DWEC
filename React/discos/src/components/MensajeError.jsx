@@ -10,5 +10,4 @@ const MensajeError = (props) => {
 		</>
 	);
 };
-
 export default MensajeError;

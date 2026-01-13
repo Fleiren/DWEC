@@ -1,7 +1,7 @@
 "use strict";
 const patrones = {
 	nombre: /.{5,}/,
-	caratula: /^https?:\/\//, 
+	caratula: /^https?:\/\//,
 	grupo: /.{5,}/,
 	anyo: /\d{4}/,
 	localizacion: /^ES-\d{3}[A-Z]{2}$/,
@@ -52,7 +52,6 @@ const validarCampo = (campo) => {
 	return valido;
 };
 
-
 /**
  * Valida el campo nombre.
  * @param {HTMLElement} campo
@@ -60,7 +59,7 @@ const validarCampo = (campo) => {
  */
 const validarNombre = (campo) => {
 	let patron = patrones.nombre;
-	return campo!=="" && validarPatron(campo, patron);
+	return campo !== "" && validarPatron(campo, patron);
 };
 
 /**
@@ -80,7 +79,7 @@ const validarCaratula = (campo) => {
  */
 const validarGrupo = (campo) => {
 	let patron = patrones.grupo;
-	return campo!=="" && validarPatron(campo, patron);
+	return campo !== "" && validarPatron(campo, patron);
 };
 
 /**
@@ -108,7 +107,7 @@ const validarAnyo = (campo) => {
  * @returns {boolean}
  */
 const validarGenero = (campo) => {
-	return campo !=="";
+	return campo !== "";
 };
 
 /**
@@ -135,7 +134,7 @@ const validarPatron = (valor, patron) => {
 
 /**
  * Devuelve el objeto bien formateado, añadiendo la id.
- * @param {Object} formulario 
+ * @param {Object} formulario
  * @returns {Object}
  */
 const crearDiscoJSON = (formulario) => {
@@ -155,39 +154,51 @@ const crearDiscoJSON = (formulario) => {
 
 /**
  * Devuelve la lista de discos filtrada buscando coincidencias con el string que se ha pasado por parámetro.
- * @param {string} dato  
- * @param {Array} discos  
+ * @param {string} dato
+ * @param {Array} discos
  * @returns {Array}
  */
 const buscarDisco = (dato, discos) => {
 	let resultado = [];
-	resultado = discos.filter((disco) => disco.nombre === dato || disco.genero === dato || disco.localizacion === dato || disco.anyo === dato || disco.grupo === dato);
+	resultado = discos.filter(
+		(disco) =>
+			disco.nombre === dato ||
+			disco.genero === dato ||
+			disco.localizacion === dato ||
+			disco.anyo === dato ||
+			disco.grupo === dato
+	);
 	return resultado;
-}
+};
 
 /**
  * Eliminar de la lista el disco con la id que se pasa por parámetro.
- * @param {string} id 
- * @param {Array} discos 
+ * @param {string} id
+ * @param {Array} discos
  * @returns {Array}
  */
 const eliminarDiscoPorId = (id, discos) => {
-	//He tenido que añadir window porque no me funcionaba, en Vanilla si funciona.
-	window.confirm("¿Estás seguro de que quieres eliminar el disco?") && (discos = discos.filter((disco) => disco.id !== id));
+	//Hacer a mano.
+	window.confirm("¿Estás seguro de que quieres eliminar el disco?") &&
+		(discos = discos.filter((disco) => disco.id !== id));
 	return discos;
-	
-}
+};
 
 /**
  * Busca el disco con la id pasada por parámetro.
- * @param {string} id 
- * @param {Array} discos 
+ * @param {string} id
+ * @param {Array} discos
  * @returns {Object}
  */
 const buscarDiscoId = (id, discos) => {
-	return discos.find((disco) => {return disco.id===id});
-}
-export { validarCampo, crearDiscoJSON, validarNombre,
+	return discos.find((disco) => {
+		return disco.id === id;
+	});
+};
+export {
+	validarCampo,
+	crearDiscoJSON,
+	validarNombre,
 	validarAnyo,
 	validarCaratula,
 	validarGenero,
@@ -195,5 +206,5 @@ export { validarCampo, crearDiscoJSON, validarNombre,
 	validarLocalizacion,
 	buscarDisco,
 	eliminarDiscoPorId,
-	buscarDiscoId
- };
+	buscarDiscoId,
+};
