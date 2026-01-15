@@ -10,7 +10,10 @@ const ListarDiscos = (props) => {
 	const { discos, setDiscos } = props;
 	const [discosFiltrados, setDiscosFiltrados] = useState(discos);
 	const [busquedaVacia, setBusquedaVacia] = useState(false);
+	const [mostrarConfirm, setMostrarConfirm] = useState(false);
+	const [idDiscoEliminar, setIdDiscoEliminar] = useState(null);
 	const filtroRef = useRef();
+
 	let resultadoFiltro = [];
 
 	/**
@@ -46,16 +49,36 @@ const ListarDiscos = (props) => {
 	 */
 	const eliminarDisco = (evento) => {
 		if (evento.target.name === "eliminar") {
-			//La id del disco se obtiene porque en el input para eliminar tiene como valor la id del disco.
-			const nuevaLista = eliminarDiscoPorId(evento.target.value, [...discos]);
+			setIdDiscoEliminar(evento.target.value);
+			setMostrarConfirm(true);
+		}
+	};
+
+	const eliminarDiscoConfirmado = () => {
+		if (idDiscoEliminar) {
+			const nuevaLista = eliminarDiscoPorId(idDiscoEliminar, [...discos]);
 			setDiscos(nuevaLista);
 			setDiscosFiltrados(nuevaLista);
+			setMostrarConfirm(false);
+			setIdDiscoEliminar(null);
 		}
+	};
+
+	const cancelarEliminacionDisco = () => {
+		setMostrarConfirm(false);
+		setIdDiscoEliminar(null);
 	};
 
 	return (
 		<>
 			<div className="contenedor_listarDiscos">
+				{mostrarConfirm && (
+					<div className="confirmar_eliminacion">
+						<p>¿Estás seguro de que quieres borrar el disco?</p>
+						<button onClick={eliminarDiscoConfirmado}>Aceptar</button>
+						<button onClick={cancelarEliminacionDisco}>Cancelar</button>
+					</div>
+				)}
 				<div className="contenedor_controles">
 					<input
 						ref={filtroRef}
