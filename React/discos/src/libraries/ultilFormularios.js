@@ -178,9 +178,7 @@ const buscarDisco = (dato, discos) => {
  * @returns {Array}
  */
 const eliminarDiscoPorId = (id, discos) => {
-	//Hacer a mano.
-	
-discos = discos.filter((disco) => disco.id !== id);
+	discos = discos.filter((disco) => disco.id !== id);
 	return discos;
 };
 
