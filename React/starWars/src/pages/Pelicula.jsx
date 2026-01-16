@@ -1,72 +1,72 @@
-import { React, useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import {
-	obtenerPeliculaPorId,
-	obtenerDatosDesdeArray,
-	obtenerDiezFulfilled,
-	obtenerIdUrl,
-} from "../libraries/datosApi";
-import Actor from "./../components/Actor.jsx";
+import { useEffect, useContext } from "react";
+import { ContextoPeliculas } from "./../context/ProveedorPeliculas.jsx";
+import { ContextoPersonajes } from "./../context/ProveedorPersonajes.jsx";
+import { ContextoVehiculos } from "./../context/ProveedorVehiculos.jsx";
+import DetallesPersonaje from "./../components/DetallesPersonaje.jsx";
+import { useParams } from "react-router-dom";
+import Personajes from "../components/Personajes.jsx";
 import "./pelicula.css";
-const Pelicula = ({ datosPeliculas }) => {
+const Pelicula = () => {
 	const { id } = useParams();
-	const [actores, setActores] = useState([]);
-	const pelicula = obtenerPeliculaPorId(datosPeliculas, id);
-	const navigate = useNavigate();
 
-	const obtenerActores = async () => {
-		const listaActores = await obtenerDatosDesdeArray(pelicula.characters);
-		console.log(listaActores);
-		//Solo queremos 10 por lo que voy a filtrar los que han sido completados con éxito y de ahí cojo 10.
-		const diezActores = obtenerDiezFulfilled(listaActores);
-		setActores(diezActores);
-	};
+	const { obtenerPeliculaPorId } = useContext(ContextoPeliculas);
 
-	const mostrarDetalles = (evento) => {
-		if (evento.target.className === "detalles_actor") {
-			//Los actores los muestro en otra página por lo que navego a esa ruta.
-			navigate(`/actor/${evento.target.id}`);
-		}
-	};
+	const {
+		cargarPersonajes,
+		vaciarPersonajes,
+		personajes,
+		personajeSeleccionado,
+		eliminarPersonajeSeleccionado,
+	} = useContext(ContextoPersonajes);
 
-	//Cada vez que cambie el id de la película, vuelvo a obtener los actores.
+	const { vaciarVehiculos, ocultarVehiculos } = useContext(ContextoVehiculos);
+
+	const pelicula = obtenerPeliculaPorId(id);
+
+	//Cada vez que cambie el id de la película, vuelvo a obtener los personajes y limpio los datos de los vehículos y el personaje seleccionado.
 	useEffect(() => {
-		//Limpio los actores antes de obtener los nuevos porque si no se ven los antiguos hasta que cargan los nuevos y eso queda feo.
-		setActores([]);
-		obtenerActores();
+		if (pelicula) {
+			vaciarPersonajes();
+			cargarPersonajes(pelicula.characters);
+			eliminarPersonajeSeleccionado();
+			vaciarVehiculos();
+			ocultarVehiculos();
+		}
 	}, [id]);
-	//Si no hay película o no hay actores, muestro cargando. (Creo que me falta implementar esta validación en más sitios).
-	if (!pelicula || actores.length === 0) {
-		return (
-			<img
-				className="cargando"
-				src="https://cdn.pixabay.com/animation/2022/10/11/03/16/03-16-39-160_512.gif"
-			/>
-		);
-	}
+
 	return (
 		<>
-			<div>
-				<h1>{pelicula.title}</h1>
-				<h3>Sinopsis</h3>
-				<p>{pelicula.opening_crawl}</p>
-				<h3>Director</h3>
-				<p>{pelicula.director}</p>
-				<h3>Productor</h3>
-				<p>{pelicula.producer}</p>
-				<h3>Fecha de lanzamiento</h3>
-				<p>{pelicula.release_date}</p>
-				<hr />
-				<h3>Actores</h3>
-				<div className="contenedor_actores" onClick={mostrarDetalles}>
-					{actores &&
-						//Pintamos cada actor mediante un componente y le pasamos los datos (al final solo uso el nombre) y el id extraído de la url para poder navegar a su página de detalles.
-						actores.map((actor) => {
-							const id = obtenerIdUrl(actor.url);
-							return <Actor key={id} id_actor={id} datos={actor}></Actor>;
-						})}
+			{/**Si no se han cargado la película o los personajes saldrá el símbolo de cargando. */}
+			{!pelicula || personajes.length === 0 ? (
+				<div className="contenedor_pelicula">
+					<img
+						src="https://pagos.puertovallarta.gob.mx:83/Resources/Images/loading.gif"
+						alt="Cargando..."
+					/>
 				</div>
-			</div>
+			) : (
+				<div className="contenedor_pelicula">
+					<h1>{pelicula.title}</h1>
+					<div className="contenedor_contenido">
+						<div className="contenedor_resumen">
+							<h3>Resumen</h3>
+							<p>{pelicula.opening_crawl}</p>
+						</div>
+						<div className="contenedor_datos_adicionales">
+							<h3>Personajes</h3>
+							<div className="contenedor_detalles">
+								<div className="info_pelicula">
+									<Personajes />
+								</div>
+								<div className="detalles_personaje">
+									{/**Si se ha seleccionado algún personaje entonces se mostrará el componente para mostrar sus detalles. */}
+									{personajeSeleccionado && <DetallesPersonaje />}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			)}
 		</>
 	);
 };

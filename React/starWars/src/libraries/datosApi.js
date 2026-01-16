@@ -5,65 +5,46 @@
  *
  * @param {string} url - La URL del recurso al que se desea acceder.
  * @param {('blob'|'text'|'json')} tipoDeDato - El tipo de dato en el que se desea procesar la respuesta ('blob', 'text', 'json'). Nota: 'blop' en el código se asume que es un error tipográfico por 'blob'.
- * @returns {Promise<any>} Una promesa que se resuelve con los datos obtenidos en el formato especificado.
+ * @returns {Array} Devuelve un array de objetos.
  * @throws {Error} Lanza un error si la respuesta HTTP no es satisfactoria, si el tipo de dato es inválido o si no se reciben datos.
  */
-const obtenerDatos = (url, tipoDeDato) => {
-    return fetch(url)
-    .then((respuesta)=>{
-        if(!respuesta.ok) throw new Error("Error en la url.");
-        if(tipoDeDato.toLowerCase() === "blop") return respuesta.blob();
-        if(tipoDeDato.toLowerCase() === "text") return respuesta.text();
-        if(tipoDeDato.toLowerCase() === "json") return respuesta.json();
-        else throw new Error("Error con el tipo de dato");
-    })
-    .then((datos)=>{
-        if(!datos) throw new Error("No se han recibido datos");
+const obtenerDatos = async (url, tipoDeDato) => {
+    
+        try{
+            const respuesta = await fetch(url);
+            if(respuesta.ok){
+                let datos;
+                if(tipoDeDato.toLowerCase() === "blop") datos = await respuesta.blob();
+                if(tipoDeDato.toLowerCase() === "text") datos = await respuesta.text();
+                if(tipoDeDato.toLowerCase() === "json") datos = await respuesta.json();
+                if(datos.results){
+                    return datos.results;
+                }
+                return datos;
+            }else{
+                throw new Error ("Se ha producido un error al traer datos de la api.");
+            }
+            
+        }catch(error){
+        throw error;
+        };
+}
+
+/**
+ * Obtiene los datos de varias url y te los devuelve en un array de objetos.
+ * @param {Array} Las url que se van a consultar.
+ * @return {Array} El array con los datos que se han consultado mediante las url pasadas por parámetro.
+ */
+const obtenerDatosUrls = async (urls) => {
+    try{
+        const promesas = urls.map((url)=>{return obtenerDatos(url, "json")});
+        let datos = await Promise.allSettled(promesas);
+        datos = datos.filter((dato)=>{return dato.status === "fulfilled"}).map((dato)=>{return dato.value});
         return datos;
-    })
-    .catch((error)=>{
-        throw new Error(error.message);
-    });
-}
-
-/**
- * Busca una película dentro de una lista por su 'episode_id'.
- * Realiza una conversión a entero para asegurar la comparación correcta.
- *
- * @param {Array<Object>} listaPeliculas - El array de objetos película donde buscar.
- * @param {(string)} id - El ID del episodio a buscar.
- * @returns {Object|undefined} El objeto película encontrado o `undefined` si no se encuentra.
- */
-const obtenerPeliculaPorId = (listaPeliculas, id) => {
-    return listaPeliculas.find((pelicula)=>{return parseInt(pelicula.episode_id) === parseInt(id)});
-}
-
-/**
- * Realiza múltiples peticiones asíncronas para obtener datos de un array de URLs.
- * Utiliza `Promise.allSettled` para que todas las promesas se resuelvan (cumplidas o rechazadas) sin detenerse por un fallo.
- *
- * @param {Array<string>} arrayUrl - Array de URLs a las que se debe hacer la petición.
- * @returns {Promise<Array<Object>>} Una promesa que se resuelve con un array de objetos resultado de `Promise.allSettled`, conteniendo el estado (`status`) y el valor (`value`) o razón (`reason`) de cada promesa.
- */
-const obtenerDatosDesdeArray = (arrayUrl) => {
-    const promesas = arrayUrl.map((url)=>{return obtenerDatos(url, "json")});
-    return Promise.allSettled(promesas);
-}
-
-/**
- * Filtra los resultados de `Promise.allSettled` para obtener solo las promesas cumplidas (`fulfilled`).
- * Extrae el valor de cada resultado y lo limita a un máximo de 10 elementos.
- *
- * @param {Array<Object>} datos - Array de objetos resultado de `Promise.allSettled` (debe contener las propiedades `status` y `value`).
- * @returns {Array<any>} Un array con los valores (`value`) de las promesas que se cumplieron con éxito, limitado a 10 elementos.
- */
-const obtenerDiezFulfilled = (datos) => {
-    datos = datos.filter((dato)=>{return dato.status === "fulfilled"});
-    datos = datos.map((dato)=>{return dato.value});
-    if(datos.length > 10 ){
-        datos = datos.slice(0,10);
+    }catch(error){
+        throw error;
     }
-    return datos;
+    
 
 }
 
@@ -82,4 +63,4 @@ const obtenerIdUrl = (url) => {
 
 
 
-export {obtenerDatos, obtenerPeliculaPorId, obtenerDatosDesdeArray, obtenerDiezFulfilled, obtenerIdUrl};
+export {obtenerDatos, obtenerDatosUrls, obtenerIdUrl};

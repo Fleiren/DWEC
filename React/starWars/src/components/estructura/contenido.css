@@ -5,12 +5,7 @@
     flex-grow: 1; 
     background-color: rgba(0, 0, 0, 0.5); 
     background-blend-mode: multiply;
-    
-    /* 🚨 CLAVE: Añadir padding inferior para que el contenido no sea tapado por el Pie. */
-    /* 60px es una estimación segura para la altura de tu pie. */
     padding-bottom: 60px; 
-    
-    /* Asegúrate de tener también padding superior y lateral para que el contenido no se pegue al Menu y a los bordes */
     padding-top: 20px;
     padding-left: 40px;
     padding-right: 40px;

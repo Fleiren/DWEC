@@ -1,0 +1,20 @@
+.contenedor_personajes {
+   display: flex;
+    flex-direction: column; /* los actores en columna */
+    max-height: 80vh;       /* limita altura según pantalla */
+    overflow-y: auto;       /* scroll solo en este contenedor */
+    position: sticky;       /* se pega mientras haces scroll */
+    top: 20px;              /* distancia desde la parte superior de la ventana */
+    padding: 10px;
+    border: 1px solid #d6af00; /* opcional, para ver límites */
+    
+    
+}
+
+.contenedor_lista_personajes {
+   
+}
+
+.contenedor_detalles {
+    
+}

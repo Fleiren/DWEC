@@ -1,7 +1,11 @@
-.contenedor_actores{ 
+.contenedor_personajes{ 
     display: flex;
-    flex-direction: column;
+    flex-direction:  column ;
     padding-bottom: 70px;
+}
+
+.contenedor_resumen{
+    width: 80vh;
 }
 
 .cargando{
@@ -11,4 +15,16 @@
     flex-direction: column;
     justify-content: center;
     align-content: center;
+}
+
+
+.contenedor_contenido{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.contenedor_detalles{
+    display:flex ;
+    flex-direction: row;
 }

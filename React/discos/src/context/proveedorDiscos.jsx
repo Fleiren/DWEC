@@ -6,6 +6,7 @@ const ContextoDiscos = createContext();
 const ProveedorDiscos = ({ children }) => {
 	const [discos, setDiscos] = useState();
 	const url = "http://localhost:3000/discos";
+	const { cargando, error, obtenerDatos } = useAPI();
 	const obtenerDiscos = async () => {
 		try {
 			const datos = await obtenerDatos(url);
@@ -25,7 +26,11 @@ const ProveedorDiscos = ({ children }) => {
 		obtenerDiscos,
 	};
 
-	return <ContextoDiscos value={acciones}>{children}</ContextoDiscos>;
+	return (
+		<ContextoDiscos.Provider value={acciones}>
+			{children}
+		</ContextoDiscos.Provider>
+	);
 };
 
 export default ProveedorDiscos;

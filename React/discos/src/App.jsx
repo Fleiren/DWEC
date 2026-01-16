@@ -18,23 +18,13 @@ function App() {
 		);
 	}
 
-	const discosIniciales = localStorage.getItem("discos")
-		? JSON.parse(localStorage.getItem("discos"))
-		: [];
-
-	const [discos, setDiscos] = useState(discosIniciales);
-
-	useEffect(() => {
-		localStorage.setItem("discos", JSON.stringify(discos));
-	}, [discos]);
-
 	return (
 		<>
 			<Contenedor>
 				<Cabecera />
 				<Menu />
 				<Contenido>
-					<Rutas discos={[...discos]} setDiscos={setDiscos}></Rutas>
+					<Rutas></Rutas>
 				</Contenido>
 				<Pie className="contenedor_pie"></Pie>
 			</Contenedor>

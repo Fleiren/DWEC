@@ -1,13 +1,14 @@
 import React, { useState, useRef } from "react";
 import Disco from "../components/Disco.jsx";
+import useDiscos from "../hooks/useDiscos.js";
 import "./listarDiscos.css";
 import {
 	buscarDisco,
 	eliminarDiscoPorId,
 } from "../libraries/ultilFormularios.js";
 
-const ListarDiscos = (props) => {
-	const { discos, setDiscos } = props;
+const ListarDiscos = () => {
+	const { discos } = useDiscos();
 	const [discosFiltrados, setDiscosFiltrados] = useState(discos);
 	const [busquedaVacia, setBusquedaVacia] = useState(false);
 	const [mostrarConfirm, setMostrarConfirm] = useState(false);
@@ -57,7 +58,7 @@ const ListarDiscos = (props) => {
 	const eliminarDiscoConfirmado = () => {
 		if (idDiscoEliminar) {
 			const nuevaLista = eliminarDiscoPorId(idDiscoEliminar, [...discos]);
-			setDiscos(nuevaLista);
+			//setDiscos(nuevaLista);
 			setDiscosFiltrados(nuevaLista);
 			setMostrarConfirm(false);
 			setIdDiscoEliminar(null);
@@ -96,18 +97,16 @@ const ListarDiscos = (props) => {
 				</div>
 
 				<div className="contenedor_mostrarDiscos" onClick={eliminarDisco}>
-					{discosFiltrados && !busquedaVacia ? (
-						discosFiltrados.map((disco) => {
-							return (
-								<Disco
-									key={disco.id}
-									disco={disco}
-									setDiscos={setDiscos}
-								></Disco>
-							);
-						})
+					{discos ? (
+						discosFiltrados && !busquedaVacia ? (
+							discosFiltrados.map((disco) => {
+								return <Disco key={disco.id} disco={disco}></Disco>;
+							})
+						) : (
+							<h2>No hay discos para la búsqueda solicitada.</h2>
+						)
 					) : (
-						<h2>No hay discos para la búsqueda solicitada.</h2>
+						<Cargando />
 					)}
 				</div>
 			</div>

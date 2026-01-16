@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const useApi = () => {
+const useAPI = () => {
 	const [cargando, setCargando] = useState(false);
 	const [error, setError] = useState(null);
 
@@ -34,4 +34,12 @@ export const useApi = () => {
 	const obtenerDatos = (url) => {
 		return llamarApi(url, { method: "GET" });
 	};
+
+	return {
+		cargando,
+		error,
+		obtenerDatos
+	}
 };
+
+export default useAPI;

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
 	validarCampo,
-	crearDiscoJSON,
 	validarNombre,
 	validarAnyo,
 	validarCaratula,
@@ -11,9 +10,7 @@ import {
 } from "./../libraries/ultilFormularios.js";
 import MensajeError from "./../components/MensajeError.jsx";
 import "./insertarDisco.css";
-const InsertarDisco = (props) => {
-	//Obtenemos las variables necesarias para modificar y obtener los datos de los discos.
-	const { discos, setDiscos } = props;
+const InsertarDisco = () => {
 	//Declaramos los mensajes de error según el campo del formulario.
 	const errores = {
 		nombre: "El nombre debe tener al menos 5 caracteres.",
@@ -49,7 +46,7 @@ const InsertarDisco = (props) => {
 	const [erroresActivos, setErroresActivos] = useState(erroresActivosInicial);
 	const [exito, setExito] = useState(false);
 
-	//En este método actualizamos el estado formulario y revisamos si es correcto (¿Hace muchas cosas? a veces modularizar se hace difícil).
+	//En este método actualizamos el estado formulario y revisamos si es correcto.
 	/**
 	 * Actualiza el objeto formulario.
 	 * @param {HTMLElement} evento
@@ -104,17 +101,8 @@ const InsertarDisco = (props) => {
 		//Si sigue siendo válido podemos enviar el formulario.
 		if (valido) {
 			enviarFormulario();
+			setFormulario(formularioInicial);
 		}
-	};
-
-	/**
-	 * Actualiza los discos y resetea el formulario.
-	 */
-	const enviarFormulario = () => {
-		const disco = crearDiscoJSON(formulario);
-		mensajeExito();
-		setDiscos([...discos, disco]);
-		setFormulario(formularioInicial);
 	};
 
 	/**

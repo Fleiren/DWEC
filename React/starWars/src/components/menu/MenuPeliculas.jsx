@@ -1,11 +1,13 @@
-import { React } from "react";
+import { React, useContext } from "react";
 import { Link } from "react-router-dom";
+import { ContextoPeliculas } from "../../context/ProveedorPeliculas.jsx";
 import "./menuPeliculas.css";
-const MenuPeliculas = ({ datosPeliculas }) => {
+const MenuPeliculas = () => {
+	const { peliculas } = useContext(ContextoPeliculas);
 	return (
 		<>
 			<div className="contenedor_menuPeliculas">
-				{datosPeliculas.map((pelicula) => {
+				{peliculas.map((pelicula) => {
 					return (
 						<Link
 							key={pelicula.episode_id}

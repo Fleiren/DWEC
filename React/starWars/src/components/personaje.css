@@ -1,7 +1,7 @@
-.contenedor_actor{
+.contenedor_personaje{
     display: flex;
     justify-content: flex-start;
     align-self: flex-start;
-    padding: 10px;
+    padding: 0px;
     cursor: pointer;
 }
