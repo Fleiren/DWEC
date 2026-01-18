@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import "./mensajeError.css";
+import "./MensajeError.css";
 const MensajeError = (props) => {
 	const { mensajeError } = props;
 	return (

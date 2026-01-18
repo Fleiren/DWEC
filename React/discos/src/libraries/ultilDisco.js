@@ -138,7 +138,7 @@ const validarPatron = (valor, patron) => {
  * @returns {Object}
  */
 const crearDiscoJSON = (formulario) => {
-	//Generamos la id.
+	
 	let idDisco = crypto.randomUUID();
 	return {
 		id: idDisco,
@@ -152,47 +152,10 @@ const crearDiscoJSON = (formulario) => {
 	};
 };
 
-/**
- * Devuelve la lista de discos filtrada buscando coincidencias con el string que se ha pasado por parámetro.
- * @param {string} dato
- * @param {Array} discos
- * @returns {Array}
- */
-const buscarDisco = (dato, discos) => {
-	let resultado = [];
-	resultado = discos.filter(
-		(disco) =>
-			disco.nombre === dato ||
-			disco.genero === dato ||
-			disco.localizacion === dato ||
-			disco.anyo === dato ||
-			disco.grupo === dato
-	);
-	return resultado;
-};
 
-/**
- * Eliminar de la lista el disco con la id que se pasa por parámetro.
- * @param {string} id
- * @param {Array} discos
- * @returns {Array}
- */
-const eliminarDiscoPorId = (id, discos) => {
-	discos = discos.filter((disco) => disco.id !== id);
-	return discos;
-};
 
-/**
- * Busca el disco con la id pasada por parámetro.
- * @param {string} id
- * @param {Array} discos
- * @returns {Object}
- */
-const buscarDiscoId = (id, discos) => {
-	return discos.find((disco) => {
-		return disco.id === id;
-	});
-};
+
+
 export {
 	validarCampo,
 	crearDiscoJSON,
@@ -202,7 +165,4 @@ export {
 	validarGenero,
 	validarGrupo,
 	validarLocalizacion,
-	buscarDisco,
-	eliminarDiscoPorId,
-	buscarDiscoId,
 };

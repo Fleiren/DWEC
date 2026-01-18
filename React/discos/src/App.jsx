@@ -6,21 +6,25 @@ import Contenido from "./components/estructura/Contenido.jsx";
 import Pie from "./components/estructura/Pie.jsx";
 import Rutas from "./routes/Rutas.jsx";
 import Menu from "./components/menu/Menu.jsx";
+import MensajeApp from "./components/MensajeApp.jsx";
+import useMensajes from "./hooks/useMensajes.js";
 
 function App() {
-	if (typeof Storage === "undefined") {
-		return (
-			<>
-				<div className="mensaje_error">
-					El navegador no soporta localStorage
-				</div>
-			</>
-		);
-	}
+	const { mensaje, ocultarMensaje, mensajeActivo } = useMensajes();
 
-	return (
+	useEffect(() => {
+		if (mensaje !== "") {
+			setTimeout(() => {
+				ocultarMensaje();
+			}, 3000);
+		}
+	}, [mensaje, ocultarMensaje]);
+	return typeof Storage === "undefined" ? (
+		<div className="mensaje_error">El navegador no soporta localStorage</div>
+	) : (
 		<>
 			<Contenedor>
+				{mensajeActivo && <MensajeApp />}
 				<Cabecera />
 				<Menu />
 				<Contenido>

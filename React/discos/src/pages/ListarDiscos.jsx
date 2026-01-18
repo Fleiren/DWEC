@@ -1,16 +1,13 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Disco from "../components/Disco.jsx";
+import Cargando from "../components/Cargando.jsx";
 import useDiscos from "../hooks/useDiscos.js";
+import Confirm from "../components/Confirm.jsx";
 import "./listarDiscos.css";
-import {
-	buscarDisco,
-	eliminarDiscoPorId,
-} from "../libraries/ultilFormularios.js";
 
 const ListarDiscos = () => {
-	const { discos } = useDiscos();
-	const [discosFiltrados, setDiscosFiltrados] = useState(discos);
-	const [busquedaVacia, setBusquedaVacia] = useState(false);
+	const { discos, cargando, borrarDisco, buscarDisco } = useDiscos();
+	const [discosFiltrados, setDiscosFiltrados] = useState([]);
 	const [mostrarConfirm, setMostrarConfirm] = useState(false);
 	const [idDiscoEliminar, setIdDiscoEliminar] = useState(null);
 	const filtroRef = useRef();
@@ -26,13 +23,8 @@ const ListarDiscos = () => {
 		if (textoBusqueda !== "") {
 			resultadoFiltro = buscarDisco(textoBusqueda, [...discos]);
 			setDiscosFiltrados(resultadoFiltro);
-			//Si no hay discos que coincidan con la busqueda el estado busquedaVacia se pone en true para que se muestre el mensaje.
-			resultadoFiltro.length === 0
-				? setBusquedaVacia(true)
-				: setBusquedaVacia(false);
 		} else {
 			setDiscosFiltrados(discos);
-			setBusquedaVacia(false);
 		}
 	};
 
@@ -40,7 +32,7 @@ const ListarDiscos = () => {
 	 * Reestablece los valores de los estados busquedaVacia y discosFiltrados.
 	 */
 	const limpiar = () => {
-		setBusquedaVacia(false);
+		filtroRef.current.value = "";
 		setDiscosFiltrados(discos);
 	};
 
@@ -57,9 +49,7 @@ const ListarDiscos = () => {
 
 	const eliminarDiscoConfirmado = () => {
 		if (idDiscoEliminar) {
-			const nuevaLista = eliminarDiscoPorId(idDiscoEliminar, [...discos]);
-			//setDiscos(nuevaLista);
-			setDiscosFiltrados(nuevaLista);
+			borrarDisco(idDiscoEliminar);
 			setMostrarConfirm(false);
 			setIdDiscoEliminar(null);
 		}
@@ -70,16 +60,24 @@ const ListarDiscos = () => {
 		setIdDiscoEliminar(null);
 	};
 
+	useEffect(() => {
+		if (discos) {
+			setDiscosFiltrados(discos);
+		}
+	}, [discos]);
 	return (
 		<>
 			<div className="contenedor_listarDiscos">
-				{mostrarConfirm && (
-					<div className="confirmar_eliminacion">
-						<p>¿Estás seguro de que quieres borrar el disco?</p>
-						<button onClick={eliminarDiscoConfirmado}>Aceptar</button>
-						<button onClick={cancelarEliminacionDisco}>Cancelar</button>
-					</div>
-				)}
+				{
+					/**Debería ser un componente confirm, si me da tiempo lo hago. */
+					mostrarConfirm && (
+						<Confirm
+							mensaje={"¿Estás seguro de que quieres borrar el disco?"}
+							accionAceptar={eliminarDiscoConfirmado}
+							accionCancelar={cancelarEliminacionDisco}
+						></Confirm>
+					)
+				}
 				<div className="contenedor_controles">
 					<input
 						ref={filtroRef}
@@ -97,16 +95,14 @@ const ListarDiscos = () => {
 				</div>
 
 				<div className="contenedor_mostrarDiscos" onClick={eliminarDisco}>
-					{discos ? (
-						discosFiltrados && !busquedaVacia ? (
-							discosFiltrados.map((disco) => {
-								return <Disco key={disco.id} disco={disco}></Disco>;
-							})
-						) : (
-							<h2>No hay discos para la búsqueda solicitada.</h2>
-						)
-					) : (
+					{cargando ? (
 						<Cargando />
+					) : discosFiltrados && discosFiltrados.length > 0 ? (
+						discosFiltrados.map((disco) => {
+							return <Disco key={disco.id} disco={disco}></Disco>;
+						})
+					) : (
+						<h2>No hay discos para la búsqueda solicitada.</h2>
 					)}
 				</div>
 			</div>

@@ -1,13 +1,18 @@
 import React from "react";
 import "./discoDetalles.css";
-import { useParams } from "react-router-dom";
-import { buscarDiscoId } from "./../libraries/ultilFormularios.js";
-const DiscoDetalles = (props) => {
-	const { discos } = props;
+import useDiscos from "../hooks/useDiscos.js";
+import { useParams, useNavigate } from "react-router-dom";
+
+const DiscoDetalles = () => {
+	const { buscarDiscoId } = useDiscos();
 	const { id } = useParams();
-	//Obtenemos el disco con esa id.
-	const disco = buscarDiscoId(id, discos);
-	//Me cuesta manejar un poco las condiciones para mostrar o no datos ya que combinar el js y el html en el return se me hace complicado, quiero hacer ternarias pero no me va bien ya que mi idea es que si le objeto disco es null que se muestre algún error.
+	const navigate = useNavigate();
+	const disco = buscarDiscoId(id);
+
+	//Navegamos a la página de edición del disco.
+	const navegarEdicion = () => {
+		navigate(`/editarDisco/${id}`);
+	};
 	return (
 		<>
 			<div className="contenedor_detalles">
@@ -21,6 +26,9 @@ const DiscoDetalles = (props) => {
 					{disco.anyo && <p>Año de publicación: {disco.anyo}</p>}
 					{disco.Localizacion && <p>Localización: {disco.género}</p>}
 					<p>{disco.prestado ? "El disco es prestado" : "El disco es nuevo"}</p>
+					<button id="editar" onClick={navegarEdicion}>
+						Editar
+					</button>
 				</div>
 			</div>
 		</>

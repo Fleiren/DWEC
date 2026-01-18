@@ -35,10 +35,26 @@ const useAPI = () => {
 		return llamarApi(url, { method: "GET" });
 	};
 
+	const borrar = (url) => {
+		return llamarApi(url, {method: "DELETE"});
+	}
+
+	const guardar = (url, body) => {
+		return llamarApi(url, {method:"POST", body: JSON.stringify(body)});
+	}
+
+	const editar = (url, body) =>{
+		return llamarApi(url, {method: "PUT", body: JSON.stringify(body)
+		});
+	}
+
 	return {
 		cargando,
 		error,
-		obtenerDatos
+		obtenerDatos,
+		borrar,
+		guardar,
+		editar
 	}
 };
 

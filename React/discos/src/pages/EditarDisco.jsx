@@ -1,4 +1,5 @@
-import React, { useState, useNavigate } from "react";
+import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import {
 	validarCampo,
 	validarNombre,
@@ -11,8 +12,13 @@ import {
 } from "../libraries/ultilDisco.js";
 import useDiscos from "./../hooks/useDiscos.js";
 import MensajeError from "../components/MensajeError.jsx";
-import "./insertarDisco.css";
-const InsertarDisco = () => {
+import "./editarDisco.css";
+const EditarDisco = () => {
+	const { id } = useParams();
+	const { discos, buscarDiscoId } = useDiscos();
+	const disco = buscarDiscoId(id, discos);
+	//Al final este formulario, es decir, este componente es prácticamente igual que InsertarDisco.jsx,
+	//la única diferencia es que aquí cargamos los datos del disco a editar y en el otro no.
 	//Declaramos los mensajes de error según el campo del formulario.
 	const errores = {
 		nombre: "El nombre debe tener al menos 5 caracteres.",
@@ -25,13 +31,13 @@ const InsertarDisco = () => {
 	};
 	//Declaramos el estado inicial del objeto disco.
 	const formularioInicial = {
-		nombre: "",
-		caratula: "",
-		grupo: "",
-		anyo: "",
-		genero: "",
-		localizacion: "",
-		prestado: false,
+		nombre: disco.nombre,
+		caratula: disco.caratula,
+		grupo: disco.grupo,
+		anyo: disco.anyo,
+		genero: disco.genero,
+		localizacion: disco.localizacion,
+		prestado: disco.prestado,
 	};
 
 	//Declaramos el estado inicial de los errores que están activos.
@@ -46,7 +52,8 @@ const InsertarDisco = () => {
 	//Declaramos los estados.
 	const [formulario, setFormulario] = useState(formularioInicial);
 	const [erroresActivos, setErroresActivos] = useState(erroresActivosInicial);
-	const { guardarDisco } = useDiscos();
+	const { editarDisco } = useDiscos();
+	const navigate = useNavigate();
 
 	//En este método actualizamos el estado formulario y revisamos si es correcto.
 	/**
@@ -102,9 +109,10 @@ const InsertarDisco = () => {
 		setErroresActivos(erroresActivos);
 		//Si sigue siendo válido podemos enviar el formulario.
 		if (valido) {
-			const disco = crearDiscoJSON(formulario);
-			guardarDisco(disco);
-			setFormulario(formularioInicial);
+			const discoEditado = crearDiscoJSON(formulario);
+			discoEditado.id = disco.id; // Mantenemos la misma ID
+			editarDisco(discoEditado);
+			navigate(`/listarDiscos`);
 		}
 	};
 
@@ -227,8 +235,8 @@ const InsertarDisco = () => {
 						/>
 						<input
 							type="button"
-							id="guardar"
-							value="Guardar"
+							id="actualizarDisco"
+							value="Actualizar datos"
 							onClick={validarFormulario}
 						/>
 					</form>
@@ -238,4 +246,4 @@ const InsertarDisco = () => {
 	);
 };
 
-export default InsertarDisco;
+export default EditarDisco;

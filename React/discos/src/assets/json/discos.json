@@ -1,58 +1,54 @@
 {
-	"discos": [
-		{
-			"nombre": "The Wall (Live)",
-			"caratula": "https://m.media-amazon.com/images/I/716mP06vSGL._SL1500_.jpg",
-			"grupo": "Pink Floyd",
-			"anyo": "1980",
-			"genero": "rock",
-			"localizacion": "ES-101PF",
-			"prestado": false
-		},
-		{
-			"nombre": "Eye in the Sky",
-			"caratula": "https://m.media-amazon.com/images/I/71u9S9S-8pL._SL1425_.jpg",
-			"grupo": "The Alan Parsons Project",
-			"anyo": "1982",
-			"genero": "alternativePop",
-			"localizacion": "ES-202AP",
-			"prestado": true
-		},
-		{
-			"nombre": "90125",
-			"caratula": "https://m.media-amazon.com/images/I/71W8Spx6NML._SL1425_.jpg",
-			"grupo": "Yes",
-			"anyo": "1983",
-			"genero": "rock",
-			"localizacion": "ES-303YS",
-			"prestado": false
-		},
-		{
-			"nombre": "Misplaced Childhood",
-			"caratula": "https://m.media-amazon.com/images/I/81mSt-G6XHL._SL1500_.jpg",
-			"grupo": "Marillion",
-			"anyo": "1985",
-			"genero": "rock",
-			"localizacion": "ES-404MA",
-			"prestado": false
-		},
-		{
-			"nombre": "A Momentary Lapse of Reason",
-			"caratula": "https://m.media-amazon.com/images/I/81p6-o8oWvL._SL1500_.jpg",
-			"grupo": "Pink Floyd",
-			"anyo": "1987",
-			"genero": "rock",
-			"localizacion": "ES-505PF",
-			"prestado": true
-		},
-		{
-			"nombre": "Ammonia Avenue",
-			"caratula": "https://m.media-amazon.com/images/I/718fS-8fH-L._SL1200_.jpg",
-			"grupo": "The Alan Parsons Project",
-			"anyo": "1984",
-			"genero": "pop",
-			"localizacion": "ES-606AP",
-			"prestado": false
-		}
-	]
+  "discos": [
+    {
+      "nombre": "The Dark Side of the Moon",
+      "caratula": "",
+      "grupo": "Pink Floyd",
+      "anyo": "1973",
+      "genero": "rock",
+      "localizacion": "ES-102PF",
+      "prestado": false,
+      "id": "a1b2"
+    },
+    {
+      "id": "c3d4",
+      "nombre": "Tales of Mystery and Imagination",
+      "caratula": "",
+      "grupo": "The Alan Parsons Project",
+      "anyo": "1976",
+      "genero": "rock",
+      "localizacion": "ES-303AP",
+      "prestado": false
+    },
+    {
+      "id": "k1l2",
+      "nombre": "90125",
+      "caratula": "",
+      "grupo": "Yesssssss",
+      "anyo": "1983",
+      "genero": "alternativePop",
+      "localizacion": "ES-909YE",
+      "prestado": true
+    },
+    {
+      "nombre": "Selling England by the Pound",
+      "caratula": "",
+      "grupo": "Genesis",
+      "anyo": "1973",
+      "genero": "rock",
+      "localizacion": "ES-111GE",
+      "prestado": false,
+      "id": "m3n4"
+    },
+    {
+      "nombre": "Brother in Arms",
+      "caratula": "",
+      "grupo": "Dire Straits",
+      "anyo": "1985",
+      "genero": "rock",
+      "localizacion": "ES-222DS",
+      "prestado": false,
+      "id": "o5p6"
+    }
+  ]
 }
