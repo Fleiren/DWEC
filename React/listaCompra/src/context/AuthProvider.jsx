@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useAuth from "../hooks/useAuth.js";
+import useSupabase from "../hooks/useAuth.js";
 
 const authContext = createContext();
 
@@ -9,12 +9,13 @@ const AuthProvider = ({ children }) => {
 	const initialCredentials = {
 		email: "",
 		password: "",
+		display_name: "",
 	};
 	const initialUser = {};
 	const initialMessage = "";
 	const initialIsAuthenticated = false;
 	const navigate = useNavigate();
-	const { createAccount, signIn } = useAuth();
+	const { signUp, signIn, singOut, getUser } = useSupabase();
 
 	const [credentials, setCredentials] = useState(initialCredentials);
 	const [user, setUser] = useState(initialUser);
@@ -24,9 +25,9 @@ const AuthProvider = ({ children }) => {
 	);
 	const [message, setMessage] = useState(initialMessage);
 
-	const createAccountSupabase = async () => {
+	const createAccount = async () => {
 		try {
-			await createAccount(credentials);
+			await signUp(credentials);
 			setMessage(
 				"Recibirás un correo electrónico para la confirmación de la cuenta.",
 			);
@@ -35,7 +36,7 @@ const AuthProvider = ({ children }) => {
 		}
 	};
 
-	const signInSupabase = async () => {
+	const logIn = async () => {
 		setError(initialMessage);
 		try {
 			await signIn(credentials);
@@ -43,6 +44,58 @@ const AuthProvider = ({ children }) => {
 			setError(error.message);
 		}
 	};
+
+	const logOut = async () => {
+		try {
+			await singOut();
+			setError(initialMessage);
+		} catch (error) {
+			setError(error.message);
+		}
+	};
+
+	const getCurrentUser = async () => {
+		try {
+			const currentUser = await getUser();
+			if (currentUser) {
+				setUser(currentUser);
+				setError(initialMessage);
+			} else {
+				setError("No se encuentra el usuario actual.");
+			}
+		} catch (error) {
+			setError(error.message);
+		}
+	};
+
+	useEffect(() => {
+		const subscription = supabaseConnexion.auth.onAuthStateChange(
+			(event, session) => {
+				if (session) {
+					navigate("/porductList");
+					setIsAuthenticated(true);
+					getCurrentUser();
+				} else {
+					navigate("/login");
+					setIsAuthenticated(false);
+				}
+			},
+		);
+	}, []);
+
+	const dataProvider = {
+		createAccount,
+		logIn,
+		logOut,
+		isAuthenticated,
+		user,
+		error,
+		message,
+	};
+
+	return (
+		<authContext.Provider value={dataProvider}>{children}</authContext.Provider>
+	);
 };
 
 export default AuthProvider;

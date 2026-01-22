@@ -1,8 +1,8 @@
 const Footer = () => {
 	return (
-		<div>
+		<footer>
 			<small>Derechos reservados a Irene Payá Hernández</small>
-		</div>
+		</footer>
 	);
 };
 
