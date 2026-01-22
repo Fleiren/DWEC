@@ -1,0 +1,98 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 20px;
+}
+
+fieldset {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: #fff;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+
+
+input[type="text"], input[type="number"], input[type="url"] {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 15px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type="button"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* Desafío del DOM */
+.error {
+	border: 2px solid red !important;
+	background-color: #ffe0e0;
+}
+
+.mensajeError {
+	color: red;
+	font-size: 0.8em;
+	margin-top: -10px;
+	margin-bottom: 10px;
+    display: none; /* Por defecto oculto */
+}
+
+.mensajeError.visible {
+    display: block;
+}
+
+
+/* Estilos del Catálogo */
+.listaPlanetas {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.seccion-planeta {
+    border: 1px solid #0056b3;
+    padding: 20px;
+    background-color: #e6f0ff;
+}
+
+.seccion-propia {
+    border: 2px solid #8B0000;
+    background-color: #ffcccc;
+}
+
+.residentes-lista {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.residente-item {
+    background-color: #f8f8f8;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+.gestion-residente {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px dashed #aaa;
+}
+.ocultar{
+    display:none;
+}

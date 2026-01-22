@@ -1,0 +1,51 @@
+{
+	"usuarios": [
+		{
+			"id": "1",
+			"nombre": "Luke Skywalker",
+			"rol": "Jedi",
+			"planeta": "Tatooine"
+		},
+		{
+			"id": "2",
+			"nombre": "Leia Organa",
+			"rol": "Princesa",
+			"planeta": "Alderaan"
+		},
+		{ "id": "3", "nombre": "Han Solo", "rol": "Piloto", "planeta": "Corellia" },
+		{ "id": "4", "nombre": "Darth Vader", "rol": "Sith", "planeta": "Tatooine" }
+	],
+	"peliculas": [
+		{
+			"id": "1",
+			"titulo": "Una Nueva Esperanza",
+			"año": 1977,
+			"director": "George Lucas",
+			"personajes": [
+				"http://localhost:3000/usuarios/1",
+				"http://localhost:3000/usuarios/2",
+				"http://localhost:3000/usuarios/3",
+				"http://localhost:3000/usuarios/4"
+			]
+		},
+		{
+			"id": "2",
+			"titulo": "El Imperio Contraataca",
+			"año": 1980,
+			"director": "Irvin Kershner",
+			"personajes": [
+				"http://localhost:3000/usuarios/1",
+				"http://localhost:3000/usuarios/4"
+			]
+		}
+	],
+	"planetas": [
+		{ "id": "1", "nombre": "Tatooine", "clima": "Arid", "diametro": "10465" },
+		{
+			"id": "2",
+			"nombre": "Alderaan",
+			"clima": "Temperate",
+			"diametro": "12500"
+		}
+	]
+}

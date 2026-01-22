@@ -47,19 +47,6 @@ const ListarDiscos = () => {
 		}
 	};
 
-	const eliminarDiscoConfirmado = () => {
-		if (idDiscoEliminar) {
-			borrarDisco(idDiscoEliminar);
-			setMostrarConfirm(false);
-			setIdDiscoEliminar(null);
-		}
-	};
-
-	const cancelarEliminacionDisco = () => {
-		setMostrarConfirm(false);
-		setIdDiscoEliminar(null);
-	};
-
 	useEffect(() => {
 		if (discos) {
 			setDiscosFiltrados(discos);

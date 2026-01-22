@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen: El Archivo Rebelde</title>
+    <link rel="stylesheet" href="./css/estilo.css">
+</head>
+<body>
+    <header>
+        <h1>SISTEMA DE GESTIÓN DE MISIONES</h1>
+    </header>
+
+    <main>
+        <section id="registro">
+            <fieldset>
+                <legend>Registrar Nueva Misión</legend>
+                <form id="formMision">
+                    <div class="campo">
+                        <label>Nombre de la Misión:</label>
+                        <input type="text" name="titulo" placeholder="Ej: Robo de planos">
+                    </div>
+
+                    <div class="campo">
+                        <label>Prioridad (Radio):</label>
+                        <input type="radio" name="prioridad" value="Baja"> Baja
+                        <input type="radio" name="prioridad" value="Media"> Media
+                        <input type="radio" name="prioridad" value="Alta"> Alta
+                    </div>
+
+                    <div class="campo">
+                        <label>Equipamiento (Checkbox):</label>
+                        <input type="checkbox" name="equipo" value="Sable"> Sable
+                        <input type="checkbox" name="equipo" value="Droide"> Droide
+                        <input type="checkbox" name="equipo" value="Nave"> Nave
+                    </div>
+
+                    <div class="campo">
+                        <label>Planeta Destino (Sin ID/Name):</label>
+                        <select>
+                            <option value="">-- Selecciona --</option>
+                            <option value="Tatooine">Tatooine</option>
+                            <option value="Hoth">Hoth</option>
+                            <option value="Endor">Endor</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label>Imagen de Referencia (Sin Name):</label>
+                        <input type="url" id="url_imagen" placeholder="http://...">
+                    </div>
+
+                    
+                    <div class="botones">
+                        <button type="button" >Guardar en Local</button>
+                        <button type="button" >Resetear misiones</button>
+                    </div>
+                </form>
+            </fieldset>
+            
+            <div class="buscador">
+                <input type="text" id="inputBusqueda" placeholder="Buscar misión por título...">
+            </div>
+        </section>
+
+        <section id="catalogo">
+            <h2>Misiones en LocalStorage</h2>
+            <div id="contenedorMisiones" class="grid-cartas"></div>
+        </section>
+
+        <hr>
+
+        <section id="api-section">
+            <h2>Catálogo de Películas (API)</h2>
+            <button id="btnCargarAPI">Cargar desde Servidor</button>
+            <div id="listaPeliculas" class="grid-cartas"></div>
+            
+            <div id="detallePelicula" class="detalle-oculto"></div>
+        </section>
+    </main>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>

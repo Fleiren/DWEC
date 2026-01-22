@@ -17,6 +17,7 @@ function App() {
 					<Cabecera />
 					<Menu />
 					<Contenido>
+						{/**añadir error general para los errores de la api */}
 						<Rutas />
 					</Contenido>
 					<Pie />
