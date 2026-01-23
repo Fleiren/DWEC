@@ -1,6 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import useSupabase from "../hooks/useAuth.js";
+import useSupabase from "../hooks/useSupabase.js";
 
 const authContext = createContext();
 
@@ -14,8 +14,8 @@ const AuthProvider = ({ children }) => {
 	const initialUser = {};
 	const initialMessage = "";
 	const initialIsAuthenticated = false;
-	const navigate = useNavigate();
-	const { signUp, signIn, singOut, getUser } = useSupabase();
+	const nav = useNavigate();
+	const { signUp, signIn, singOut, getUser, getSubscription } = useSupabase();
 
 	const [credentials, setCredentials] = useState(initialCredentials);
 	const [user, setUser] = useState(initialUser);
@@ -69,18 +69,16 @@ const AuthProvider = ({ children }) => {
 	};
 
 	useEffect(() => {
-		const subscription = supabaseConnexion.auth.onAuthStateChange(
-			(event, session) => {
-				if (session) {
-					navigate("/porductList");
-					setIsAuthenticated(true);
-					getCurrentUser();
-				} else {
-					navigate("/login");
-					setIsAuthenticated(false);
-				}
-			},
-		);
+		const subscription = getSubscription((event, session) => {
+			if (session) {
+				nav("/porductList");
+				setIsAuthenticated(true);
+				getCurrentUser();
+			} else {
+				nav("/login");
+				setIsAuthenticated(false);
+			}
+		});
 	}, []);
 
 	const dataProvider = {

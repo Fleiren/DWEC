@@ -1,13 +1,13 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { Home } from "../pages/Home.jsx";
-import { Login } from "../pages/Login.jsx";
-import { ProductList } from "../pages/ProductList.jsx";
-import { Register } from "../pages/Register.jsx";
-import { ShoppingList } from "../pages/ShoppingList.jsx";
-import { Error } from "../pages/Error.jsx";
+import Home from "../pages/Home.jsx";
+import Login from "../pages/Login.jsx";
+import ProductList from "../pages/ProductList.jsx";
+import Register from "../pages/Register.jsx";
+import ShoppingList from "../pages/ShoppingList.jsx";
+import Error from "../pages/Error.jsx";
 
-const Routes = () => {
+const Router = () => {
 	return (
 		<Routes>
 			<Route Path="/" element={<Home />} />
@@ -19,3 +19,5 @@ const Routes = () => {
 		</Routes>
 	);
 };
+
+export default Router;

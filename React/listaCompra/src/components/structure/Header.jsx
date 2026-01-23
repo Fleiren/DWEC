@@ -5,11 +5,11 @@ const Header = () => {
 		<header>
 			<h1>Lista de la compra</h1>
 			{isAuthenticated ? (
-				<button onClick={logOut()}>Cerrar sesión</button>
+				<button onClick={logOut}>Cerrar sesión</button>
 			) : (
 				<>
-					<button onClick={logIn()}>Iniciar sesión</button>
-					<button onClick={createAccount()}>Registrarse</button>
+					<button onClick={logIn}>Iniciar sesión</button>
+					<button onClick={createAccount}>Registrarse</button>
 				</>
 			)}
 		</header>

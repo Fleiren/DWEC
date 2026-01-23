@@ -69,11 +69,16 @@ const useSupabase = () => {
 		}
 	};
 
+	const getSubscription = (f) => {
+		return supabaseConnexion.auth.onAuthStateChange(f);
+	};
+
 	return {
-		createAccount,
+		signUp,
 		signIn,
 		signOut,
 		getUser,
+		getSubscription,
 	};
 };
 
