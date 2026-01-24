@@ -1,7 +1,8 @@
+import "./footer.css";
 const Footer = () => {
 	return (
-		<footer>
-			<small>Derechos reservados a Irene Payá Hernández</small>
+		<footer className="footer_container">
+			<small>Derechos reservados a Irene Payá Hernández.</small>
 		</footer>
 	);
 };

@@ -1,0 +1,104 @@
+/**
+ * Capa de fondo (Overlay) que bloquea la interacción con la aplicación.
+ * Se utiliza un azul muy oscuro con transparencia para centrar la atención.
+ */
+.contenedor_confirm {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(26, 42, 58, 0.85); /* Azul tinta translúcido */
+    z-index: 9999; /* Por encima de todo, incluido el Header */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px); /* Suaviza el fondo para mayor elegancia */
+}
+
+/**
+ * Tarjeta de confirmación diseñada como una edición de coleccionista.
+ * Utiliza lowerCamelCase según la norma 12 de la práctica.
+ */
+.confirmar_eliminacion {
+    background-color: #fdfaf6; /* Crema papel antiguo */
+    color: #1a2a3a;           /* Azul tinta */
+    padding: 3rem;
+    border-radius: 4px;
+    border: 1px solid #c5a059; /* Borde dorado fino */
+    border-top: 8px solid #c5a059; /* Detalle de lomo de libro */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    
+    width: 90%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    
+    /* Animación de escala para una entrada orgánica */
+    animation: zoomInConfirm 0.3s ease-out;
+}
+
+/* Estilo del mensaje de texto */
+.confirmar_eliminacion p {
+    font-family: 'Georgia', serif;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    color: #1a2a3a;
+}
+
+/**
+ * Botones de acción. 
+ * El diseño busca ser intuitivo para favorecer el uso (Norma 11).
+ */
+.boton_confirm {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+/* Botón de aceptación (Cerrar sesión) */
+.boton_confirm:first-of-type {
+    background-color: #1a2a3a;
+    color: #c5a059;
+    border: 2px solid #c5a059;
+}
+
+/* Botón de cancelación (Volver) */
+.boton_confirm:last-of-type {
+    background-color: transparent;
+    color: #1a2a3a;
+    border: 2px solid #1a2a3a;
+    margin-top: 10px;
+}
+
+/* Efectos de interacción */
+.boton_confirm:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.boton_confirm:first-of-type:hover {
+    background-color: #c5a059;
+    color: #1a2a3a;
+}
+
+/* Animación de entrada */
+@keyframes zoomInConfirm {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

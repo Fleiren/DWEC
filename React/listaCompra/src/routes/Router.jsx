@@ -10,12 +10,12 @@ import Error from "../pages/Error.jsx";
 const Router = () => {
 	return (
 		<Routes>
-			<Route Path="/" element={<Home />} />
-			<Route Path="/login" element={<Login />} />
-			<Route Path="/productList" element={<ProductList />} />
-			<Route Path="/register" element={<Register />} />
-			<Route Path="/shoppingList" element={<ShoppingList />} />
-			<Route Path="*" element={<Error />} />
+			<Route path="/" element={<Home />} />
+			<Route path="/login" element={<Login />} />
+			<Route path="/productList" element={<ProductList />} />
+			<Route path="/register" element={<Register />} />
+			<Route path="/shoppingList" element={<ShoppingList />} />
+			<Route path="*" element={<Error />} />
 		</Routes>
 	);
 };

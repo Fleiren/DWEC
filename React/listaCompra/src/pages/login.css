@@ -1,0 +1,69 @@
+/**
+ * Contenedor del formulario de acceso.
+ * Se configura como una columna vertical mediante Flexbox.
+ */
+.login_container {
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    
+    /* Configuración de columna vertical */
+    display: flex;
+    flex-direction: column; 
+    
+    width: 100%;
+    max-width: 400px; /* Ancho máximo para evitar deformación */
+    border-top: 5px solid #c5a059; /* Estilo lomo de libro dorado */
+}
+
+/* Título centrado dentro de la columna */
+.login_container h3 {
+    text-align: center;
+    color: #1a2a3a;
+    margin-bottom: 2rem;
+    font-variant: small-caps;
+}
+
+/**
+ * Estilo de etiquetas (Labels).
+ * Al ser un contenedor flex en columna, ocupan su propia línea.
+ */
+.login_container label {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #555555;
+    margin-bottom: 0.5rem;
+}
+
+/**
+ * Campos de entrada controlados por el estado.
+ * Se les da un ancho completo para llenar la columna.
+ */
+.login_container input[type="email"],
+.login_container input[type="password"] {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1.5rem; /* Espacio entre campos */
+    border: 1px solid #e0d7c6;
+    border-radius: 4px;
+    box-sizing: border-box; /* Evita que el padding sume al ancho */
+}
+
+/* Botón de acción principal */
+.login_container input[type="button"] {
+    background-color: #1a2a3a;
+    color: #c5a059;
+    border: 2px solid #c5a059;
+    padding: 0.9rem;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.login_container input[type="button"]:hover {
+    background-color: #c5a059;
+    color: #1a2a3a;
+}

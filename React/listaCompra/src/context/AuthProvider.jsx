@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useSupabase from "../hooks/useSupabase.js";
+import useMessage from "../hooks/useMessage.js";
 
 const authContext = createContext();
 
@@ -12,70 +13,121 @@ const AuthProvider = ({ children }) => {
 		display_name: "",
 	};
 	const initialUser = {};
-	const initialMessage = "";
 	const initialIsAuthenticated = false;
 	const nav = useNavigate();
-	const { signUp, signIn, singOut, getUser, getSubscription } = useSupabase();
+	const { signUp, signIn, signOut, getUser, getSubscription } = useSupabase();
+	const { showMessage } = useMessage();
 
 	const [credentials, setCredentials] = useState(initialCredentials);
 	const [user, setUser] = useState(initialUser);
-	const [error, setError] = useState(initialMessage);
 	const [isAuthenticated, setIsAuthenticated] = useState(
 		initialIsAuthenticated,
 	);
-	const [message, setMessage] = useState(initialMessage);
 
+	/**
+	 * Función para crear una cuenta nueva.
+	 */
 	const createAccount = async () => {
 		try {
 			await signUp(credentials);
-			setMessage(
+			//Tener un contexto que maneje los mensajes facilita un montón el código.
+			showMessage(
 				"Recibirás un correo electrónico para la confirmación de la cuenta.",
+				"info",
 			);
 		} catch (error) {
-			setError(error.message);
+			showMessage(error.message, "error");
 		}
 	};
 
+	/**
+	 * Función para iniciar sesión.
+	 */
 	const logIn = async () => {
-		setError(initialMessage);
 		try {
 			await signIn(credentials);
 		} catch (error) {
-			setError(error.message);
+			showMessage(error.message, "error");
 		}
 	};
 
+	/**
+	 * Función para cerrar sesión.
+	 */
 	const logOut = async () => {
 		try {
-			await singOut();
-			setError(initialMessage);
+			await signOut();
 		} catch (error) {
-			setError(error.message);
+			showMessage(error.message, "error");
 		}
 	};
 
+	/**
+	 * Función para obtener el usuario actual.
+	 */
 	const getCurrentUser = async () => {
 		try {
 			const currentUser = await getUser();
 			if (currentUser) {
 				setUser(currentUser);
-				setError(initialMessage);
 			} else {
-				setError("No se encuentra el usuario actual.");
+				showMessage("No se encuentra el usuario actual.", "error");
 			}
 		} catch (error) {
-			setError(error.message);
+			showMessage(error.message, "error");
+		}
+	};
+
+	/**
+	 * Función para actualizar los datos del formulario.
+	 * @param {*} evento
+	 */
+	const updateData = (evento) => {
+		const { name, value } = evento.target;
+		//Comprobamos que tenga name para que no salte error ya que si no tiene valor se rellenará como null o "".
+		if (name) {
+			setCredentials({ ...credentials, [name]: value });
+		}
+	};
+
+	/**
+	 * Funciones para validar los formularios de login y registro.
+	 */
+	const validateLogin = () => {
+		if (!credentials.email || !credentials.password) {
+			showMessage("Los campos no pueden estar vacíos.", "error");
+		} else {
+			logIn();
+		}
+	};
+
+	/**
+	 * Función para validar el formulario de registro.
+	 */
+	const validateRegister = () => {
+		if (
+			!credentials.email ||
+			!credentials.password ||
+			!credentials.display_name
+		) {
+			showMessage("Los campos no pueden estar vacíos.", "error");
+		} else {
+			createAccount();
 		}
 	};
 
 	useEffect(() => {
+		/**
+		 * Suscripción para detectar cambios en la autenticación del usuario.
+		 */
 		const subscription = getSubscription((event, session) => {
+			//Me gustaría practicar más el uso de las subscripciones porque no sabría muy bien como usarlas.
 			if (session) {
-				nav("/porductList");
+				nav("/shoppingList");
 				setIsAuthenticated(true);
 				getCurrentUser();
 			} else {
-				nav("/login");
+				nav("/");
 				setIsAuthenticated(false);
 			}
 		});
@@ -85,10 +137,11 @@ const AuthProvider = ({ children }) => {
 		createAccount,
 		logIn,
 		logOut,
+		updateData,
+		validateLogin,
+		validateRegister,
 		isAuthenticated,
 		user,
-		error,
-		message,
 	};
 
 	return (
