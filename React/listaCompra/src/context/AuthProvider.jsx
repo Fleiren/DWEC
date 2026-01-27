@@ -125,7 +125,7 @@ const AuthProvider = ({ children }) => {
 		const subscription = getSubscription((event, session) => {
 			//Me gustaría practicar más el uso de las subscripciones porque no sabría muy bien como usarlas.
 			if (session) {
-				nav("/shoppingList");
+				nav("/productList");
 				setIsAuthenticated(true);
 				getCurrentUser();
 			} else {

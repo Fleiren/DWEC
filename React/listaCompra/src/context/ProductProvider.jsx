@@ -19,11 +19,10 @@ const ProductProvider = ({ children }) => {
 	const { getProducts, getProductById, saveProduct, editProduct } =
 		useSupabaseProduct();
 
-	const listProducts = () => {
+	const listProducts = async () => {
 		try {
-			const response = getProducts();
+			const response = await getProducts();
 			if (response) {
-				console.log(response);
 				setProducts(response);
 			} else {
 				showMessage("No se han podido obtener los productos.", "error");
@@ -33,9 +32,9 @@ const ProductProvider = ({ children }) => {
 		}
 	};
 
-	const findProductById = (id) => {
+	const findProductById = async (id) => {
 		try {
-			const response = getProductById(id);
+			const response = await getProductById(id);
 			if (response) {
 				setSelectedProduct(response);
 			} else {
@@ -49,17 +48,17 @@ const ProductProvider = ({ children }) => {
 		}
 	};
 
-	const createProduct = (product) => {
+	const createProduct = async (product) => {
 		try {
-			saveProduct(product);
+			await saveProduct(product);
 		} catch (error) {
 			showMessage(error.message, "error");
 		}
 	};
 
-	const updateProduct = (product) => {
+	const updateProduct = async (product) => {
 		try {
-			editProduct(product);
+			await editProduct(product);
 		} catch (error) {
 			showMessage(error.message, "error");
 		}

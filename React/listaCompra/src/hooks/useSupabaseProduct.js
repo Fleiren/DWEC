@@ -15,15 +15,13 @@ const useSupabaseProduct = () => {
 	};
 	const getProducts = async () => {
 		//No hace falta un try-catch en éste punto ya que si el método request lanza un error, lo recogerá quien llame a la función getProducts (que es el contexto).
-		return (products = await request(
-			supabaseConnexion.from("products").select("*"),
-		));
+		return await request(supabaseConnexion.from("products").select("*"));
 	};
 
 	const getProductById = async (id) => {
-		return (product = await request(
+		return await request(
 			supabaseConnexion.from("products").select("*").eq("id", id),
-		));
+		);
 	};
 
 	const saveProduct = async (product) => {
