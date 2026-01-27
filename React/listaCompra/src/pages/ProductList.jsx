@@ -1,5 +1,15 @@
+import useProduct from "./../hooks/useProduct.js";
+import Product from "./../components/Product.jsx";
 const ProductList = () => {
-	return <h1>Lista de productos</h1>;
+	const { products } = useProduct();
+	return (
+		<>
+			<h1>Lista de Libros</h1>
+			{products.map((product) => {
+				return <Product product={product} />;
+			})}
+		</>
+	);
 };
 
 export default ProductList;

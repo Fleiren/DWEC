@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import useSupabase from "../hooks/useSupabase.js";
+import useSupabaseAuth from "../hooks/useSupabaseAuth.js";
 import useMessage from "../hooks/useMessage.js";
 
 const authContext = createContext();
@@ -15,7 +15,8 @@ const AuthProvider = ({ children }) => {
 	const initialUser = {};
 	const initialIsAuthenticated = false;
 	const nav = useNavigate();
-	const { signUp, signIn, signOut, getUser, getSubscription } = useSupabase();
+	const { signUp, signIn, signOut, getUser, getSubscription } =
+		useSupabaseAuth();
 	const { showMessage } = useMessage();
 
 	const [credentials, setCredentials] = useState(initialCredentials);

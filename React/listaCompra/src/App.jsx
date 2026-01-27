@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useMessage from "./hooks/useMessage.js";
+import ProductProvider from "./context/ProductProvider.jsx";
 import Header from "./components/structure/Header.jsx";
 import Footer from "./components/structure/Footer.jsx";
 import Content from "./components/structure/Content.jsx";
@@ -10,17 +11,18 @@ import Menu from "./components/menu/Menu.jsx";
 import "./App.css";
 
 function App() {
-	const { isActive } = useMessage();
 	//Las páginas están sin diseñar aún pero la estructura básica ya está lista.
 	return (
 		<>
 			<Container>
 				<Header />
 				<Menu />
-				<Content>
-					{isActive && <MessageApp />}
-					<Router />
-				</Content>
+				<ProductProvider>
+					<Content>
+						<MessageApp />
+						<Router />
+					</Content>
+				</ProductProvider>
 				<Footer />
 			</Container>
 		</>
