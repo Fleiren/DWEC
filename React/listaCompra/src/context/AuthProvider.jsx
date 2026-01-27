@@ -35,6 +35,7 @@ const AuthProvider = ({ children }) => {
 				"Recibirás un correo electrónico para la confirmación de la cuenta.",
 				"info",
 			);
+			setCredentials(initialCredentials);
 		} catch (error) {
 			showMessage(error.message, "error");
 		}
@@ -142,6 +143,7 @@ const AuthProvider = ({ children }) => {
 		validateRegister,
 		isAuthenticated,
 		user,
+		credentials,
 	};
 
 	return (
