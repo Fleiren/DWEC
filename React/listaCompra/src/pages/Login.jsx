@@ -5,7 +5,7 @@ const Login = () => {
 
 	//No se puede usar delegación de eventos con onChange en React, me salen un montón de errores y si coloco un onInput también me salen errores pidiendome que lo cambie a onChange. Por lo que he optado por colocar el onChange en cada input.
 	return (
-		<div className="login_container">
+		<form className="login_container">
 			<h3>Iniciar sesión</h3>
 			<label htmlFor="email">Correo electrónico</label>
 			<input
@@ -29,10 +29,9 @@ const Login = () => {
 				type="button"
 				id="logIn"
 				onClick={validateLogin}
-				onChange={updateData}
 				value="Iniciar sesión"
 			/>
-		</div>
+		</form>
 	);
 };
 export default Login;

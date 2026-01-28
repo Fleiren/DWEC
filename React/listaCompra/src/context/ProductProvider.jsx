@@ -63,6 +63,66 @@ const ProductProvider = ({ children }) => {
 			showMessage(error.message, "error");
 		}
 	};
+
+	const filterProducts = (type, value) => {
+		switch (type) {
+			case "name":
+				filterProductName(value);
+				break;
+			case "price":
+			case "weight":
+				filterProductPriceWeight(type, value);
+				break;
+			default:
+				break;
+		}
+	};
+	const filterProductName = (name) => {
+		const filtered = products.filter((product) => {
+			product.name.toLowerCase().includes(name.toLowerCase());
+		});
+		setFilteredProducts(filtered);
+	};
+
+	const filterProductPriceWeight = (type, number) => {
+		const filtered = products.filter((product) => {
+			return product[type] <= number;
+		});
+		setFilteredProducts(filtered);
+	};
+
+	const orderProducts = (type, value) => {
+		switch (type) {
+			case "name":
+				orderProductName();
+				break;
+			case "price":
+			case "weight":
+				orderProductPriceWeight(type, value);
+				break;
+			default:
+				break;
+		}
+	};
+
+	const orderProductName = () => {
+		const ordered = [...products].sort((a, b) => {
+			return a.name.localeCompare(b.name);
+		});
+		setFilteredProducts(ordered);
+	};
+
+	const orderProductPriceWeight = (type) => {
+		const ordered = [...products].sort((a, b) => {
+			return a[type] - b[type];
+		});
+		setFilteredProducts(ordered);
+	};
+
+	const clearFilter = () => {
+		setFilteredProducts([]);
+	};
+
 	useEffect(() => {
 		listProducts();
 	}, []);
@@ -74,6 +134,9 @@ const ProductProvider = ({ children }) => {
 		findProductById,
 		createProduct,
 		updateProduct,
+		filterProducts,
+		orderProducts,
+		clearFilter,
 	};
 	return (
 		<>

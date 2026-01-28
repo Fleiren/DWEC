@@ -4,7 +4,7 @@ const Register = () => {
 	const { updateData, validateRegister, credentials } = useAuth();
 
 	return (
-		<div className="register_container">
+		<form className="register_container">
 			<h3>Crear cuenta</h3>
 			<label htmlFor="email">Correo electrónico</label>
 			<input
@@ -39,7 +39,7 @@ const Register = () => {
 				onClick={validateRegister}
 				value="Registrarse"
 			/>
-		</div>
+		</form>
 	);
 };
 

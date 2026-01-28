@@ -1,0 +1,27 @@
+/**
+ * Tarjeta de producto individual.
+ */
+.product_card {
+    background: white;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border-left: 4px solid #1a2a3a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.product_card:hover {
+    border-left-color: #c5a059;
+    background-color: #fcfaf7;
+}
+
+.product_card h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: #1a2a3a;
+}

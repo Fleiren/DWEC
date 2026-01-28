@@ -1,0 +1,35 @@
+/**
+ * Barra de filtros ajustada para la columna izquierda.
+ */
+.filter_product_menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    background: #fdfaf6;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+}
+
+.filter_product_menu h4 {
+    width: 100%; /* El título ocupa toda la línea para separar secciones */
+    font-size: 0.7rem;
+    margin: 5px 0;
+    color: #c5a059;
+}
+
+.filter_product_menu button {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 5px 12px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.filter_product_menu button:hover {
+    border-color: #1a2a3a;
+    background-color: #1a2a3a;
+    color: #c5a059;
+}
