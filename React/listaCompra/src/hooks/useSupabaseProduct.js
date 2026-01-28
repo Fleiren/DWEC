@@ -1,9 +1,12 @@
 import { supabaseConnexion } from "./../supabase/supabase.js";
+import { useState } from "react";
 
 const useSupabaseProduct = () => {
+	const [loading, setLoading] = useState(false);
 	//Mi compañero David ha creado un método genérico para separar lógica fijándose en como hicimos useApi, he hecho lo mismo porque me parece que queda precioso.
 	const request = async (promise) => {
 		try {
+			setLoading(true);
 			const { data, error } = await promise;
 			if (error) {
 				throw error;
@@ -11,6 +14,8 @@ const useSupabaseProduct = () => {
 			return data;
 		} catch (error) {
 			throw error;
+		} finally {
+			setLoading(false);
 		}
 	};
 	const getProducts = async () => {
@@ -35,6 +40,7 @@ const useSupabaseProduct = () => {
 	};
 
 	return {
+		loading,
 		getProducts,
 		getProductById,
 		saveProduct,

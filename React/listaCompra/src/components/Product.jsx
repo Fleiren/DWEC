@@ -5,6 +5,8 @@ const Product = ({ product }) => {
 		<>
 			<div className="product_card">
 				<h3>{product.name}</h3>
+				<p>{product.weight}</p>
+				<p>{product.price}</p>
 			</div>
 		</>
 	);

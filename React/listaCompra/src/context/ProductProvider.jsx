@@ -14,9 +14,10 @@ const ProductProvider = ({ children }) => {
 	const [selectedProduct, setSelectedProduct] = useState(emptyProduct);
 	const [products, setProducts] = useState([]);
 	const [filteredProducts, setFilteredProducts] = useState([]);
+	const [isFiltered, setIsFiltered] = useState(false);
 
 	const { showMessage } = useMessage();
-	const { getProducts, getProductById, saveProduct, editProduct } =
+	const { loading, getProducts, getProductById, saveProduct, editProduct } =
 		useSupabaseProduct();
 
 	const listProducts = async () => {
@@ -78,17 +79,29 @@ const ProductProvider = ({ children }) => {
 		}
 	};
 	const filterProductName = (name) => {
-		const filtered = products.filter((product) => {
-			product.name.toLowerCase().includes(name.toLowerCase());
-		});
-		setFilteredProducts(filtered);
+		if (name === "") {
+			setIsFiltered(false);
+		} else {
+			const filtered = products.filter((product) => {
+				return product.name.toLowerCase().startsWith(name.toLowerCase());
+			});
+			setFilteredProducts(filtered);
+			setIsFiltered(true);
+		}
 	};
 
 	const filterProductPriceWeight = (type, number) => {
-		const filtered = products.filter((product) => {
-			return product[type] <= number;
-		});
-		setFilteredProducts(filtered);
+		//Me estaba dando error porque lo recibo como un string y se me había olvidado eso.
+		const numberValue = Number(number);
+		if (numberValue === 0) {
+			setIsFiltered(false);
+		} else {
+			const filtered = products.filter((product) => {
+				return product[type] <= numberValue;
+			});
+			setFilteredProducts(filtered);
+			setIsFiltered(true);
+		}
 	};
 
 	const orderProducts = (type, value) => {
@@ -110,6 +123,7 @@ const ProductProvider = ({ children }) => {
 			return a.name.localeCompare(b.name);
 		});
 		setFilteredProducts(ordered);
+		setIsFiltered(true);
 	};
 
 	const orderProductPriceWeight = (type) => {
@@ -117,10 +131,12 @@ const ProductProvider = ({ children }) => {
 			return a[type] - b[type];
 		});
 		setFilteredProducts(ordered);
+		setIsFiltered(true);
 	};
 
 	const clearFilter = () => {
 		setFilteredProducts([]);
+		setIsFiltered(false);
 	};
 
 	useEffect(() => {
@@ -131,6 +147,7 @@ const ProductProvider = ({ children }) => {
 		selectedProduct,
 		products,
 		filteredProducts,
+		isFiltered,
 		findProductById,
 		createProduct,
 		updateProduct,
