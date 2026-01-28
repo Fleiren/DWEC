@@ -14,6 +14,7 @@ const ProductProvider = ({ children }) => {
 	const [selectedProduct, setSelectedProduct] = useState(emptyProduct);
 	const [products, setProducts] = useState([]);
 	const [filteredProducts, setFilteredProducts] = useState([]);
+	//Lo hago ya aunque no lo vaya a usar todavía porque seguro que lo voy a necesitar.
 	const [isFiltered, setIsFiltered] = useState(false);
 
 	const { showMessage } = useMessage();
@@ -25,6 +26,8 @@ const ProductProvider = ({ children }) => {
 			const response = await getProducts();
 			if (response) {
 				setProducts(response);
+				//Se inicializa también la lista de productos filtrados con todos los productos.
+				setFilteredProducts(response);
 			} else {
 				showMessage("No se han podido obtener los productos.", "error");
 			}
@@ -80,9 +83,9 @@ const ProductProvider = ({ children }) => {
 	};
 	const filterProductName = (name) => {
 		if (name === "") {
-			setIsFiltered(false);
+			setFilteredProducts([...products]);
 		} else {
-			const filtered = products.filter((product) => {
+			const filtered = [...products].filter((product) => {
 				return product.name.toLowerCase().startsWith(name.toLowerCase());
 			});
 			setFilteredProducts(filtered);
@@ -92,11 +95,11 @@ const ProductProvider = ({ children }) => {
 
 	const filterProductPriceWeight = (type, number) => {
 		//Me estaba dando error porque lo recibo como un string y se me había olvidado eso.
-		const numberValue = Number(number);
-		if (numberValue === 0) {
-			setIsFiltered(false);
+		if (number === "") {
+			setFilteredProducts([...products]);
 		} else {
-			const filtered = products.filter((product) => {
+			const numberValue = Number.parseFloat(number);
+			const filtered = [...products].filter((product) => {
 				return product[type] <= numberValue;
 			});
 			setFilteredProducts(filtered);
@@ -113,29 +116,30 @@ const ProductProvider = ({ children }) => {
 			case "weight":
 				orderProductPriceWeight(type, value);
 				break;
+			case "":
+				//Sin orden, vuelvo a la lista original.
+				setFilteredProducts([...products]);
 			default:
 				break;
 		}
 	};
 
 	const orderProductName = () => {
-		const ordered = [...products].sort((a, b) => {
+		const ordered = [...filteredProducts].sort((a, b) => {
 			return a.name.localeCompare(b.name);
 		});
 		setFilteredProducts(ordered);
-		setIsFiltered(true);
 	};
 
 	const orderProductPriceWeight = (type) => {
-		const ordered = [...products].sort((a, b) => {
+		const ordered = [...filteredProducts].sort((a, b) => {
 			return a[type] - b[type];
 		});
 		setFilteredProducts(ordered);
-		setIsFiltered(true);
 	};
 
 	const clearFilter = () => {
-		setFilteredProducts([]);
+		setFilteredProducts([...products]);
 		setIsFiltered(false);
 	};
 
@@ -148,6 +152,7 @@ const ProductProvider = ({ children }) => {
 		products,
 		filteredProducts,
 		isFiltered,
+		loading,
 		findProductById,
 		createProduct,
 		updateProduct,

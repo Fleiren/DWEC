@@ -3,12 +3,21 @@ import Product from "./../components/Product.jsx";
 import FilterProductMenu from "../components/menu/submenu/FilterProductMenu.jsx";
 import useAuth from "../hooks/useAuth.js";
 import Loading from "./../components/Loading.jsx";
+import "./productList.css";
 const ProductList = () => {
-	const { products, filteredProducts, isFiltered, loading } = useProduct();
+	const { filteredProducts, loading } = useProduct();
 	const { isAuthenticated } = useAuth();
-	//Esta idea la he pillado de la IA porque me estaba dando un error y al pasarle el código para que me ayude me ha recomendado esto y me ha parecido profesional (es una tontería pero no se me había ocurrido).
-	//De esta manera quito lógica en el HTML.
-	const actualList = isFiltered ? filteredProducts : products;
+
+	const calculateAverage = () => {
+		let totalPrice = 0;
+		filteredProducts.forEach((product) => {
+			totalPrice += product.price;
+		});
+
+		return totalPrice / filteredProducts.length || 0;
+	};
+	const totalProducts = filteredProducts.length;
+	const averagePrice = calculateAverage();
 	return (
 		<>
 			<div className="product_list_container">
@@ -18,9 +27,9 @@ const ProductList = () => {
 				) : (
 					<>
 						{isAuthenticated && <FilterProductMenu />}
-						<div className="product_lista">
-							{actualList.length > 0 ? (
-								actualList.map((product) => {
+						<div className="product_list">
+							{filteredProducts.length > 0 ? (
+								filteredProducts.map((product) => {
 									return <Product key={product.id} product={product} />;
 								})
 							) : (
@@ -28,7 +37,14 @@ const ProductList = () => {
 							)}
 						</div>
 						<div className="product_details">
-							<p>hdkjashdasjkhdkasjhda</p>
+							<strong>
+								Cantidad
+								<span className="stat_value">{totalProducts}</span>
+							</strong>
+							<strong>
+								Media de Precio
+								<span className="stat_value">{averagePrice.toFixed(2)}€</span>
+							</strong>
 						</div>
 					</>
 				)}

@@ -1,27 +1,23 @@
-/**
- * Tarjeta de producto individual.
- */
 .product_card {
     background: white;
-    padding: 15px 20px;
-    margin-bottom: 10px;
+    border: 1px solid #e0d7c6;
+    border-top: 5px solid #1a2a3a;
+    padding: 20px;
     border-radius: 4px;
-    border-left: 4px solid #1a2a3a;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.product_card:hover {
-    border-left-color: #c5a059;
-    background-color: #fcfaf7;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .product_card h3 {
     margin: 0;
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #1a2a3a;
+}
+
+.product_card p {
+    margin: 0;
+    color: #666;
+    font-weight: bold;
 }
