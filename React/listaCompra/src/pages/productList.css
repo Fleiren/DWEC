@@ -1,8 +1,20 @@
+/* App.css o productList.css */
 .product_list_container {
-    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    align-items: center; /* Centra el título, el menú y el grid */
+    padding: 20px;
+}
+
+.product_list {
+    display: grid !important;
+    /* Bajamos el mínimo de 250px a 200px para que entren más por fila */
+    grid-template-columns: repeat(3,  1fr) !important; 
+    gap: 25px !important;
+    width: 100% !important;
+    margin-top: 20px;
 }
 
 .product_list_container h1 {
@@ -14,47 +26,34 @@
 
 .product_details {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    gap: 50px; /* Espacio amplio entre los dos datos */
-    background-color: #1a2a3a; /* Azul tinta profundo */
-    color: #ffffff;
-    padding: 15px 30px;
-    border-radius: 12px;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border-left: 6px solid #c5a059; /* Detalle en dorado */
+    background-color: #ffffff;
+    border: 2px solid #e0d7c6;
+    border-radius: 50px; /* Estilo píldora */
+    padding: 10px 40px;
+    margin: 10px auto 30px auto;
+    width: fit-content; /* Se ajusta al texto */
+    gap: 30px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
 .product_details strong {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    display: flex;
-    flex-direction: column; /* Apila el título sobre el valor */
-    align-items: center;
-    font-weight: 400;
-    color: #e0d7c6; /* Crema suave para las etiquetas */
+    color: #1a2a3a;
+    font-size: 0.9rem;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-/* Estilo para los números (valores dinámicos) */
 .product_details strong::after {
-    content: attr(data-value); /* Si quieres usarlo dinámico, o simplemente: */
+    content: "";
     display: block;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin-top: 4px;
+    width: 20px;
+    height: 2px;
+    background: #c5a059;
+    margin: 2px auto;
 }
 
-/* AQUÍ ESTÁ LA MAGIA DE LAS 4 COLUMNAS */
-.product_list {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 25px;
-    width: 100%;
-}
+
 
 @media (max-width: 1100px) {
     .product_list { grid-template-columns: repeat(2, 1fr) !important; }

@@ -1,12 +1,13 @@
 import "./filterProductMenu.css";
-import useProduct from "../../../hooks/useProduct";
+import useProductContext from "../../../hooks/useProductContext.js";
 import { useState } from "react";
 const FilterProductMenu = () => {
-	const { orderProducts, filterProducts, clearFilter } = useProduct();
+	const { orderProducts, filterProducts, clearFilter } = useProductContext();
 	const initialInputs = {
 		name: "",
 		price: "",
 		weight: "",
+		order: "",
 	};
 
 	const [inputs, setInputs] = useState(initialInputs);
@@ -22,6 +23,12 @@ const FilterProductMenu = () => {
 		//De esta forma no dejamos que hayan varios filtros activos a la vez.
 		setInputs({ ...initialInputs, [type]: value });
 		filterProducts(type, value);
+	};
+
+	const applyOrder = (evento) => {
+		const value = evento.target.value;
+		setInputs({ ...inputs, order: value });
+		orderProducts(value);
 	};
 	return (
 		<>
@@ -52,7 +59,7 @@ const FilterProductMenu = () => {
 						<input
 							id="weight"
 							type="number"
-							placeholder="1.5"
+							placeholder="1,5"
 							value={inputs.weight}
 							onInput={applyFilter}
 						/>
@@ -62,10 +69,7 @@ const FilterProductMenu = () => {
 				<div className="filter_section_order">
 					<div className="filter_group">
 						<label htmlFor="orderType">Ordenar lista</label>
-						<select
-							id="orderType"
-							onChange={(evento) => orderProducts(evento.target.value)}
-						>
+						<select id="orderType" onChange={applyOrder} value={inputs.order}>
 							<option value="">Sin orden</option>
 							<option value="name">Alfabético</option>
 							<option value="price">Más barato</option>

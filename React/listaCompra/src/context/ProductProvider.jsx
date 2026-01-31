@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
-import useMessage from "../hooks/useMessage.js";
-import useSupabaseProduct from "./../hooks/useSupabaseProduct.js";
+import useMessageContext from "../hooks/useMessageContext.js";
+import useSupabaseCRUD from "../hooks/useSupabaseCRUD.js";
 const productContext = createContext();
 
 const ProductProvider = ({ children }) => {
@@ -17,13 +17,13 @@ const ProductProvider = ({ children }) => {
 	//Lo hago ya aunque no lo vaya a usar todavía porque seguro que lo voy a necesitar.
 	const [isFiltered, setIsFiltered] = useState(false);
 
-	const { showMessage } = useMessage();
-	const { loading, getProducts, getProductById, saveProduct, editProduct } =
-		useSupabaseProduct();
+	const { showMessage } = useMessageContext();
+	const { loading, getAll, getById, save, edit, remove } =
+		useSupabaseCRUD("products");
 
 	const listProducts = async () => {
 		try {
-			const response = await getProducts();
+			const response = await getAll();
 			if (response) {
 				setProducts(response);
 				//Se inicializa también la lista de productos filtrados con todos los productos.
@@ -38,7 +38,7 @@ const ProductProvider = ({ children }) => {
 
 	const findProductById = async (id) => {
 		try {
-			const response = await getProductById(id);
+			const response = await getById(id);
 			if (response) {
 				setSelectedProduct(response);
 			} else {
@@ -54,7 +54,7 @@ const ProductProvider = ({ children }) => {
 
 	const createProduct = async (product) => {
 		try {
-			await saveProduct(product);
+			await save(product);
 		} catch (error) {
 			showMessage(error.message, "error");
 		}
@@ -62,7 +62,15 @@ const ProductProvider = ({ children }) => {
 
 	const updateProduct = async (product) => {
 		try {
-			await editProduct(product);
+			await edit(product);
+		} catch (error) {
+			showMessage(error.message, "error");
+		}
+	};
+
+	const removeProduct = async (id) => {
+		try {
+			await remove(id);
 		} catch (error) {
 			showMessage(error.message, "error");
 		}
@@ -143,6 +151,23 @@ const ProductProvider = ({ children }) => {
 		setIsFiltered(false);
 	};
 
+	//Estos métodos de aquí estoy pensando en llevarlos a un archivo estilo util.js pero no se si sería demasiada modularización para algo sencillo como un map...
+	//incluso estoy pensando que al ser una sola línea, no haría falta que estuviera en un método a parte.
+
+	const addItem = (item) => {
+		setProducts([...products, item]);
+	};
+
+	const removeItem = (id) => {
+		const newList = products.filter((p) => p.id != id);
+		setProducts(newList);
+	};
+
+	const updateItem = (item) => {
+		const newList = products.map((p) => (p.id === item.id ? item : p));
+		setProducts(newList);
+	};
+
 	useEffect(() => {
 		listProducts();
 	}, []);
@@ -156,6 +181,7 @@ const ProductProvider = ({ children }) => {
 		findProductById,
 		createProduct,
 		updateProduct,
+		removeProduct,
 		filterProducts,
 		orderProducts,
 		clearFilter,

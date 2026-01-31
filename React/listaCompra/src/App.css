@@ -13,10 +13,14 @@ html, body, #root {
   background-color: var(--backgroundLight);
 }
 
-.Container_container {
+.Content_container {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  align-items: stretch; /* Mantenemos esto para el Grid */
+  padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .Content_container {
@@ -41,4 +45,15 @@ footer {
   color: var(--white);
   padding: 1rem;
   text-align: center;
+}
+form {
+  max-width: 400px;
+  margin: 2rem auto; /* Esto centra el bloque horizontalmente */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: var(--shadowSoft);
 }

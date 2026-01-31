@@ -1,7 +1,7 @@
-import useAuth from "../hooks/useAuth.js";
+import useAuthContext from "../hooks/useAuthContext.js";
 import "./register.css";
 const Register = () => {
-	const { updateData, validateRegister, credentials } = useAuth();
+	const { updateData, validateRegister, credentials } = useAuthContext();
 
 	return (
 		<form className="register_container">
@@ -21,6 +21,15 @@ const Register = () => {
 				name="password"
 				type="password"
 				value={credentials.password}
+				onChange={updateData}
+				placeholder="Tu contraseña"
+			/>
+			<label htmlFor="confirmPassword">Confirmar contraseña</label>
+			<input
+				id="confirmPassword"
+				name="confirmPassword"
+				type="password"
+				value={credentials.confirmPassword}
 				onChange={updateData}
 				placeholder="Tu contraseña"
 			/>

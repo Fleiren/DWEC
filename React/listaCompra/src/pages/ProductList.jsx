@@ -1,12 +1,13 @@
-import useProduct from "./../hooks/useProduct.js";
+import useProductContext from "./../hooks/useProductContext.js";
 import Product from "./../components/Product.jsx";
 import FilterProductMenu from "../components/menu/submenu/FilterProductMenu.jsx";
-import useAuth from "../hooks/useAuth.js";
+import useAuthContext from "../hooks/useAuthContext.js";
 import Loading from "./../components/Loading.jsx";
+import { formatCurrency } from "../utils/formatters.js";
 import "./productList.css";
 const ProductList = () => {
-	const { filteredProducts, loading } = useProduct();
-	const { isAuthenticated } = useAuth();
+	const { filteredProducts, loading } = useProductContext();
+	const { isAuthenticated } = useAuthContext();
 
 	const calculateAverage = () => {
 		let totalPrice = 0;
@@ -18,6 +19,7 @@ const ProductList = () => {
 	};
 	const totalProducts = filteredProducts.length;
 	const averagePrice = calculateAverage();
+	// Hay varias ternarias ya que el menú de filtros solo se muestra si el usuario está autenticado, si no se han cargado los productos se muestra el loading y si en las búsquedas no hay prductos se muestra un mensaje.
 	return (
 		<>
 			<div className="product_list_container">
@@ -38,12 +40,15 @@ const ProductList = () => {
 						</div>
 						<div className="product_details">
 							<strong>
-								Cantidad
-								<span className="stat_value">{totalProducts}</span>
+								Cantidad:
+								<span className="stat_value"> {totalProducts}</span>
 							</strong>
 							<strong>
-								Media de Precio
-								<span className="stat_value">{averagePrice.toFixed(2)}€</span>
+								Media de Precio:
+								<span className="stat_value">
+									{/**Se separa el espacio del método por culpa del prettier, cada vesz que guardo se pone así automáticamente. */}{" "}
+									{formatCurrency(averagePrice.toFixed(2))}
+								</span>
 							</strong>
 						</div>
 					</>

@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { productContext } from "./../context/ProductProvider.jsx";
-const useProduct = () => {
+import { productContext } from "../context/ProductProvider.jsx";
+const useProductContext = () => {
 	const context = useContext(productContext);
 	if (!context) {
 		throw new Error(
@@ -10,4 +10,4 @@ const useProduct = () => {
 	return context;
 };
 
-export default useProduct;
+export default useProductContext;

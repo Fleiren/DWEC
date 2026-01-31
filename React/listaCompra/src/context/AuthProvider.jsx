@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useSupabaseAuth from "../hooks/useSupabaseAuth.js";
-import useMessage from "../hooks/useMessage.js";
+import useMessageContext from "../hooks/useMessageContext.js";
 
 const authContext = createContext();
 
@@ -10,6 +10,7 @@ const AuthProvider = ({ children }) => {
 	const initialCredentials = {
 		email: "",
 		password: "",
+		confirmPassword: "",
 		display_name: "",
 	};
 	const initialUser = {};
@@ -17,7 +18,7 @@ const AuthProvider = ({ children }) => {
 	const nav = useNavigate();
 	const { signUp, signIn, signOut, getUser, getSubscription } =
 		useSupabaseAuth();
-	const { showMessage } = useMessage();
+	const { showMessage } = useMessageContext();
 
 	const [credentials, setCredentials] = useState(initialCredentials);
 	const [user, setUser] = useState(initialUser);
@@ -36,7 +37,7 @@ const AuthProvider = ({ children }) => {
 				"Recibirás un correo electrónico para la confirmación de la cuenta.",
 				"info",
 			);
-			setCredentials(initialCredentials);
+			resetDataForm();
 		} catch (error) {
 			showMessage(error.message, "error");
 		}
@@ -48,6 +49,7 @@ const AuthProvider = ({ children }) => {
 	const logIn = async () => {
 		try {
 			await signIn(credentials);
+			resetDataForm();
 		} catch (error) {
 			showMessage(error.message, "error");
 		}
@@ -92,6 +94,7 @@ const AuthProvider = ({ children }) => {
 		}
 	};
 
+	//Estoy haciendo las validaciones de los datos en el proveedor pero creo que no debería ser así...
 	/**
 	 * Funciones para validar los formularios de login y registro.
 	 */
@@ -110,12 +113,19 @@ const AuthProvider = ({ children }) => {
 		if (
 			!credentials.email ||
 			!credentials.password ||
-			!credentials.display_name
+			!credentials.display_name ||
+			!credentials.confirmPassword
 		) {
 			showMessage("Los campos no pueden estar vacíos.", "error");
+		} else if (credentials.password !== credentials.confirmPassword) {
+			showMessage("Las contraseñas no coinciden.", "error");
 		} else {
 			createAccount();
 		}
+	};
+
+	const resetDataForm = () => {
+		setCredentials(initialCredentials);
 	};
 
 	useEffect(() => {
@@ -142,6 +152,7 @@ const AuthProvider = ({ children }) => {
 		updateData,
 		validateLogin,
 		validateRegister,
+		resetDataForm,
 		isAuthenticated,
 		user,
 		credentials,

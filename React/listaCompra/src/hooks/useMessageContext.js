@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { messageContext } from "./../context/MessageProvider.jsx";
+import { messageContext } from "../context/MessageProvider.jsx";
 
-const useMessage = () => {
+const useMessageContext = () => {
 	const context = useContext(messageContext);
 	if (!context) {
 		throw new Error(
@@ -11,4 +11,4 @@ const useMessage = () => {
 	return context;
 };
 
-export default useMessage;
+export default useMessageContext;

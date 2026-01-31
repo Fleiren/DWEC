@@ -1,7 +1,7 @@
-import useAuth from "./../hooks/useAuth.js";
+import useAuthContext from "./../hooks/useAuthContext.js";
 import "./login.css";
 const Login = () => {
-	const { updateData, validateLogin, credentials } = useAuth();
+	const { updateData, validateLogin, credentials } = useAuthContext();
 
 	//No se puede usar delegación de eventos con onChange en React, me salen un montón de errores y si coloco un onInput también me salen errores pidiendome que lo cambie a onChange. Por lo que he optado por colocar el onChange en cada input.
 	return (

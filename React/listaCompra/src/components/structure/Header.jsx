@@ -1,19 +1,22 @@
-import useAuth from "../../hooks/useAuth.js";
+import useAuthContext from "../../hooks/useAuthContext.js";
 import "./header.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Confirm from "../Confirm.jsx";
 const Header = () => {
 	const navigate = useNavigate();
-	const { isAuthenticated, logOut, user } = useAuth();
+	const { isAuthenticated, logOut, user, resetDataForm } = useAuthContext();
 	const [showConfirm, setShowConfirm] = useState(false);
 	//Lo aparto en funciones por si en un futuro quiero añadir más lógica.
 	const start = () => {
 		navigate("/login");
+		//Borramos los datos del formulario al darle al botón ya que creo que lo más normal es que si cambias de página se reinicien los datos.
+		resetDataForm();
 	};
 
 	const create = () => {
 		navigate("/register");
+		resetDataForm();
 	};
 
 	const logOutConfirm = () => {

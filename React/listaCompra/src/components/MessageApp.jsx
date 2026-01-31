@@ -1,9 +1,9 @@
 import React from "react";
-import useMessage from "../hooks/useMessage.js";
+import useMessageContext from "../hooks/useMessageContext.js";
 import "./messageApp.css";
 
 const MensajeApp = () => {
-	const { message, messageType, isActive } = useMessage();
+	const { message, messageType, isActive } = useMessageContext();
 
 	return (
 		isActive && (
