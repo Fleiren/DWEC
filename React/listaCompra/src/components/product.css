@@ -1,54 +1,79 @@
 .product_card {
-    background: white;
-    border: 1px solid #e0d7c6;
-    padding: 20px;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+	background: white;
+	border: 1px solid #e0d7c6;
+	padding: 20px;
+	border-radius: 12px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .product_card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+	transform: translateY(-10px);
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Imagen mucho más grande */
 .product_card img {
-    width: 100%;
-    height: 250px; /* Aumentado de 180px a 250px */
-    object-fit: contain; /* Para que no se corte la portada del libro */
-    margin-bottom: 15px;
-    transition: transform 0.3s ease;
+	width: 100%;
+	height: 250px; /* Aumentado de 180px a 250px */
+	object-fit: contain; /* Para que no se corte la portada del libro */
+	margin-bottom: 15px;
+	transition: transform 0.3s ease;
 }
 
 .product_card:hover img {
-    transform: scale(1.05); /* Efecto zoom al pasar el ratón */
+	transform: scale(1.05); /* Efecto zoom al pasar el ratón */
 }
 
 .product_card h3 {
-    font-family: 'Georgia', serif;
-    font-size: 1.1rem;
-    color: #1a2a3a;
-    margin: 10px 0;
-    min-height: 2.5rem;
-    display: flex;
-    align-items: center;
+	font-family: "Georgia", serif;
+	font-size: 1.1rem;
+	color: #1a2a3a;
+	margin: 10px 0;
+	min-height: 2.5rem;
+	display: flex;
+	align-items: center;
 }
 
 .product_card p {
-    margin: 4px 0;
-    font-size: 0.9rem;
-    color: #666;
+	margin: 4px 0;
+	font-size: 0.9rem;
+	color: #666;
 }
 
 /* El precio resaltado */
 .product_card p:last-child {
-    font-size: 1.2rem;
-    color: #c5a059;
-    font-weight: bold;
-    margin-top: 10px;
+	font-size: 1.2rem;
+	color: #c5a059;
+	font-weight: bold;
+	margin-top: 10px;
+}
+
+/* 2. NUEVO ESTILO PARA EL CONTENEDOR DE ICONOS */
+/* Usamos Flexbox para ponerlos en fila y centrados, ocupando poco espacio */
+.options_img {
+	display: flex; /* Los pone uno al lado del otro */
+	gap: 15px; /* Espacio entre los iconos */
+	justify-content: center; /* Los centra horizontalmente */
+	margin-top: auto; /* Empuja los iconos al final si sobra espacio arriba */
+	padding-top: 10px;
+}
+
+/* 3. ESTILO DE LOS ICONOS PEQUEÑOS */
+.options_img img {
+	cursor: pointer;
+	width: 24px; /* Tamaño fijo pequeño */
+	height: 24px; /* Reseteamos el height de 250px que causaba el problema */
+	opacity: 0.6; /* Un poco transparentes para que no roben atención */
+	transition: all 0.2s ease;
+}
+
+/* Efecto al pasar el ratón sobre los iconos */
+.options_img img:hover {
+	opacity: 1;
+	transform: scale(1.2);
 }

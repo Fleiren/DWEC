@@ -1,5 +1,7 @@
 import "./product.css";
 import { formatCurrency, formatNumberEs } from "../utils/formatters.js";
+import imageTrash from "../assets/img/trash.png";
+import imageEdit from "../assets/img/edit2.png";
 
 const Product = ({ product }) => {
 	return (
@@ -13,6 +15,10 @@ const Product = ({ product }) => {
 					<strong>Peso:</strong> {formatNumberEs(product.weight)} Kg
 				</p>
 				<p className="price_tag">{formatCurrency(product.price)}</p>
+			</div>
+			<div className="options_img">
+				<img src={imageTrash} alt="Eliminar" />
+				<img src={imageEdit} alt="Editar" />
 			</div>
 		</div>
 	);
