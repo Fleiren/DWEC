@@ -1,37 +1,27 @@
-/**
- * Estilos para el componente Menu.
- * Se diseña como una barra de navegación secundaria que aparece
- * solo cuando el usuario está autenticado.
- */
 nav {
-    width: 100%;
-    background-color: #f4ece1; /* Tono papel viejo para contraste suave */
-    display: flex;
-    justify-content: center;   /* Centra los enlaces horizontalmente */
-    gap: 30px;                /* Espaciado entre elementos del menú */
-    padding: 10px 0;
-    border-bottom: 1px solid #dcd3c1;
-    box-sizing: border-box;
+	background-color: var(--bg-paper);
+	padding: 10px 2rem;
+	border-bottom: 1px solid var(--border-color);
+	display: flex;
+	gap: 20px;
+	justify-content: center;
+	flex-shrink: 0;
 }
 
-/**
- * Clase para los enlaces del menú (Link de react-router-dom).
- * Se eliminan subrayados y se aplica un estilo tipo "índice de libro".
- */
 .element {
-    text-decoration: none;
-    color: #1a2a3a; /* Azul tinta para legibilidad */
-    font-weight: 600;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: color 0.3s ease, border-bottom 0.3s ease;
-    padding: 5px 0;
-    border-bottom: 2px solid transparent;
+	text-decoration: none;
+	color: var(--text-light);
+	font-weight: 700;
+	font-size: 0.95rem;
+	padding-bottom: 5px;
+	border-bottom: 2px solid transparent;
+	transition: all 0.3s ease;
+	text-transform: uppercase;
+	letter-spacing: 1px;
 }
 
-/* Efecto hover: Simula un subrayado elegante al pasar el ratón */
-.element:hover {
-    color: #c5a059; /* Dorado para resaltar la selección */
-    border-bottom: 2px solid #c5a059;
+.element:hover,
+.element:focus {
+	color: var(--accent-brown);
+	border-bottom: 2px solid var(--accent-brown);
 }

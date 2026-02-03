@@ -1,82 +1,81 @@
-/**
- * Contenedor principal para la creación de cuentas.
- * Se utiliza Flexbox en columna para alinear etiquetas e inputs verticalmente[cite: 51].
- */
-.register_container {
-    background-color: #ffffff;
-    padding: 2.5rem;
-    border-radius: 8px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* Sombra suave para destacar el formulario [cite: 51] */
-    
-    display: flex;
-    flex-direction: column; 
-    
-    width: 100%;
-    max-width: 400px; /* Ancho máximo para legibilidad en pantallas grandes */
-    border-top: 5px solid #c5a059; /* Lomo dorado decorativo */
+/* Estilos aplicables a login.css, register.css, createProduct.css */
+
+.login_container,
+.register_container,
+form {
+	background: var(--bg-white);
+	max-width: 500px;
+	margin: 2rem auto;
+	padding: 2.5rem;
+	border-radius: 8px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+	border: 1px solid var(--border-color);
+	display: flex;
+	flex-direction: column;
 }
 
-/* Título de la sección de registro */
-.register_container h3 {
-    text-align: center;
-    color: #1a2a3a;
-    margin-bottom: 1.5rem;
-    font-variant: small-caps;
+h3 {
+	text-align: center;
+	margin-bottom: 1.5rem;
+	color: var(--accent-brown);
 }
 
-/**
- * Estilos para las etiquetas de los campos.
- * Proporcionan claridad sobre qué dato debe introducir el usuario.
- */
-.register_container label {
-    font-weight: bold;
-    font-size: 0.85rem;
-    color: #555555;
-    margin-bottom: 0.4rem;
+label {
+	font-size: 0.9rem;
+	font-weight: bold;
+	margin-bottom: 5px;
+	color: var(--text-main);
+	margin-top: 15px;
 }
 
-/**
- * Configuración de los campos de entrada.
- * Son formularios controlados a través del estado en React.
- */
-.register_container input[type="email"],
-.register_container input[type="password"],
-.register_container input[type="text"] {
-    width: 100%;
-    padding: 0.8rem;
-    margin-bottom: 1.2rem; /* Espaciado uniforme entre elementos */
-    border: 1px solid #e0d7c6;
-    border-radius: 4px;
-    box-sizing: border-box; /* Evita que el padding altere el ancho total */
-    background-color: #fdfaf7;
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="url"],
+textarea,
+select {
+	padding: 12px;
+	border: 1px solid var(--border-color);
+	border-radius: 4px;
+	font-family: "Lato", sans-serif;
+	font-size: 1rem;
+	background-color: #fafafa;
+	transition: border-color 0.3s;
 }
 
-/* Efecto visual al enfocar un campo para mejorar la experiencia de usuario */
-.register_container input:focus {
-    border-color: #c5a059;
-    outline: none;
-    background-color: #ffffff;
+input:focus,
+textarea:focus,
+select:focus {
+	outline: none;
+	border-color: var(--accent-brown);
+	background-color: #fff;
 }
 
-/**
- * Botón de registro.
- * Utiliza colores de contraste para resaltar la acción principal.
- */
-.register_container input[type="button"] {
-    background-color: #1a2a3a;
-    color: #c5a059;
-    border: 2px solid #c5a059;
-    padding: 0.9rem;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-    text-transform: uppercase;
-    margin-top: 0.5rem;
-    transition: all 0.3s ease;
+input[type="button"],
+input[type="submit"],
+.btn_clear {
+	margin-top: 25px;
+	padding: 12px;
+	background-color: var(--accent-brown);
+	color: white;
+	border: none;
+	border-radius: 4px;
+	font-size: 1rem;
+	font-weight: bold;
+	transition: background-color 0.3s;
 }
 
-/* Feedback visual al pasar el ratón por el botón */
-.register_container input[type="button"]:hover {
-    background-color: #c5a059;
-    color: #1a2a3a;
+input[type="button"]:hover {
+	background-color: #6d5448;
+}
+
+/* Link para volver o acciones secundarias */
+.back-link {
+	display: block;
+	text-align: center;
+	margin-top: 15px;
+	color: var(--text-light);
+	text-decoration: none;
+	font-size: 0.9rem;
 }

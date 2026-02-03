@@ -1,67 +1,46 @@
-/**
- * Estilos para el componente de cabecera (Header).
- * Se diseña para ocupar todo el ancho superior y mantener una interfaz intuitiva.
- */
 .header_container {
-    /* Ocupa todo el ancho del navegador y se mantiene arriba */
-    width: 100%;
-    background-color: #1a2a3a; /* Azul tinta estilo librería */
-    color: #fdfaf6;            /* Blanco crema para el texto */
-    
-    /* Flexbox para alinear el título a la izquierda y botones a la derecha */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-    /* Espaciado interno: 1rem arriba/abajo y 5% a los lados para elegancia */
-    padding: 1rem 5%;
-    
-    /* Asegura que el padding no sume al ancho total de la pantalla */
-    box-sizing: border-box;
-    
-    /* Detalle estético: borde dorado y sombra suave */
-    border-bottom: 3px solid #c5a059;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	background-color: var(--bg-white);
+	height: var(--header-height);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 2rem;
+	border-bottom: 1px solid var(--border-color);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+	flex-shrink: 0; /* Evita que se encoja */
+	z-index: 10;
 }
 
-/* Estilo del título principal */
 .header_container h1 {
-    margin: 0;
-    font-size: 1.5rem;
-    font-family: 'Georgia', serif; /* Estilo literario */
-    letter-spacing: 1px;
+	font-size: 1.8rem;
+	color: var(--accent-brown);
+	letter-spacing: -0.5px;
+	font-weight: 700;
 }
 
-/* Contenedor del nombre de usuario y botones */
-.header_container div, 
-.header_container nav {
-    display: flex;
-    align-items: center;
-    gap: 15px; /* Espacio entre el nombre y el botón */
+.header_container div {
+	display: flex;
+	align-items: center;
+	gap: 15px;
 }
 
-/* Estilo para el nombre completo (Display Name) requerido por la práctica  */
 .header_container h3 {
-    margin: 0;
-    font-size: 1rem;
-    font-weight: normal;
-    font-style: italic;
-    color: #c5a059;
+	font-size: 1rem;
+	font-weight: 400;
+	margin-right: 10px;
+	font-family: "Lato", sans-serif;
 }
 
-/* Botones de navegación y acción */
 .header_container button {
-    background-color: #c5a059;
-    color: #1a2a3a;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
+	background: transparent;
+	border: 1px solid var(--text-main);
+	padding: 8px 16px;
+	border-radius: 4px;
+	transition: all 0.3s ease;
+	font-size: 0.9rem;
 }
 
 .header_container button:hover {
-    background-color: #fdfaf6;
-    transform: translateY(-2px);
+	background: var(--text-main);
+	color: var(--bg-white);
 }

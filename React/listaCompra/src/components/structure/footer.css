@@ -1,37 +1,11 @@
-/**
- * Estilos para el componente de pie de página (Footer).
- * Se diseña para ser sutil pero legible, cerrando la estructura de la aplicación.
- */
 .footer_container {
-    /* Ocupa todo el ancho inferior */
-    width: 100%;
-    
-    /* Colores en contraste con el fondo crema de la app */
-    background-color: #1a2a3a; /* Azul tinta a juego con el Header */
-    color: #888888;            /* Texto gris suave para no distraer */
-    
-    /* Centrado de contenido */
-    text-align: center;
-    padding: 1.5rem 0;
-    
-    /* Línea superior para separarlo visualmente del contenido */
-    border-top: 1px solid #333333;
-    
-    /* Aseguramos que no se mueva del fondo */
-    margin-top: auto; 
-    box-sizing: border-box;
-}
-
-/* Estilo para el texto legal/derechos */
-.footer_container small {
-    font-size: 0.8rem;
-    letter-spacing: 0.5px;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    display: block;
-}
-
-/* Opcional: un toque dorado al nombre si quieres que resalte un poco */
-.footer_container small::after {
-    content: " | 2026";
-    color: #c5a059;
+	background-color: var(--bg-paper);
+	border-top: 1px solid var(--border-color);
+	height: var(--footer-height);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--text-light);
+	font-size: 0.85rem;
+	flex-shrink: 0;
 }

@@ -1,108 +1,75 @@
 .filter_product_menu {
-    display: flex;
-    flex-wrap: wrap; /* Se adapta si la pantalla es pequeña */
-    align-items: center;
-    justify-content: center;
-    gap: 20px; /* Separación entre grupos */
-    background-color: #ffffff;
-    padding: 10px 25px;
-    border-radius: 50px; /* Forma de píldora */
-    border: 1px solid #e0d7c6;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    margin: 0 auto 20px auto;
-    width: fit-content; /* Ocupa solo lo necesario, no toda la pantalla */
-    max-width: 95%;
+	background-color: var(--bg-white);
+	padding: 1.5rem;
+	margin-bottom: 2rem;
+	border-radius: 8px;
+	border: 1px solid var(--border-color);
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	justify-content: space-between;
+	align-items: flex-end;
 }
 
-/* Sección de inputs (Nombre, Precio, Peso) */
 .filter_section_inputs {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding-right: 20px;
-    border-right: 1px solid #e0d7c6; /* Separador vertical elegante */
+	display: flex;
+	gap: 15px;
+	flex-wrap: wrap;
+	box-shadow: none; /* Quitamos sombra del form genérico */
+	border: none;
+	padding: 0;
+	margin: 0;
 }
 
-/* Sección de ordenar */
-.filter_section_order {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-/* EL CAMBIO CLAVE: Etiqueta al lado del input, no encima */
 .filter_group {
-    display: flex;
-    flex-direction: row; /* Horizontal */
-    align-items: center;
-    gap: 8px;
+	display: flex;
+	flex-direction: column;
 }
 
 .filter_group label {
-    display: block; /* ¡Las mostramos de nuevo! */
-    font-size: 0.75rem; /* Pequeñas pero legibles */
-    font-weight: 800;
-    color: #c5a059; /* Dorado */
-    text-transform: uppercase;
-    white-space: nowrap; /* Que no se rompa el texto */
+	font-size: 0.8rem;
+	margin-top: 0;
+	margin-bottom: 5px;
+	color: var(--text-light);
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
 }
 
-/* Inputs compactos */
-.filter_group input, 
+.filter_group input,
 .filter_group select {
-    padding: 5px 10px;
-    border: 1px solid #ddd;
-    border-radius: 15px;
-    font-size: 0.85rem;
-    background: #fdfaf7;
-    outline: none;
-    height: 32px; /* Altura controlada */
-    color: #333;
+	padding: 8px;
+	font-size: 0.9rem;
+	width: 140px;
 }
 
-.filter_group input:focus {
-    border-color: #c5a059;
-    background: #fff;
+.filter_section_order {
+	display: flex;
+	align-items: flex-end;
+	gap: 15px;
 }
 
-/* Controlamos el ancho para que no se ensanche la barra */
-input#name { width: 130px; }
-input#price { width: 60px; }
-input#weight { width: 60px; }
-select#orderType { width: 110px; }
-
-/* Botón de Reset */
+/* Botón reset más sutil */
 .btn_clear {
-    background: #1a2a3a;
-    color: #c5a059;
-    border: none;
-    padding: 0 15px;
-    height: 32px;
-    border-radius: 15px;
-    font-size: 0.7rem;
-    font-weight: bold;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: 0.2s;
-    display: flex;
-    align-items: center;
+	margin-top: 0;
+	padding: 8px 15px;
+	background-color: transparent;
+	color: var(--text-light);
+	border: 1px solid var(--border-color);
 }
 
 .btn_clear:hover {
-    background: #c5a059;
-    color: #1a2a3a;
+	background-color: #eee;
+	color: var(--text-main);
 }
 
-/* Ajuste para móviles: si no cabe, que se pongan uno debajo de otro */
-@media (max-width: 900px) {
-    .filter_product_menu {
-        border-radius: 12px; /* Menos redondo en móvil */
-        flex-direction: column;
-        gap: 10px;
-    }
-    .filter_section_inputs {
-        border-right: none;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+/* Icono de añadir (+) */
+.filter_section_order input[type="image"] {
+	width: 35px;
+	height: 35px;
+	transition: transform 0.2s;
+	cursor: pointer;
+}
+
+.filter_section_order input[type="image"]:hover {
+	transform: rotate(90deg);
 }

@@ -1,64 +1,40 @@
-/* App.css o productList.css */
 .product_list_container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra el título, el menú y el grid */
-    padding: 20px;
-}
-
-.product_list {
-    display: grid !important;
-    /* Bajamos el mínimo de 250px a 200px para que entren más por fila */
-    grid-template-columns: repeat(3,  1fr) !important; 
-    gap: 25px !important;
-    width: 100% !important;
-    margin-top: 20px;
+	width: 100%;
 }
 
 .product_list_container h1 {
-    font-family: 'Georgia', serif;
-    border-bottom: 2px solid var(--gold);
-    color: #1a2a3a;
-    margin: 0;
+	text-align: center;
+	margin-bottom: 2rem;
+	font-size: 2rem;
+	color: var(--text-main);
+	border-bottom: 2px solid var(--border-color);
+	padding-bottom: 10px;
+	display: inline-block;
+	width: 100%;
+}
+
+/* Grid automático responsive */
+.product_list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+	gap: 2rem;
+	margin-bottom: 2rem;
 }
 
 .product_details {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #ffffff;
-    border: 2px solid #e0d7c6;
-    border-radius: 50px; /* Estilo píldora */
-    padding: 10px 40px;
-    margin: 10px auto 30px auto;
-    width: fit-content; /* Se ajusta al texto */
-    gap: 30px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+	background-color: var(--bg-white);
+	padding: 15px;
+	border-radius: 8px;
+	border: 1px solid var(--border-color);
+	display: flex;
+	justify-content: space-around;
+	margin-top: 2rem;
+	font-family: "Merriweather", serif;
+	color: var(--text-light);
 }
 
-.product_details strong {
-    color: #1a2a3a;
-    font-size: 0.9rem;
-    font-family: 'Segoe UI', sans-serif;
-}
-
-.product_details strong::after {
-    content: "";
-    display: block;
-    width: 20px;
-    height: 2px;
-    background: #c5a059;
-    margin: 2px auto;
-}
-
-
-
-@media (max-width: 1100px) {
-    .product_list { grid-template-columns: repeat(2, 1fr) !important; }
-}
-
-@media (max-width: 600px) {
-    .product_list { grid-template-columns: 1fr !important; }
+.stat_value {
+	color: var(--accent-brown);
+	font-weight: bold;
+	font-size: 1.2rem;
 }

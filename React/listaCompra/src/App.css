@@ -1,59 +1,74 @@
+/* Importamos fuentes elegantes: Merriweather (Títulos/Libros) y Lato (UI/Textos) */
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap");
+
 :root {
-  --backgroundLight: #f4f7f6;
-  --primaryColor: #2c3e50;
-  --accentColor: #3498db;
-  --white: #ffffff;
-  --gold: #c5a059;
+	/* Paleta "Papelería / Librería" */
+	--bg-paper: #fcfbf8; /* Color crema muy suave */
+	--bg-white: #ffffff;
+	--text-main: #2c3e50; /* Azul oscuro casi negro (tinta) */
+	--text-light: #606f7b;
+	--accent-brown: #8d6e63; /* Marrón cuero */
+	--accent-gold: #c5a059; /* Dorado envejecido */
+	--border-color: #e0d7c6;
+	--success: #27ae60;
+	--error: #c0392b;
+
+	/* Medidas */
+	--header-height: 70px;
+	--footer-height: 50px;
 }
 
-html, body, #root {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  background-color: var(--backgroundLight);
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
+body {
+	font-family: "Lato", sans-serif;
+	background-color: var(--bg-paper);
+	color: var(--text-main);
+	line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	font-family: "Merriweather", serif; /* Toque literario */
+	color: var(--text-main);
+}
+
+button {
+	cursor: pointer;
+	font-family: "Lato", sans-serif;
+}
+
+/* Estructura Principal para Header/Footer Fijos */
+/* Esto se conecta con tu Container.jsx */
+.Container_container {
+	display: flex;
+	flex-direction: column;
+	height: 100vh; /* Ocupa toda la altura de la pantalla */
+	overflow: hidden; /* Evita doble scroll */
+}
+
+/* Esto se conecta con tu Content.jsx */
 .Content_container {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch; /* Mantenemos esto para el Grid */
-  padding: 2rem;
-  width: 100%;
-  box-sizing: border-box;
+	flex: 1; /* Ocupa todo el espacio sobrante entre header y footer */
+	overflow-y: auto; /* Aquí es donde ocurre el scroll */
+	padding: 2rem;
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto; /* Centrado */
+	scroll-behavior: smooth;
 }
 
-.Content_container {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  /* CAMBIO CLAVE: stretch permite que el grid ocupe todo el ancho */
-  align-items: stretch; 
-  padding: 2rem;
-  box-sizing: border-box;
-  width: 100%;
+/* Scrollbar personalizado y elegante */
+.Content_container::-webkit-scrollbar {
+	width: 8px;
 }
-
-header {
-  background-color: var(--primaryColor);
-  color: var(--white);
-  padding: 1rem 5%;
-}
-
-footer {
-  background-color: var(--primaryColor);
-  color: var(--white);
-  padding: 1rem;
-  text-align: center;
-}
-form {
-  max-width: 400px;
-  margin: 2rem auto; /* Esto centra el bloque horizontalmente */
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: var(--shadowSoft);
+.Content_container::-webkit-scrollbar-thumb {
+	background-color: var(--border-color);
+	border-radius: 4px;
 }
