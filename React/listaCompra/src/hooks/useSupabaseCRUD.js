@@ -32,13 +32,16 @@ const useSupabaseCRUD = (tableName) => {
 	};
 
 	const getById = async (id) => {
+		//Para que no te devuelva un array de objetos la consulta puedes indicar con single() que te devuelva solo uno y como estas consultas solo devuelven un registro nos ahorramos el problema del array.
 		return await request(
-			supabaseConnexion.from(tableName).select("*").eq("id", id),
+			supabaseConnexion.from(tableName).select("*").eq("id", id).single(),
 		);
 	};
 
 	const save = async (item) => {
-		return await request(supabaseConnexion.from(tableName).insert(item));
+		return await request(
+			supabaseConnexion.from(tableName).insert(item).select().single(),
+		);
 	};
 
 	const edit = async (item) => {
@@ -48,9 +51,7 @@ const useSupabaseCRUD = (tableName) => {
 	};
 
 	const remove = async (id) => {
-		return request(
-			supabaseConnexion.from(tableName).delete().eq("id", id),
-		);
+		return request(supabaseConnexion.from(tableName).delete().eq("id", id));
 	};
 
 	return {
@@ -59,7 +60,7 @@ const useSupabaseCRUD = (tableName) => {
 		getById,
 		save,
 		edit,
-		remove
+		remove,
 	};
 };
 

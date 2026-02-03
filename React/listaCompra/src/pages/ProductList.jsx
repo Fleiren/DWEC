@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useProductContext from "./../hooks/useProductContext.js";
 import Product from "./../components/Product.jsx";
 import FilterProductMenu from "../components/menu/submenu/FilterProductMenu.jsx";
@@ -13,7 +14,7 @@ const ProductList = () => {
 	const [showConfirm, setShowConfirm] = useState(false);
 	//Veo esto un poco chapuza, creo que se podría arreglar el confirm o algo para recibir id.
 	const [idSelectedProduct, setIdSelectedProduct] = useState("");
-
+	const nv = useNavigate();
 	const calculateAverage = () => {
 		let totalPrice = 0;
 		filteredProducts.forEach((product) => {
@@ -29,7 +30,11 @@ const ProductList = () => {
 	const deleteProduct = (evento) => {
 		if (evento.target.name === "delete") {
 			setShowConfirm(true);
+			//Guardamos la id en un estado para tener acceso a ella si el usuario decide eliminar el producto.
 			setIdSelectedProduct(evento.target.value);
+		}
+		if (evento.target.name === "edit") {
+			nv(`/editProduct/${evento.target.value}`);
 		}
 	};
 	const confirmDeleteProduct = () => {

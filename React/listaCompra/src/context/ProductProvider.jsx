@@ -1,14 +1,15 @@
 import { createContext, useState, useEffect } from "react";
 import useMessageContext from "../hooks/useMessageContext.js";
 import useSupabaseCRUD from "../hooks/useSupabaseCRUD.js";
+import { cleanNumber } from "../utils/formatters.js";
 const productContext = createContext();
 
 const ProductProvider = ({ children }) => {
 	const emptyProduct = {
 		name: "",
 		description: "",
-		price: null,
-		weight: null,
+		price: "",
+		weight: "",
 		image: "",
 	};
 	const [selectedProduct, setSelectedProduct] = useState(emptyProduct);
@@ -20,6 +21,15 @@ const ProductProvider = ({ children }) => {
 	const { showMessage } = useMessageContext();
 	const { loading, getAll, getById, save, edit, remove } =
 		useSupabaseCRUD("products");
+
+	//Estos dos métodos son para evitar utilizar el setter fuera del contexto, ahora hace lo mismo pero entiendo que la estructura debe ser esta aunque ahora no haya ninguna validación.
+	const updateSelectedProduct = (product) => {
+		setSelectedProduct(product);
+	};
+
+	const resetSelectedProduct = () => {
+		setSelectedProduct(emptyProduct);
+	};
 
 	const listProducts = async () => {
 		try {
@@ -54,7 +64,10 @@ const ProductProvider = ({ children }) => {
 
 	const createProduct = async (product) => {
 		try {
-			await save(product);
+			const newProduct = await save(product);
+			const newList = [...products, newProduct];
+			setProducts(newList);
+			setFilteredProducts(newList);
 		} catch (error) {
 			showMessage(error.message, "error");
 		}
@@ -63,6 +76,13 @@ const ProductProvider = ({ children }) => {
 	const updateProduct = async (product) => {
 		try {
 			await edit(product);
+			//Actualizamos también los estados.
+			const newList = [...products].map((p) =>
+				p.id === product.id ? product : p,
+			);
+			setProducts(newList);
+			setFilteredProducts(newList);
+			showMessage("El producto se ha editado con éxito.", "ok");
 		} catch (error) {
 			showMessage(error.message, "error");
 		}
@@ -71,7 +91,9 @@ const ProductProvider = ({ children }) => {
 	const removeProduct = async (id) => {
 		try {
 			await remove(id);
-			removeItem(id);
+			const newList = products.filter((p) => p.id !== id);
+			setProducts(newList);
+			setFilteredProducts(newList);
 			showMessage("Se ha borrado el producto con éxito.", "ok");
 		} catch (error) {
 			showMessage(error.message, "error");
@@ -153,21 +175,48 @@ const ProductProvider = ({ children }) => {
 		setIsFiltered(false);
 	};
 
-	//Estos métodos de aquí estoy pensando en llevarlos a un archivo estilo util.js pero no se si sería demasiada modularización para algo sencillo como un map...
-	//incluso estoy pensando que al ser una sola línea, no haría falta que estuviera en un método a parte.
-
-	const addItem = (item) => {
-		setProducts([...products, item]);
+	const updateDataProduct = (evento) => {
+		const { name, value } = evento.target;
+		if (name) {
+			setSelectedProduct({ ...selectedProduct, [name]: value });
+		}
 	};
 
-	const removeItem = (id) => {
-		const newList = products.filter((p) => p.id != id);
-		setProducts(newList);
-	};
+	const validateProduct = () => {
+		//He agrupado los errores para que los mensajes sean un poco más genéricos, se que se podría hacer mejor.
+		//He hecho un return en cada condición porque no se si es buena práctica que el proveedor navegue a otras páginas,
+		//ya que tenía pensado hacer muchos if, else if y que si entra al último else (todo ha salido bien) a parte de guardar navegue directamente a la lista,
+		//pero al final, como luego en añadir producto no voy directamente a la lista (y no se si es buena práctica que un proveedor maneje navegaciones) lo he dejado como que indica si ha funcionado o no.
 
-	const updateItem = (item) => {
-		const newList = products.map((p) => (p.id === item.id ? item : p));
-		setProducts(newList);
+		//Cambiamos las "," a "." para que la base de datos no falle ya que da error si intentamos registrar datos con ",".
+
+		const weight = cleanNumber(selectedProduct.weight);
+		const price = cleanNumber(selectedProduct.price);
+		if (
+			!selectedProduct.name ||
+			!selectedProduct.name.trim() ||
+			!selectedProduct.weight ||
+			!selectedProduct.price
+		) {
+			showMessage("Los campos obligatorios no pueden estar vacíos.", "error");
+			return null;
+		}
+
+		if (isNaN(weight) || isNaN(price)) {
+			showMessage("Los campos precio y peso deben ser números", "error");
+			return null;
+		}
+
+		if (weight <= 0 || price <= 0) {
+			showMessage(
+				"Los campos precio y peso deben ser números positivos, mayores a 0",
+				"error",
+			);
+			return null;
+		}
+		const productReady = { ...selectedProduct, weight: weight, price: price };
+
+		return productReady;
 	};
 
 	useEffect(() => {
@@ -180,6 +229,8 @@ const ProductProvider = ({ children }) => {
 		filteredProducts,
 		isFiltered,
 		loading,
+		updateSelectedProduct,
+		resetSelectedProduct,
 		findProductById,
 		createProduct,
 		updateProduct,
@@ -187,6 +238,8 @@ const ProductProvider = ({ children }) => {
 		filterProducts,
 		orderProducts,
 		clearFilter,
+		updateDataProduct,
+		validateProduct,
 	};
 	return (
 		<>

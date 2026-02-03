@@ -6,6 +6,8 @@ import ProductList from "../pages/ProductList.jsx";
 import Register from "../pages/Register.jsx";
 import ShoppingList from "../pages/ShoppingList.jsx";
 import Error from "../pages/Error.jsx";
+import CreateProduct from "../pages/CreateProduct.jsx";
+import EditProduct from "../pages/EditProduct.jsx";
 
 const Router = () => {
 	return (
@@ -13,6 +15,8 @@ const Router = () => {
 			<Route path="/" element={<Home />} />
 			<Route path="/login" element={<Login />} />
 			<Route path="/productList" element={<ProductList />} />
+			<Route path="/editProduct/:id" element={<EditProduct />} />
+			<Route path="/createProduct" element={<CreateProduct />} />
 			<Route path="/register" element={<Register />} />
 			<Route path="/shoppingList" element={<ShoppingList />} />
 			<Route path="*" element={<Error />} />

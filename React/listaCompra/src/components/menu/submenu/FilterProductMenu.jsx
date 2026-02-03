@@ -1,7 +1,10 @@
 import "./filterProductMenu.css";
 import useProductContext from "../../../hooks/useProductContext.js";
+import createIcon from "../../../assets/img/mas.png";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 const FilterProductMenu = () => {
+	const nv = useNavigate();
 	const { orderProducts, filterProducts, clearFilter } = useProductContext();
 	const initialInputs = {
 		name: "",
@@ -15,6 +18,10 @@ const FilterProductMenu = () => {
 	const reset = () => {
 		clearFilter();
 		setInputs(initialInputs);
+	};
+
+	const navigateCreate = () => {
+		nv("/createProduct");
 	};
 
 	const applyFilter = (evento) => {
@@ -80,6 +87,12 @@ const FilterProductMenu = () => {
 					<button className="btn_clear" onClick={reset}>
 						Reset
 					</button>
+					<input
+						type="image"
+						src={createIcon}
+						alt="Añadir producto"
+						onClick={navigateCreate}
+					/>
 				</div>
 			</div>
 		</>

@@ -1,31 +1,45 @@
-import "./createProduct.css";
+import "./editProduct.css";
 import { useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import useProductContext from "../hooks/useProductContext.js";
-import useMessageContext from "../hooks/useMessageContext.js";
-const CreateProduct = () => {
+const EditProduct = () => {
+	const { id } = useParams();
+	const nv = useNavigate();
 	const {
+		products,
 		validateProduct,
 		updateDataProduct,
-		resetSelectedProduct,
+		updateSelectedProduct,
 		selectedProduct,
-		createProduct,
+		updateProduct,
 	} = useProductContext();
 
-	const { showMessage } = useMessageContext();
+	const product = [...products].find((p) => p.id === id);
+
+	const editProduct = {
+		id: product.id,
+		name: product.name,
+		weight: product.weight,
+		price: product.price,
+		image: product.image,
+		description: product.description,
+	};
+
 	const validate = async () => {
 		const validProduct = validateProduct();
 		if (validProduct) {
 			try {
-				await createProduct(validProduct);
-				showMessage("El producto se ha creado con éxito.", "ok");
+				await updateProduct(validProduct);
+				nv("/productList");
 			} catch (error) {
 				showMessage(error.message, "error");
 			}
 		}
 	};
+
 	useEffect(() => {
-		//Cuando se monta el componente se actualiza el estado del producto seleccionado para asegurarnos de que está vacío.
-		resetSelectedProduct();
+		//Cuando se monta el componente se actualiza el estado del producto seleccionado para poder tenerlo ya con los datos del producto que vamos a editar.
+		updateSelectedProduct(editProduct);
 	}, []);
 	return (
 		<>
@@ -73,10 +87,9 @@ const CreateProduct = () => {
 					value={selectedProduct.description}
 					onChange={updateDataProduct}
 				/>
-				<input type="button" onClick={validate} value="Crear" />
+				<input type="button" onClick={validate} value="Editar" />
 			</form>
 		</>
 	);
 };
-
-export default CreateProduct;
+export default EditProduct;
