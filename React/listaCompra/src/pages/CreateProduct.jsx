@@ -50,7 +50,7 @@ const CreateProduct = () => {
 				/>
 				<label htmlFor="price">Precio:</label>
 				<input
-					type="nmber"
+					type="number"
 					id="price"
 					name="price"
 					value={selectedProduct.price}
@@ -66,8 +66,7 @@ const CreateProduct = () => {
 					onChange={updateDataProduct}
 				/>
 				<label htmlFor="description">Descripción:</label>
-				<input
-					type="textarea"
+				<textarea
 					id="description"
 					name="description"
 					value={selectedProduct.description}
