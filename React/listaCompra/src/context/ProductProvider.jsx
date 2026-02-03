@@ -71,6 +71,8 @@ const ProductProvider = ({ children }) => {
 	const removeProduct = async (id) => {
 		try {
 			await remove(id);
+			removeItem(id);
+			showMessage("Se ha borrado el producto con éxito.", "ok");
 		} catch (error) {
 			showMessage(error.message, "error");
 		}

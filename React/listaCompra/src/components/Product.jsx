@@ -17,8 +17,21 @@ const Product = ({ product }) => {
 				<p className="price_tag">{formatCurrency(product.price)}</p>
 			</div>
 			<div className="options_img">
-				<img src={imageTrash} alt="Eliminar" />
-				<img src={imageEdit} alt="Editar" />
+				<input
+					type="image"
+					src={imageTrash}
+					id="delete"
+					name="delete"
+					value={product.id}
+				/>
+
+				<input
+					type="image"
+					src={imageEdit}
+					id="edit"
+					name="edit"
+					value={product.id}
+				/>
 			</div>
 		</div>
 	);

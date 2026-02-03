@@ -53,27 +53,26 @@
 	margin-top: 10px;
 }
 
-/* 2. NUEVO ESTILO PARA EL CONTENEDOR DE ICONOS */
-/* Usamos Flexbox para ponerlos en fila y centrados, ocupando poco espacio */
+
 .options_img {
-	display: flex; /* Los pone uno al lado del otro */
-	gap: 15px; /* Espacio entre los iconos */
-	justify-content: center; /* Los centra horizontalmente */
-	margin-top: auto; /* Empuja los iconos al final si sobra espacio arriba */
+	display: flex; 
+	gap: 15px; 
+	justify-content: center;
+	margin-top: auto; 
 	padding-top: 10px;
 }
 
-/* 3. ESTILO DE LOS ICONOS PEQUEÑOS */
-.options_img img {
+
+.options_img input {
 	cursor: pointer;
-	width: 24px; /* Tamaño fijo pequeño */
-	height: 24px; /* Reseteamos el height de 250px que causaba el problema */
-	opacity: 0.6; /* Un poco transparentes para que no roben atención */
+	width: 24px;
+	height: 24px;
+	opacity: 0.6;
 	transition: all 0.2s ease;
 }
 
-/* Efecto al pasar el ratón sobre los iconos */
-.options_img img:hover {
+
+.options_img input:hover {
 	opacity: 1;
 	transform: scale(1.2);
 }

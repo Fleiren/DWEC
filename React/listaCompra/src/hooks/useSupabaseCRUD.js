@@ -48,7 +48,7 @@ const useSupabaseCRUD = (tableName) => {
 	};
 
 	const remove = async (id) => {
-		return await request(
+		return request(
 			supabaseConnexion.from(tableName).delete().eq("id", id),
 		);
 	};
@@ -59,6 +59,7 @@ const useSupabaseCRUD = (tableName) => {
 		getById,
 		save,
 		edit,
+		remove
 	};
 };
 
