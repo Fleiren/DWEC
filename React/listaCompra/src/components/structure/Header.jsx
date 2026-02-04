@@ -39,7 +39,7 @@ const Header = () => {
 				<>
 					{/* Uso el operador opcional ya que la variable user al iniciar sesión puede ser null */}
 					<div>
-						<h3>Bienvenido {user?.user_metadata?.display_name}</h3>
+						<h3>Disfruta de tu compra {user?.user_metadata?.display_name}</h3>
 						<button onClick={logOutConfirm}>Cerrar sesión</button>
 						{showConfirm && (
 							//Componente de confirmación reutilizable.

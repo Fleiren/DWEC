@@ -1,19 +1,25 @@
 import { Link } from "react-router-dom";
 import useAuthContext from "../../hooks/useAuthContext.js";
+import useProductContext from "../../hooks/useProductContext.js";
 import "./menu.css";
 const Menu = () => {
 	const { isAuthenticated } = useAuthContext();
+	const { isShoppingListVisible, toggleShoppingList } = useProductContext();
 	return (
 		<nav>
 			<>
 				<Link className="element" to="/productList">
 					Productos
 				</Link>
-				{/** Solo se mostrará la lista de la compra a los que estén registrados. */}
+				{/** Para la siguiente práctica quiero investigar para hacer esto bien con un outlet porque esto lo veo un poco chapuza la verdad (pongo un enlace para que se parezca al link).*/}
 				{isAuthenticated && (
-					<Link className="element" to="/shoppingList">
-						Lista de la compra
-					</Link>
+					<a
+						className={`element ${isShoppingListVisible ? "active" : ""}`}
+						onClick={toggleShoppingList}
+						style={{ cursor: "pointer" }}
+					>
+						{isShoppingListVisible ? "Ocultar Lista" : "Lista de la compra"}
+					</a>
 				)}
 			</>
 		</nav>

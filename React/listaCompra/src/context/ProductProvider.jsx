@@ -11,7 +11,17 @@ const ProductProvider = ({ children }) => {
 		price: "",
 		weight: "",
 		image: "",
+		category: "books",
 	};
+
+	//Este estado irá en otro contexto en la siguiente práctica ya implementaré la lista de la compra de forma completa, lo coloco aquí por tener ya la lógica porque no me da tiempo a hacer todo el otro contexto.
+	const [isShoppingListVisible, setIsShoppingListVisible] = useState(false);
+
+	const toggleShoppingList = () => {
+		setIsShoppingListVisible(!isShoppingListVisible);
+	};
+
+	const [activeCategory, setActiveCategory] = useState("books");
 	const [selectedProduct, setSelectedProduct] = useState(emptyProduct);
 	const [products, setProducts] = useState([]);
 	const [filteredProducts, setFilteredProducts] = useState([]);
@@ -31,13 +41,20 @@ const ProductProvider = ({ children }) => {
 		setSelectedProduct(emptyProduct);
 	};
 
+	const changeCategory = (category) => {
+		setActiveCategory(category);
+		const newFiltered = products.filter((p) => p.category === category);
+		setFilteredProducts(newFiltered);
+	};
 	const listProducts = async () => {
 		try {
 			const response = await getAll();
 			if (response) {
 				setProducts(response);
-				//Se inicializa también la lista de productos filtrados con todos los productos.
-				setFilteredProducts(response);
+				//Se inicializa también la lista de productos filtrados con todos los productos de la categoría libros ya que son los que quiero que se muestren por defecto.
+				//Filtro directamente la respuesta porque si no, cuando recargo la página no se cargan los productos.
+				const newFiltered = response.filter((p) => p.category === "books");
+				setFilteredProducts(newFiltered);
 			} else {
 				showMessage("No se han podido obtener los productos.", "error");
 			}
@@ -67,7 +84,7 @@ const ProductProvider = ({ children }) => {
 			const newProduct = await save(product);
 			const newList = [...products, newProduct];
 			setProducts(newList);
-			setFilteredProducts(newList);
+			setFilteredProducts(newList.filter((p) => p.category === activeCategory));
 		} catch (error) {
 			showMessage(error.message, "error");
 		}
@@ -81,7 +98,7 @@ const ProductProvider = ({ children }) => {
 				p.id === product.id ? product : p,
 			);
 			setProducts(newList);
-			setFilteredProducts(newList);
+			setFilteredProducts(newList.filter((p) => p.category === activeCategory));
 			showMessage("El producto se ha editado con éxito.", "ok");
 		} catch (error) {
 			showMessage(error.message, "error");
@@ -93,7 +110,7 @@ const ProductProvider = ({ children }) => {
 			await remove(id);
 			const newList = products.filter((p) => p.id !== id);
 			setProducts(newList);
-			setFilteredProducts(newList);
+			setFilteredProducts(newList.filter((p) => p.category === activeCategory));
 			showMessage("Se ha borrado el producto con éxito.", "ok");
 		} catch (error) {
 			showMessage(error.message, "error");
@@ -113,12 +130,19 @@ const ProductProvider = ({ children }) => {
 				break;
 		}
 	};
+
+	//¿¿Que me estoy liando con esto de las categorías?? Sí, lo se.
 	const filterProductName = (name) => {
 		if (name === "") {
-			setFilteredProducts([...products]);
+			setFilteredProducts(
+				[...products].filter((product) => product.category === activeCategory),
+			);
 		} else {
 			const filtered = [...products].filter((product) => {
-				return product.name.toLowerCase().startsWith(name.toLowerCase());
+				return (
+					product.category === activeCategory &&
+					product.name.toLowerCase().startsWith(name.toLowerCase())
+				);
 			});
 			setFilteredProducts(filtered);
 			setIsFiltered(true);
@@ -128,11 +152,15 @@ const ProductProvider = ({ children }) => {
 	const filterProductPriceWeight = (type, number) => {
 		//Me estaba dando error porque lo recibo como un string y se me había olvidado eso.
 		if (number === "") {
-			setFilteredProducts([...products]);
+			setFilteredProducts(
+				[...products].filter((product) => product.category === activeCategory),
+			);
 		} else {
 			const numberValue = Number.parseFloat(number);
 			const filtered = [...products].filter((product) => {
-				return product[type] <= numberValue;
+				return (
+					product.category === activeCategory && product[type] <= numberValue
+				);
 			});
 			setFilteredProducts(filtered);
 			setIsFiltered(true);
@@ -171,7 +199,9 @@ const ProductProvider = ({ children }) => {
 	};
 
 	const clearFilter = () => {
-		setFilteredProducts([...products]);
+		setFilteredProducts(
+			[...products].filter((p) => p.category === activeCategory),
+		);
 		setIsFiltered(false);
 	};
 
@@ -229,6 +259,8 @@ const ProductProvider = ({ children }) => {
 		filteredProducts,
 		isFiltered,
 		loading,
+		isShoppingListVisible,
+		activeCategory,
 		updateSelectedProduct,
 		resetSelectedProduct,
 		findProductById,
@@ -240,6 +272,8 @@ const ProductProvider = ({ children }) => {
 		clearFilter,
 		updateDataProduct,
 		validateProduct,
+		toggleShoppingList,
+		changeCategory,
 	};
 	return (
 		<>

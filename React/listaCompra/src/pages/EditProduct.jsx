@@ -23,6 +23,7 @@ const EditProduct = () => {
 		price: product.price,
 		image: product.image,
 		description: product.description,
+		category: product.category,
 	};
 
 	const validate = async () => {
@@ -79,6 +80,16 @@ const EditProduct = () => {
 					value={selectedProduct.image}
 					onChange={updateDataProduct}
 				/>
+				<label htmlFor="category">Categoría:</label>
+				<select
+					id="category"
+					name="category"
+					value={selectedProduct.category || "books"}
+					onChange={updateDataProduct}
+				>
+					<option value="books">Libros</option>
+					<option value="stationery">Papelería</option>
+				</select>
 				<label htmlFor="description">Descripción:</label>
 				<textarea
 					id="description"

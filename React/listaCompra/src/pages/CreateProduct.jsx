@@ -18,6 +18,7 @@ const CreateProduct = () => {
 			try {
 				await createProduct(validProduct);
 				showMessage("El producto se ha creado con éxito.", "ok");
+				resetSelectedProduct();
 			} catch (error) {
 				showMessage(error.message, "error");
 			}
@@ -65,6 +66,16 @@ const CreateProduct = () => {
 					value={selectedProduct.image}
 					onChange={updateDataProduct}
 				/>
+				<label htmlFor="category">Categoría:</label>
+				<select
+					id="category"
+					name="category"
+					value={selectedProduct.category || "books"}
+					onChange={updateDataProduct}
+				>
+					<option value="books">Libros</option>
+					<option value="stationery">Papelería</option>
+				</select>
 				<label htmlFor="description">Descripción:</label>
 				<textarea
 					id="description"

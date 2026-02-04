@@ -38,3 +38,122 @@
 	font-weight: bold;
 	font-size: 1.2rem;
 }
+
+/* Contenedor de las pestañas */
+.category_tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--border-color); /* Línea base */
+}
+
+/* Estilo de cada pestaña */
+.tab_btn {
+    background: transparent;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    font-family: 'Merriweather', serif;
+    color: var(--text-light);
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    border-radius: 8px 8px 0 0; /* Redondeado solo arriba */
+}
+
+/* Efecto Hover */
+.tab_btn:hover {
+    color: var(--accent-brown);
+    background-color: rgba(0,0,0,0.02);
+}
+
+/* Pestaña ACTIVA */
+.tab_btn.active {
+    color: var(--text-main);
+    font-weight: 700;
+    border-bottom: 3px solid var(--accent-brown); /* Línea gruesa debajo */
+    background-color: var(--bg-white);
+}
+
+/* Mensaje de "No hay resultados" */
+.no_results {
+    grid-column: 1 / -1; /* Ocupa todo el ancho del grid */
+    text-align: center;
+    padding: 40px;
+    color: var(--text-light);
+    font-style: italic;
+}
+/* --- NUEVAS REGLAS DE LAYOUT --- */
+
+/* Contenedor principal que envuelve productos + carrito */
+.layout_container {
+    display: grid;
+    grid-template-columns: 1fr; /* Por defecto 1 columna (solo productos) */
+    gap: 2rem;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+/* Cuando se activa la sidebar, dividimos el espacio */
+.layout_container.with_sidebar {
+    grid-template-columns: 3fr 1fr; /* 75% productos, 25% carrito */
+}
+
+/* Estilo de la zona del carrito */
+.shopping_cart_area {
+    border-left: 1px solid var(--border-color);
+    padding-left: 2rem;
+    height: 100%;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Estilo provisional del hueco del carrito */
+.cart_placeholder {
+    background-color: var(--bg-paper);
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    color: var(--text-light);
+    min-height: 300px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Responsive para móvil: el carrito se pone abajo */
+@media (max-width: 768px) {
+    .layout_container.with_sidebar {
+        grid-template-columns: 1fr;
+    }
+    .shopping_cart_area {
+        border-left: none;
+        border-top: 1px solid var(--border-color);
+        padding-left: 0;
+        padding-top: 2rem;
+    }
+}
+
+
+/* --- TUS REGLAS EXISTENTES (MANTENLAS IGUAL) --- */
+.product_list_container {
+    width: 100%;
+    /* Quitamos cualquier restricción de ancho fijo si la hubiera */
+}
+
+.product_list_container h1 {
+    /* ... lo que tenías ... */
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: var(--text-main);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+    display: inline-block;
+    width: 100%;
+}
+
+/* ... resto de tu CSS (tab_btn, etc.) ... */

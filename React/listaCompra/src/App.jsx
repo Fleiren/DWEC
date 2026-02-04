@@ -16,9 +16,9 @@ function App() {
 		<>
 			<Container>
 				<Header />
-				<Menu />
-				{/** El ProductProvider engloba todas las páginas ya que el header y el menú no van a hacer uso de los productos. */}
+				{/** He tenido que meter el menú en el proveedor de productos ya que para mostrar la lista de la compra necesitaba usarlo, cambiará cuando haga un contexto para la lista de la compra. */}
 				<ProductProvider>
+					<Menu />
 					<Content>
 						<MessageApp />
 						<Router />
