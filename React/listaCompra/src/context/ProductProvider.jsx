@@ -178,7 +178,7 @@ const ProductProvider = ({ children }) => {
 				break;
 			case "":
 				//Sin orden, vuelvo a la lista original.
-				setFilteredProducts([...products]);
+				clearFilter();
 			default:
 				break;
 		}

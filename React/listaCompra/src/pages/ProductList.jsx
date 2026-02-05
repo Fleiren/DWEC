@@ -16,6 +16,7 @@ const ProductList = () => {
 		isShoppingListVisible,
 		activeCategory,
 		changeCategory,
+		clearFilter,
 	} = useProductContext();
 	const { isAuthenticated } = useAuthContext();
 	const [showConfirm, setShowConfirm] = useState(false);
@@ -69,13 +70,17 @@ const ProductList = () => {
 							<div className="category_tabs">
 								<button
 									className={`tab_btn ${activeCategory === "books" ? "active" : ""}`}
-									onClick={() => changeCategory("books")}
+									onClick={() => {
+										changeCategory("books");
+									}}
 								>
 									📚 Libros
 								</button>
 								<button
 									className={`tab_btn ${activeCategory === "stationery" ? "active" : ""}`}
-									onClick={() => changeCategory("stationery")}
+									onClick={() => {
+										changeCategory("stationery");
+									}}
 								>
 									✏️ Papelería
 								</button>

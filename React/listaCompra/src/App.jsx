@@ -1,4 +1,5 @@
 import ProductProvider from "./context/ProductProvider.jsx";
+import ShoppingListProvider from "./context/ShoppingListProvider.jsx";
 import Header from "./components/structure/Header.jsx";
 import Footer from "./components/structure/Footer.jsx";
 import Content from "./components/structure/Content.jsx";
@@ -18,11 +19,13 @@ function App() {
 				<Header />
 				{/** He tenido que meter el menú en el proveedor de productos ya que para mostrar la lista de la compra necesitaba usarlo, cambiará cuando haga un contexto para la lista de la compra. */}
 				<ProductProvider>
-					<Menu />
-					<Content>
-						<MessageApp />
-						<Router />
-					</Content>
+					<ShoppingListProvider>
+						<Menu />
+						<Content>
+							<MessageApp />
+							<Router />
+						</Content>
+					</ShoppingListProvider>
 				</ProductProvider>
 				<Footer />
 			</Container>

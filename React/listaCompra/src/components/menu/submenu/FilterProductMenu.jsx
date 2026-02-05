@@ -2,10 +2,11 @@ import "./filterProductMenu.css";
 import useProductContext from "../../../hooks/useProductContext.js";
 import createIcon from "../../../assets/img/mas.png";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const FilterProductMenu = () => {
 	const nv = useNavigate();
-	const { orderProducts, filterProducts, clearFilter } = useProductContext();
+	const { orderProducts, filterProducts, clearFilter, activeCategory } =
+		useProductContext();
 	const initialInputs = {
 		name: "",
 		price: "",
@@ -37,6 +38,10 @@ const FilterProductMenu = () => {
 		setInputs({ ...inputs, order: value });
 		orderProducts(value);
 	};
+
+	useEffect(() => {
+		setInputs(initialInputs);
+	}, [activeCategory]);
 	return (
 		<>
 			<div className="filter_product_menu">
