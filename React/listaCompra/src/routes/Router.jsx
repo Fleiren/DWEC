@@ -4,7 +4,7 @@ import Home from "../pages/Home.jsx";
 import Login from "../pages/Login.jsx";
 import ProductList from "../pages/ProductList.jsx";
 import Register from "../pages/Register.jsx";
-import ShoppingList from "../pages/ShoppingList.jsx";
+import ShoppingLists from "../pages/ShoppingLists.jsx";
 import Error from "../pages/Error.jsx";
 import CreateProduct from "../pages/CreateProduct.jsx";
 import EditProduct from "../pages/EditProduct.jsx";
@@ -18,7 +18,7 @@ const Router = () => {
 			<Route path="/editProduct/:id" element={<EditProduct />} />
 			<Route path="/createProduct" element={<CreateProduct />} />
 			<Route path="/register" element={<Register />} />
-			<Route path="/shoppingList" element={<ShoppingList />} />
+			<Route path="/shoppingLists" element={<ShoppingLists />} />
 			<Route path="*" element={<Error />} />
 		</Routes>
 	);

@@ -1,0 +1,18 @@
+/* Estilo de la zona del carrito */
+.shopping_cart_area {
+	border-left: 1px solid var(--border-color);
+	padding-left: 2rem;
+	height: 100%;
+	animation: fadeIn 0.3s ease;
+}
+
+/* Estilo provisional del hueco del carrito */
+.cart_placeholder {
+	background-color: var(--bg-paper);
+	border: 2px dashed var(--border-color);
+	border-radius: 8px;
+	padding: 20px;
+	text-align: center;
+	color: var(--text-light);
+	min-height: 300px;
+}

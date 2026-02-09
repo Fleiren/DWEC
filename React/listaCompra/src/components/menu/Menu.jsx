@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import useAuthContext from "../../hooks/useAuthContext.js";
-import useProductContext from "../../hooks/useProductContext.js";
+import useShoppingListContext from "../../hooks/useShoppingListContext.js";
 import "./menu.css";
 const Menu = () => {
 	const { isAuthenticated } = useAuthContext();
-	const { isShoppingListVisible, toggleShoppingList } = useProductContext();
+	const { isShoppingListVisible, toggleShoppingList } =
+		useShoppingListContext();
 	return (
 		<nav>
 			<>

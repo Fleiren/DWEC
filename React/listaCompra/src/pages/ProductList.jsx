@@ -6,18 +6,20 @@ import FilterProductMenu from "../components/menu/submenu/FilterProductMenu.jsx"
 import useAuthContext from "../hooks/useAuthContext.js";
 import Loading from "./../components/Loading.jsx";
 import { formatCurrency } from "../utils/formatters.js";
+import useShoppingListContext from "../hooks/useShoppingListContext.js";
 import Confirm from "../components/Confirm.jsx";
 import "./productList.css";
+import ShoppingLists from "../pages/ShoppingLists.jsx";
 const ProductList = () => {
 	const {
 		filteredProducts,
 		loading,
 		removeProduct,
-		isShoppingListVisible,
 		activeCategory,
 		changeCategory,
 		clearFilter,
 	} = useProductContext();
+	const { isShoppingListVisible } = useShoppingListContext();
 	const { isAuthenticated } = useAuthContext();
 	const [showConfirm, setShowConfirm] = useState(false);
 	//Veo esto un poco chapuza, creo que se podría arreglar el confirm o algo para recibir id.
@@ -118,13 +120,7 @@ const ProductList = () => {
 						</>
 					)}
 				</div>
-				{isShoppingListVisible && (
-					<aside className="shopping_cart_area">
-						<div className="cart_placeholder">
-							<h3>Lista de la compra</h3>
-						</div>
-					</aside>
-				)}
+				{isShoppingListVisible && <ShoppingLists />}
 			</div>
 		</>
 	);

@@ -10,4 +10,4 @@ const useShoppingListContext = () => {
 	return context;
 };
 
-export default ShoppingListContext;
+export default useShoppingListContext;

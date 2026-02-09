@@ -14,13 +14,6 @@ const ProductProvider = ({ children }) => {
 		category: "books",
 	};
 
-	//Este estado irá en otro contexto en la siguiente práctica ya implementaré la lista de la compra de forma completa, lo coloco aquí por tener ya la lógica porque no me da tiempo a hacer todo el otro contexto.
-	const [isShoppingListVisible, setIsShoppingListVisible] = useState(false);
-
-	const toggleShoppingList = () => {
-		setIsShoppingListVisible(!isShoppingListVisible);
-	};
-
 	const [activeCategory, setActiveCategory] = useState("books");
 	const [selectedProduct, setSelectedProduct] = useState(emptyProduct);
 	const [products, setProducts] = useState([]);
@@ -259,7 +252,6 @@ const ProductProvider = ({ children }) => {
 		filteredProducts,
 		isFiltered,
 		loading,
-		isShoppingListVisible,
 		activeCategory,
 		updateSelectedProduct,
 		resetSelectedProduct,
@@ -272,7 +264,6 @@ const ProductProvider = ({ children }) => {
 		clearFilter,
 		updateDataProduct,
 		validateProduct,
-		toggleShoppingList,
 		changeCategory,
 	};
 	return (

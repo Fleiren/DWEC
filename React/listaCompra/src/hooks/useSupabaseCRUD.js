@@ -31,6 +31,13 @@ const useSupabaseCRUD = (tableName) => {
 		return await request(supabaseConnexion.from(tableName).select("*"));
 	};
 
+	//Le he pregutado a la IA si era buena idea hacer un método que fuera getAllById pero me ha recomendado mejor hacerlo genérico por columna y me ha parecido una idea increible.
+	const getAllByColumn = async (column, value) => {
+		return await request(
+			supabaseConnexion.from(tableName).select("*").eq(column, value),
+		);
+	};
+
 	const getById = async (id) => {
 		//Para que no te devuelva un array de objetos la consulta puedes indicar con single() que te devuelva solo uno y como estas consultas solo devuelven un registro nos ahorramos el problema del array.
 		return await request(
@@ -57,6 +64,7 @@ const useSupabaseCRUD = (tableName) => {
 	return {
 		loading,
 		getAll,
+		getAllByColumn,
 		getById,
 		save,
 		edit,
