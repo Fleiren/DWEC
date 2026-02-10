@@ -38,6 +38,14 @@ const useSupabaseCRUD = (tableName) => {
 		);
 	};
 
+	const getMultitable = async (columnName, columnValue, query) => {
+		return await request(
+			supabaseConnexion
+				.from(tableName)
+				.select(query)
+				.eq(columnName, columnValue),
+		);
+	};
 	const getById = async (id) => {
 		//Para que no te devuelva un array de objetos la consulta puedes indicar con single() que te devuelva solo uno y como estas consultas solo devuelven un registro nos ahorramos el problema del array.
 		return await request(
@@ -69,6 +77,7 @@ const useSupabaseCRUD = (tableName) => {
 		save,
 		edit,
 		remove,
+		getMultitable,
 	};
 };
 

@@ -1,0 +1,62 @@
+/* La tarjeta contenedora */
+.shopping_list_item_card {
+	display: flex; /* Alinea imagen y texto en fila */
+	align-items: center; /* Centra verticalmente */
+	gap: 15px; /* Espacio entre la imagen y el nombre */
+
+	background-color: white; /* Fondo blanco para resaltar sobre el gris del sidebar */
+	padding: 10px; /* Espacio interno */
+	margin-bottom: 10px; /* Espacio entre tarjetas */
+	border-radius: 8px; /* Bordes redondeados suaves */
+	border: 1px solid #eee; /* Borde sutil */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03); /* Sombra muy suave para dar profundidad */
+
+	transition: all 0.2s ease; /* Animación suave para el hover */
+}
+
+/* Efecto al pasar el ratón */
+.shopping_list_item_card:hover {
+	transform: translateY(-2px); /* Se levanta un poquito */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+	border-color: var(
+		--accent-brown,
+		#d7ccc8
+	); /* Borde sutil de tu color marrón */
+}
+
+/* Contenedor de la imagen (para asegurar tamaño fijo) */
+.shopping_list_item_img_container {
+	width: 50px; /* Ancho fijo */
+	height: 50px; /* Alto fijo */
+	flex-shrink: 0; /* IMPORTANTE: Evita que la imagen se aplaste si el texto es largo */
+
+	border-radius: 6px;
+	overflow: hidden; /* Recorta lo que sobre de la imagen */
+	border: 1px solid #f0f0f0;
+	background-color: #fff;
+
+	/* Para centrar la imagen dentro del cuadradito */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* La imagen en sí */
+.shopping_list_item_img_container img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover; /* 'cover' recorta para llenar, 'contain' muestra toda la imagen */
+}
+
+/* El nombre del producto */
+.shopping_list_item_card h3 {
+	margin: 0; /* Quitamos márgenes por defecto del h3 */
+	font-size: 0.95rem; /* Un poco más pequeño que en el catálogo principal */
+	font-weight: 600;
+	color: var(--text-main, #333);
+	line-height: 1.3; /* Altura de línea para nombres largos */
+
+	/* Si el nombre es muy largo, que no rompa el diseño */
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

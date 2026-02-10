@@ -1,0 +1,36 @@
+/* Estilo base para el h3 */
+.name_list {
+	cursor: pointer; /* Muestra la manita (CRUCIAL) */
+	padding: 12px 15px; /* Aumenta el área de clic (no solo el texto) */
+	margin: 5px 0; /* Separación entre listas */
+	background-color: white; /* Fondo blanco para resaltar sobre el gris */
+	border: 1px solid #e0e0e0; /* Borde sutil */
+	border-radius: 6px; /* Bordes redondeados modernos */
+	color: #333; /* Color de texto principal */
+	font-size: 1rem;
+	font-weight: 500;
+	transition: all 0.2s ease; /* Suaviza los cambios de color */
+
+	/* Evita que se seleccione el texto al hacer doble clic rápido */
+	user-select: none;
+
+	/* Para poner un iconito o flecha si quieres luego */
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+/* Estado HOVER: Cuando pasas el ratón por encima */
+.name_list:hover {
+	background-color: #fff8f0; /* Un fondo muy clarito (puedes usar tu marrón claro) */
+	border-color: var(--accent-brown, #8d6e63); /* Borde del color de tu marca */
+	color: var(--accent-brown, #8d6e63); /* Texto del color de tu marca */
+	transform: translateX(4px); /* Pequeño desplazamiento a la derecha */
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Sombra suave */
+}
+
+/* Estado ACTIVE: Cuando estás presionando el clic */
+.name_list:active {
+	background-color: #ececec;
+	transform: scale(0.99); /* Efecto de "presionar botón" */
+}

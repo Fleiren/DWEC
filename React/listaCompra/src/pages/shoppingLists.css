@@ -17,7 +17,10 @@
 	min-height: 300px;
 }
 
-#button_addList{
+.shopping_lists div {
+	cursor: pointer;
+}
+#button_addList {
 	margin-top: 0;
 	margin-bottom: 20px;
 	padding: 8px 15px;
@@ -27,6 +30,6 @@
 }
 
 #button_addList:hover {
- 	background-color: #eee;
+	background-color: #eee;
 	color: var(--text-main);
 }

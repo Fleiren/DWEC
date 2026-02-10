@@ -5,10 +5,16 @@ import { useState } from "react";
 import Prompt from "../components/Prompt.jsx";
 import "./shoppingLists.css";
 const ShoppingLists = () => {
-	const { lists, saveShoppingList } = useShoppingListContext();
+	const {
+		lists,
+		saveShoppingList,
+		selectedList,
+		clearSelectedList,
+		getListById,
+		getProductsFromList,
+	} = useShoppingListContext();
 	const [showPrompt, setShowPrompt] = useState(false);
 	//Me he decantado por el siguiente diseño para mostrar los detalles de la lista: al pulsar sobre el nombre de la lista se mostrará en el espacio reservado para las listas, en vez de las listas, los productos de la lista seleccionada y un botón de volver para ver las listas otra vez.
-	const [selectedList, setSelectedList] = useState(null);
 
 	const createList = (listName) => {
 		//Preparamos el objeto con el formato necesario para guardarlo en la base de datos, el proveedor se encargará de añadir los datos que faltan.
@@ -19,17 +25,22 @@ const ShoppingLists = () => {
 		setShowPrompt(false);
 	};
 
-	//PREGUNTAR EL TEMA DE DELEGACIÓN DE EVENTOS, ¿ESTO ESTÁ BIEN O ES MEJOR UN ONCLICK EN EL COMPONENTE SHOPPINGLIST?
 	const changeSelectedList = (evento) => {
-		if (evento.target.name === "list") {
-			setSelectedList(lists.find((list) => list.id === evento.target.value));
+		if (evento.target.classList.contains("name_list")) {
+			getListById(evento.target.dataset.id);
+			getProductsFromList(evento.target.dataset.id);
 		}
 	};
 	return (
 		<aside className="shopping_cart_area">
 			<div className="cart_placeholder">
 				{!selectedList ? (
-					<div className="shopping_lists" onClick={changeSelectedList}>
+					<div
+						className="shopping_lists"
+						onClick={(evento) => {
+							changeSelectedList(evento);
+						}}
+					>
 						<h3>Listas de la compra</h3>
 						<button
 							id="button_addList"
@@ -46,16 +57,14 @@ const ShoppingLists = () => {
 						)}
 					</div>
 				) : (
-					<ShoppingListDetails
-						list={selectedList}
-						onBack={() => setSelectedList(null)}
-					/>
+					//En clase me dijiste que no era buena práctica pasar un método que maneja un estado de un componente padre al hijo de esta manera, pero para este caso no se me ocurre otra forma de hacerlo, igual el diseño directamente no es el mejor.
+					<ShoppingListDetails list={selectedList} goBack={clearSelectedList} />
 				)}
 				{showPrompt && (
 					<Prompt
 						message="Introduce el nombre de la lista."
 						onSubmit={createList}
-						onCancel={() => setShowPrompt(false)}
+						onCancel={clearPrompt}
 					/>
 				)}
 			</div>

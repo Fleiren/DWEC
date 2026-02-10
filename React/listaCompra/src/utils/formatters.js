@@ -4,6 +4,7 @@ const formatCurrency = (amount) => {
 	const formated = Intl.NumberFormat("es-ES", {
 		style: "currency",
 		currency: "EUR",
+		useGrouping: true,
 	}).format(amount);
 
 	return formated;
@@ -11,7 +12,9 @@ const formatCurrency = (amount) => {
 
 const formatNumberEs = (number) => {
 	if (!number) return "-";
-	const formated = Intl.NumberFormat("es-ES").format(number);
+	const formated = Intl.NumberFormat("es-ES", { useGrouping: true }).format(
+		number,
+	);
 	return formated;
 };
 
