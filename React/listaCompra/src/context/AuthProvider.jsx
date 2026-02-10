@@ -13,7 +13,8 @@ const AuthProvider = ({ children }) => {
 		confirmPassword: "",
 		display_name: "",
 	};
-	const initialUser = {};
+	//Antes inicializaba como objeto vacío el usuario pero me daba error al cargar la lista de la compra ya que comprobaba if(user) y al ser un objeto vacío se consideraba como true y se intentaba cargar la lista de la compra con un id de usuario vacío, bme estoy dando cuenta de lo delicado que es como inicialices los estados y lo importante que es tener claro el funcionamiento de todo el código para evitar errores.
+	const initialUser = null;
 	const initialIsAuthenticated = false;
 	const nav = useNavigate();
 	const { signUp, signIn, signOut, getUser, getSubscription } =

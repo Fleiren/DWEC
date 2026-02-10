@@ -17,7 +17,6 @@ const ProductList = () => {
 		removeProduct,
 		activeCategory,
 		changeCategory,
-		clearFilter,
 	} = useProductContext();
 	const { isShoppingListVisible } = useShoppingListContext();
 	const { isAuthenticated } = useAuthContext();

@@ -16,3 +16,17 @@
 	color: var(--text-light);
 	min-height: 300px;
 }
+
+#button_addList{
+	margin-top: 0;
+	margin-bottom: 20px;
+	padding: 8px 15px;
+	background-color: transparent;
+	color: var(--text-light);
+	border: 1px solid var(--border-color);
+}
+
+#button_addList:hover {
+ 	background-color: #eee;
+	color: var(--text-main);
+}

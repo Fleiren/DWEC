@@ -1,7 +1,7 @@
-const ShoppingList = ({ name }) => {
+const ShoppingList = ({ list }) => {
 	return (
-		<div>
-			<h1>{name}</h1>
+		<div name="list" value={list.id}>
+			<h3>{list.name}</h3>
 		</div>
 	);
 };
