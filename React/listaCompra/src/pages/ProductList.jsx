@@ -18,7 +18,8 @@ const ProductList = () => {
 		activeCategory,
 		changeCategory,
 	} = useProductContext();
-	const { isShoppingListVisible } = useShoppingListContext();
+	const { isShoppingListVisible, addProductToShoppingList } =
+		useShoppingListContext();
 	const { isAuthenticated } = useAuthContext();
 	const [showConfirm, setShowConfirm] = useState(false);
 	//Veo esto un poco chapuza, creo que se podría arreglar el confirm o algo para recibir id.
@@ -36,7 +37,7 @@ const ProductList = () => {
 
 	const averagePrice = calculateAverage();
 
-	const deleteProduct = (evento) => {
+	const productOptions = (evento) => {
 		if (evento.target.name === "delete") {
 			setShowConfirm(true);
 			//Guardamos la id en un estado para tener acceso a ella si el usuario decide eliminar el producto.
@@ -45,7 +46,13 @@ const ProductList = () => {
 		if (evento.target.name === "edit") {
 			nv(`/editProduct/${evento.target.value}`);
 		}
+
+		if (evento.target.classList.contains("add_button")) {
+			//En este método vamos a asignar la lista actual donde se van a guardar los productos y se encargará de llamar al método que lo guarda/actualiza.
+			addProductToShoppingList(evento.target.dataset.id);
+		}
 	};
+
 	const confirmDeleteProduct = () => {
 		setShowConfirm(false);
 		removeProduct(idSelectedProduct);
@@ -94,7 +101,7 @@ const ProductList = () => {
 									accionCancelar={closeConfirm}
 								/>
 							)}
-							<div className="product_list" onClick={deleteProduct}>
+							<div className="product_list" onClick={productOptions}>
 								{filteredProducts.length > 0 ? (
 									filteredProducts.map((product) => {
 										return <Product key={product.id} product={product} />;

@@ -23,6 +23,7 @@ const ShoppingListProvider = ({ children }) => {
 	const {
 		getAllByColumn: getAllProducts,
 		save: saveProduct,
+		updateBy2Column: updateProductBy2Column,
 		remove: removeProduct,
 		getMultitable: getProductsFromMultipleTables,
 		loading: loadingProducts,
@@ -72,7 +73,6 @@ const ShoppingListProvider = ({ children }) => {
 			showMessage("El nombre de la lista no puede estar vacío.", "error");
 			return;
 		}
-
 		try {
 			const listReady = {
 				...list,
@@ -82,9 +82,12 @@ const ShoppingListProvider = ({ children }) => {
 			if (data) {
 				setLists([...lists, data]);
 				showMessage("Lista creada correctamente.", "ok");
+				return data;
 			}
 		} catch (error) {
 			showMessage(error.message, "error");
+			return null;
+			//Necesito retornar porque en el código donde se llama necesito comprobar de alguna manera si se ha creado el objeto.
 		}
 	};
 
@@ -104,18 +107,127 @@ const ShoppingListProvider = ({ children }) => {
 			const data = await getProductsFromMultipleTables(
 				"id_shoppingList",
 				id,
-				"id_product, amount, products(name, image, id, price, weight)",
+				"id_shoppingList, id_product, amount, products(name, image, id, price, weight)",
 			);
 			console.log(data);
+			//Hago los return porque necesito los datos desde esta llamada y no desde el estado, ya que me da error cuando quiero depender del estado porque no se actualiza al momento.
 			if (data) {
 				setProductsFromActualList(data);
+				return data;
 			}
 		} catch (error) {
 			showMessage(error.message, "error");
 			setProductsFromActualList([]);
+			return null;
 		}
 	};
 
+	const addProductToShoppingList = async (productId) => {
+		//Esta función se encarga de buscar a que lista se va a añadir el producto ya que en caso de que el usuario sea un vago no quiero que no compre nada en mi web asi que se generaría una lisat "carrito" por defecto.
+		//Voy a explicar bien este código proque creo que es un poco lioso y quiero entenderlo cuando lo vuleva a ver (bueno, estoy escribiendo esto y aún no me hge puesto a escribir pero lo veo venir).
+		let listToUse = selectedList;
+		//Si el usuario no ha seleccionado ninguna lista, voy a mirar si ya tiene generada la que es por defecto.
+		if (!listToUse) {
+			let cartList = lists.find(
+				(list) => list.name.toLowerCase() === "carrito",
+			);
+			//Si no tiene la lista por defecto la creamos y la guardamos.
+			if (!cartList) {
+				cartList = {
+					name: "Carrito",
+				};
+				cartList = await saveShoppingList(cartList);
+				if (!cartList) {
+					showMessage(
+						"No se ha podido crear la lista por defecto, no se ha añadido el producto a ninguna lista.",
+						"error",
+					);
+					return;
+				}
+			}
+			//Asignamos la lista que vamos a usar.
+			listToUse = cartList;
+		}
+		//Igual esto solo debería hacerse en caso de no haber una lista ya seleccionada (dentro del if) pero bueno, así me aseguro de que haya una lista seleccionada.
+		setSelectedList(listToUse);
+		//Para que se muestre el sidebar con la lista seleccionada y sus productos.
+		if (!isShoppingListVisible) {
+			setIsShoppingListVisible(true);
+		}
+		//A este método lo llamaba desde el componente de lista de productos pero me daba error porque claro, al ser asíncrona no se actualizaba el estado de selectedList.
+		//Sigo sin acordarme que si utilizo los estados para guardar la lista lo más probable es que sea null o undefined porque no se cargan en el momento.
+		await addProduct(listToUse.id, productId);
+		getProductsFromList(listToUse.id);
+	};
+
+	//Por defecto la cantidad es 1 ya que quiero que si el usuario añade el producto por primera vez no le salga cuantos añadir, si no que luego el botón de añadir cambia con el número que ya hay en el carrito y si van sumando, no quiero que el usuario me indique ya un total pero lo dejo por defecto por si en algún momento decido pasarlo por parámetro.
+	const addProduct = async (listId, productId, amount = 1) => {
+		try {
+			const allProductsFromList = await getProductsFromList(listId);
+
+			if (allProductsFromList) {
+				const productExists = allProductsFromList.find(
+					(p) => p.id_product === productId,
+				);
+
+				if (productExists) {
+					const updatedProduct = {
+						id_shoppingList: productExists.id_shoppingList,
+						id_product: productExists.id_product,
+						amount: productExists.amount + amount,
+					};
+
+					const finalProduct = await updateProductBy2Column(
+						"id_shoppingList",
+						"id_product",
+						updatedProduct,
+					);
+
+					if (finalProduct) {
+						const newProducts = allProductsFromList.map((p) => {
+							if (p.id_product === productId) {
+								return { ...p, amount: finalProduct.amount };
+							}
+							return p;
+						});
+
+						setProductsFromActualList(newProducts);
+						showMessage("Cantidad actualizada correctamente.", "ok");
+					} else {
+						showMessage(
+							"Error: La base de datos no devolvió el registro actualizado.",
+							"error",
+						);
+					}
+				} else {
+					const newProduct = {
+						id_shoppingList: listId,
+						id_product: productId,
+						amount: amount,
+					};
+
+					const finalProduct = await saveProduct(newProduct);
+
+					if (finalProduct) {
+						await getProductsFromList(listId);
+						showMessage("Producto añadido a la lista.", "ok");
+					} else {
+						showMessage(
+							"No se ha podido añadir el producto a la lista.",
+							"error",
+						);
+					}
+				}
+			} else {
+				showMessage(
+					"No se han podido acceder a los productos de la lista.",
+					"error",
+				);
+			}
+		} catch (error) {
+			showMessage(error.message, "error");
+		}
+	};
 	useEffect(() => {
 		if (user) {
 			//no quiero que esta consulta se haga antes de que el usuario esté listo, así que lo que hago es esperar a que el usuario esté listo para hacer la consulta de las listas, de esta forma evito errores por intentar hacer una consulta con un id de usuario vacío o nulo.
@@ -131,6 +243,7 @@ const ShoppingListProvider = ({ children }) => {
 		getProductsFromList,
 		getListById,
 		clearSelectedList,
+		addProductToShoppingList,
 		productsFromActualList,
 		lists,
 		isShoppingListVisible,

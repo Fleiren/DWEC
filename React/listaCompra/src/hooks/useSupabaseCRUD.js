@@ -65,6 +65,13 @@ const useSupabaseCRUD = (tableName) => {
 		);
 	};
 
+	//He tenido que hacer este método porque la id no se llama id en todas las tablas y porque la tabla intermedia tiene dos id, he estado media vida con error al editar la cantidad del producto hasta que se me ha ocurrido esto, ¿Es mejor de otra forma?.
+	const updateBy2Column = async (column1, column2, item) => {
+				return await request(
+			supabaseConnexion.from(tableName).update(item).eq(column1, item[column1]).eq(column2, item[column2]).select().single()
+		);
+	};
+
 	const remove = async (id) => {
 		return request(supabaseConnexion.from(tableName).delete().eq("id", id));
 	};
@@ -73,6 +80,7 @@ const useSupabaseCRUD = (tableName) => {
 		loading,
 		getAll,
 		getAllByColumn,
+		updateBy2Column,
 		getById,
 		save,
 		edit,
