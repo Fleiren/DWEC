@@ -109,7 +109,6 @@ const ShoppingListProvider = ({ children }) => {
 				id,
 				"id_shoppingList, id_product, amount, products(name, image, id, price, weight)",
 			);
-			console.log(data);
 			//Hago los return porque necesito los datos desde esta llamada y no desde el estado, ya que me da error cuando quiero depender del estado porque no se actualiza al momento.
 			if (data) {
 				setProductsFromActualList(data);
@@ -176,11 +175,15 @@ const ShoppingListProvider = ({ children }) => {
 						id_product: productExists.id_product,
 						amount: productExists.amount + amount,
 					};
-
-					const finalProduct = await updateProductBy2Column(
+					//No hay manera de que supabase me devuelva el objeto actualizado asi que me toca hacer otra llamada a la base de datos para obtener el objeto actualizado.
+					await updateProductBy2Column(
 						"id_shoppingList",
 						"id_product",
 						updatedProduct,
+					);
+
+					const finalProduct = await getProductsFromList(
+						productExists.id_shoppingList,
 					);
 
 					if (finalProduct) {
