@@ -1,36 +1,45 @@
-/* Estilo base para el h3 */
-.name_list {
-	cursor: pointer; /* Muestra la manita (CRUCIAL) */
-	padding: 12px 15px; /* Aumenta el área de clic (no solo el texto) */
-	margin: 5px 0; /* Separación entre listas */
-	background-color: white; /* Fondo blanco para resaltar sobre el gris */
-	border: 1px solid #e0e0e0; /* Borde sutil */
-	border-radius: 6px; /* Bordes redondeados modernos */
-	color: #333; /* Color de texto principal */
-	font-size: 1rem;
-	font-weight: 500;
-	transition: all 0.2s ease; /* Suaviza los cambios de color */
-
-	/* Evita que se seleccione el texto al hacer doble clic rápido */
-	user-select: none;
-
-	/* Para poner un iconito o flecha si quieres luego */
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+/* Cada item de la lista de listas */
+.shopping_lists h3.name_list {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-main);
+    padding: 12px 10px;
+    margin: 0;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s;
 }
 
-/* Estado HOVER: Cuando pasas el ratón por encima */
-.name_list:hover {
-	background-color: #fff8f0; /* Un fondo muy clarito (puedes usar tu marrón claro) */
-	border-color: var(--accent-brown, #8d6e63); /* Borde del color de tu marca */
-	color: var(--accent-brown, #8d6e63); /* Texto del color de tu marca */
-	transform: translateX(4px); /* Pequeño desplazamiento a la derecha */
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Sombra suave */
+.shopping_lists h3.name_list:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+    color: var(--accent-brown);
 }
 
-/* Estado ACTIVE: Cuando estás presionando el clic */
-.name_list:active {
-	background-color: #ececec;
-	transform: scale(0.99); /* Efecto de "presionar botón" */
+/* La fecha pequeña dentro del h3 */
+.name_list p {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: normal;
+    margin: 0;
+}
+
+/* Botón flotante o destacado para crear lista (si lo tienes en el componente padre) */
+#button_addList {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--accent-brown);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    transition: background-color 0.3s;
+}
+
+#button_addList:hover {
+    background-color: var(--text-main); /* Oscurecer un poco */
 }

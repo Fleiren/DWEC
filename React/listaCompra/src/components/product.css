@@ -85,3 +85,23 @@
 	filter: grayscale(0%); /* Color original al pasar ratón */
 	transform: scale(1.2);
 }
+
+.add_button {
+    flex-grow: 1; /* Ocupa el espacio restante */
+    background-color: var(--accent-brown);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: "Merriweather", serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    white-space: nowrap; /* Evita que el texto salte de línea */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.add_button:hover {
+    background-color: var(--text-main); /* Un tono más oscuro */
+}

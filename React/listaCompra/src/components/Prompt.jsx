@@ -22,7 +22,7 @@ const Prompt = ({ message, onSubmit, onCancel }) => {
 					name="prompt"
 					value={inputValue}
 					onChange={changeInputValue}
-					autofocus
+					autoFocus
 				/>
 				<div className="botones_prompt">
 					<button className="boton_prompt" onClick={submit}>

@@ -3,6 +3,7 @@ import ShoppingList from "../components/ShoppingList.jsx";
 import ShoppingListDetails from "../components/ShoppingListDetails.jsx";
 import { useState } from "react";
 import Prompt from "../components/Prompt.jsx";
+import Loading from "../components/Loading.jsx";
 import "./shoppingLists.css";
 const ShoppingLists = () => {
 	const {
@@ -12,6 +13,7 @@ const ShoppingLists = () => {
 		clearSelectedList,
 		getListById,
 		getProductsFromList,
+		loadingLists,
 	} = useShoppingListContext();
 	const [showPrompt, setShowPrompt] = useState(false);
 	//Me he decantado por el siguiente diseño para mostrar los detalles de la lista: al pulsar sobre el nombre de la lista se mostrará en el espacio reservado para las listas, en vez de las listas, los productos de la lista seleccionada y un botón de volver para ver las listas otra vez.
@@ -22,6 +24,10 @@ const ShoppingLists = () => {
 			name: listName,
 		};
 		saveShoppingList(list);
+		setShowPrompt(false);
+	};
+
+	const clearPrompt = () => {
 		setShowPrompt(false);
 	};
 
@@ -50,7 +56,11 @@ const ShoppingLists = () => {
 						>
 							+
 						</button>
-						{lists.length > 0 ? (
+						{loadingLists ? (
+							<div style={{ padding: "20px", textAlign: "center" }}>
+								<Loading />
+							</div>
+						) : lists.length > 0 ? (
 							lists.map((list) => <ShoppingList key={list.id} list={list} />)
 						) : (
 							<p>No hay listas.</p>

@@ -46,6 +46,8 @@ const useSupabaseCRUD = (tableName) => {
 				.eq(columnName, columnValue),
 		);
 	};
+
+	
 	const getById = async (id) => {
 		//Para que no te devuelva un array de objetos la consulta puedes indicar con single() que te devuelva solo uno y como estas consultas solo devuelven un registro nos ahorramos el problema del array.
 		return await request(
@@ -76,6 +78,30 @@ const useSupabaseCRUD = (tableName) => {
 		);
 	};
 
+	//Lo mismo me ha pasado para borrar, al ser dos columnas no me vale el método genérico.
+	const removeBy2Column = async (column1, column2, item) => {
+		return await request(
+			supabaseConnexion
+				.from(tableName)
+				.delete()
+				.eq(column1, item[column1])
+				.eq(column2, item[column2]),
+		);
+	};
+
+	//Al final no lo he usado porque me generaba un lag brutal.
+	const multitableBy2Column = async (column1, column2, item, query) => {
+		return await request(
+			supabaseConnexion
+				.from(tableName)
+				.select(query)
+				.eq(column1, item[column1])
+				.eq(column2, item[column2]).single(),
+		);
+	
+		
+	}
+
 	const remove = async (id) => {
 		return request(supabaseConnexion.from(tableName).delete().eq("id", id));
 	};
@@ -85,11 +111,13 @@ const useSupabaseCRUD = (tableName) => {
 		getAll,
 		getAllByColumn,
 		updateBy2Column,
+		removeBy2Column,
 		getById,
 		save,
 		edit,
 		remove,
 		getMultitable,
+		multitableBy2Column,
 	};
 };
 

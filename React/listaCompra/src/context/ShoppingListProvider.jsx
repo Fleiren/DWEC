@@ -24,8 +24,9 @@ const ShoppingListProvider = ({ children }) => {
 		getAllByColumn: getAllProducts,
 		save: saveProduct,
 		updateBy2Column: updateProductBy2Column,
-		remove: removeProduct,
+		removeBy2Column: removeProductBy2Column,
 		getMultitable: getProductsFromMultipleTables,
+		multitableBy2Column: getSingleProductFromMultipleTables,
 		loading: loadingProducts,
 	} = useSupabaseCRUD("shoppingList_products");
 
@@ -47,6 +48,22 @@ const ShoppingListProvider = ({ children }) => {
 		}
 	};
 
+	//Esto lo he copiado de la IA porque no entiendo que estoy haciendo tan mal como para tener un lag tan grande, igual al hacer lo del carrito me he liado mucho porque comprobaba todo el rato que lista estaba seleccionada ya que el estado no se guardaba al momento y me daba errores... al final lo mejor ha sido esto, cargar tordos los datos nada más empezar.
+	const getInitialData = async () => {
+		if (user) {
+			const loadLists = await getLists();
+			if (loadLists) {
+				const cartList = loadLists.find(
+					(l) => l.name.toLowerCase() === "carrito",
+				);
+				//Básicamente lo que hacemos aquí es tener todos los datos ya cargados para evitar llamadas a la api cada vez que le doy a los botones.
+				if (cartList) {
+					setSelectedList(cartList);
+					await getProductsFromList(cartList.id);
+				}
+			}
+		}
+	};
 	const getLists = async () => {
 		//Añado igualmente aquí una comprobación para asegurarme de que el usuario está cargado.
 		if (!user || !user.id) {
@@ -102,6 +119,28 @@ const ShoppingListProvider = ({ children }) => {
 		}
 	};
 
+	const removeProductFromList = async (listId, productId) => {
+		try {
+			//Creamos un objeto con la información que necesita la base de datos.
+			const itemToRemove = {
+				id_shoppingList: listId,
+				id_product: productId,
+			};
+			await removeProductBy2Column(
+				"id_shoppingList",
+				"id_product",
+				itemToRemove,
+			);
+			//Actualizamos el estado.
+			const newProducts = productsFromActualList.filter(
+				(p) => p.id_product !== productId,
+			);
+			setProductsFromActualList(newProducts);
+			showMessage("Producto eliminado de la lista.", "ok");
+		} catch (error) {
+			showMessage(error.message, "error");
+		}
+	};
 	const getProductsFromList = async (id) => {
 		try {
 			const data = await getProductsFromMultipleTables(
@@ -114,6 +153,8 @@ const ShoppingListProvider = ({ children }) => {
 				setProductsFromActualList(data);
 				return data;
 			}
+			setProductsFromActualList([]);
+			return [];
 		} catch (error) {
 			showMessage(error.message, "error");
 			setProductsFromActualList([]);
@@ -121,121 +162,129 @@ const ShoppingListProvider = ({ children }) => {
 		}
 	};
 
-	const addProductToShoppingList = async (productId) => {
+	const getOrCreateCart = async (currentLists) => {
+		let cart = currentLists.find((l) => l.name.toLowerCase() === "carrito");
+		if (!cart) {
+			cart = await saveShoppingList({ name: "Carrito" });
+		}
+		return cart;
+	};
+
+	//He hecho este método 50.000 veces ya, no entiendo como puedo tener tantos problemas con esto.
+	const addProductToShoppingList = async (productId, amount = 1) => {
 		//Esta función se encarga de buscar a que lista se va a añadir el producto ya que en caso de que el usuario sea un vago no quiero que no compre nada en mi web asi que se generaría una lisat "carrito" por defecto.
 		//Voy a explicar bien este código proque creo que es un poco lioso y quiero entenderlo cuando lo vuleva a ver (bueno, estoy escribiendo esto y aún no me hge puesto a escribir pero lo veo venir).
 		let listToUse = selectedList;
+		//Como sigo con errores por culpa del estado voy a probar a usar una variable temporal.
+		let productsInList = [];
 		//Si el usuario no ha seleccionado ninguna lista, voy a mirar si ya tiene generada la que es por defecto.
 		if (!listToUse) {
-			let cartList = lists.find(
-				(list) => list.name.toLowerCase() === "carrito",
-			);
-			//Si no tiene la lista por defecto la creamos y la guardamos.
-			if (!cartList) {
-				cartList = {
-					name: "Carrito",
-				};
-				cartList = await saveShoppingList(cartList);
-				if (!cartList) {
-					showMessage(
-						"No se ha podido crear la lista por defecto, no se ha añadido el producto a ninguna lista.",
-						"error",
-					);
-					return;
-				}
-			}
-			//Asignamos la lista que vamos a usar.
-			listToUse = cartList;
+			const currentLists = lists.length > 0 ? lists : await getLists();
+			listToUse = await getOrCreateCart(currentLists);
+			setSelectedList(listToUse);
+			//Con esto ya he aprendido la lección de que no debo usar un estado en la misma función donde lo modifico.
+			productsInList = await getProductsFromList(listToUse.id);
+		} else {
+			productsInList = productsFromActualList;
 		}
-		//Igual esto solo debería hacerse en caso de no haber una lista ya seleccionada (dentro del if) pero bueno, así me aseguro de que haya una lista seleccionada.
-		setSelectedList(listToUse);
+
 		//Para que se muestre el sidebar con la lista seleccionada y sus productos.
 		if (!isShoppingListVisible) {
 			setIsShoppingListVisible(true);
 		}
-		//A este método lo llamaba desde el componente de lista de productos pero me daba error porque claro, al ser asíncrona no se actualizaba el estado de selectedList.
-		//Sigo sin acordarme que si utilizo los estados para guardar la lista lo más probable es que sea null o undefined porque no se cargan en el momento.
-		await addProduct(listToUse.id, productId);
-		getProductsFromList(listToUse.id);
+
+		const productExists = productsInList.find(
+			(p) => p.id_product === productId,
+		);
+
+		if (productExists) {
+			await updateAmount(productExists, amount);
+		} else {
+			await addNewProduct(listToUse.id, productId, amount);
+		}
 	};
 
-	//Por defecto la cantidad es 1 ya que quiero que si el usuario añade el producto por primera vez no le salga cuantos añadir, si no que luego el botón de añadir cambia con el número que ya hay en el carrito y si van sumando, no quiero que el usuario me indique ya un total pero lo dejo por defecto por si en algún momento decido pasarlo por parámetro.
-	const addProduct = async (listId, productId, amount = 1) => {
+	//Al final no he usado este método porque me generaba un lag brutal, la verdad que estoy teniendo muchos problemas con el lag y por eso no he enviado la práctica a tiempo.
+	const getSingleProductFromList = async (listId, productId) => {
 		try {
-			const allProductsFromList = await getProductsFromList(listId);
+			//No se porque pero se me hace más comodo trabajar con objetos que con strings sueltos, siento que el método genérico es más cómodo.
+			const dataProduct = {
+				id_shoppingList: listId,
+				id_product: productId,
+			};
+			const data = await getSingleProductFromMultipleTables(
+				"id_shoppingList",
+				"id_product",
+				dataProduct,
+				"id_shoppingList, id_product, amount, products(name, image, id, price, weight)",
+			);
+			if (data) {
+				return data;
+			}
+		} catch (error) {
+			showMessage(error.message, "error");
+			return null;
+		}
+	};
 
-			if (allProductsFromList) {
-				const productExists = allProductsFromList.find(
-					(p) => p.id_product === productId,
-				);
+	//No te haces una idea del monstruo de método que tenía para añadir productos con el lío de la lista y de modificar las cantidades, tenía unas 72 líneas así que lo he separado en varios métodos.
+	//Por defecto la cantidad es 1 ya que quiero que si el usuario añade el producto por primera vez no le salga cuantos añadir, si no que luego el botón de añadir cambia con el número que ya hay en el carrito y si van sumando, no quiero que el usuario me indique ya un total pero lo dejo por defecto por si en algún momento decido pasarlo por parámetro.
 
-				if (productExists) {
-					const updatedProduct = {
-						id_shoppingList: productExists.id_shoppingList,
-						id_product: productExists.id_product,
-						amount: productExists.amount + amount,
-					};
-					//No hay manera de que supabase me devuelva el objeto actualizado asi que me toca hacer otra llamada a la base de datos para obtener el objeto actualizado.
-					await updateProductBy2Column(
-						"id_shoppingList",
-						"id_product",
-						updatedProduct,
-					);
+	const addNewProduct = async (listId, productId, amount = 1) => {
+		const newProduct = {
+			id_shoppingList: listId,
+			id_product: productId,
+			amount: amount,
+		};
 
-					const finalProduct = await getProductsFromList(
-						productExists.id_shoppingList,
-					);
+		const finalProduct = await saveProduct(newProduct);
+		if (finalProduct) {
+			//Si el producto se ha guardado correctamente traemos todos los productos de la lista para actualizar el estado.
+			await getProductsFromList(listId);
+			showMessage("Producto añadido a la lista.", "ok");
+		} else {
+			showMessage("No se ha podido añadir el producto a la lista.", "error");
+		}
+	};
 
-					if (finalProduct) {
-						const newProducts = allProductsFromList.map((p) => {
-							if (p.id_product === productId) {
-								return { ...p, amount: finalProduct.amount };
-							}
-							return p;
-						});
-
-						setProductsFromActualList(newProducts);
-						showMessage("Cantidad actualizada correctamente.", "ok");
-					} else {
-						showMessage(
-							"Error: La base de datos no devolvió el registro actualizado.",
-							"error",
-						);
-					}
-				} else {
-					const newProduct = {
-						id_shoppingList: listId,
-						id_product: productId,
-						amount: amount,
-					};
-
-					const finalProduct = await saveProduct(newProduct);
-
-					if (finalProduct) {
-						await getProductsFromList(listId);
-						showMessage("Producto añadido a la lista.", "ok");
-					} else {
-						showMessage(
-							"No se ha podido añadir el producto a la lista.",
-							"error",
-						);
-					}
-				}
-			} else {
-				showMessage(
-					"No se han podido acceder a los productos de la lista.",
-					"error",
+	const updateAmount = async (product, amountToAdd) => {
+		//Calculamos la cantidad actualizada, la que debemos modificar.
+		const newAmount = product.amount + amountToAdd;
+		//Si la cantidad es 0, entendemos que el usuario quiere eliminar el producto de la lista por lo que lo eliminamos.
+		try {
+			if (newAmount <= 0) {
+				await removeProductFromList(
+					product.id_shoppingList,
+					product.id_product,
 				);
 			}
+
+			const productUpdated = {
+				id_shoppingList: product.id_shoppingList,
+				id_product: product.id_product,
+				amount: newAmount,
+			};
+
+			//Actualizamos la base de datos con la nueva cantidad.
+			await updateProductBy2Column(
+				"id_shoppingList",
+				"id_product",
+				productUpdated,
+			);
+			//Actualizamos el estado con la nueva cantidad.
+			const newProducts = productsFromActualList.map((p) => {
+				if (p.id_product === product.id_product) {
+					return { ...p, amount: newAmount };
+				}
+				return p;
+			});
+			setProductsFromActualList(newProducts);
 		} catch (error) {
 			showMessage(error.message, "error");
 		}
 	};
 	useEffect(() => {
-		if (user) {
-			//no quiero que esta consulta se haga antes de que el usuario esté listo, así que lo que hago es esperar a que el usuario esté listo para hacer la consulta de las listas, de esta forma evito errores por intentar hacer una consulta con un id de usuario vacío o nulo.
-			getLists();
-		}
+		getInitialData();
 	}, [user]);
 
 	//No me convence lo de tener dos loadig.
@@ -247,6 +296,9 @@ const ShoppingListProvider = ({ children }) => {
 		getListById,
 		clearSelectedList,
 		addProductToShoppingList,
+		removeShoppingList,
+		removeProductFromList,
+		updateAmount,
 		productsFromActualList,
 		lists,
 		isShoppingListVisible,

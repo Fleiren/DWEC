@@ -1,0 +1,90 @@
+/* Contenedor principal que ocupa toda la altura del sidebar */
+.details_container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    /* Aseguramos que no se desborde horizontalmente */
+    overflow-x: hidden; 
+}
+
+/* Cabecera con los botones de acción */
+.header_actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+}
+
+.header_actions button {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Merriweather", serif;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    transition: all 0.2s ease;
+}
+
+.header_actions button:hover {
+    background-color: var(--bg-white);
+    color: var(--text-main);
+    border-color: var(--text-light);
+}
+
+/* Botón de eliminar específico (estilo peligro) */
+.header_actions .btn_delete_list {
+    color: #d32f2f;
+    border-color: #ffcdd2;
+    background-color: #ffebee;
+}
+
+.header_actions .btn_delete_list:hover {
+    background-color: #d32f2f;
+    color: white;
+    border-color: #d32f2f;
+}
+
+/* Título de la lista */
+.details_container h3 {
+    color: var(--accent-brown);
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+/* Área de scroll para los productos */
+/* Esto es clave: hace que si hay muchos productos, solo scrollee esta parte */
+.products_scroll_area {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 5px; /* Espacio para que la scrollbar no tape contenido */
+    margin-top: 10px;
+}
+
+/* Scrollbar personalizada sutil */
+.products_scroll_area::-webkit-scrollbar {
+    width: 6px;
+}
+.products_scroll_area::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 3px;
+}
+
+/* Mensaje de vacío */
+.empty_msg {
+    text-align: center;
+    color: var(--text-light);
+    font-style: italic;
+    margin-top: 2rem;
+}
+
+/* Centrado del Loading */
+.loading-container {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+}

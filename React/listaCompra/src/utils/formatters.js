@@ -29,4 +29,14 @@ const cleanNumber = (value) => {
 	return parseFloat(stringValue);
 };
 
-export { formatCurrency, formatNumberEs, cleanNumber };
+const formatDate = (dateString) => {
+	if (!dateString) return "-";
+	const date = new Date(dateString).toLocaleDateString("es-ES", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+    });  
+	return date;              
+};
+
+export { formatCurrency, formatNumberEs, cleanNumber, formatDate };

@@ -1,0 +1,40 @@
+.shopping_list_menu {
+    background-color: var(--bg-white); /* O un gris muy clarito si tienes var(--bg-light) */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.shopping_list_menu h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.1rem !important; /* Forzamos tamaño menor que el título principal */
+    color: var(--text-main);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 5px;
+    text-align: left !important;
+}
+
+.shopping_list_menu p {
+    margin: 5px 0;
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: space-between; /* Texto a la izquierda, valor a la derecha */
+    color: var(--text-light);
+}
+
+/* Estilo para el aviso del coche */
+.warning {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #fff3cd; /* Amarillo suave estándar */
+    color: #856404; /* Texto marrón oscuro */
+    border: 1px solid #ffeeba;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in;
+}
