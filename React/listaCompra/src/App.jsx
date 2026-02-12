@@ -10,9 +10,7 @@ import Menu from "./components/menu/Menu.jsx";
 import "./App.css";
 
 function App() {
-	//Las páginas están sin diseñar aún pero la estructura básica ya está lista.
-	//Lo siento, no me gusta nada el diseño pero estoy en ello, te prometo que quedará una página bonita, además que se me ha ocurrido una idea para usar el peso de los libros.
-	//Si, el css lo ha hecho la IA porque me cuesta muchísimo, no me daría tiempo (pero quiero conseguir hacer yo el diseño de esta si me da tiempo).
+	//Esta entrega, la 6.10 ha sido desesperante porque me he puesto tiquismiquis con cosas y no me ha dado tiempo, quería hacer muchas comprobaciones y eso me generaba mucho lag, cambiaba el diseño todo el rato porque no me convencía la dinámica de la página... espero no haberla liado mucho.
 	return (
 		<>
 			<Container>

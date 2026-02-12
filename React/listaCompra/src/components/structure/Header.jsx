@@ -14,6 +14,10 @@ const Header = () => {
 		resetDataForm();
 	};
 
+	const home = () => {
+		navigate("/");
+		resetDataForm();
+	};
 	const create = () => {
 		navigate("/register");
 		resetDataForm();
@@ -34,7 +38,7 @@ const Header = () => {
 
 	return (
 		<header className="header_container">
-			<h1>Booky</h1>
+			<h1 onClick={home}>Booky</h1>
 			{isAuthenticated ? (
 				<>
 					{/* Uso el operador opcional ya que la variable user al iniciar sesión puede ser null */}

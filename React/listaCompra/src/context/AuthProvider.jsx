@@ -142,6 +142,8 @@ const AuthProvider = ({ children }) => {
 			} else {
 				nav("/");
 				setIsAuthenticated(false);
+				//Me faltaba esta línea y cuando cerraba sesión dejaba todo a la vista de lo que había dejado el usuario anterior, no se reiniciaban los datos que no se recargan al momento.
+				setUser(null);
 			}
 		});
 	}, []);

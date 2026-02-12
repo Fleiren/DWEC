@@ -3,7 +3,7 @@ import ShoppingList from "../components/ShoppingList.jsx";
 import ShoppingListDetails from "../components/ShoppingListDetails.jsx";
 import { useState } from "react";
 import Prompt from "../components/Prompt.jsx";
-import Loading from "../components/Loading.jsx";
+import LoadingMini from "../components/LoadingMini.jsx";
 import "./shoppingLists.css";
 const ShoppingLists = () => {
 	const {
@@ -58,7 +58,7 @@ const ShoppingLists = () => {
 						</button>
 						{loadingLists ? (
 							<div style={{ padding: "20px", textAlign: "center" }}>
-								<Loading />
+								<LoadingMini />
 							</div>
 						) : lists.length > 0 ? (
 							lists.map((list) => <ShoppingList key={list.id} list={list} />)

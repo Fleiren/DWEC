@@ -18,8 +18,11 @@ const ProductList = () => {
 		activeCategory,
 		changeCategory,
 	} = useProductContext();
-	const { isShoppingListVisible, addProductToShoppingList } =
-		useShoppingListContext();
+	const {
+		isShoppingListVisible,
+		addProductToShoppingList,
+		removeProductFromLocal,
+	} = useShoppingListContext();
 	const { isAuthenticated } = useAuthContext();
 	const [showConfirm, setShowConfirm] = useState(false);
 	//Veo esto un poco chapuza, creo que se podría arreglar el confirm o algo para recibir id.
@@ -56,6 +59,7 @@ const ProductList = () => {
 	const confirmDeleteProduct = () => {
 		setShowConfirm(false);
 		removeProduct(idSelectedProduct);
+		removeProductFromLocal();
 	};
 	const closeConfirm = () => {
 		setShowConfirm(false);

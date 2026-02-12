@@ -1,19 +1,21 @@
+/* --- LOADING PANTALLA COMPLETA (GLOBAL) --- */
 .loading_container {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-
-	background-color: rgba(0, 0, 0, 0.7);
-
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-	z-index: 20000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6); /* Un poco más suave */
+    backdrop-filter: blur(2px); /* Efecto borroso moderno */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Z-index alto pero controlado */
 }
 
-img {
-	width: 10%;
+/* Importante: Especificamos que solo afecte a la img DENTRO del container */
+.loading_container img {
+    width: 80px; /* Tamaño fijo para que no sea gigante en pantallas grandes */
+    height: auto;
 }
+

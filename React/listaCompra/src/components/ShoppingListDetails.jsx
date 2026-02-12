@@ -4,7 +4,7 @@ import ShoppingListProduct from "./ShoppingListProduct.jsx";
 import useShoppingListContext from "../hooks/useShoppingListContext.js";
 import useMessageContext from "../hooks/useMessageContext.js";
 import ShopingListMenu from "./menu/submenu/shoppingListMenu.jsx";
-import Loading from "./Loading.jsx";
+import LoadingMini from "./LoadingMini.jsx";
 import Confirm from "./Confirm.jsx";
 const ShoppingListDetails = ({ list, goBack }) => {
 	const {
@@ -50,9 +50,10 @@ const ShoppingListDetails = ({ list, goBack }) => {
 			</div>
 
 			<h3>{list.name}</h3>
-			{loadingProducts ? (
+			{/**Con esta comprobación solo mostraré el loading cuando se haya cargado la lista por primera vez ya que el tema de agregar producto y tal desde la lista no quiero que sea con parpadeos. */}
+			{loadingProducts && productsFromActualList.length === 0 ? (
 				<div className="loading-container">
-					<Loading />
+					<LoadingMini />
 				</div>
 			) : (
 				<>

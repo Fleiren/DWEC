@@ -9,7 +9,7 @@ const ShoppingListProvider = ({ children }) => {
 
 	const [lists, setLists] = useState([]);
 	const [isShoppingListVisible, setIsShoppingListVisible] = useState(false);
-	const [productsFromActualList, setProductsFromActualList] = useState(null);
+	const [productsFromActualList, setProductsFromActualList] = useState([]);
 	const [selectedList, setSelectedList] = useState(null);
 
 	//Usaremos alias para identificar que métodos son de una tabla y que métodos de la otra.
@@ -36,7 +36,7 @@ const ShoppingListProvider = ({ children }) => {
 
 	const clearSelectedList = () => {
 		setSelectedList(null);
-		setProductsFromActualList(null);
+		setProductsFromActualList([]);
 	};
 
 	const getListById = (id) => {
@@ -141,6 +141,18 @@ const ShoppingListProvider = ({ children }) => {
 			showMessage(error.message, "error");
 		}
 	};
+
+	//Este método sirve para actualizar la lista de la compra al momento si se ha borrado un producto desde la interfaz ya que para que se actualice necesito recargar la página y yo quiero qye sea al momento.
+	const removeProductFromLocal = async (idProduct) => {
+		//Solo se hará si hay una lista seleccionada en ese momento que es cuando quiero que se actualice en el momento.
+		if (productsFromActualList && productsFromActualList.length > 0) {
+			const newProducts = productsFromActualList.filter(
+				(product) => product.id_product !== idProduct,
+			);
+			setProductsFromActualList(newProducts);
+		}
+	};
+
 	const getProductsFromList = async (id) => {
 		try {
 			const data = await getProductsFromMultipleTables(
@@ -181,6 +193,10 @@ const ShoppingListProvider = ({ children }) => {
 		if (!listToUse) {
 			const currentLists = lists.length > 0 ? lists : await getLists();
 			listToUse = await getOrCreateCart(currentLists);
+			if (!listToUse) {
+				showMessage("Error: No se pudo cargar el carrito.", "error");
+				return;
+			}
 			setSelectedList(listToUse);
 			//Con esto ya he aprendido la lección de que no debo usar un estado en la misma función donde lo modifico.
 			productsInList = await getProductsFromList(listToUse.id);
@@ -257,6 +273,7 @@ const ShoppingListProvider = ({ children }) => {
 					product.id_shoppingList,
 					product.id_product,
 				);
+				return;
 			}
 
 			const productUpdated = {
@@ -284,7 +301,15 @@ const ShoppingListProvider = ({ children }) => {
 		}
 	};
 	useEffect(() => {
-		getInitialData();
+		if (user) {
+			getInitialData();
+		} else {
+			//Si el usuario cierra sesión reiniciamos todos los datos.
+			setLists([]);
+			setSelectedList(null);
+			setProductsFromActualList([]);
+			setIsShoppingListVisible(false);
+		}
 	}, [user]);
 
 	//No me convence lo de tener dos loadig.
@@ -299,6 +324,7 @@ const ShoppingListProvider = ({ children }) => {
 		removeShoppingList,
 		removeProductFromList,
 		updateAmount,
+		removeProductFromLocal,
 		productsFromActualList,
 		lists,
 		isShoppingListVisible,

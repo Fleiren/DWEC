@@ -11,11 +11,15 @@
 	z-index: 10;
 }
 
+.header_container h1:hover{
+	color: #462c23;
+}
 .header_container h1 {
 	font-size: 1.8rem;
 	color: var(--accent-brown);
 	letter-spacing: -0.5px;
 	font-weight: 700;
+	cursor: pointer;
 }
 
 .header_container div {

@@ -1,0 +1,16 @@
+/* --- LOADING MINI (LOCAL) --- */
+.loading_mini_container {
+    width: 100%;
+    height: 100%;
+    min-height: 150px; /* Altura mínima para que no se vea aplastado */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent; /* Fondo transparente para integrarse */
+}
+
+.loading_mini_container img {
+    width: 40px; /* Mucho más pequeño */
+    height: 40px;
+    object-fit: contain;
+}
