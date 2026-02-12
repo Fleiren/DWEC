@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import ShoppingListProduct from "./ShoppingListProduct.jsx";
 import useShoppingListContext from "../hooks/useShoppingListContext.js";
 import useMessageContext from "../hooks/useMessageContext.js";
-import ShopingListMenu from "./menu/submenu/shoppingListMenu.jsx";
+import ShopingListMenu from "../components/menu/submenu/ShoppingListMenu.jsx";
 import LoadingMini from "./LoadingMini.jsx";
 import Confirm from "./Confirm.jsx";
 const ShoppingListDetails = ({ list, goBack }) => {
