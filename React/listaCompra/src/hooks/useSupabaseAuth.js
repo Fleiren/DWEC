@@ -1,11 +1,31 @@
 import { supabaseConnexion } from "../supabase/supabase.js";
+import { useState } from "react";
 
 //En este hook realizamos la conexión con supabase, de esta manera, si en un futuro queremos cambiar de servicio de autenticación, solo tendríamos que modificar este hook.
+
+//Ya que para la práctica 6.11 tenemos que añadir funciones, he arreglado los métodos utilizando un método auxiliar "request" como hice en useSupabaseCRUD.js.
 const useSupabaseAuth = () => {
-	const signUp = async ({ email, password, display_name }) => {
+	const [loading, setLoading] = useState(false);
+
+	const request = async (promise) => {
 		try {
-			if (email && password && display_name) {
-				const { data, error } = await supabaseConnexion.auth.signUp({
+			setLoading(true);
+			const { data, error } = await promise;
+			if (error) {
+				throw error;
+			}
+			return data;
+		} catch (error) {
+			throw error;
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	const signUp = async ({ email, password, display_name }) => {
+		if (email && password && display_name) {
+			return await request(
+				supabaseConnexion.auth.signUp({
 					email: email,
 					password: password,
 					options: {
@@ -13,72 +33,67 @@ const useSupabaseAuth = () => {
 							display_name: display_name,
 						},
 					},
-				});
-
-				if (error) {
-					throw error;
-				}
-			} else {
-				throw new Error("Debes introducir los datos para registrarte.");
-			}
-		} catch (error) {
-			throw error;
+				}),
+			);
+		} else {
+			throw new Error("Debes introducir los datos para registrarte.");
 		}
 	};
 
 	const signIn = async ({ email, password }) => {
-		try {
-			if (email && password) {
-				const { data, error } = await supabaseConnexion.auth.signInWithPassword(
-					{
-						email: email,
-						password: password,
-						//Se puede hacer una redirección.
-					},
-				);
-				if (error) {
-					throw error;
-				}
-			} else {
-				throw new Error("Debes introducir los datos para iniciar sesión.");
-			}
-		} catch (error) {
-			throw error;
+		if (email && password) {
+			return await request(
+				supabaseConnexion.auth.signInWithPassword({
+					email: email,
+					password: password,
+					//Se puede hacer una redirección.
+				}),
+			);
+		} else {
+			throw new Error("Debes introducir los datos para iniciar sesión.");
 		}
 	};
 
 	const signOut = async () => {
-		try {
-			await supabaseConnexion.auth.signOut();
-		} catch (error) {
-			throw error;
-		}
+		return await request(supabaseConnexion.auth.signOut());
 	};
 
 	const getUser = async () => {
-		try {
-			const { data, error } = await supabaseConnexion.auth.getUser();
-
-			if (error) {
-				throw error;
-			}
-			return data.user;
-		} catch (error) {
-			throw error;
-		}
+		return await request(supabaseConnexion.auth.getUser());
 	};
 
+	const getRole = async (idUser) => {
+		return await request(
+			supabaseConnexion
+				.from("user_roles")
+				.select("*")
+				.eq("id_role", idUser)
+				.single(),
+		);
+	};
+
+	const updateRole = async (idUser, newRole) => {
+		return await request(
+			supabaseConnexion
+				.from("user_roles")
+				.update({ role: newRole })
+				.eq("id_role", idUser),
+		);
+	};
 	//Esta función sirve para suscribirse a los cambios de autenticación, de esta manera también podemose separar la lógica de supabase del resto de la aplicación.
 	const getSubscription = (f) => {
 		return supabaseConnexion.auth.onAuthStateChange(f);
 	};
 
 	return {
+		loading,
 		signUp,
 		signIn,
 		signOut,
 		getUser,
 		getSubscription,
+		getRole,
+		updateRole,
 	};
 };
 

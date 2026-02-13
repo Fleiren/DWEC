@@ -32,3 +32,24 @@ function App() {
 }
 
 export default App;
+
+//Código de las funciones y los triggers:
+/**
+ * 
+CREATE OR REPLACE FUNCTION public.handle_new_user()
+RETURNS trigger
+LANGUAGE plpgsql
+SECURITY DEFINER 
+SET search_path = public
+AS $$
+BEGIN
+  INSERT INTO public.roles (id_rol, email, rol)
+  VALUES (
+    new.id,          
+    new.email,        
+    'usuario'         
+  );
+  RETURN new;
+END;
+$$;
+ */
