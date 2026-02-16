@@ -1,3 +1,47 @@
+//Código de las funciones y los triggers:
+/**
+ * 
+He creado un enum para los roles, así evitamos que se registre un rol que no hemos definido.
+create type roles as enum ('user', 'admin');
+
+Controlo con la función que también se inserte el usuario en la tabla profile para que ya tenga un perfil.
+
+create or replace function public.handle_new_user()
+RETURNS trigger as $$
+begin
+
+  insert into public.user_roles (id_role, email, role)
+  values (new.id, new.email, 'user');
+
+  insert into public.profile (user_id, name)
+  values (new.id, new.raw_user_meta_data->>'display_name');
+  return new;
+end;
+$$ language plpgsql security definer;
+
+
+create OR REPLACE trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute procedure public.handle_new_user();
+
+
+
+
+  create or replace function public.check_is_admin()
+returns boolean as $$
+begin
+  return exists (
+    select 1
+    from public.user_roles
+    where id_role = auth.uid() 
+    and role = 'admin'         
+  );
+end;
+$$ language plpgsql security definer set search_path = public;
+
+
+ */
+
 import ProductProvider from "./context/ProductProvider.jsx";
 import ShoppingListProvider from "./context/ShoppingListProvider.jsx";
 import Header from "./components/structure/Header.jsx";
@@ -10,7 +54,6 @@ import Menu from "./components/menu/Menu.jsx";
 import "./App.css";
 
 function App() {
-	//Esta entrega, la 6.10 ha sido desesperante porque me he puesto tiquismiquis con cosas y no me ha dado tiempo, quería hacer muchas comprobaciones y eso me generaba mucho lag, cambiaba el diseño todo el rato porque no me convencía la dinámica de la página... espero no haberla liado mucho.
 	return (
 		<>
 			<Container>
@@ -32,24 +75,3 @@ function App() {
 }
 
 export default App;
-
-//Código de las funciones y los triggers:
-/**
- * 
-CREATE OR REPLACE FUNCTION public.handle_new_user()
-RETURNS trigger
-LANGUAGE plpgsql
-SECURITY DEFINER 
-SET search_path = public
-AS $$
-BEGIN
-  INSERT INTO public.roles (id_rol, email, rol)
-  VALUES (
-    new.id,          
-    new.email,        
-    'usuario'         
-  );
-  RETURN new;
-END;
-$$;
- */

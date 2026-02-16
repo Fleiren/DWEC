@@ -51,6 +51,7 @@ const ShoppingListProvider = ({ children }) => {
 	//Esto lo he copiado de la IA porque no entiendo que estoy haciendo tan mal como para tener un lag tan grande, igual al hacer lo del carrito me he liado mucho porque comprobaba todo el rato que lista estaba seleccionada ya que el estado no se guardaba al momento y me daba errores... al final lo mejor ha sido esto, cargar tordos los datos nada más empezar.
 	const getInitialData = async () => {
 		if (user) {
+			console.log(user);
 			const loadLists = await getLists();
 			if (loadLists) {
 				const cartList = loadLists.find(
@@ -65,8 +66,9 @@ const ShoppingListProvider = ({ children }) => {
 		}
 	};
 	const getLists = async () => {
+		console.log(user.id);
 		//Añado igualmente aquí una comprobación para asegurarme de que el usuario está cargado.
-		if (!user || !user.id) {
+		if (!user) {
 			showMessage("No se ha podido cargar el usuario.", "error");
 			return;
 		}
