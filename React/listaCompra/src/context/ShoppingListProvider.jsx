@@ -49,41 +49,34 @@ const ShoppingListProvider = ({ children }) => {
 	};
 
 	//Esto lo he copiado de la IA porque no entiendo que estoy haciendo tan mal como para tener un lag tan grande, igual al hacer lo del carrito me he liado mucho porque comprobaba todo el rato que lista estaba seleccionada ya que el estado no se guardaba al momento y me daba errores... al final lo mejor ha sido esto, cargar tordos los datos nada más empezar.
+
 	const getInitialData = async () => {
 		if (user) {
-			console.log(user);
-			const loadLists = await getLists();
-			if (loadLists) {
-				const cartList = loadLists.find(
-					(l) => l.name.toLowerCase() === "carrito",
-				);
-				//Básicamente lo que hacemos aquí es tener todos los datos ya cargados para evitar llamadas a la api cada vez que le doy a los botones.
-				if (cartList) {
-					setSelectedList(cartList);
-					await getProductsFromList(cartList.id);
-				}
-			}
+			const loadedLists = await getLists();
+			await getOrCreateCart(loadedLists);
 		}
 	};
 	const getLists = async () => {
-		console.log(user.id);
 		//Añado igualmente aquí una comprobación para asegurarme de que el usuario está cargado.
 		if (!user) {
 			showMessage("No se ha podido cargar el usuario.", "error");
-			return;
+			return [];
 		}
 		try {
 			const data = await getAllLists("id_owner", user.id);
 			if (data) {
 				setLists(data);
+				return data;
 			} else {
 				showMessage(
 					"No se han podido obtener las listas de la compra.",
 					"error",
 				);
+				return [];
 			}
 		} catch (error) {
 			showMessage(error.message, "error");
+			return [];
 		}
 	};
 
@@ -91,6 +84,11 @@ const ShoppingListProvider = ({ children }) => {
 		if (list.name.trim() === "") {
 			showMessage("El nombre de la lista no puede estar vacío.", "error");
 			return;
+		}
+		//A veces se duplicaba la lista asi que con esto hago otra comprobación.
+		if (list.name.toLowerCase() === "carrito") {
+			const existe = lists.find((l) => l.name.toLowerCase() === "carrito");
+			if (existe) return existe;
 		}
 		try {
 			const listReady = {
@@ -100,7 +98,12 @@ const ShoppingListProvider = ({ children }) => {
 			const data = await saveList(listReady);
 			if (data) {
 				setLists([...lists, data]);
-				showMessage("Lista creada correctamente.", "ok");
+				console.log(data.name.toLowerCase());
+				if (data.name.toLowerCase() !== "carrito") {
+					//Para que no salga el mensaje al iniciarte por primera vez ya que es cuando crea la lista Carrito.
+					showMessage("Lista creada correctamente.", "ok");
+				}
+
 				return data;
 			}
 		} catch (error) {
@@ -177,7 +180,8 @@ const ShoppingListProvider = ({ children }) => {
 	};
 
 	const getOrCreateCart = async (currentLists) => {
-		let cart = currentLists.find((l) => l.name.toLowerCase() === "carrito");
+		const safeLists = currentLists || [];
+		let cart = safeLists.find((l) => l.name.toLowerCase() === "carrito");
 		if (!cart) {
 			cart = await saveShoppingList({ name: "Carrito" });
 		}
@@ -195,6 +199,7 @@ const ShoppingListProvider = ({ children }) => {
 		if (!listToUse) {
 			const currentLists = lists.length > 0 ? lists : await getLists();
 			listToUse = await getOrCreateCart(currentLists);
+
 			if (!listToUse) {
 				showMessage("Error: No se pudo cargar el carrito.", "error");
 				return;

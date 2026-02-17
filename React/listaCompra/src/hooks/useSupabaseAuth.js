@@ -58,8 +58,11 @@ const useSupabaseAuth = () => {
 		return await request(supabaseConnexion.auth.signOut());
 	};
 
+	//MÉTODO CORREGIDO.
 	const getUser = async () => {
-		return await request(supabaseConnexion.auth.getUser());
+		//Aquí había un error fatal que no entiendo porque antes no me daba error, el caso es que al modularizar los métodos he empezado a retornar el objeto user pero entero, el de la tabla auth de supabase y ya no me funciona nada... ya lo he corregido.
+		const data = await request(supabaseConnexion.auth.getUser());
+		return data.user;
 	};
 
 	const getRole = async (idUser) => {
