@@ -1,9 +1,10 @@
 const MiniUser = ({ user }) => {
 	console.log(user);
 	return (
-		<>
-			<h1>{user.name}</h1>
-		</>
+		<div className="user_target">
+			<h3>{user.name}</h3>
+			<p>Rol: {user.role}</p>
+		</div>
 	);
 };
 

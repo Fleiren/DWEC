@@ -22,7 +22,8 @@ const AuthProvider = ({ children }) => {
 		useSupabaseAuth();
 	const { showMessage } = useMessageContext();
 	//Para obtener todos los perfiles de usuario que hay.
-	const { getAll } = useSupabaseCRUD("profile");
+	const { getAllWithQuery, loading: loadingProfiles } =
+		useSupabaseCRUD("profile");
 
 	const [credentials, setCredentials] = useState(initialCredentials);
 	const [user, setUser] = useState(initialUser);
@@ -30,7 +31,8 @@ const AuthProvider = ({ children }) => {
 		initialIsAuthenticated,
 	);
 	const [isAdmin, setIsAdmin] = useState(false);
-
+	//Este estado me servirá para controlar si el admin está editando ya que quiero que las opciones sean diferentes en el menú.
+	const [adminIsActive, setAdminIsActive] = useState(false);
 	/**
 	 * Función para crear una cuenta nueva.
 	 */
@@ -105,13 +107,28 @@ const AuthProvider = ({ children }) => {
 		}
 	};
 
+	//Métodos para cuando el ususario es admin, igual esto debería estar en otro proveedor pero como en realidad son funciones que tienen que ver con el usuario y este proveedor maneja el inicio de sesión...
 	const getAllUsers = async () => {
 		try {
-			const users = await getAll();
+			const users = await getAllWithQuery(
+				"user_id, avatar, name, description, user_roles(role, email)",
+			);
 			return users;
 		} catch (error) {
 			showMessage(error.message, "error");
 			return null;
+		}
+	};
+
+	const activeEditing = async () => {
+		if (isAdmin) {
+			setAdminIsActive(true);
+		}
+	};
+
+	const desactiveEditing = async () => {
+		if (isAdmin) {
+			setAdminIsActive(false);
 		}
 	};
 	/**
@@ -176,6 +193,7 @@ const AuthProvider = ({ children }) => {
 				//Me faltaba esta línea y cuando cerraba sesión dejaba todo a la vista de lo que había dejado el usuario anterior, no se reiniciaban los datos que no se recargan al momento.
 				setUser(null);
 				setIsAdmin(false);
+				setAdminIsActive(false);
 			}
 		});
 	}, []);
@@ -189,10 +207,14 @@ const AuthProvider = ({ children }) => {
 		validateRegister,
 		resetDataForm,
 		getAllUsers,
+		activeEditing,
+		desactiveEditing,
 		isAuthenticated,
 		user,
 		credentials,
 		isAdmin,
+		loadingProfiles,
+		adminIsActive,
 	};
 
 	return (

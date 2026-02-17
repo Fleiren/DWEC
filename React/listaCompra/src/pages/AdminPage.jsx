@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import useAuthContext from "../hooks/useAuthContext";
 import useMessageContext from "../hooks/useMessageContext";
 import MiniUser from "../components/MiniUser.jsx";
+import Loading from "../components/Loading.jsx";
+import AdminMenu from "../components/menu/submenu/AdminMenu.jsx";
 
 const AdminPage = () => {
-	const { getAllUsers } = useAuthContext();
+	const { getAllUsers, loadingProfiles } = useAuthContext();
 	const { showMessage } = useMessageContext();
 	const [users, setUsers] = useState([]);
 	const getAllData = async () => {
@@ -22,20 +24,15 @@ const AdminPage = () => {
 	return (
 		<div>
 			<h1>Panel de control</h1>
-			{/**Los botones estos van en un submenú */}
-			<button
-				onClick={() => {
-					getAllData();
-				}}
-			>
-				Actualizar datos
-			</button>
-			<button>Productos</button>
-			{users.length > 0 ? (
+
+			<AdminMenu />
+			{loadingProfiles ? (
+				<Loading />
+			) : users.length > 0 ? (
 				<div>
-					{users.map((user) => {
-						return <MiniUser key={user.user_id} user={user} />;
-					})}
+					{users.map((user) => (
+						<MiniUser key={user.user_id} user={user} />
+					))}
 				</div>
 			) : (
 				<h1>No hay usuarios.</h1>

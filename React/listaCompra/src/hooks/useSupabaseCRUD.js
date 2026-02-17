@@ -33,7 +33,7 @@ const useSupabaseCRUD = (tableName) => {
 
 	//Este método es un poco libre, de esta manera se pueden hacer consultas multitabla, etc.
 	const getAllWithQuery = async (query) => {
-		return await supabaseConnexion.from(tableName).select(query);
+		return await request(supabaseConnexion.from(tableName).select(query));
 	};
 
 	//Le he pregutado a la IA si era buena idea hacer un método que fuera getAllById pero me ha recomendado mejor hacerlo genérico por columna y me ha parecido una idea increible.
