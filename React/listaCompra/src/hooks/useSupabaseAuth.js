@@ -65,24 +65,30 @@ const useSupabaseAuth = () => {
 		return data.user;
 	};
 
-	const getRole = async (idUser) => {
+	const getDataByColumn = async (tableName, columnValue, columnName) => {
 		return await request(
 			supabaseConnexion
-				.from("user_roles")
+				.from(tableName)
 				.select("*")
-				.eq("id_role", idUser)
+				.eq(columnName, columnValue)
 				.single(),
 		);
 	};
 
-	const updateRole = async (idUser, newRole) => {
+	const updateByColumn = async (
+		tableName,
+		columnValue,
+		columnName,
+		newRole,
+	) => {
 		return await request(
 			supabaseConnexion
-				.from("user_roles")
+				.from(tableName)
 				.update({ role: newRole })
-				.eq("id_role", idUser),
+				.eq(columnName, columnValue),
 		);
 	};
+
 	//Esta función sirve para suscribirse a los cambios de autenticación, de esta manera también podemose separar la lógica de supabase del resto de la aplicación.
 	const getSubscription = (f) => {
 		return supabaseConnexion.auth.onAuthStateChange(f);
@@ -95,8 +101,8 @@ const useSupabaseAuth = () => {
 		signOut,
 		getUser,
 		getSubscription,
-		getRole,
-		updateRole,
+		getDataByColumn,
+		updateByColumn,
 	};
 };
 

@@ -8,6 +8,7 @@ import ShoppingLists from "../pages/ShoppingLists.jsx";
 import Error from "../pages/Error.jsx";
 import CreateProduct from "../pages/CreateProduct.jsx";
 import EditProduct from "../pages/EditProduct.jsx";
+import AdminPage from "../pages/AdminPage.jsx";
 
 const Router = () => {
 	return (
@@ -19,6 +20,7 @@ const Router = () => {
 			<Route path="/createProduct" element={<CreateProduct />} />
 			<Route path="/register" element={<Register />} />
 			<Route path="/shoppingLists" element={<ShoppingLists />} />
+			<Route path="/admin" element={<AdminPage />} />
 			<Route path="*" element={<Error />} />
 		</Routes>
 	);

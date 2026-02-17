@@ -5,7 +5,8 @@ import { useState } from "react";
 import Confirm from "../Confirm.jsx";
 const Header = () => {
 	const navigate = useNavigate();
-	const { isAuthenticated, logOut, user, resetDataForm } = useAuthContext();
+	const { isAuthenticated, logOut, user, resetDataForm, isAdmin } =
+		useAuthContext();
 	const [showConfirm, setShowConfirm] = useState(false);
 	//Lo aparto en funciones por si en un futuro quiero añadir más lógica.
 	const start = () => {
@@ -23,6 +24,10 @@ const Header = () => {
 		resetDataForm();
 	};
 
+	const goToAdminPage = () => {
+		navigate("/admin");
+	};
+
 	const logOutConfirm = () => {
 		setShowConfirm(true);
 	};
@@ -38,10 +43,20 @@ const Header = () => {
 
 	return (
 		<header className="header_container">
-			<h1 onClick={home}>Booky</h1>
+			<div>
+				<h1 onClick={home}>Booky</h1>
+				{/**He vuelto a comprobar si está autenticado porque el diseño de que el botón del panel esté a la izquierda me obliga a meterlo en el mismo div que el título. */}
+				{isAuthenticated && isAdmin && (
+					<button onClick={goToAdminPage} className="admin">
+						Panel de control
+					</button>
+				)}
+			</div>
+
 			{isAuthenticated ? (
 				<>
 					{/* Uso el operador opcional ya que la variable user al iniciar sesión puede ser null */}
+
 					<div>
 						<h3>Disfruta de tu compra {user?.user_metadata?.display_name}</h3>
 						<button onClick={logOutConfirm}>Cerrar sesión</button>

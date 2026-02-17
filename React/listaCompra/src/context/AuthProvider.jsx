@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useSupabaseAuth from "../hooks/useSupabaseAuth.js";
+import useSupabaseCRUD from "../hooks/useSupabaseCRUD.js";
 import useMessageContext from "../hooks/useMessageContext.js";
 
 const authContext = createContext();
@@ -17,15 +18,18 @@ const AuthProvider = ({ children }) => {
 	const initialUser = null;
 	const initialIsAuthenticated = false;
 	const nav = useNavigate();
-	const { signUp, signIn, signOut, getUser, getSubscription } =
+	const { signUp, signIn, signOut, getUser, getSubscription, getDataByColumn } =
 		useSupabaseAuth();
 	const { showMessage } = useMessageContext();
+	//Para obtener todos los perfiles de usuario que hay.
+	const { getAll } = useSupabaseCRUD("profile");
 
 	const [credentials, setCredentials] = useState(initialCredentials);
 	const [user, setUser] = useState(initialUser);
 	const [isAuthenticated, setIsAuthenticated] = useState(
 		initialIsAuthenticated,
 	);
+	const [isAdmin, setIsAdmin] = useState(false);
 
 	/**
 	 * Función para crear una cuenta nueva.
@@ -72,9 +76,27 @@ const AuthProvider = ({ children }) => {
 	 */
 	const getCurrentUser = async () => {
 		try {
-			const currentUser = await getUser();
+			let currentUser = await getUser();
 			if (currentUser) {
+				//Obtenemos los demás datos del usuario.
+				const role = await getDataByColumn(
+					"user_roles",
+					currentUser.id,
+					"id_role",
+				);
+				const profile = await getDataByColumn(
+					"profile",
+					currentUser.id,
+					"user_id",
+				);
+				currentUser = { ...currentUser, role: role.role, profile: profile };
 				setUser(currentUser);
+				if (role.role.toLowerCase() === "admin") {
+					setIsAdmin(true);
+				} else {
+					//En realidad esto no haría falta porque por defecto empieza en false y si hay cambio de usuario se reinicia a false pero por añadir seguridad supongo que no está de más.
+					setIsAdmin(false);
+				}
 			} else {
 				showMessage("No se encuentra el usuario actual.", "error");
 			}
@@ -83,6 +105,15 @@ const AuthProvider = ({ children }) => {
 		}
 	};
 
+	const getAllUsers = async () => {
+		try {
+			const users = await getAll();
+			return users;
+		} catch (error) {
+			showMessage(error.message, "error");
+			return null;
+		}
+	};
 	/**
 	 * Función para actualizar los datos del formulario.
 	 * @param {*} evento
@@ -144,6 +175,7 @@ const AuthProvider = ({ children }) => {
 				setIsAuthenticated(false);
 				//Me faltaba esta línea y cuando cerraba sesión dejaba todo a la vista de lo que había dejado el usuario anterior, no se reiniciaban los datos que no se recargan al momento.
 				setUser(null);
+				setIsAdmin(false);
 			}
 		});
 	}, []);
@@ -156,9 +188,11 @@ const AuthProvider = ({ children }) => {
 		validateLogin,
 		validateRegister,
 		resetDataForm,
+		getAllUsers,
 		isAuthenticated,
 		user,
 		credentials,
+		isAdmin,
 	};
 
 	return (

@@ -31,6 +31,11 @@ const useSupabaseCRUD = (tableName) => {
 		return await request(supabaseConnexion.from(tableName).select("*"));
 	};
 
+	//Este método es un poco libre, de esta manera se pueden hacer consultas multitabla, etc.
+	const getAllWithQuery = async (query) => {
+		return await supabaseConnexion.from(tableName).select(query);
+	};
+
 	//Le he pregutado a la IA si era buena idea hacer un método que fuera getAllById pero me ha recomendado mejor hacerlo genérico por columna y me ha parecido una idea increible.
 	const getAllByColumn = async (column, value) => {
 		return await request(
@@ -38,7 +43,7 @@ const useSupabaseCRUD = (tableName) => {
 		);
 	};
 
-	const getMultitable = async (columnName, columnValue, query) => {
+	const getMultitable = async (tableName, columnName, columnValue, query) => {
 		return await request(
 			supabaseConnexion
 				.from(tableName)
@@ -47,7 +52,6 @@ const useSupabaseCRUD = (tableName) => {
 		);
 	};
 
-	
 	const getById = async (id) => {
 		//Para que no te devuelva un array de objetos la consulta puedes indicar con single() que te devuelva solo uno y como estas consultas solo devuelven un registro nos ahorramos el problema del array.
 		return await request(
@@ -96,11 +100,10 @@ const useSupabaseCRUD = (tableName) => {
 				.from(tableName)
 				.select(query)
 				.eq(column1, item[column1])
-				.eq(column2, item[column2]).single(),
+				.eq(column2, item[column2])
+				.single(),
 		);
-	
-		
-	}
+	};
 
 	const remove = async (id) => {
 		return request(supabaseConnexion.from(tableName).delete().eq("id", id));
@@ -118,6 +121,7 @@ const useSupabaseCRUD = (tableName) => {
 		remove,
 		getMultitable,
 		multitableBy2Column,
+		getAllWithQuery,
 	};
 };
 

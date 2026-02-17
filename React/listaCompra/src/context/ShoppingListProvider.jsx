@@ -98,7 +98,6 @@ const ShoppingListProvider = ({ children }) => {
 			const data = await saveList(listReady);
 			if (data) {
 				setLists([...lists, data]);
-				console.log(data.name.toLowerCase());
 				if (data.name.toLowerCase() !== "carrito") {
 					//Para que no salga el mensaje al iniciarte por primera vez ya que es cuando crea la lista Carrito.
 					showMessage("Lista creada correctamente.", "ok");
@@ -258,6 +257,7 @@ const ShoppingListProvider = ({ children }) => {
 			id_shoppingList: listId,
 			id_product: productId,
 			amount: amount,
+			owner_id: user.id,
 		};
 
 		const finalProduct = await saveProduct(newProduct);
