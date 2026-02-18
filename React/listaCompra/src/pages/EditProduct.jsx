@@ -31,7 +31,7 @@ const EditProduct = () => {
 		if (validProduct) {
 			try {
 				await updateProduct(validProduct);
-				nv("/productList");
+				nv("/productsAdmin");
 			} catch (error) {
 				showMessage(error.message, "error");
 			}

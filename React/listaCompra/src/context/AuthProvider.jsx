@@ -186,6 +186,7 @@ const AuthProvider = ({ children }) => {
 			if (session) {
 				nav("/productList");
 				setIsAuthenticated(true);
+				setAdminIsActive(false);
 				getCurrentUser();
 			} else {
 				nav("/");

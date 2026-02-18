@@ -51,9 +51,11 @@ import Container from "./components/structure/Container.jsx";
 import Router from "./routes/Router.jsx";
 import MessageApp from "./components/MessageApp.jsx";
 import Menu from "./components/menu/Menu.jsx";
+import AdminMenu from "./components/menu/submenu/AdminMenu.jsx";
 import "./App.css";
-
+import useAuthContext from "./hooks/useAuthContext.js";
 function App() {
+	const { adminIsActive } = useAuthContext();
 	return (
 		<>
 			<Container>
@@ -61,7 +63,7 @@ function App() {
 				{/** He tenido que meter el menú en el proveedor de productos ya que para mostrar la lista de la compra necesitaba usarlo, cambiará cuando haga un contexto para la lista de la compra. */}
 				<ProductProvider>
 					<ShoppingListProvider>
-						<Menu />
+						{adminIsActive ? <AdminMenu /> : <Menu />}
 						<Content>
 							<MessageApp />
 							<Router />

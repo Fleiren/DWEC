@@ -6,7 +6,7 @@ import useAuthContext from "../hooks/useAuthContext.js";
 import useShoppingListContext from "../hooks/useShoppingListContext.js";
 
 const Product = ({ product }) => {
-	const { isAuthenticated } = useAuthContext();
+	const { isAuthenticated, adminIsActive, isAdmin } = useAuthContext();
 	const { selectedList } = useShoppingListContext();
 	return (
 		<div className="product_card">
@@ -20,7 +20,7 @@ const Product = ({ product }) => {
 				</p>
 				<p className="price_tag">{formatCurrency(product.price)}</p>
 			</div>
-			{isAuthenticated && (
+			{isAuthenticated && adminIsActive && isAdmin && (
 				<div className="options_img">
 					<input
 						type="image"
@@ -37,14 +37,16 @@ const Product = ({ product }) => {
 						name="edit"
 						value={product.id}
 					/>
-					<button className="add_button" data-id={product.id}>
-						{selectedList
-							? //Me he mareado un poco con este diseño pero le estoy dando muchas vueltas para que sea intuitivo.
-								//Lo que voy a hacer es que si el usuario no ha seleccionado ninguna lista que al darle a añadir se cree una lista por defecto llamada carrito, para los usuarios más vagos que solo quieren comprar y ya.
-								`+ Añadir a ${selectedList.name}`
-							: `+ Añadir al carrito`}
-					</button>
 				</div>
+			)}
+			{!adminIsActive && isAuthenticated && (
+				<button className="add_button" data-id={product.id}>
+					{selectedList
+						? //Me he mareado un poco con este diseño pero le estoy dando muchas vueltas para que sea intuitivo.
+							//Lo que voy a hacer es que si el usuario no ha seleccionado ninguna lista que al darle a añadir se cree una lista por defecto llamada carrito, para los usuarios más vagos que solo quieren comprar y ya.
+							`+ Añadir a ${selectedList.name}`
+						: `+ Añadir al carrito`}
+				</button>
 			)}
 		</div>
 	);

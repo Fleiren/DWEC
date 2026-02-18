@@ -1,0 +1,33 @@
+nav {
+	background-color: var(--bg-paper);
+	padding: 10px 2rem;
+	border-bottom: 1px solid var(--border-color);
+	display: flex;
+	gap: 20px;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+.element {
+	text-decoration: none;
+	color: var(--text-light);
+	font-weight: 700;
+	font-size: 0.95rem;
+	padding-bottom: 5px;
+	border-bottom: 2px solid transparent;
+	transition: all 0.3s ease;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	cursor: pointer;
+}
+
+a {
+	cursor: pointer;
+}
+
+.element:hover,
+.element:focus {
+	color: var(--accent-brown);
+	border-bottom: 2px solid var(--accent-brown);
+	cursor: pointer;
+}

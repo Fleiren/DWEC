@@ -7,7 +7,6 @@ import useAuthContext from "../hooks/useAuthContext.js";
 import Loading from "./../components/Loading.jsx";
 import { formatCurrency } from "../utils/formatters.js";
 import useShoppingListContext from "../hooks/useShoppingListContext.js";
-import Confirm from "../components/Confirm.jsx";
 import "./productList.css";
 import ShoppingLists from "../pages/ShoppingLists.jsx";
 const ProductList = () => {
@@ -56,15 +55,6 @@ const ProductList = () => {
 		}
 	};
 
-	const confirmDeleteProduct = () => {
-		setShowConfirm(false);
-		removeProduct(idSelectedProduct);
-		removeProductFromLocal();
-	};
-	const closeConfirm = () => {
-		setShowConfirm(false);
-		setIdSelectedProduct("");
-	};
 	// Hay varias ternarias ya que el menú de filtros solo se muestra si el usuario está autenticado, si no se han cargado los productos se muestra el loading y si en las búsquedas no hay prductos se muestra un mensaje.
 	return (
 		<>
@@ -73,7 +63,7 @@ const ProductList = () => {
 				className={`layout_container ${isShoppingListVisible ? "with_sidebar" : ""}`}
 			>
 				<div className="product_list_container">
-					<h1>Lista de Libros</h1>
+					<h1>Lista de Productos</h1>
 					{loading ? (
 						<Loading />
 					) : (
@@ -98,13 +88,7 @@ const ProductList = () => {
 								</button>
 							</div>
 							{isAuthenticated && <FilterProductMenu />}
-							{showConfirm && (
-								<Confirm
-									mensaje="¿Seguro que quieres borrar este producto?"
-									accionAceptar={confirmDeleteProduct}
-									accionCancelar={closeConfirm}
-								/>
-							)}
+
 							<div className="product_list" onClick={productOptions}>
 								{filteredProducts.length > 0 ? (
 									filteredProducts.map((product) => {

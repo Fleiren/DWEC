@@ -8,7 +8,9 @@ import ShoppingLists from "../pages/ShoppingLists.jsx";
 import Error from "../pages/Error.jsx";
 import CreateProduct from "../pages/CreateProduct.jsx";
 import EditProduct from "../pages/EditProduct.jsx";
-import AdminPage from "../pages/AdminPage.jsx";
+import UsersAdmin from "../pages/UsersAdmin.jsx";
+import ProductsAdmin from "../pages/ProductsAdmin.jsx";
+import UserDetailsAdmin from "../pages/UserDetailsAdmin.jsx";
 
 const Router = () => {
 	return (
@@ -16,11 +18,13 @@ const Router = () => {
 			<Route path="/" element={<Home />} />
 			<Route path="/login" element={<Login />} />
 			<Route path="/productList" element={<ProductList />} />
+			<Route path="/productsAdmin" element={<ProductsAdmin />} />
 			<Route path="/editProduct/:id" element={<EditProduct />} />
+			<Route path="/userDetailsAdmin/:id" element={<UserDetailsAdmin />} />
 			<Route path="/createProduct" element={<CreateProduct />} />
 			<Route path="/register" element={<Register />} />
 			<Route path="/shoppingLists" element={<ShoppingLists />} />
-			<Route path="/admin" element={<AdminPage />} />
+			<Route path="/usersAdmin" element={<UsersAdmin />} />
 			<Route path="*" element={<Error />} />
 		</Routes>
 	);

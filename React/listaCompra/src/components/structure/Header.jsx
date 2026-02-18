@@ -13,6 +13,7 @@ const Header = () => {
 		isAdmin,
 		activeEditing,
 		adminIsActive,
+		desactiveEditing,
 	} = useAuthContext();
 	const [showConfirm, setShowConfirm] = useState(false);
 	//Lo aparto en funciones por si en un futuro quiero añadir más lógica.
@@ -25,6 +26,7 @@ const Header = () => {
 	const home = () => {
 		navigate("/");
 		resetDataForm();
+		desactiveEditing();
 	};
 	const create = () => {
 		navigate("/register");
@@ -33,7 +35,7 @@ const Header = () => {
 
 	const goToAdminPage = () => {
 		activeEditing();
-		navigate("/admin");
+		navigate("/usersAdmin");
 	};
 
 	const logOutConfirm = () => {

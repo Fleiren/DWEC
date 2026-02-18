@@ -1,19 +1,27 @@
 import { useState, useEffect } from "react";
-import useAuthContext from "../hooks/useAuthContext";
-import useMessageContext from "../hooks/useMessageContext";
+import { useNavigate } from "react-router-dom";
+import useAuthContext from "../hooks/useAuthContext.js";
+import useMessageContext from "../hooks/useMessageContext.js";
 import MiniUser from "../components/MiniUser.jsx";
 import Loading from "../components/Loading.jsx";
-import AdminMenu from "../components/menu/submenu/AdminMenu.jsx";
 
-const AdminPage = () => {
+const UsersAdmin = () => {
 	const { getAllUsers, loadingProfiles } = useAuthContext();
 	const { showMessage } = useMessageContext();
 	const [users, setUsers] = useState([]);
+	const nv = useNavigate();
+	//Este método lo he pasado por props... no se si es la mejor opción, aún me cuesta ver buenas prácticas en estos casos.
 	const getAllData = async () => {
 		const users = await getAllUsers();
 		if (users) {
 			setUsers(users);
 			console.log(users);
+		}
+	};
+
+	const goToUserDetails = (evento) => {
+		if (evento.target.name === "inspect") {
+			nv(`/userDetailsAdmin/${evento.target.dataset.id}`);
 		}
 	};
 	useEffect(() => {
@@ -25,11 +33,14 @@ const AdminPage = () => {
 		<div>
 			<h1>Panel de control</h1>
 
-			<AdminMenu />
 			{loadingProfiles ? (
 				<Loading />
 			) : users.length > 0 ? (
-				<div>
+				<div
+					onClick={(evento) => {
+						goToUserDetails(evento);
+					}}
+				>
 					{users.map((user) => (
 						<MiniUser key={user.user_id} user={user} />
 					))}
@@ -41,4 +52,4 @@ const AdminPage = () => {
 	);
 };
 
-export default AdminPage;
+export default UsersAdmin;
